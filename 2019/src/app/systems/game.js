@@ -1,6 +1,6 @@
 import {Box} from "../entities/Box";
 
-AFRAME.registerSystem('game', {
+const game = AFRAME.registerSystem('game', {
     schema: {},
 
     init: function () {
@@ -19,3 +19,4 @@ AFRAME.registerSystem('game', {
         this.box.update(time, timeDelta);
     }
 });
+export { game };
