@@ -6,8 +6,7 @@ AFRAME.registerSystem('game', {
     schema: {},
 
     init() {
-      console.log('Game Initialized');
-
+      // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
 
       // Example summon a custom entity
@@ -19,7 +18,6 @@ AFRAME.registerSystem('game', {
     },
 
     tick(time, timeDelta) {
-      this.controller.tick(time, timeDelta);
       // Update game objects
       this.box.update(time, timeDelta);
     }
