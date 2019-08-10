@@ -20,7 +20,8 @@ export default {
     //   exclude: 'node_modules/**' // only transpile our source code
     // }),
 		minify( {
-			// Options for babel-minify.
+			comments: false,
+			sourceMap: false,
 		})
 	],
 	external: [  ]
