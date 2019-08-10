@@ -1,4 +1,4 @@
-.PHONY: all clean build build.webpack
+.PHONY: all clean build build.webpack build.test
 
 all: node_modules/
 	npm start
@@ -14,6 +14,8 @@ build.rollup: node_modules/
 	npx inline-source-cli dist/index.html dist/index.html
 	node postbuild.js
 
+build.test:
+	npx http-server dist/
 
 clean:
 	-rm -f package-lock.json
