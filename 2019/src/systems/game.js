@@ -10,15 +10,22 @@ AFRAME.registerSystem('game', {
       this.controller = new Controller();
 
       // Example summon a custom entity
-      this.box = new Box(0, 2, -5, {
-        width: 2,
-        height: 2,
-        depth: 2
-      });
+      this.entities = [
+        new Box(0, 2, -5, {
+          width: 2,
+          height: 2,
+          depth: 2
+        }),
+        new Box(-10, 2, -5, {
+          width: 1.5,
+          height: 1.5,
+          depth: 1.5
+        }),
+      ]
     },
 
     tick(time, timeDelta) {
       // Update game objects
-      this.box.update(time, timeDelta);
+      this.entities.forEach(entity => entity.update(time, timeDelta));
     }
 });

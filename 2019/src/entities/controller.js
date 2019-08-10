@@ -26,7 +26,6 @@ const templateCardboard = `
 
 const templateHand = `
 <a-entity
-  cursor
   laser-controls
   line="color: red; opacity: 0.75"
   >
