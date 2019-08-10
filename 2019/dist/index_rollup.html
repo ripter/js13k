@@ -14,70 +14,15 @@ body {
 }
 
 body {
-    background-color: #0074D9;
+    background-color: #FFDC00;
 }
         </style>
     </head>
     <body>
         <a-scene></a-scene>
-        <script>(function () {
-    'use strict';
-
-    class Box {
-        constructor(x, y, z, settings) {
-            this.scene = document.querySelector('a-scene');
-            this.el = document.createElement('a-entity');
-
-            this.el.setAttribute('position', {
-                x: x || 0,
-                y: y || 0,
-                z: z || 0
-            });
-            this.el.setAttribute('geometry', {
-                primitive: 'box',
-                width: settings.width || 1,
-                height: settings.height || 1,
-                depth: settings.depth || 1
-            });
-            this.el.setAttribute('material', {
-                opacity: 1,
-                shader: 'standard'
-            });
-
-            this.el.setAttribute('visible', true);
-
-            this.el.className = 'box';
-
-            this.scene.appendChild(this.el);
-        }
-
-        update(time, timeDelta) {
-            let rotation = this.el.getAttribute('rotation');
-            this.el.setAttribute('rotation', { y: rotation.y + 0.01 * timeDelta });
-        }
-    }
-
-    const game = AFRAME.registerSystem('game', {
-        schema: {},
-
-        init: function () {
-            console.log('Game Initialized');
-
-            // Example summon a custom entity
-            this.box = new Box(0, 2, -5, {
-               width: 2,
-               height: 2,
-               depth: 2
-            });
-        },
-
-        tick(time, timeDelta){
-            // Your gameloop code
-            this.box.update(time, timeDelta);
-        }
-    });
-
-}());
+        <script>(function(){'use strict';class a{constructor(a,b,c,d){this.scene=document.querySelector("a-scene"),this.el=document.createElement("a-entity"),this.el.setAttribute("position",{x:a||0,y:b||0,z:c||0}),this.el.setAttribute("geometry",{primitive:"box",width:d.width||1,height:d.height||1,depth:d.depth||1}),this.el.setAttribute("material",{opacity:1,shader:"standard"}),this.el.setAttribute("visible",!0),this.el.className="box",this.scene.appendChild(this.el)}update(a,b){let c=this.el.getAttribute("rotation");this.el.setAttribute("rotation",{y:c.y+.01*b})}}AFRAME.registerSystem("game",{schema:{},init:function(){// Example summon a custom entity
+console.log("Game Initialized"),this.box=new a(0,2,-5,{width:2,height:2,depth:2})},tick(a,b){// Your gameloop code
+this.box.update(a,b)}})})();
 </script>
     </body>
 </html>

@@ -19,6 +19,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "rollup": "^1.19.4",
+    "rollup-plugin-babel-minify": "^9.0.0",
     "rollup-plugin-generate-html-template": "^1.2.0",
     "rollup-plugin-inline-source": "^1.0.2",
     "rollup-plugin-node-resolve": "^5.2.0",
