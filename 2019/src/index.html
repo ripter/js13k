@@ -14,12 +14,16 @@ body {
 }
 
 body {
-    background-color: #2ECC40;
+    background-color: #001f3f;
 }
         </style>
     </head>
     <body>
-        <a-scene></a-scene>
+        <a-scene>
+          <a-entity id="player">
+            <a-entity id="camera" camera look-controls position="0 1.6 0"></a-entity>
+          </a-entity>
+        </a-scene>
         <script inline src="./main.js"></script>
     </body>
 </html>

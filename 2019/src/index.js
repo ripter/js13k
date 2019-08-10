@@ -1,2 +1,2 @@
-import './app/main';
-// import './styles/main.css';
+import './components/cursor-listener.js';
+import './systems/game';

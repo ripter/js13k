@@ -3,6 +3,8 @@ export class Box {
         this.scene = document.querySelector('a-scene');
         this.el = document.createElement('a-entity');
 
+        this.el.setAttribute('cursor-listener', 'cursor-listener');
+
         this.el.setAttribute('position', {
             x: x || 0,
             y: y || 0,
