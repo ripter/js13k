@@ -1,0 +1,11 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script><style>html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FF851B;
+}</style></head><body><a-scene></a-scene><script inline src="./main.js"></script><script type="text/javascript">!function(t){var e={};function i(r){if(e[r])return e[r].exports;var n=e[r]={i:r,l:!1,exports:{}};return t[r].call(n.exports,n,n.exports,i),n.l=!0,n.exports}i.m=t,i.c=e,i.d=function(t,e,r){i.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},i.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},i.t=function(t,e){if(1&e&&(t=i(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(i.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var n in t)i.d(r,n,function(e){return t[e]}.bind(null,n));return r},i.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return i.d(e,"a",e),e},i.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},i.p="",i(i.s=0)}([function(t,e,i){"use strict";i.r(e);class r{constructor(t,e,i,r){this.scene=document.querySelector("a-scene"),this.el=document.createElement("a-entity"),this.el.setAttribute("position",{x:t||0,y:e||0,z:i||0}),this.el.setAttribute("geometry",{primitive:"box",width:r.width||1,height:r.height||1,depth:r.depth||1}),this.el.setAttribute("material",{opacity:1,shader:"standard"}),this.el.setAttribute("visible",!0),this.el.className="box",this.scene.appendChild(this.el)}update(t,e){let i=this.el.getAttribute("rotation");this.el.setAttribute("rotation",{y:i.y+.01*e})}}AFRAME.registerSystem("game",{schema:{},init:function(){console.log("Game Initialized"),this.box=new r(0,2,-5,{width:2,height:2,depth:2})},tick(t,e){this.box.update(t,e)}})}]);</script></body></html>
