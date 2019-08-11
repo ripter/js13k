@@ -1,35 +1,44 @@
+import { updateElement } from '../utils/updateElement.js';
+
 export class Box {
-    constructor(x, y, z, settings) {
-        this.scene = document.querySelector('a-scene');
-        this.el = document.createElement('a-entity');
+  constructor(x, y, z, settings) {
+    this.scene = document.querySelector('a-scene');
+    this.el = document.createElement('a-entity');
 
-        this.el.setAttribute('cursor-listener', 'cursor-listener');
-
-        this.el.setAttribute('position', {
-            x: x || 0,
-            y: y || 0,
-            z: z || 0
-        });
-        this.el.setAttribute('geometry', {
-            primitive: 'box',
-            width: settings.width || 1,
-            height: settings.height || 1,
-            depth: settings.depth || 1
-        });
-        this.el.setAttribute('material', {
-            opacity: 1,
-            shader: 'standard'
-        });
-
-        this.el.setAttribute('visible', true);
-
-        this.el.className = 'box';
-
-        this.scene.appendChild(this.el);
+    this.props = {
+      'cursor-listener': 'cursor-listener',
+      position: {
+        x: x || 0,
+        y: y || 0,
+        z: z || 0,
+      },
+      rotation: {
+        x: x || 0,
+        y: y || 0,
+        z: z || 0,
+      },
+      geometry: {
+        primitive: 'box',
+        width: settings.width || 1,
+        height: settings.height || 1,
+        depth: settings.depth || 1,
+      },
+      material: {
+        opacity: 1,
+        shader: 'standard'
+      },
+      visible: true,
     }
 
-    update(time, timeDelta) {
-        let rotation = this.el.getAttribute('rotation');
-        this.el.setAttribute('rotation', { y: rotation.y + 0.01 * timeDelta });
-    }
+    updateElement(this.el, this.props);
+    this.el.className = 'box';
+    this.scene.appendChild(this.el);
+  }
+
+  update(time, timeDelta) {
+    let { rotation } = this.props;
+    rotation.y = rotation.y + 0.01 * timeDelta;
+    this.rotation = rotation;
+    updateElement(this.el, this.props);
+  }
 }

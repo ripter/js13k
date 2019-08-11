@@ -1,3 +1,4 @@
+import { updateElement } from '../utils/updateElement.js';
 // Handle Cardboard, Go, and Quest VR systems
 export class Controller {
   constructor() {
@@ -6,27 +7,52 @@ export class Controller {
     // Go & Quest controller
     const elLeftHand = this.elLeftHand = document.querySelector('#leftHand');
 
-    // Default without a controller, switch when a controller connects
-    elCamera.innerHTML = templateCardboard;
+    // Create a base entity to update.
+    this.el = document.createElement('a-entity');
+
+    // Default to Cardbard input
+    elCamera.appendChild(this.el);
+    updateElement(this.el, propsCardboard);
+
+    // On controller, switch input
     window.addEventListener('gamepadconnected', () => {
-      elCamera.innerHTML = '';
-      elLeftHand.innerHTML = templateHand;
+      // Move the controller to the left hand
+      elLeftHand.appendChild(this.el);
+      // Clear all the old attributes.
+      this.el.getAttributeNames().forEach((attrName) => {
+        this.el.removeAttribute(attrName);
+      });
+      // Set the new attributes
+      updateElement(this.el, propsLeftHand);
     });
   }
 }
 
-const templateCardboard = `
-<a-entity
-  cursor="fuse: true; fuseTimeout: 500"
-  position="0 0 -1"
-  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-  material="color: black; shader: flat"
-  >
-</a-entity>`;
+const propsCardboard = {
+  cursor: {
+    fuse: true,
+    fuseTimeout: 500,
+  },
+  position: {
+    x: 0,
+    y: 0,
+    z: -1,
+  },
+  geometry: {
+    primitive: 'ring',
+    radiusInner: 0.02,
+    radiusOuter: 0.03,
+  },
+  material: {
+    color: 'black',
+    shader: 'flat',
+  },
+};
 
-const templateHand = `
-<a-entity
-  laser-controls
-  line="color: red; opacity: 0.75"
-  >
-</a-entity>`;
+const propsLeftHand = {
+  'laser-controls': 'laser-contorls',
+  line: {
+    color: 'red',
+    opacity: 0.75,
+  },
+};
