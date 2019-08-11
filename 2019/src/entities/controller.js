@@ -43,10 +43,16 @@ const propsCardboard = {
     color: 'black',
     shader: 'flat',
   },
+  raycaster: {
+    objects: '[cursor-listener]',
+  },
 };
 
 const propsLeftHand = {
-  'laser-controls': 'laser-contorls',
+  'laser-controls': {},
+  raycaster: {
+    objects: '[cursor-listener]',
+  },
   line: {
     color: 'red',
     opacity: 0.75,
