@@ -18,10 +18,6 @@ export class Controller {
     window.addEventListener('gamepadconnected', () => {
       // Move the controller to the left hand
       elLeftHand.appendChild(this.el);
-      // Clear all the old attributes.
-      this.el.getAttributeNames().forEach((attrName) => {
-        this.el.removeAttribute(attrName);
-      });
       // Set the new attributes
       updateElement(this.el, propsLeftHand);
     });
