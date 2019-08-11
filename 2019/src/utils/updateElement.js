@@ -13,6 +13,8 @@ export function updateElement(elm, props) {
 
 
 export function setAttributes(elm, props) {
+  //TODO: Profile shows this as taking a lot of time to run.
+  // Not sure if it creates an array each time, or if .forEach is slow or both.
   Object.keys(props).forEach((attrName) => {
     const value = props[attrName];
     elm.setAttribute(attrName, value);
