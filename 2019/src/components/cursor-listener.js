@@ -1,4 +1,4 @@
-const COLORS = ['red', 'green', 'blue'];
+const COLORS = ['#001f3f', '#7FDBFF', '#3D9970', '#01FF70', '#FF851B', '#85144b', '#B10DC9'];
 
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
