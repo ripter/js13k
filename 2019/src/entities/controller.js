@@ -16,10 +16,12 @@ export class Controller {
 
     // On controller, switch input
     window.addEventListener('gamepadconnected', () => {
-      // Move the controller to the left hand
-      elLeftHand.appendChild(this.el);
+      this.el.remove();
+      this.el = document.createElement('a-entity');
       // Set the new attributes
       updateElement(this.el, propsLeftHand);
+      // Move the controller to the left hand
+      elLeftHand.appendChild(this.el);
     });
   }
 }
