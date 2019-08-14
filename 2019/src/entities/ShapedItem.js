@@ -1,7 +1,7 @@
 import { updateElement } from '../utils/updateElement.js';
 
 export class ShapedItem {
-  constructor(x, y, z) {
+  constructor(x, y, z, icon = 'HEART') {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
@@ -19,7 +19,7 @@ export class ShapedItem {
       },
       geometry: {
         primitive: 'extrudeShape',
-        vertices: ['-1 1 0', '-1 -1 0', '1 -1 0'],
+        icon,
       },
       material: {
         opacity: 1,
