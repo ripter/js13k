@@ -50,8 +50,9 @@ const propsCardboard = {
   },
 };
 
+//TODO: Make sure the default model isn't loaded, its from a CDN server and not allowed.
 const propsLeftHand = {
-  'laser-controls': {},
+  'laser-controls': { model: false },
   raycaster: {
     objects: '[cursor-listener]',
   },
