@@ -1,6 +1,7 @@
 import { Controller } from '../entities/controller.js';
-import { Box } from "../entities/Box";
+import { Box } from '../entities/Box';
 import { Room } from '../entities/room.js';
+import { ShapedItem } from '../entities/ShapedItem.js';
 
 
 AFRAME.registerSystem('game', {
@@ -17,12 +18,7 @@ AFRAME.registerSystem('game', {
           height: 2,
           depth: 2
         }),
-        new Box(-10, 2, -5, {
-          width: 1.5,
-          height: 1.5,
-          depth: 1.5
-        }),
-
+        new ShapedItem(-10, 2, -5),
         new Room(),
       ]
     },
