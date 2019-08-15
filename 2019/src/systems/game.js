@@ -6,6 +6,8 @@ import { ShapedItem } from '../entities/ShapedItem.js';
 import { SHAPES } from '../shapes.js';
 const SHAPE_LIST = Object.keys(SHAPES);
 
+const TOTAL_ITEMS = 20;
+
 
 AFRAME.registerSystem('game', {
     schema: {},
@@ -34,7 +36,7 @@ AFRAME.registerSystem('game', {
 
     startGame() {
       const { entities =[] } = this;
-      for (let i=0; i < 20; i++) {
+      for (let i=0; i < TOTAL_ITEMS; i++) {
         const position = this.getRandomCloudPoint();
         const shape = SHAPE_LIST[THREE.Math.randInt(0, SHAPE_LIST.length)];
         entities.push(new ShapedItem(position, shape));
