@@ -19,6 +19,24 @@ const ICONS = {
     'lineTo',[0.5,0.134],
     'lineTo',[0.528,0.097],
   ],
+  CLOUD: [
+    'moveTo',[2.5, 5],
+    'lineTo',[8.75, 5],
+    'bezierCurveTo',[10, 5, 10, 2.5, 8.75, 2.5],
+    'bezierCurveTo',[8.75, 0.5, 5.5, 0.5, 5.25, 2],
+    'bezierCurveTo',[5.25, 2, 3.75, 1.25, 3, 3],
+    'bezierCurveTo',[3, 3, 1.25, 3.5, 2.5, 5],
+  ],
+  LIGHTNING: [
+    'moveTo',[240, 200],
+    'lineTo',[290, 200],
+    'lineTo',[270, 240],
+    'lineTo',[310, 240],
+    'lineTo',[230, 330],
+    'lineTo',[250, 280],
+    'lineTo',[200, 280],
+  ],
+
   SMILE: [
     'moveTo',[20.35,19.7],
     'lineTo',[20.45,19.65],
@@ -100,23 +118,6 @@ const ICONS = {
     'bezierCurveTo',[10.183,3.1,10,2.6,10,2],
     'bezierCurveTo',[10,1.4,10.183,0.933,10.55,0.6],
     'bezierCurveTo',[10.883,0.2,11.367,0,12,0],
-  ],
-  CLOUD: [
-    'moveTo',[10, 20],
-    'lineTo',[35, 20],
-    'bezierCurveTo',[40, 20, 40, 10, 35, 10],
-    'bezierCurveTo',[35, 2, 22, 2, 21, 8],
-    'bezierCurveTo',[21, 8, 15, 5, 12, 12],
-    'bezierCurveTo',[12, 12, 5, 14,10, 20],
-  ],
-  LIGHTNING: [
-    'moveTo',[240, 200],
-    'lineTo',[290, 200],
-    'lineTo',[270, 240],
-    'lineTo',[310, 240],
-    'lineTo',[230, 330],
-    'lineTo',[250, 280],
-    'lineTo',[200, 280],
   ],
 }
 

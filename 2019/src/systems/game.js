@@ -13,7 +13,7 @@ AFRAME.registerSystem('game', {
 
       // Example summon a custom entity
       this.entities = [
-        new ShapedItem(0, 2, -5, 'SMILE'),
+        new ShapedItem(0, 2, -5, 'HEART'),
         new ShapedItem(-10, 2, -5, 'HEART'),
         new ShapedItem(10, 2, -5, 'CLOUD'),
         new ShapedItem(7, 2, -5, 'LIGHTNING'),
