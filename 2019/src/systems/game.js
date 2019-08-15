@@ -3,6 +3,9 @@ import { Box } from '../entities/Box';
 import { Room } from '../entities/room.js';
 import { ShapedItem } from '../entities/ShapedItem.js';
 
+import { SHAPES } from '../shapes.js';
+const SHAPE_LIST = Object.keys(SHAPES);
+
 
 AFRAME.registerSystem('game', {
     schema: {},
@@ -11,14 +14,8 @@ AFRAME.registerSystem('game', {
       // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
 
-      // Example summon a custom entity
-      // this.entities = [
-      //   new ShapedItem(0, 2, -5, 'HEART'),
-      //   new ShapedItem(-10, 2, -5, 'HEART'),
-      //   new ShapedItem(10, 2, -5, 'CLOUD'),
-      //   new ShapedItem(7, 2, -5, 'LIGHTNING'),
-      //   new Room(),
-      // ]
+      this.cloudGeometery = new THREE.SphereGeometry( 5, 32, 32 );
+
       this.floor = new Room();
       this.startGame();
     },
@@ -28,10 +25,19 @@ AFRAME.registerSystem('game', {
       this.entities.forEach(entity => entity.update(time, timeDelta));
     },
 
+    getRandomCloudPoint() {
+      const { vertices } = this.cloudGeometery;
+      // limit to the upper hemisphere
+      const points = vertices.filter(v => v.y >= 2);
+      return points[THREE.Math.randInt(0, points.length)];
+    },
+
     startGame() {
       const { entities =[] } = this;
-      for (let i=0; i < 10; i++) {
-        entities.push(new ShapedItem());
+      for (let i=0; i < 20; i++) {
+        const position = this.getRandomCloudPoint();
+        const shape = SHAPE_LIST[THREE.Math.randInt(0, SHAPE_LIST.length)];
+        entities.push(new ShapedItem(position, shape));
       }
       this.entities = entities;
     },

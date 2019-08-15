@@ -1,7 +1,7 @@
 import { updateElement } from '../utils/updateElement.js';
 
 export class ShapedItem {
-  constructor(icon = 'HEART') {
+  constructor(position = {}, icon = 'HEART') {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
@@ -13,9 +13,9 @@ export class ShapedItem {
     this.state = {
       'cursor-listener': 'cursor-listener',
       position: {
-        x: 0,
-        y: 0,
-        z: 0,
+        x: position.x || 0,
+        y: position.y || 0,
+        z: position.z || 0,
       },
       rotation: {
         x: 0,
@@ -35,6 +35,8 @@ export class ShapedItem {
 
     updateElement(this.el, this.state);
     this.scene.appendChild(this.el);
+
+    // this.el.object3D.position.setFromCylindricalCoords(5, THREE.Math.degToRad(25), 10);
   }
 
   update(time, timeDelta) {
@@ -42,7 +44,7 @@ export class ShapedItem {
     const { radius, height, rotationSpeed, thetaDegree } = this;
 
     // drift the item
-    position.setFromCylindricalCoords(radius, THREE.Math.degToRad(0.1 * timeDelta), height);
+    // position.setFromCylindricalCoords(radius, THREE.Math.degToRad(0.01 * timeDelta), height);
 
     // Rotate the item
     // this.state.rotation.y = this.state.rotation.y + rotationSpeed * timeDelta;
