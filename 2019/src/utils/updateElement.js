@@ -2,11 +2,11 @@
  * Calls elm.setAttribute() for each key/value in props
  */
 export function updateElement(elm, props) {
-  const oldProps = elm.getAttributeNames();
-  const removedProps = getRemovedAttributes(oldProps, props);
+  // const oldProps = elm.getAttributeNames();
+  // const removedProps = getRemovedAttributes(oldProps, props);
 
   // Remove the dead attributes
-  removeAttributes(elm, removedProps);
+  // removeAttributes(elm, removedProps);
   // Add/Update the rest
   setAttributes(elm, props);
 }
@@ -21,11 +21,11 @@ export function setAttributes(elm, props) {
   });
 }
 
-export function removeAttributes(elm, propNameList) {
-  propNameList.forEach(attrName => elm.removeAttribute(attrName));
-}
+// export function removeAttributes(elm, propNameList) {
+//   propNameList.forEach(attrName => elm.removeAttribute(attrName));
+// }
 
 
-export function getRemovedAttributes(oldProps, newProps) {
-  return oldProps.filter((attrName) => !newProps.hasOwnProperty(attrName))
-}
+// export function getRemovedAttributes(oldProps, newProps) {
+//   return oldProps.filter((attrName) => !newProps.hasOwnProperty(attrName))
+// }

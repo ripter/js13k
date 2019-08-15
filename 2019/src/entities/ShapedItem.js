@@ -5,6 +5,11 @@ export class ShapedItem {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
+    this.radius = Math.random() * 5 + 3;
+    this.thetaDegree = Math.random()*180;
+    this.height = Math.random() * 2 + 2;
+    this.rotationSpeed = THREE.Math.degToRad((Math.random()/25));
+
     this.state = {
       'cursor-listener': 'cursor-listener',
       position: {
@@ -32,5 +37,16 @@ export class ShapedItem {
     this.scene.appendChild(this.el);
   }
 
-  update() {}
+  update(time, timeDelta) {
+    const { position } = this.el.object3D;
+    const { radius, height, rotationSpeed, thetaDegree } = this;
+
+    // drift the item
+    position.setFromCylindricalCoords(radius, THREE.Math.degToRad(0.1 * timeDelta), height);
+
+    // Rotate the item
+    // this.state.rotation.y = this.state.rotation.y + rotationSpeed * timeDelta;
+    this.el.object3D.rotation.y = this.el.object3D.rotation.y + (rotationSpeed * timeDelta);
+    // updateElement(this.el, this.state);
+  }
 }

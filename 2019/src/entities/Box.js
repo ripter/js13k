@@ -1,7 +1,7 @@
 import { updateElement } from '../utils/updateElement.js';
 
 export class Box {
-  constructor(x, y, z, settings) {
+  constructor(x, y, z, settings = {}) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
@@ -36,9 +36,11 @@ export class Box {
   }
 
   update(time, timeDelta) {
-    let { rotation } = this.props;
-    rotation.y = rotation.y + 0.01 * timeDelta;
-    this.rotation = rotation;
-    updateElement(this.el, this.props);
+    const { rotation } = this.el.object3D;
+    rotation.set(rotation.x, rotation.y, THREE.Math.degToRad(rotation.y + 0.01 * timeDelta))
+    // let { rotation } = this.props;
+    // rotation.y = rotation.y + 0.01 * timeDelta;
+    // this.rotation = rotation;
+    // updateElement(this.el, this.props);
   }
 }
