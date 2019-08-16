@@ -46,7 +46,7 @@ const propsCardboard = {
     shader: 'flat',
   },
   raycaster: {
-    objects: '[cursor-listener]',
+    objects: '[selectable]',
   },
 };
 

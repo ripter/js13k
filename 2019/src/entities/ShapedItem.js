@@ -7,7 +7,7 @@ export class ShapedItem {
     this.el = document.createElement('a-entity');
 
     this.state = {
-      'cursor-listener': {}, // required to get cursor events on the element
+      // 'cursor-listener': {}, // required to get cursor events on the element
       selectable: {},
       orbit: {
         radius: THREE.Math.randInt(3, 6),
