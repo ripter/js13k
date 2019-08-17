@@ -17,7 +17,11 @@ AFRAME.registerSystem('game', {
     init() {
       // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
-      this.selectedEntity = null;
+      this.selected = {
+        entity: null,
+        isPull: true,
+        orbitPosition: new THREE.Vector3(0,0,0),
+      };
 
       // this.cloudGeometery = new THREE.SphereGeometry( 5, 32, 32 );
 
@@ -31,19 +35,40 @@ AFRAME.registerSystem('game', {
     },
 
     setSelected(entity) {
-      if (entity === this.selectedEntity) { return; }
+      if (entity === this.selected.entity) { return; }
+      console.log('setSelected', entity);
 
-      if (this.selectedEntity) {
-        this.selectedEntity.removeAttribute('float-to');
-        this.selectedEntity.setAttribute('orbit');
+      if (this.selected.entity) {
+        this.clearSelected();
       }
 
-      this.selectedEntity = entity;
+      // Pull entity to the player's hand.
+      this.selected.isPull = true;
+      this.selected.entity = entity;
+      entity.object3D.getWorldDirection(this.selected.orbitPosition);
+      this.selected.orbitAttribute = entity.getAttribute('obit');
+
+      window.selectedEntity = entity;
       entity.removeAttribute('orbit');
       entity.setAttribute('float-to', {
         target: '#leftHand',
         speed: 1,
       });
+    },
+
+    clearSelected() {
+      console.log('clearSelected', this.selected.entity);
+      this.selected.entity.removeAttribute('float-to');
+      this.selected.entity = null;
+      return;
+      // const { entity, orbitPosition } = this.selected;
+      // // Push back into place.
+      // this.selected.isPull = false;
+      // entity.setAttribute('float-to', {
+      //   position: orbitPosition,
+      //   speed: 2,
+      // });
+      // this.selected.entity = null;
     },
 
     // getRandomCloudPoint() {

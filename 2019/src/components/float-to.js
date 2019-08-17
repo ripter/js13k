@@ -2,6 +2,7 @@
 AFRAME.registerComponent('float-to', {
   schema: {
     target: {type: 'selector'},
+    position: {type: 'vec3'},
     speed: {type: 'number'},
   },
 
@@ -10,42 +11,22 @@ AFRAME.registerComponent('float-to', {
   },
 
   tick(time, timeDelta) {
-    const { position } = this.el.object3D;
-    const target = this.data.target.object3D;
-    const distance = position.distanceToSquared(target.position);
+    // const { position } = this.el.object3D;
+    // const target = this.data.target.object3D;
+    // const targetPosition = this.data.position ? this.data.position : this.data.target.object3D.position;
+    const targetPosition = this.data.target.object3D.position;
+    // const targetPosition = this.data.position;
+    console.log('targetPosition', targetPosition);
+    const distance = this.el.object3D.position.distanceToSquared(targetPosition);
 
-
+    // console.log('float-to', this.el);
     if ((0|distance) <= 0) {
-      console.log('DONe', distance);
+      console.log('self-remove float-to', distance);
       this.el.removeAttribute('float-to');
     }
 
-    this.el.object3D.lookAt(target.position);
-    position.add(this.getMovementVector(timeDelta));
+    this.el.object3D.lookAt(targetPosition);
+    this.el.object3D.translateZ(0.01);
   },
-
-  getMovementVector: (function () {
-    var directionVector = new THREE.Vector3(0, 0, 0);
-    var rotationEuler = new THREE.Euler(0, 0, 0, 'YXZ');
-
-    return function (delta) {
-      var rotation = this.el.getAttribute('rotation');
-      var velocity = this.velocity;
-      var xRotation;
-
-      directionVector.copy(velocity);
-      directionVector.multiplyScalar(delta);
-
-      // Absolute.
-      // if (!rotation) { return directionVector; }
-
-      xRotation = rotation.x;
-
-      // Transform direction relative to heading.
-      rotationEuler.set(THREE.Math.degToRad(xRotation), THREE.Math.degToRad(rotation.y), 0);
-      directionVector.applyEuler(rotationEuler);
-      return directionVector;
-    };
-  })(),
 
 });
