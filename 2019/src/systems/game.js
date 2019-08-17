@@ -17,6 +17,7 @@ AFRAME.registerSystem('game', {
     init() {
       // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
+      this.elLeftHand = document.querySelector('#leftHand');
       this.selected = {
         entity: null,
         isPull: true,
@@ -45,20 +46,26 @@ AFRAME.registerSystem('game', {
       // Pull entity to the player's hand.
       this.selected.isPull = true;
       this.selected.entity = entity;
-      entity.object3D.getWorldDirection(this.selected.orbitPosition);
+      // entity.object3D.getWorldDirection(this.selected.orbitPosition);
+      this.selected.orbitPosition.copy(entity.object3D.position);
       this.selected.orbitAttribute = entity.getAttribute('obit');
 
       window.selectedEntity = entity;
       entity.removeAttribute('orbit');
       entity.setAttribute('float-to', {
-        target: '#leftHand',
-        speed: 1,
+        // target: '#leftHand',
+        // position: this.elLeftHand.getAttribute('position'),
+        targetPosition: this.elLeftHand.object3D.position,
+        speed: 0.01,
       });
     },
 
     clearSelected() {
       console.log('clearSelected', this.selected.entity);
-      this.selected.entity.removeAttribute('float-to');
+      this.selected.entity.setAttribute('float-to', {
+        targetPosition: this.selected.orbitPosition,
+        speed: 0.05,
+      });
       this.selected.entity = null;
       return;
       // const { entity, orbitPosition } = this.selected;
