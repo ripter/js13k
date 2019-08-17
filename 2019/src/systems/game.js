@@ -6,7 +6,7 @@ import { ShapedItem } from '../entities/ShapedItem.js';
 import { SHAPES } from '../shapes.js';
 const SHAPE_LIST = Object.keys(SHAPES);
 
-const TOTAL_ITEMS = 20;
+const TOTAL_ITEMS = 30;
 
 
 AFRAME.registerSystem('game', {
