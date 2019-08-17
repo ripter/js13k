@@ -7,7 +7,7 @@ export class ShapedItem {
     this.el = document.createElement('a-entity');
 
     this.state = {
-      // 'cursor-listener': {}, // required to get cursor events on the element
+      class: icon,
       selectable: {},
       orbit: {
         radius: THREE.Math.randInt(3, 6),
@@ -41,7 +41,7 @@ export class ShapedItem {
   }
 
   update(time, timeDelta) {
-    const { position } = this.el.object3D;
+    // const { position } = this.el.object3D;
 
     // Rotate the item
     // this.state.rotation.y = this.state.rotation.y + rotationSpeed * timeDelta;
