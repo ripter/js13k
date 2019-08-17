@@ -20,16 +20,20 @@ body {
     background-color: #0074D9;
 }
   </style>
+  <script inline src="./main.js"></script>
 </head>
 <body>
   <a-scene>
     <a-entity id="player">
       <a-entity id="camera" camera look-controls="pointerLockEnabled: true;" wasd-controls position="0 1.6 0"></a-entity>
       <a-entity id="leftHand" position="0 1 -0.25">
-        <a-cone color="#FFDC00" radius-bottom="0.02" radius-top="0.1" height="0.25"></a-cone>
+        <a-entity
+          color="#FFDC00"
+          geometry="primitive: extrudeShape; icon: HAND"
+          rotation="135 0 0"
+          scale="0.25 0.25 0.25"></a-entity>
       </a-entity>
     </a-entity>
   </a-scene>
-  <script inline src="./main.js"></script>
 </body>
 </html>
