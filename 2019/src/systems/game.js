@@ -1,6 +1,5 @@
 import { Controller } from '../entities/controller.js';
 import { Box } from '../entities/Box';
-import { Room } from '../entities/room.js';
 import { Goal } from '../entities/Goal.js'
 import { ShapedItem } from '../entities/ShapedItem.js';
 
@@ -24,14 +23,9 @@ AFRAME.registerSystem('game', {
         entity: null,
       };
 
-      this.floor = new Room();
       this.startGame();
     },
 
-    // tick(time, timeDelta) {
-      // Update game objects
-      // this.entities.forEach(entity => entity.update(time, timeDelta));
-    // },
 
     setSelected(entity) {
       if (entity === this.selected) { return; }
@@ -55,15 +49,12 @@ AFRAME.registerSystem('game', {
 
     startGame() {
       const { entities = [], goals = [] } = this;
-      const shapeList = SHAPE_LIST.filter(shape => shape !== 'HAND');
+      const shapeList = SHAPE_LIST;//.filter(shape => shape !== 'HAND');
       const getRandomShape = () => {
-        const key = shapeList[THREE.Math.randInt(0, shapeList.length-1)];
-        // return SHAPES[key];
-        return key;
+        return shapeList[THREE.Math.randInt(0, shapeList.length-1)];
       };
 
       // Make a grid of goals around the player
-      // const offsetX = TOTAL_GOALS;
       for (let x=0; x < TOTAL_GOALS; x++) {
         for (let y=0; y < TOTAL_GOALS; y++) {
           goals.push(new Goal({
