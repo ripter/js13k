@@ -56,16 +56,16 @@ AFRAME.registerSystem('game', {
         // target: '#leftHand',
         // position: this.elLeftHand.getAttribute('position'),
         targetPosition: this.elLeftHand.object3D.position,
-        speed: 0.01,
+        speed: 0.1,
       });
     },
 
     clearSelected() {
       console.log('clearSelected', this.selected.entity);
-      this.selected.entity.setAttribute('float-to', {
-        targetPosition: this.selected.orbitPosition,
-        speed: 0.05,
-      });
+      // this.selected.entity.setAttribute('float-to', {
+      //   targetPosition: this.selected.orbitPosition,
+      //   speed: 0.05,
+      // });
       this.selected.entity = null;
       return;
       // const { entity, orbitPosition } = this.selected;

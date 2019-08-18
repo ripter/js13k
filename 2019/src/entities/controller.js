@@ -22,14 +22,17 @@ export class Controller {
       updateElement(this.el, propsLeftHand);
       // Move the controller to the left hand
       elLeftHand.appendChild(this.el);
+      // remove the position because it'll be the same as the IRL controller.
+      elLeftHand.removeAttribute('position');
     });
   }
 }
 
 const propsCardboard = {
   cursor: {
-    fuse: true,
-    fuseTimeout: 500,
+    rayOrigin: 'mouse',
+    // fuse: true,
+    // fuseTimeout: 500,
   },
   position: {
     x: 0,
@@ -54,7 +57,7 @@ const propsCardboard = {
 const propsLeftHand = {
   'laser-controls': { model: false },
   raycaster: {
-    objects: '[cursor-listener]',
+    objects: '[selectable]',
   },
   line: {
     color: 'red',

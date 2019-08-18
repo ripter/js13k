@@ -6,33 +6,39 @@ AFRAME.registerComponent('float-to', {
   },
 
   init() {
-    this.velocity = new THREE.Vector3(0, 0, 0.01);
+    this.startingPosition = new THREE.Vector3();
+    this.targetPosition = new THREE.Vector3();
+    this.direction = 'target';
+
+    this.el.object3D.getWorldPosition(this.startingPosition);
+  },
+
+  update(oldData) {
+    this.targetPosition.copy(this.data.targetPosition);
   },
 
   tick(time, timeDelta) {
-    const { targetPosition, speed } = this.data;
-    // const { position } = this.el.object3D;
-    // const target = this.data.target.object3D;
-    // const targetPosition = this.data.position ? this.data.position : this.data.target.object3D.position;
-    // const targetPosition = this.data.target ? this.data.target.object3D.position : this.data.position;
-    // const targetPosition = this.data.target.object3D.position;
-    // const targetPosition = this.data.position;
-    console.group('float-to.update');
-    console.log('this.el.object3D.position', this.el.object3D.position);
-    console.log('targetPosition', targetPosition);
+    const { speed } = this.data;
+    const { targetPosition, direction } = this;
     const distance = this.el.object3D.position.distanceToSquared(targetPosition);
-    console.log('distance', distance);
 
-    // console.log('float-to', this.el);
-    if ((0|distance) <= 0) {
-      console.log('self-remove float-to', distance);
-      this.el.removeAttribute('float-to');
-    }
-
+    // console.log('moving to', targetPosition, distance);
     this.el.object3D.lookAt(targetPosition);
     this.el.object3D.translateZ(speed);
 
-    console.groupEnd();
+    if (distance <= speed) {
+      if (direction === 'target') {
+        this.targetPosition.copy(this.startingPosition);
+        this.direction = 'starting';
+      }
+      else {
+        // completed bounce.
+        this.el.removeAttribute('float-to');
+      }
+
+      // console.log('Move back!', distance, this.startingPosition);
+      // return this.el.setAttribute('targetPosition', this.startingPosition);
+    }
   },
 
 });
