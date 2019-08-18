@@ -8,6 +8,7 @@ import { SHAPES } from '../shapes.js';
 const SHAPE_LIST = Object.keys(SHAPES);
 
 const TOTAL_ITEMS = 30;
+const TOTAL_GOALS = 3;
 
 
 AFRAME.registerSystem('game', {
@@ -27,10 +28,10 @@ AFRAME.registerSystem('game', {
       this.startGame();
     },
 
-    tick(time, timeDelta) {
+    // tick(time, timeDelta) {
       // Update game objects
-      this.entities.forEach(entity => entity.update(time, timeDelta));
-    },
+      // this.entities.forEach(entity => entity.update(time, timeDelta));
+    // },
 
     setSelected(entity) {
       if (entity === this.selected) { return; }
@@ -53,14 +54,28 @@ AFRAME.registerSystem('game', {
 
 
     startGame() {
-      const { entities =[] } = this;
+      const { entities = [], goals = [] } = this;
+      const shapeList = Object.keys(SHAPE_LIST).filter(shape => shape !== 'HAND');
+      const getRandomShape = () => {
+        const key = shapeList[THREE.Math.randInt(0, shapeList.length-1)];
+        return SHAPE_LIST[key];
+      };
+
+      // Fill with goals
+      for (let i=0; i < TOTAL_GOALS; i++) {
+        goals.push(new Goal({
+          icon: getRandomShape(),
+        }));
+      }
+
+      // Fill with random shaped items
       for (let i=0; i < TOTAL_ITEMS; i++) {
-        const shape = SHAPE_LIST[THREE.Math.randInt(0, SHAPE_LIST.length)];
         entities.push(new ShapedItem({
           x: 0,
           y: THREE.Math.randInt(2, 4),
-          z: 0
-        }, shape));
+          z: 0,
+          shape: getRandomShape(),
+        }));
       }
       this.entities = entities;
     },

@@ -2,12 +2,12 @@ import { updateElement } from '../utils/updateElement.js';
 
 
 export class ShapedItem {
-  constructor(position = {}, icon = 'HEART') {
+  constructor(props = {}) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
     this.state = {
-      class: icon,
+      // class: props.shape,
       selectable: {},
       orbit: {
         radius: THREE.Math.randInt(3, 6),
@@ -16,9 +16,9 @@ export class ShapedItem {
         deltaTheta: (THREE.Math.randInt(0, 1) === 0 ? 1 : -1) * ((2 * Math.PI) / Math.pow(10, THREE.Math.randFloat(3, 4))),
       },
       position: {
-        x: position.x || 0,
-        y: position.y || 0,
-        z: position.z || 0,
+        x: props.x || 0,
+        y: props.y || 0,
+        z: props.z || 0,
       },
       rotation: {
         x: 0,
@@ -27,7 +27,7 @@ export class ShapedItem {
       },
       geometry: {
         primitive: 'extrudeShape',
-        icon,
+        icon: props.shape,
       },
       material: {
         opacity: 1,
@@ -38,14 +38,5 @@ export class ShapedItem {
 
     updateElement(this.el, this.state);
     this.scene.appendChild(this.el);
-  }
-
-  update(time, timeDelta) {
-    // const { position } = this.el.object3D;
-
-    // Rotate the item
-    // this.state.rotation.y = this.state.rotation.y + rotationSpeed * timeDelta;
-    // this.el.object3D.rotation.y = this.el.object3D.rotation.y + (rotationSpeed * timeDelta);
-    // updateElement(this.el, this.state);
   }
 }
