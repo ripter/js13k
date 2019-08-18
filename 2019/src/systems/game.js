@@ -55,17 +55,24 @@ AFRAME.registerSystem('game', {
 
     startGame() {
       const { entities = [], goals = [] } = this;
-      const shapeList = Object.keys(SHAPE_LIST).filter(shape => shape !== 'HAND');
+      const shapeList = SHAPE_LIST.filter(shape => shape !== 'HAND');
       const getRandomShape = () => {
         const key = shapeList[THREE.Math.randInt(0, shapeList.length-1)];
-        return SHAPE_LIST[key];
+        // return SHAPES[key];
+        return key;
       };
 
-      // Fill with goals
-      for (let i=0; i < TOTAL_GOALS; i++) {
-        goals.push(new Goal({
-          icon: getRandomShape(),
-        }));
+      // Make a grid of goals around the player
+      // const offsetX = TOTAL_GOALS;
+      for (let x=0; x < TOTAL_GOALS; x++) {
+        for (let y=0; y < TOTAL_GOALS; y++) {
+          goals.push(new Goal({
+            x: -0.75 + (x * 0.5),
+            y: 0.1,
+            z: -0.5 + (y * 0.5),
+            icon: getRandomShape(),
+          }));
+        }
       }
 
       // Fill with random shaped items
