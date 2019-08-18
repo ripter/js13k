@@ -3,6 +3,7 @@ AFRAME.registerComponent('float-to', {
   schema: {
     targetPosition: {type: 'vec3'},
     speed: {type: 'number'},
+    active: {default: true},
   },
 
   init() {
@@ -13,11 +14,12 @@ AFRAME.registerComponent('float-to', {
     this.el.object3D.getWorldPosition(this.startingPosition);
   },
 
-  update(oldData) {
-    this.targetPosition.copy(this.data.targetPosition);
-  },
+  // update(oldData) {
+  //   this.targetPosition.copy(this.data.targetPosition);
+  // },
 
   tick(time, timeDelta) {
+    if (!this.data.active) { return; }
     const { speed } = this.data;
     const { targetPosition, direction } = this;
     const distance = this.el.object3D.position.distanceToSquared(targetPosition);
@@ -30,10 +32,12 @@ AFRAME.registerComponent('float-to', {
       if (direction === 'target') {
         this.targetPosition.copy(this.startingPosition);
         this.direction = 'starting';
+        this.el.emit('float-at-target', { el: this.el });
       }
       else {
         // completed bounce.
         this.el.removeAttribute('float-to');
+        this.el.emit('float-completed', { el: this.el })
       }
 
       // console.log('Move back!', distance, this.startingPosition);

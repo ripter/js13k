@@ -20,8 +20,6 @@ AFRAME.registerSystem('game', {
       this.elLeftHand = document.querySelector('#leftHand');
       this.selected = {
         entity: null,
-        isPull: true,
-        orbitPosition: new THREE.Vector3(0,0,0),
       };
 
       // this.cloudGeometery = new THREE.SphereGeometry( 5, 32, 32 );
@@ -44,18 +42,27 @@ AFRAME.registerSystem('game', {
       }
 
       // Pull entity to the player's hand.
-      this.selected.isPull = true;
+      // this.selected.isPull = true;
       this.selected.entity = entity;
       // entity.object3D.getWorldDirection(this.selected.orbitPosition);
-      this.selected.orbitPosition.copy(entity.object3D.position);
-      this.selected.orbitAttribute = entity.getAttribute('obit');
+      // this.selected.orbitPosition.copy(entity.object3D.position);
+      // this.selected.orbitAttribute = entity.getAttribute('obit');
 
-      window.selectedEntity = entity;
-      entity.removeAttribute('orbit');
+      entity.addEventListener('float-at-target', (event) => {
+        console.log('game responding to float-at-target', event);
+      });
+      entity.addEventListener('float-completed', (event) => {
+        console.log('game responding to float-completed', event);
+        entity.setAttribute('orbit', {active: true});
+      });
+
+      // window.selectedEntity = entity;
+      // entity.removeAttribute('orbit');
+      entity.setAttribute('orbit', {active: false});
       entity.setAttribute('float-to', {
         // target: '#leftHand',
-        // position: this.elLeftHand.getAttribute('position'),
-        targetPosition: this.elLeftHand.object3D.position,
+        targetPosition: this.elLeftHand.getAttribute('position'),
+        // targetPosition: this.elLeftHand.object3D.position,
         speed: 0.1,
       });
     },
