@@ -1,7 +1,7 @@
 import { Controller } from '../entities/controller.js';
 import { Box } from '../entities/Box';
 import { Goal } from '../entities/Goal.js'
-import { ShapedItem } from '../entities/ShapedItem.js';
+import { Item } from '../entities/Item.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
 
@@ -111,7 +111,7 @@ AFRAME.registerSystem('game', {
 
     createNewItem() {
       // Create the item
-      const entity = new ShapedItem({
+      const entity = new Item({
         x: 0,
         y: THREE.Math.randInt(2, 4),
         z: 0,

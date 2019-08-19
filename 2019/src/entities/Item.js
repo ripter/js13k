@@ -1,7 +1,7 @@
 import { updateElement } from '../utils/updateElement.js';
 
 
-export class ShapedItem {
+export class Item {
   constructor(props = {}) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');

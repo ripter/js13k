@@ -14,9 +14,9 @@ AFRAME.registerComponent('float-to', {
     this.el.object3D.getWorldPosition(this.startingPosition);
   },
 
-  // update(oldData) {
-  //   this.targetPosition.copy(this.data.targetPosition);
-  // },
+  update(oldData) {
+    this.targetPosition.copy(this.data.targetPosition);
+  },
 
   tick(time, timeDelta) {
     if (!this.data.active) { return; }
