@@ -12,18 +12,8 @@ AFRAME.registerComponent('selectable', {
     });
   },
 
-  // tick(time, timeDelta) {
-    // const { deltaTheta, radius } = this.data;
-    // const { position } = this.el.object3D;
-    // const { theta } = this;
-    // const x = radius * Math.cos(theta);
-    // const z = radius * Math.sin(theta);
-    //
-    // this.theta += deltaTheta;
-    // position.set(x, position.y, z);
-  // },
-
   handleEvent(event) {
+    console.log('selectable', event.type, event);
     const { lastIndex } = this;
     let nextIndex = lastIndex;
     while (nextIndex === lastIndex) {

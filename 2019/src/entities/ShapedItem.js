@@ -6,6 +6,7 @@ export class ShapedItem {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
+    this.el.classList.add('item');
     this.state = {
       // class: props.shape,
       selectable: {},

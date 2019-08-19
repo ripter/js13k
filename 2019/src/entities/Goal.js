@@ -4,7 +4,6 @@ export class Goal {
     this.sceneEl = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.classList.add('goal');
     this.el.setAttribute('position', {
       x: props.x,
       y: props.y,
@@ -17,6 +16,8 @@ export class Goal {
         scale="0.25 0.25 0.25"
         geometry="primitive: extrudeShape; icon: ${props.icon}"
         material="color: #7FDBFF; transparent: true; opacity: 0.5;"
+        selectable
+        class="goal"
         ></a-entity>
     `;
 
