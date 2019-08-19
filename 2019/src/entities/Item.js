@@ -8,8 +8,12 @@ export class Item {
 
     this.el.classList.add('item');
     this.state = {
-      // class: props.shape,
+      class: props.shape,
       selectable: {},
+      'float-to': {
+        active: false,
+        speed: 0.05,
+      },
       orbit: {
         radius: THREE.Math.randInt(3, 6),
         startTheta: THREE.Math.randFloat(0, 2 * Math.PI),

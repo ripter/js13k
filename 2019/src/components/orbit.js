@@ -1,3 +1,5 @@
+// const EVENTS = ['selected', 'unselected'];
+
 AFRAME.registerComponent('orbit', {
   schema: {
     startTheta: {default: 0},
@@ -11,6 +13,19 @@ AFRAME.registerComponent('orbit', {
     this.theta = this.data.startTheta;
   },
 
+  // play() {
+  //   EVENTS.forEach(eventName => this.el.addEventListener(eventName, this));
+  // },
+  //
+  // pause() {
+  //   EVENTS.forEach(eventName => this.el.removeEventListener(eventName, this));
+  // },
+
+  // update(oldData) {
+    // console.log('orbit update', oldData);
+    // this.targetPosition.copy(this.data.targetPosition);
+  // },
+
   // Update position to orbit around the center
   tick(time, timeDelta) {
     if (!this.data.active) { return; }
@@ -23,4 +38,8 @@ AFRAME.registerComponent('orbit', {
     this.theta += deltaTheta;
     position.set(x, position.y, z);
   },
+
+  // handleEvent(event) {
+  //   console.log('orbit.handleEvent', event.type, event);
+  // },
 });

@@ -51,7 +51,7 @@ AFRAME.registerSystem('game', {
         this.state.selectedItem.setAttribute('orbit', {active: false});
         this.state.selectedItem.setAttribute('float-to', {
           targetPosition: this.state.selectedGoal.getAttribute('position'),
-          speed: 0.05,
+          active: true,
         });
       }
 
@@ -81,11 +81,22 @@ AFRAME.registerSystem('game', {
       const old = this.state[name];
 
       // notify the old that it is no longer selected
-      old && old.emit('unselected');
+      if (old) {
+        old.setAttribute('orbit', {active: true});
+        old.setAttribute('float-to', {
+          active: false,
+        });
+        old.emit('unselected');
+      }
       // Update and notify the new selected
       this.state[name] = elm;
       elm.emit('selected');
       return true;
+    },
+
+
+    testMatchMatch() {
+       console.log('Goal and Item match?');
     },
 
     // Starts a new game!
@@ -133,5 +144,12 @@ AFRAME.registerSystem('game', {
 
     handleEvent(event) {
        console.log('game.handleEvent', event.type, event);
+       switch (event.type) {
+         case 'float-completed':
+           // this.
+           break;
+         default:
+
+       }
     },
 });
