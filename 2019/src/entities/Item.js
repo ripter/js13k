@@ -14,6 +14,9 @@ export class Item {
         active: false,
         speed: 0.05,
       },
+      lockAndKey: {
+
+      },
       orbit: {
         radius: THREE.Math.randInt(3, 6),
         startTheta: THREE.Math.randFloat(0, 2 * Math.PI),

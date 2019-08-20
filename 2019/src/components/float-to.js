@@ -15,7 +15,6 @@ AFRAME.registerComponent('float-to', {
   },
 
   update(oldData) {
-    console.log('float-to update', oldData);
     this.targetPosition.copy(this.data.targetPosition);
   },
 

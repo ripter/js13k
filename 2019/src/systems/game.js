@@ -24,6 +24,7 @@ AFRAME.registerSystem('game', {
       this.state = {
         selectedItem: null,
         selectedGoal: null,
+        goalPosition: new THREE.Vector3(),
       };
 
       this.startGame();
@@ -32,27 +33,43 @@ AFRAME.registerSystem('game', {
 
     // Triggered by components (selectable) when the user selects an item/goal.
     setSelected(elm) {
-      const { selectedGoal, selectedItem } = this.state;
-
-      // Update with the new entity
+      // Update selected state with the new entity
       const isGoal = elm.classList.contains('goal');
       if (isGoal) {
         // bail if it's already the selected entity
-        if (!this.updateSelected('selectedGoal', elm)) { return; }
+        if (!this.setSelectedState('selectedGoal', elm)) { return; }
       }
       else {
         // bail if it's already the selected entity
-        if (!this.updateSelected('selectedItem', elm)) { return; }
+        if (!this.setSelectedState('selectedItem', elm)) { return; }
       }
 
       // Do we have both a Goal and an Item?
-      if (this.state.selectedGoal !== null && this.state.selectedItem !== null ) {
-        // Move the Item to the Goal!
-        this.state.selectedItem.setAttribute('orbit', {active: false});
-        this.state.selectedItem.setAttribute('float-to', {
-          targetPosition: this.state.selectedGoal.getAttribute('position'),
-          active: true,
+      const { selectedGoal, selectedItem, goalPosition } = this.state;
+      if (selectedGoal !== null && selectedItem !== null ) {
+        // Get the goal's world position.
+        selectedGoal.object3D.getWorldPosition(goalPosition);
+        // Start the lock & key
+        selectedItem.setAttribute('lockAndKey', {
+          lock: goalPosition,
         });
+        // Reset the selected so the user can pick again.
+        this.setSelectedState('selectedGoal', null);
+        this.setSelectedState('selectedItem', null);
+        // // Trigger the Paired event to let them know!
+        // [this.state.selectedItem, this.state.selectedGoal].forEach(selectedElm => {
+        //   selectedElm.emit('paired', {
+        //     item: this.state.selectedItem,
+        //     goal: this.state.selectedGoal,
+        //   });
+        // });
+
+        // Move the Item to the Goal!
+        // this.state.selectedItem.setAttribute('orbit', {active: false});
+        // this.state.selectedItem.setAttribute('float-to', {
+        //   targetPosition: this.state.selectedGoal.getAttribute('position'),
+        //   active: true,
+        // });
       }
 
       // if (entity === this.selected) { return; }
@@ -75,22 +92,22 @@ AFRAME.registerSystem('game', {
 
     // Attempts to update the selected item.
     // return false if the item is already selected.
-    updateSelected(name, elm) {
+    setSelectedState(name, elm) {
       // bail if it's already the selected entity
       if (elm === this.state[name]) { return false; }
       const old = this.state[name];
 
       // notify the old that it is no longer selected
-      if (old) {
-        old.setAttribute('orbit', {active: true});
-        old.setAttribute('float-to', {
-          active: false,
-        });
-        old.emit('unselected');
-      }
+      // if (old) {
+      //   old.setAttribute('orbit', {active: true});
+      //   old.setAttribute('float-to', {
+      //     active: false,
+      //   });
+      //   old.emit('unselected');
+      // }
       // Update and notify the new selected
       this.state[name] = elm;
-      elm.emit('selected');
+      // elm.emit('selected');
       return true;
     },
 
@@ -129,7 +146,7 @@ AFRAME.registerSystem('game', {
         shape: getRandomShape(),
       });
       // Listen for events.
-      ['float-at-target', 'float-completed'].forEach(eventName => entity.el.addEventListener(eventName, this));
+      // ['float-at-target', 'float-completed'].forEach(eventName => entity.el.addEventListener(eventName, this));
     },
 
     createNewGoal(x, y) {
@@ -142,14 +159,14 @@ AFRAME.registerSystem('game', {
     },
 
 
-    handleEvent(event) {
-       console.log('game.handleEvent', event.type, event);
-       switch (event.type) {
-         case 'float-completed':
-           // this.
-           break;
-         default:
-
-       }
-    },
+    // handleEvent(event) {
+    //    console.log('game.handleEvent', event.type, event);
+    //    switch (event.type) {
+    //      case 'float-completed':
+    //        // this.
+    //        break;
+    //      default:
+    //
+    //    }
+    // },
 });
