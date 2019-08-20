@@ -1,9 +1,11 @@
+import { uuid } from '../utils/uuid.js';
 
 export class Goal {
   constructor(props = {}) {
     this.sceneEl = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
+    this.el.id = uuid(),
     this.el.setAttribute('position', {
       x: props.x,
       y: props.y,
@@ -21,6 +23,7 @@ export class Goal {
         ></a-entity>
     `;
 
+    console.log('goal', this.el);
     this.sceneEl.appendChild(this.el);
   }
 }

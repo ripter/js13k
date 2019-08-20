@@ -10,7 +10,7 @@ const EVENTS = ['float-completed'];
 AFRAME.registerComponent('lockAndKey', {
   schema: {
     active: {default: true},
-    lock: {type: 'vec3'},
+    lock: {type: 'selector'},
     // targetPosition: {type: 'vec3'},
     // speed: {type: 'number'},
     // active: {default: true},
@@ -30,8 +30,18 @@ AFRAME.registerComponent('lockAndKey', {
 
   // sync local refrences when the data changes.
   update(oldData) {
+    console.log('lockAndKey.update', oldData);
     // Start floating when the lock changes.
     if (oldData.lock !== this.data.lock) {
+      /*
+      // Get the goal's world position.
+selectedGoal.object3D.getWorldPosition(goalPosition);
+// Start the lock & key
+selectedItem.setAttribute('lockAndKey', {
+  lock: goalPosition,
+});
+
+       */
       this.lockPosition.copy(this.data.lock);
       this.floatToLock();
     }
@@ -42,6 +52,7 @@ AFRAME.registerComponent('lockAndKey', {
      switch (event.type) {
        case 'float-completed':
          console.log('test if lock and key match');
+         this.el.setAttribute('float-to', {active: false});
          break;
        default:
 

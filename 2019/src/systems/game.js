@@ -47,74 +47,28 @@ AFRAME.registerSystem('game', {
       // Do we have both a Goal and an Item?
       const { selectedGoal, selectedItem, goalPosition } = this.state;
       if (selectedGoal !== null && selectedItem !== null ) {
+        console.log('selectedGoal.id', `#${selectedGoal.id}`);
         // Get the goal's world position.
-        selectedGoal.object3D.getWorldPosition(goalPosition);
+        // selectedGoal.object3D.getWorldPosition(goalPosition);
         // Start the lock & key
         selectedItem.setAttribute('lockAndKey', {
-          lock: goalPosition,
+          lock: `#${selectedGoal.id}`,
         });
         // Reset the selected so the user can pick again.
         this.setSelectedState('selectedGoal', null);
         this.setSelectedState('selectedItem', null);
-        // // Trigger the Paired event to let them know!
-        // [this.state.selectedItem, this.state.selectedGoal].forEach(selectedElm => {
-        //   selectedElm.emit('paired', {
-        //     item: this.state.selectedItem,
-        //     goal: this.state.selectedGoal,
-        //   });
-        // });
-
-        // Move the Item to the Goal!
-        // this.state.selectedItem.setAttribute('orbit', {active: false});
-        // this.state.selectedItem.setAttribute('float-to', {
-        //   targetPosition: this.state.selectedGoal.getAttribute('position'),
-        //   active: true,
-        // });
       }
-
-      // if (entity === this.selected) { return; }
-      // Pull entity to the player's hand.
-      // this.selected = entity;
-
-      // entity.addEventListener('float-at-target', (event) => {
-      //   console.log('game responding to float-at-target', event);
-      // });
-      // entity.addEventListener('float-completed', (event) => {
-      //   entity.setAttribute('orbit', {active: true});
-      // });
-      //
-      // entity.setAttribute('orbit', {active: false});
-      // entity.setAttribute('float-to', {
-      //   targetPosition: this.elLeftHand.getAttribute('position'),
-      //   speed: 0.1,
-      // });
     },
 
     // Attempts to update the selected item.
     // return false if the item is already selected.
-    setSelectedState(name, elm) {
+    setSelectedState(name, value) {
       // bail if it's already the selected entity
-      if (elm === this.state[name]) { return false; }
-      const old = this.state[name];
-
-      // notify the old that it is no longer selected
-      // if (old) {
-      //   old.setAttribute('orbit', {active: true});
-      //   old.setAttribute('float-to', {
-      //     active: false,
-      //   });
-      //   old.emit('unselected');
-      // }
-      // Update and notify the new selected
-      this.state[name] = elm;
-      // elm.emit('selected');
+      if (value === this.state[name]) { return false; }
+      this.state[name] = value;
       return true;
     },
 
-
-    testMatchMatch() {
-       console.log('Goal and Item match?');
-    },
 
     // Starts a new game!
     startGame() {
