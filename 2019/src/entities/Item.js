@@ -16,7 +16,7 @@ export class Item {
         active: false,
         speed: 0.05,
       },
-      lockAndKey: {
+      'lock-key': {
         key: props.shape,
       },
       orbit: {

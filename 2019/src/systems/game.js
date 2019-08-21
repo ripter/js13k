@@ -55,8 +55,9 @@ AFRAME.registerSystem('game', {
       // Do we have both a Goal and an Item?
       const { selectedGoal, selectedItem, goalPosition } = this.state;
       if (selectedGoal !== null && selectedItem !== null ) {
+        console.log('Setting Lock', selectedGoal.id, selectedGoal);
         // Start the lock & key
-        selectedItem.setAttribute('lockAndKey', {
+        selectedItem.setAttribute('lock-key', {
           elLock: `#${selectedGoal.id}`,
         });
         // Reset the selected so the user can pick again.

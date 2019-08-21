@@ -2,6 +2,7 @@ const COLORS = ['#001f3f', '#7FDBFF', '#3D9970', '#01FF70', '#FF851B', '#85144b'
 
 AFRAME.registerComponent('selectable', {
   schema: {
+    active: {default: true},
   },
 
   init: function () {
@@ -13,6 +14,7 @@ AFRAME.registerComponent('selectable', {
   },
 
   handleEvent(event) {
+    if (!this.data.active) { return; }
     // console.log('selectable', event.type, event);
     const { lastIndex } = this;
     let nextIndex = lastIndex;
