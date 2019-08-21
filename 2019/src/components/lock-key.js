@@ -30,10 +30,9 @@ AFRAME.registerComponent('lock-key', {
 
   // sync local refrences when the data changes.
   update(oldData) {
-    // Start floating when the lock changes.
-    console.log('this.data.elLock', this.data.elLock);
     if (null !== this.data.elLock
       && oldData.elLock !== this.data.elLock) {
+      // Start floating when the lock changes.
       this.floatToLock();
     }
   },
@@ -54,6 +53,7 @@ AFRAME.registerComponent('lock-key', {
   },
 
 
+  // floats the element to the lock.
   floatToLock() {
     this.toLock = true;
     // Get a copy of the positions
@@ -104,7 +104,6 @@ AFRAME.registerComponent('lock-key', {
     // Stop floating
     this.el.setAttribute('float-to', {active: false});
 
-    console.log('key', key, 'keyNeeded', keyNeeded);
     if (key === keyNeeded) {
       console.log('MATCH');
       // Lock the item and prevent the lock from being selectable for the rest of the game.

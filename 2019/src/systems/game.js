@@ -55,7 +55,6 @@ AFRAME.registerSystem('game', {
       // Do we have both a Goal and an Item?
       const { selectedGoal, selectedItem, goalPosition } = this.state;
       if (selectedGoal !== null && selectedItem !== null ) {
-        console.log('Setting Lock', selectedGoal.id, selectedGoal);
         // Start the lock & key
         selectedItem.setAttribute('lock-key', {
           elLock: `#${selectedGoal.id}`,
@@ -67,58 +66,45 @@ AFRAME.registerSystem('game', {
     },
 
 
-
     // Starts a new game!
     startGame() {
+      const shapes = Array(TOTAL_ITEMS).fill().map(getRandomShape);
+
+      // reset the lists
       this.items = [];
       this.goals = [];
 
       // Make a grid of goals around the player
       for (let x=0; x < TOTAL_GOALS; x++) {
         for (let y=0; y < TOTAL_GOALS; y++) {
-          this.goals.push(this.createNewGoal(x, y));
+          let i = x * TOTAL_GOALS + y;
+          this.goals.push(this.createNewGoal(x, y, shapes[i]));
         }
       }
 
-      // Make sure all the goals are in the items list
-      this.items = this.items.concat(this.goals);
-
       // Fill with random shaped items
       for (let i=0; i < TOTAL_ITEMS; i++) {
-        this.items.push(this.createNewItem());
+        this.items.push(this.createNewItem(shapes[i]));
       }
     },
 
-    createNewItem() {
-      // Create the item
+    // Creates a new orbiting item with shape and random y-axis
+    createNewItem(shape) {
       const entity = new Item({
         x: 0,
         y: THREE.Math.randInt(2, 4),
         z: 0,
-        shape: getRandomShape(),
+        shape,
       });
-      // Listen for events.
-      // ['float-at-target', 'float-completed'].forEach(eventName => entity.el.addEventListener(eventName, this));
     },
 
-    createNewGoal(x, y) {
+    // Creates a new Goal at location with random shape
+    createNewGoal(x, y, shape) {
       const entity = new Goal({
         x: -0.75 + (x * 0.5),
         y: 0.1,
         z: -0.5 + (y * 0.5),
-        icon: getRandomShape(),
+        icon: shape,
       });
     },
-
-
-    // handleEvent(event) {
-    //    console.log('game.handleEvent', event.type, event);
-    //    switch (event.type) {
-    //      case 'float-completed':
-    //        // this.
-    //        break;
-    //      default:
-    //
-    //    }
-    // },
 });

@@ -15,8 +15,8 @@ AFRAME.registerComponent('selectable', {
 
   handleEvent(event) {
     if (!this.data.active) { return; }
-    // console.log('selectable', event.type, event);
     const { lastIndex } = this;
+    //
     let nextIndex = lastIndex;
     while (nextIndex === lastIndex) {
       nextIndex = THREE.Math.randInt(0, COLORS.length-1);

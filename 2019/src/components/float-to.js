@@ -7,11 +7,7 @@ AFRAME.registerComponent('float-to', {
   },
 
   init() {
-    // this.startingPosition = new THREE.Vector3();
     this.targetPosition = new THREE.Vector3();
-    // this.direction = 'target';
-
-    // this.el.object3D.getWorldPosition(this.startingPosition);
   },
 
   update(oldData) {
@@ -24,7 +20,6 @@ AFRAME.registerComponent('float-to', {
     const { targetPosition } = this;
     const distance = this.el.object3D.position.distanceToSquared(targetPosition);
 
-    // console.log('moving to', targetPosition, distance);
     this.el.object3D.lookAt(targetPosition);
     this.el.object3D.translateZ(speed);
 
