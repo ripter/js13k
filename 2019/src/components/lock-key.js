@@ -67,6 +67,7 @@ AFRAME.registerComponent('lock-key', {
       },
       'float-to': {
         targetPosition: this.lockPosition,
+        targetScale: {x: 0.25, y: 0.25, z: 0.25},
         active: true,
       },
     });
@@ -81,6 +82,7 @@ AFRAME.registerComponent('lock-key', {
       },
       'float-to': {
         targetPosition: this.orbitPosition,
+        targetScale: {x: 1, y: 1, z: 1},
         active: true,
       },
     });
