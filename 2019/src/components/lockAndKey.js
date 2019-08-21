@@ -10,10 +10,8 @@ const EVENTS = ['float-completed'];
 AFRAME.registerComponent('lockAndKey', {
   schema: {
     active: {default: true},
-    lock: {type: 'selector'},
-    // targetPosition: {type: 'vec3'},
-    // speed: {type: 'number'},
-    // active: {default: true},
+    elLock: {type: 'selector'},
+    key: {type: 'string'},
   },
 
   init() {
@@ -30,32 +28,23 @@ AFRAME.registerComponent('lockAndKey', {
 
   // sync local refrences when the data changes.
   update(oldData) {
-    console.log('lockAndKey.update', oldData);
     // Start floating when the lock changes.
-    if (oldData.lock !== this.data.lock) {
-      /*
-      // Get the goal's world position.
-selectedGoal.object3D.getWorldPosition(goalPosition);
-// Start the lock & key
-selectedItem.setAttribute('lockAndKey', {
-  lock: goalPosition,
-});
-
-       */
-      this.lockPosition.copy(this.data.lock);
+    if (oldData.elLock !== this.data.elLock) {
+      console.log('lockAndKey.update', this.data.elLock);
+      this.data.elLock.object3D.getWorldPosition(this.lockPosition);
       this.floatToLock();
     }
   },
 
   handleEvent(event) {
-     console.log('Event:', event.type, event);
+     // console.log('Event:', event.type, event);
      switch (event.type) {
        case 'float-completed':
-         console.log('test if lock and key match');
          this.el.setAttribute('float-to', {active: false});
+         this.checkKeyWithLock();
          break;
        default:
-
+        console.warn('unhandled event', event);
      }
   },
 
@@ -64,7 +53,7 @@ selectedItem.setAttribute('lockAndKey', {
   // },
 
   floatToLock() {
-    console.log('Start float to lock');
+    // console.log('Start float to lock');
     const props = {
       orbit: {
         active: false,
@@ -76,5 +65,21 @@ selectedItem.setAttribute('lockAndKey', {
     };
 
     updateElement(this.el, props);
+  },
+
+  checkKeyWithLock() {
+    const { elLock, key } = this.data;
+    const keyNeeded = elLock.getAttribute('keyNeeded');
+
+    console.log('key', key);
+    console.log('keyNeeded', keyNeeded);
+
+    if (key === keyNeeded) {
+      console.log('MATCH');
+      // Lock the item and prevent the lock from being selectable for the rest of the game.
+    } else {
+      console.log('float back');
+      this.el.setAttribute('orbit', {active: true});
+    }
   },
 });

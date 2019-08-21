@@ -13,7 +13,7 @@ AFRAME.registerComponent('selectable', {
   },
 
   handleEvent(event) {
-    console.log('selectable', event.type, event);
+    // console.log('selectable', event.type, event);
     const { lastIndex } = this;
     let nextIndex = lastIndex;
     while (nextIndex === lastIndex) {

@@ -30,7 +30,7 @@ AFRAME.registerComponent('float-to', {
 
     if (distance <= speed) {
       this.el.emit('float-completed', { el: this.el })
-      // This doesn't seem to work :(
+      // This doesn't seem to work 🙁
       // this.el.setAttribute('active', false);
     }
   },

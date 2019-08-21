@@ -17,7 +17,7 @@ export class Item {
         speed: 0.05,
       },
       lockAndKey: {
-
+        key: props.shape,
       },
       orbit: {
         radius: THREE.Math.randInt(3, 6),

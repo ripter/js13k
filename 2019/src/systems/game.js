@@ -32,42 +32,39 @@ AFRAME.registerSystem('game', {
 
 
     // Triggered by components (selectable) when the user selects an item/goal.
+    // Sets the element as selected, triggers lockAndKey if this makes a pair.
     setSelected(elm) {
+      const setState = (name, elm) => {
+        // bail if it's already the selected entity
+        if (elm === this.state[name]) { return false; }
+        this.state[name] = elm;
+        return true;
+      };
+
       // Update selected state with the new entity
       const isGoal = elm.classList.contains('goal');
       if (isGoal) {
         // bail if it's already the selected entity
-        if (!this.setSelectedState('selectedGoal', elm)) { return; }
+        if (!setState('selectedGoal', elm)) { return; }
       }
       else {
         // bail if it's already the selected entity
-        if (!this.setSelectedState('selectedItem', elm)) { return; }
+        if (!setState('selectedItem', elm)) { return; }
       }
 
       // Do we have both a Goal and an Item?
       const { selectedGoal, selectedItem, goalPosition } = this.state;
       if (selectedGoal !== null && selectedItem !== null ) {
-        console.log('selectedGoal.id', `#${selectedGoal.id}`);
-        // Get the goal's world position.
-        // selectedGoal.object3D.getWorldPosition(goalPosition);
         // Start the lock & key
         selectedItem.setAttribute('lockAndKey', {
-          lock: `#${selectedGoal.id}`,
+          elLock: `#${selectedGoal.id}`,
         });
         // Reset the selected so the user can pick again.
-        this.setSelectedState('selectedGoal', null);
-        this.setSelectedState('selectedItem', null);
+        setState('selectedGoal', null);
+        setState('selectedItem', null);
       }
     },
 
-    // Attempts to update the selected item.
-    // return false if the item is already selected.
-    setSelectedState(name, value) {
-      // bail if it's already the selected entity
-      if (value === this.state[name]) { return false; }
-      this.state[name] = value;
-      return true;
-    },
 
 
     // Starts a new game!

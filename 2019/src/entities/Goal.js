@@ -5,7 +5,6 @@ export class Goal {
     this.sceneEl = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.id = uuid(),
     this.el.setAttribute('position', {
       x: props.x,
       y: props.y,
@@ -13,17 +12,18 @@ export class Goal {
     });
     this.el.innerHTML = `
       <a-entity
+        id="${uuid()}"
         rotation="90 0 0"
         position="0 1 0"
         scale="0.25 0.25 0.25"
         geometry="primitive: extrudeShape; icon: ${props.icon}"
         material="color: #7FDBFF; transparent: true; opacity: 0.5;"
+        keyNeeded="${props.icon}"
         selectable
         class="goal"
         ></a-entity>
     `;
 
-    console.log('goal', this.el);
     this.sceneEl.appendChild(this.el);
   }
 }
