@@ -37,8 +37,8 @@ AFRAME.registerSystem('game', {
       const setState = (name, elm) => {
         // bail if it's already the selected entity
         if (elm === this.state[name]) { return false; }
-        // set the old as unselected
-        if (this.state[name] !== null) { this.state[name].setAttribute('selectable', {isSelected: false}); }
+        // set the old as unselected, as long as the new one isn't null.
+        if (elm !== null && this.state[name] !== null) { this.state[name].setAttribute('selectable', {isSelected: false}); }
         // set the new as selected
         if (elm !== null) { elm.setAttribute('selectable', {isSelected: true}); }
         this.state[name] = elm;

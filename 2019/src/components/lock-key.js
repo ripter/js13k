@@ -85,6 +85,9 @@ AFRAME.registerComponent('lock-key', {
       //   color: '#FF4136',
       // },
     });
+    // this.el.setAttribute('material', {
+    //   color: '#FFDC00',
+    // });
   },
 
   // floats the element to orbitPosition
@@ -100,8 +103,23 @@ AFRAME.registerComponent('lock-key', {
         targetScale: {x: 1, y: 1, z: 1},
         active: true,
       },
-      material: {
-        color: '#FF4136',
+      selectable: {
+        isSelected: false,
+        active: true,
+      },
+    });
+    this.el.setAttribute('material', {
+      color: '#FF4136',
+    });
+
+    // Notify the lock that the key failed.
+    updateElement(this.data.elLock, {
+      'lock-goal': {
+        isUnlocked: false,
+      },
+      selectable: {
+        isSelected: false,
+        active: true,
       },
     });
   },
@@ -115,9 +133,9 @@ AFRAME.registerComponent('lock-key', {
       'float-to': {
         active: false,
       },
-      material: {
-        color: '#DDDDDD',
-      },
+    });
+    this.el.setAttribute('material', {
+      color: '#DDDDDD',
     });
   },
 
@@ -136,7 +154,7 @@ AFRAME.registerComponent('lock-key', {
     // Notify the lock that the key worked.
     updateElement(elLock, {
       'lock-goal': {
-        isOpen: true,
+        isUnlocked: true,
       },
     });
   },
