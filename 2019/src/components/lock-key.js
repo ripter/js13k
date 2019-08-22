@@ -133,7 +133,12 @@ AFRAME.registerComponent('lock-key', {
       },
       visible: false,
     });
-    //
+    // Notify the lock that the key worked.
+    updateElement(elLock, {
+      'lock-goal': {
+        isOpen: true,
+      },
+    });
   },
 
 });
