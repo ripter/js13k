@@ -16,6 +16,7 @@ AFRAME.registerComponent('lock-key', {
 
   init() {
     this.lockPosition = new THREE.Vector3();
+    // this.lockQuaternion = new THREE.Quaternion();
     this.orbitPosition = new THREE.Vector3();
     this.didTest = false;
   },
@@ -37,6 +38,21 @@ AFRAME.registerComponent('lock-key', {
     }
   },
 
+
+  checkKeyWithLock() {
+    const { elLock, key } = this.data;
+    const keyNeeded = elLock.getAttribute('key-needed');
+
+    // Stop floating
+    // this.el.setAttribute('float-to', {active: false});
+
+    if (key === keyNeeded) {
+      this.matchLock();
+    } else {
+      this.floatToOrbit();
+    }
+  },
+
   handleEvent(event) {
      if (event.type !== 'float-completed') { return; }
 
@@ -53,7 +69,11 @@ AFRAME.registerComponent('lock-key', {
   },
 
 
-  // floats the element to the lock.
+  //
+  // Actions
+  //
+
+  // floats the element to the lockPosition.
   floatToLock() {
     this.toLock = true;
     // Get a copy of the positions
@@ -73,6 +93,7 @@ AFRAME.registerComponent('lock-key', {
     });
   },
 
+  // floats the element to orbitPosition
   floatToOrbit() {
     this.toLock = false;
     // update the components
@@ -88,6 +109,7 @@ AFRAME.registerComponent('lock-key', {
     });
   },
 
+  // Stops floating and starts orbiting
   resumeOrbit() {
     updateElement(this.el, {
       orbit: {
@@ -99,18 +121,23 @@ AFRAME.registerComponent('lock-key', {
     });
   },
 
-  checkKeyWithLock() {
-    const { elLock, key } = this.data;
-    const keyNeeded = elLock.getAttribute('keyNeeded');
-
-    // Stop floating
-    this.el.setAttribute('float-to', {active: false});
-
-    if (key === keyNeeded) {
-      console.log('MATCH');
-      // Lock the item and prevent the lock from being selectable for the rest of the game.
-    } else {
-      this.floatToOrbit();
-    }
+  matchLock() {
+    const { elLock } = this.data;
+    // this.data.elLock.object3D.getWorldPosition(this.lockPosition);
+    // this.data.elLock.object3D.getWorldQuaternion(this.lockQuaternion);
+    //
+    // this.el.object3D.position.copy(this.lockPosition);
+    // this.el.object3D.applyQuaternion(this.lockQuaternion);
+    // Lock the item and prevent the lock from being selectable for the rest of the game.
+    updateElement(this.el, {
+      'float-to': {
+        active: false,
+      },
+      selectable: {
+        active: false,
+      },
+      visible: false,
+    });
   },
+
 });
