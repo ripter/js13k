@@ -19,6 +19,7 @@ export class Goal {
         geometry="primitive: extrudeShape; icon: ${props.icon}"
         material="color: #7FDBFF; transparent: true; opacity: 0.5;"
         key-needed="${props.icon}"
+        lock-goal="key: ${props.icon}"
         selectable
         class="goal"
         ></a-entity>

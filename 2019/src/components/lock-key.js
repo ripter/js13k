@@ -16,7 +16,6 @@ AFRAME.registerComponent('lock-key', {
 
   init() {
     this.lockPosition = new THREE.Vector3();
-    // this.lockQuaternion = new THREE.Quaternion();
     this.orbitPosition = new THREE.Vector3();
     this.didTest = false;
   },
@@ -39,33 +38,25 @@ AFRAME.registerComponent('lock-key', {
   },
 
 
-  checkKeyWithLock() {
+  handleEvent(event) {
+    if (event.type !== 'float-completed') { return; }
+    const { toLock } = this;
     const { elLock, key } = this.data;
     const keyNeeded = elLock.getAttribute('key-needed');
 
-    // Stop floating
-    // this.el.setAttribute('float-to', {active: false});
-
-    if (key === keyNeeded) {
-      this.matchLock();
-    } else {
-      this.floatToOrbit();
+    // If it reached the lock
+    if (toLock) {
+      // Do we have the correct key for the lock?
+      if (key === keyNeeded) {
+        this.matchLock();
+      } else {
+        this.floatToOrbit();
+      }
     }
-  },
-
-  handleEvent(event) {
-     if (event.type !== 'float-completed') { return; }
-
-     const { toLock } = this;
-
-     // If it reached the lock
-     if (toLock) {
-       this.checkKeyWithLock();
-     }
-     // if it reached orbit
-     else {
-       this.resumeOrbit();
-     }
+    // if it reached orbit
+    else {
+      this.resumeOrbit();
+    }
   },
 
 
@@ -90,6 +81,9 @@ AFRAME.registerComponent('lock-key', {
         targetScale: {x: 0.25, y: 0.25, z: 0.25},
         active: true,
       },
+      // material: {
+      //   color: '#FF4136',
+      // },
     });
   },
 
@@ -106,6 +100,9 @@ AFRAME.registerComponent('lock-key', {
         targetScale: {x: 1, y: 1, z: 1},
         active: true,
       },
+      material: {
+        color: '#FF4136',
+      },
     });
   },
 
@@ -118,17 +115,15 @@ AFRAME.registerComponent('lock-key', {
       'float-to': {
         active: false,
       },
+      material: {
+        color: '#DDDDDD',
+      },
     });
   },
 
   matchLock() {
     const { elLock } = this.data;
-    // this.data.elLock.object3D.getWorldPosition(this.lockPosition);
-    // this.data.elLock.object3D.getWorldQuaternion(this.lockQuaternion);
-    //
-    // this.el.object3D.position.copy(this.lockPosition);
-    // this.el.object3D.applyQuaternion(this.lockQuaternion);
-    // Lock the item and prevent the lock from being selectable for the rest of the game.
+    // disable and hide the item.
     updateElement(this.el, {
       'float-to': {
         active: false,
@@ -138,6 +133,7 @@ AFRAME.registerComponent('lock-key', {
       },
       visible: false,
     });
+    //
   },
 
 });

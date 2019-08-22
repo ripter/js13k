@@ -1,8 +1,9 @@
-const COLORS = ['#001f3f', '#7FDBFF', '#3D9970', '#01FF70', '#FF851B', '#85144b', '#B10DC9'];
+// const COLORS = ['#001f3f', '#7FDBFF', '#3D9970', '#01FF70', '#FF851B', '#85144b', '#B10DC9'];
 
 AFRAME.registerComponent('selectable', {
   schema: {
     active: {default: true},
+    isSelected: {default: false},
   },
 
   init: function () {
@@ -13,18 +14,17 @@ AFRAME.registerComponent('selectable', {
     });
   },
 
+  update(oldData) {
+    if (this.data.isSelected) {
+      this.el.setAttribute('material', 'color', '#0074D9');
+    }
+    else {
+      this.el.setAttribute('material', 'color', '#DDDDDD');
+    }
+  },
+
   handleEvent(event) {
     if (!this.data.active) { return; }
-    const { lastIndex } = this;
-    //
-    let nextIndex = lastIndex;
-    while (nextIndex === lastIndex) {
-      nextIndex = THREE.Math.randInt(0, COLORS.length-1);
-    }
-
-    this.el.setAttribute('material', 'color', COLORS[nextIndex]);
-    this.lastIndex = nextIndex;
-
     // Notify the system we have been selected.
     this.system.setSelected(this.el);
   },
