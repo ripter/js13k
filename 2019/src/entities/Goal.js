@@ -5,6 +5,7 @@ export class Goal {
     this.sceneEl = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
+    const shapeUUID = uuid();
     this.el.setAttribute('position', {
       x: props.x,
       y: props.y,
@@ -12,7 +13,7 @@ export class Goal {
     });
     this.el.innerHTML = `
       <a-entity
-        id="${uuid()}"
+        id="${shapeUUID}"
         rotation="90 0 0"
         position="0 0 0"
         scale="0.25 0.25 0.25"
@@ -26,5 +27,12 @@ export class Goal {
     `;
 
     this.sceneEl.appendChild(this.el);
+    this.elModel = this.el.querySelector(`#${shapeUUID}`);
+  }
+
+  // Expose a while entity's value
+  get isUnlocked() {
+    const data = this.elModel.getAttribute('lock-goal');
+    return data.isUnlocked;
   }
 }

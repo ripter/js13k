@@ -81,6 +81,19 @@ AFRAME.registerSystem('game', {
       }
     },
 
+    // Triggered by components (lock-key) when the key is used on a valid lock.
+    unlockGoal(elKey, elLock) {
+      const elTimer = this.timer.el.querySelector('[timer]');
+
+      // Have we unlocked everything?
+      const isGameOver = this.goals.every(goal => goal.isUnlocked);
+
+      if (isGameOver) {
+        console.log('YOU WON!');
+        // Stop the timer
+        elTimer.setAttribute('timer', {isPlaying: false});
+      }
+    },
 
     // Starts a new game!
     startGame() {
@@ -102,11 +115,13 @@ AFRAME.registerSystem('game', {
       for (let i=0; i < TOTAL_ITEMS; i++) {
         this.items.push(this.createNewItem(shapes[i]));
       }
+
+      console.log('startGame this', this);
     },
 
     // Creates a new orbiting item with shape and random y-axis
     createNewItem(shape) {
-      const entity = new Item({
+      return new Item({
         x: 0,
         y: THREE.Math.randInt(2, 4),
         z: 0,
@@ -116,7 +131,7 @@ AFRAME.registerSystem('game', {
 
     // Creates a new Goal at location with random shape
     createNewGoal(x, y, shape) {
-      const entity = new Goal({
+      return new Goal({
         x: -0.75 + (x * 0.5),
         y: 0.1,
         z: -0.5 + (y * 0.5),

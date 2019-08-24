@@ -15,6 +15,7 @@ AFRAME.registerComponent('lock-key', {
   },
 
   init() {
+    this.system = this.el.sceneEl.systems.game;
     this.lockPosition = new THREE.Vector3();
     this.orbitPosition = new THREE.Vector3();
     this.didTest = false;
@@ -90,6 +91,7 @@ AFRAME.registerComponent('lock-key', {
     // });
   },
 
+  // Failed match with lock.
   // floats the element to orbitPosition
   floatToOrbit() {
     this.toLock = false;
@@ -139,6 +141,7 @@ AFRAME.registerComponent('lock-key', {
     });
   },
 
+  // Successful match with the lock!
   matchLock() {
     const { elLock } = this.data;
     // disable and hide the item.
@@ -157,6 +160,9 @@ AFRAME.registerComponent('lock-key', {
         isUnlocked: true,
       },
     });
+    // Notify the system it worked.
+    // Failed match with lock.
+    this.system.unlockGoal(this.el, elLock);
   },
 
 });
