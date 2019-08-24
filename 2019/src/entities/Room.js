@@ -10,6 +10,7 @@ export class Room {
     });
 
     this.el.innerHTML = `
+      <a-entity class="timer-display" text="value: 00:00"></a-entity>
       <a-entity
         rotation="0 90 0"
         scale="0.5 0.5 0.5"
@@ -17,6 +18,13 @@ export class Room {
         geometry="primitive: extrudeShape; icon: TIMER; extrudeDepth: 1;"
         material="color: #AAAAAA;"
         ></a-entity>
+      <a-plane
+        color="#3D9970"
+        position="0 0 0"
+        height="100"
+        width="100"
+        rotation="-90 0 0"
+        ></a-plane>
     `;
 
     this.sceneEl.appendChild(this.el);
