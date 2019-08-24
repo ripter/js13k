@@ -11,13 +11,13 @@ AFRAME.registerComponent('timer', {
     this.milliseconds = 0;
   },
 
-  update(oldData) {
-    // handle isPlaying toggle
-    console.group('update');
-    console.log('newData', this.data);
-    console.log('oldData', oldData);
-    console.groupEnd();
-  },
+  // update(oldData) {
+  //   // handle isPlaying toggle
+  //   console.group('update');
+  //   console.log('newData', this.data);
+  //   console.log('oldData', oldData);
+  //   console.groupEnd();
+  // },
 
   tick(time, timeDelta) {
     if (!this.data.active || !this.data.isPlaying) { return; }
