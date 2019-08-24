@@ -14,6 +14,7 @@ export class Timer {
         rotation="0 -60 180"
         >
         <a-entity
+          timer=""
           class="timer-display"
           position="0.1 -0.43 0.25"
           rotation="45 -90 180"
