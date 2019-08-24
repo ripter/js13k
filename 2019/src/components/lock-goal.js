@@ -17,7 +17,6 @@ AFRAME.registerComponent('lock-goal', {
         color: '#2ECC40',
       });
     } else {
-      console.log('setting color to', '#DDDDDD');
       updateElement(this.el, {
         selectable: {active: true},
       });
