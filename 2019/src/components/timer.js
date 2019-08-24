@@ -20,6 +20,7 @@ AFRAME.registerComponent('timer', {
   },
 
   tick(time, timeDelta) {
+    if (!this.data.active || !this.data.isPlaying) { return; }
     this.milliseconds += timeDelta;
     this.el.setAttribute('text', {
       value: `${formatTime(this.milliseconds)}`,

@@ -23,7 +23,7 @@ AFRAME.registerSystem('game', {
       this.timer = new Timer({
         x: -0.75,
         y: 0,
-        z: -0.75,  
+        z: -0.75,
       });
       // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
@@ -42,6 +42,8 @@ AFRAME.registerSystem('game', {
     // Triggered by components (selectable) when the user selects an item/goal.
     // Sets the element as selected, triggers lockAndKey if this makes a pair.
     setSelected(elm) {
+      const elTimer = this.timer.el.querySelector('[timer]');
+      // Helper function because most of the logic the the same for both items
       const setState = (name, elm) => {
         // bail if it's already the selected entity
         if (elm === this.state[name]) { return false; }
@@ -71,6 +73,8 @@ AFRAME.registerSystem('game', {
         selectedItem.setAttribute('lock-key', {
           elLock: `#${selectedGoal.id}`,
         });
+        // Start the timer
+        elTimer.setAttribute('timer', {isPlaying: true});
         // Reset the selected so the user can pick again.
         setState('selectedGoal', null);
         setState('selectedItem', null);

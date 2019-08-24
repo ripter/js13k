@@ -18,7 +18,7 @@ export class Timer {
           class="timer-display"
           position="0.1 -0.43 0.25"
           rotation="45 -90 180"
-          text="value: 12:34; color: #000; align: center; width: 4;"></a-entity>
+          text="value: 00:00; color: #000; align: center; width: 4;"></a-entity>
         <a-entity
           scale="0.5 0.5 0.5"
           geometry="primitive: extrudeShape; icon: TIMER; extrudeDepth: 1;"
