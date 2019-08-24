@@ -2,6 +2,7 @@ import { Controller } from '../entities/controller.js';
 import { Box } from '../entities/Box';
 import { Goal } from '../entities/Goal.js'
 import { Item } from '../entities/Item.js';
+import { Room } from '../entities/Room.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
 
@@ -17,6 +18,7 @@ AFRAME.registerSystem('game', {
     init() {
       this.items = [];
       this.goals = [];
+      this.room = new Room();
       // Entity changes control schemes based on connected controllers.
       this.controller = new Controller();
       this.elLeftHand = document.querySelector('#leftHand');

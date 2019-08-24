@@ -3,11 +3,14 @@ import { SHAPES } from '../shapes.js';
 AFRAME.registerGeometry('extrudeShape', {
   schema: {
     icon: {default: 'HEART'},
+    extrudeDepth: {default: 0.15},
   },
 
 
   init(data) {
     const shapeCommands = SHAPES[data.icon];
+    //TODO: this guard can be removed in the prod version.
+    if (!shapeCommands) { throw new Error(`Unknown icon "${data.icon}". Did you mean "${data.icon.toUpperCase()}"?`); }
 
     // Convert the array of commands into the shape.
     const shape = new THREE.Shape();
@@ -20,7 +23,7 @@ AFRAME.registerGeometry('extrudeShape', {
 
 
     const extrudeSettings = {
-      depth: 0.15,
+      depth: data.extrudeDepth,
       bevelEnabled: false,
     };
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );

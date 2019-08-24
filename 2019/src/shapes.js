@@ -1,3 +1,6 @@
+export const EXCLUDE_FROM_RANDOM = [
+  'TIMER',  
+];
 export const SHAPES = {
   HEART: [
     'moveTo',[0.528,0.097],
@@ -544,4 +547,16 @@ export const SHAPES = {
   //   'bezierCurveTo',[-0.209,-0.849,-0.101,-0.758,-0.017,-0.651],
   //   'bezierCurveTo',[0.007,-0.621,0.006,-0.563,-0.022,-0.537],
   // ],
+  TIMER: [
+    'moveTo',[0.377,0.047],
+    'quadraticCurveTo',[0.5,-0.045,0.623,0.047],
+    'lineTo',[0.911,0.263],
+    'quadraticCurveTo',[1.034,0.354,0.987,0.503],
+    'lineTo',[0.877,0.852],
+    'quadraticCurveTo',[0.83,1.001,0.678,1.001],
+    'lineTo',[0.322,1.001],
+    'quadraticCurveTo',[0.17,1.001,0.123,0.852],
+    'lineTo',[0.013,0.503],
+    'quadraticCurveTo',[-0.034,0.354,0.089,0.263],
+  ],
 }
