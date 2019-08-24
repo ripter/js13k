@@ -28,7 +28,7 @@ AFRAME.registerGeometry('extrudeShape', {
     };
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
     // Icons import upside down, so flip it the right way.
-    geometry.rotateX(3.14159);
+    // geometry.rotateX(3.14159);
 
     // update with the new shape.
     // geometry.computeBoundingBox();

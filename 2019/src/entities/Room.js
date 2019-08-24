@@ -3,6 +3,7 @@ export class Room {
     this.sceneEl = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
+    this.el.id = 'ROOM';
     this.el.setAttribute('position', {
       x: props.x || 0,
       y: props.y || 0,
@@ -14,11 +15,12 @@ export class Room {
       <a-entity
         rotation="0 90 0"
         scale="0.5 0.5 0.5"
-        position="0 1.5 0"
+        position="0 0 0"
         geometry="primitive: extrudeShape; icon: TIMER; extrudeDepth: 1;"
         material="color: #AAAAAA;"
         ></a-entity>
       <a-plane
+        class="FLOOR"
         color="#3D9970"
         position="0 0 0"
         height="100"
