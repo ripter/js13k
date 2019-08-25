@@ -16,7 +16,8 @@ AFRAME.registerComponent('lock-goal', {
         opacity: 1,
         color: '#2ECC40',
       });
-    } else {
+    }
+    else {
       updateElement(this.el, {
         selectable: {active: true},
       });

@@ -1,10 +1,13 @@
-.PHONY: all clean build build.webpack build.test
+.PHONY: all clean build build.webpack build.test lint
 
 all: node_modules/
 	npm start
 
 build: node_modules/
 	npm run build
+
+lint: node_modules/
+	npx eslint --fix src/
 
 build.webpack: build
 

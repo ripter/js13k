@@ -558,4 +558,4 @@ export const SHAPES = {
     'lineTo',[0.375,0.375],
     'lineTo',[0.375,0],
   ],
-}
+};

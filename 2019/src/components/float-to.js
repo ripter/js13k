@@ -29,7 +29,7 @@ AFRAME.registerComponent('float-to', {
     this.el.object3D.scale.lerp(targetScale, alpha);
 
     if (distance <= speed) {
-      this.el.emit('float-completed', { el: this.el })
+      this.el.emit('float-completed', { el: this.el });
       // This doesn't seem to work 🙁
       // this.el.setAttribute('active', false);
     }

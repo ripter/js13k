@@ -50,7 +50,8 @@ AFRAME.registerComponent('lock-key', {
       // Do we have the correct key for the lock?
       if (key === keyNeeded) {
         this.matchLock();
-      } else {
+      }
+      else {
         this.floatToOrbit();
       }
     }

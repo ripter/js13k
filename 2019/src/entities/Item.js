@@ -41,7 +41,7 @@ export class Item {
       },
       material: {
         opacity: 1,
-        shader: 'standard'
+        shader: 'standard',
       },
       visible: true,
     };

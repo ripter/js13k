@@ -25,10 +25,10 @@ export class Box {
       },
       material: {
         opacity: 1,
-        shader: 'standard'
+        shader: 'standard',
       },
       visible: true,
-    }
+    };
 
     updateElement(this.el, this.props);
     this.el.className = 'box';
@@ -37,7 +37,7 @@ export class Box {
 
   update(time, timeDelta) {
     const { rotation } = this.el.object3D;
-    rotation.set(rotation.x, rotation.y, THREE.Math.degToRad(rotation.y + 0.01 * timeDelta))
+    rotation.set(rotation.x, rotation.y, THREE.Math.degToRad(rotation.y + 0.01 * timeDelta));
     // let { rotation } = this.props;
     // rotation.y = rotation.y + 0.01 * timeDelta;
     // this.rotation = rotation;
