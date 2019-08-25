@@ -1,13 +1,25 @@
 
-export function playNote(context, note) {
-  const o = context.createOscillator();
-  const g = context.createGain();
-  o.type = "sine";
-  o.connect(g);
-  o.frequency.value = noteToFreq(note);
-  g.connect(context.destination);
-  o.start(0);
-  g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
+
+let audioContext;
+
+export function playNote(note) {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.value = noteToFreq(note);
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/GainNode
+  const gain = audioContext.createGain();
+
+  // Connect the nodes
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.start(0);
+  gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 1);
 }
 
 function noteToFreq(note) {

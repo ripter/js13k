@@ -20,15 +20,11 @@ body {
 </head>
 <body>
   <a-scene>
-    <a-assets>
-      <audio id="mp3Loop" src="./loopTwo.mp3" preload="auto"></audio>
-    </a-assets>
     <a-entity id="player" position="-0.20 0 2.5">
       <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
       <a-entity id="leftHand" position="0 1 -0.25"></a-entity>
     </a-entity>
 
-    <a-entity id="bgMusic" sound="src: #mp3Loop; autoplay: false; loop: true;"></a-entity>
     <a-sky color="#7FDBFF"></a-sky>
   </a-scene>
 </body>

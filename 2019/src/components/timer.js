@@ -1,4 +1,5 @@
 import { formatTime } from '../utils/formatTime.js';
+import { playNote } from '../utils/playNote.js';
 
 AFRAME.registerComponent('timer', {
   schema: {
@@ -21,10 +22,19 @@ AFRAME.registerComponent('timer', {
 
   tick(time, timeDelta) {
     if (!this.data.active || !this.data.isPlaying) { return; }
+    const oldSeconds = 0|this.milliseconds / 1000;
     this.milliseconds += timeDelta;
+    const newSeconds = 0|this.milliseconds / 1000;
+
+    if (oldSeconds === newSeconds) {
+      return;
+    }
+
     this.el.setAttribute('text', {
       value: `${formatTime(this.milliseconds)}`,
     });
+
+    playNote('C2');
   },
 
 });

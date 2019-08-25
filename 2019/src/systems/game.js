@@ -47,12 +47,6 @@ AFRAME.registerSystem('game', {
       const elBGMusic = document.querySelector('#bgMusic');
       elBGMusic.components.sound.stopSound();
     });
-
-    document.addEventListener('click', () => {
-      if (!this.audioContext) {
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    });
   },
 
 
@@ -93,7 +87,7 @@ AFRAME.registerSystem('game', {
       // Start the timer
       elTimer.setAttribute('timer', {isPlaying: true});
       // Play note
-      playNote(this.audioContext, 'B4');
+      playNote('B4');
       // Reset the selected so the user can pick again.
       setState('selectedGoal', null);
       setState('selectedItem', null);
