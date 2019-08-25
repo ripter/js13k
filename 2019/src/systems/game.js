@@ -36,6 +36,17 @@ AFRAME.registerSystem('game', {
       };
 
       this.startGame();
+
+      this.sceneEl.addEventListener('enter-vr', (event) => {
+        const elBGMusic = document.querySelector('#bgMusic');
+        console.log('entered VR', event);
+        elBGMusic.components.sound.playSound();
+      });
+      this.sceneEl.addEventListener('exit-vr', (event) => {
+        const elBGMusic = document.querySelector('#bgMusic');
+        console.log('exit VR', event);
+        elBGMusic.components.sound.stopSound();
+      });
     },
 
 

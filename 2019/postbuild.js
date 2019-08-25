@@ -39,9 +39,14 @@ archive.on('error', function (err) {
 // pipe archive data to the file
 archive.pipe(output);
 archive.append(
-    fs.createReadStream('./dist/index.html'), {
-        name: 'index.html'
-    }
+  fs.createReadStream('./dist/index.html'), {
+    name: 'index.html'
+  },
+);
+archive.append(
+  fs.createReadStream('./dist/loopTwo.mp3'), {
+    name: 'loopTwo.mp3'
+  }
 );
 
 archive.finalize();
