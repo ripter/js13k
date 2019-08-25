@@ -2,6 +2,7 @@
 
 let audioContext;
 
+// Plays a very simple note
 export function playNote(note) {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
