@@ -12,12 +12,12 @@ AFRAME.registerComponent('float-to', {
     this.totalDistance = 0;
   },
 
-  update(oldData) {
+  update() {
     this.targetPosition.copy(this.data.targetPosition);
     this.totalDistance = this.el.object3D.position.distanceToSquared(this.data.targetPosition);
   },
 
-  tick(time, timeDelta) {
+  tick() {
     if (!this.data.active) { return; }
     const { speed, targetScale } = this.data;
     const { targetPosition, totalDistance } = this;

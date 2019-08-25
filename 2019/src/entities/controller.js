@@ -1,32 +1,5 @@
 import { updateElement } from '../utils/updateElement.js';
-// Handle Cardboard, Go, and Quest VR systems
-export class Controller {
-  constructor() {
-    // Cardbard and VR without a controller use a camera cursor
-    const elCamera = this.elCamera = document.querySelector('#camera');
-    // Go & Quest controller
-    const elLeftHand = this.elLeftHand = document.querySelector('#leftHand');
 
-    // Create a base entity to update.
-    this.el = document.createElement('a-entity');
-
-    // Default to Cardbard input
-    elCamera.appendChild(this.el);
-    updateElement(this.el, propsCardboard);
-
-    // On controller, switch input
-    window.addEventListener('gamepadconnected', () => {
-      this.el.remove();
-      this.el = document.createElement('a-entity');
-      // Set the new attributes
-      updateElement(this.el, propsLeftHand);
-      // Move the controller to the left hand
-      elLeftHand.appendChild(this.el);
-      // remove the position because it'll be the same as the IRL controller.
-      elLeftHand.removeAttribute('position');
-    });
-  }
-}
 
 const propsCardboard = {
   cursor: {
@@ -64,3 +37,32 @@ const propsLeftHand = {
     opacity: 0.75,
   },
 };
+
+// Handle Cardboard, Go, and Quest VR systems
+export class Controller {
+  constructor() {
+    // Cardbard and VR without a controller use a camera cursor
+    const elCamera = this.elCamera = document.querySelector('#camera');
+    // Go & Quest controller
+    const elLeftHand = this.elLeftHand = document.querySelector('#leftHand');
+
+    // Create a base entity to update.
+    this.el = document.createElement('a-entity');
+
+    // Default to Cardbard input
+    elCamera.appendChild(this.el);
+    updateElement(this.el, propsCardboard);
+
+    // On controller, switch input
+    window.addEventListener('gamepadconnected', () => {
+      this.el.remove();
+      this.el = document.createElement('a-entity');
+      // Set the new attributes
+      updateElement(this.el, propsLeftHand);
+      // Move the controller to the left hand
+      elLeftHand.appendChild(this.el);
+      // remove the position because it'll be the same as the IRL controller.
+      elLeftHand.removeAttribute('position');
+    });
+  }
+}

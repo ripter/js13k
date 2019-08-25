@@ -7,7 +7,7 @@ AFRAME.registerComponent('lock-goal', {
     isUnlocked: {default: false},
   },
 
-  update(oldData) {
+  update() {
     if (this.data.isUnlocked) {
       updateElement(this.el, {
         selectable: {active: false},

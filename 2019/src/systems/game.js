@@ -1,5 +1,4 @@
 import { Controller } from '../entities/controller.js';
-import { Box } from '../entities/Box';
 import { Goal } from '../entities/Goal.js';
 import { Item } from '../entities/Item.js';
 import { Room } from '../entities/Room.js';
@@ -38,11 +37,11 @@ AFRAME.registerSystem('game', {
     this.startGame();
 
     // Audio requires a user click to start, so use the VR enter/exit events.
-    this.sceneEl.addEventListener('enter-vr', (event) => {
+    this.sceneEl.addEventListener('enter-vr', () => {
       const elBGMusic = document.querySelector('#bgMusic');
       elBGMusic.components.sound.playSound();
     });
-    this.sceneEl.addEventListener('exit-vr', (event) => {
+    this.sceneEl.addEventListener('exit-vr', () => {
       const elBGMusic = document.querySelector('#bgMusic');
       elBGMusic.components.sound.stopSound();
     });
@@ -54,14 +53,14 @@ AFRAME.registerSystem('game', {
   setSelected(elm) {
     const elTimer = this.timer.el.querySelector('[timer]');
     // Helper function because most of the logic the the same for both items
-    const setState = (name, elm) => {
+    const setState = (name, elmValue) => {
       // bail if it's already the selected entity
-      if (elm === this.state[name]) { return false; }
+      if (elmValue === this.state[name]) { return false; }
       // set the old as unselected, as long as the new one isn't null.
-      if (elm !== null && this.state[name] !== null) { this.state[name].setAttribute('selectable', {isSelected: false}); }
+      if (elmValue !== null && this.state[name] !== null) { this.state[name].setAttribute('selectable', {isSelected: false}); }
       // set the new as selected
-      if (elm !== null) { elm.setAttribute('selectable', {isSelected: true}); }
-      this.state[name] = elm;
+      if (elmValue !== null) { elmValue.setAttribute('selectable', {isSelected: true}); }
+      this.state[name] = elmValue;
       return true;
     };
 
@@ -77,7 +76,7 @@ AFRAME.registerSystem('game', {
     }
 
     // Do we have both a Goal and an Item?
-    const { selectedGoal, selectedItem, goalPosition } = this.state;
+    const { selectedGoal, selectedItem } = this.state;
     if (selectedGoal !== null && selectedItem !== null ) {
       // Start the lock & key
       selectedItem.setAttribute('lock-key', {
@@ -92,12 +91,11 @@ AFRAME.registerSystem('game', {
   },
 
   // Triggered by components (lock-key) when the key is used on a valid lock.
-  unlockGoal(elKey, elLock) {
+  unlockGoal() {
     const elTimer = this.timer.el.querySelector('[timer]');
 
     // Have we unlocked everything?
     const isGameOver = this.goals.every(goal => goal.isUnlocked);
-
     if (isGameOver) {
       console.log('YOU WON!');
       // Stop the timer

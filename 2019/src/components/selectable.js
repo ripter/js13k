@@ -14,7 +14,7 @@ AFRAME.registerComponent('selectable', {
     });
   },
 
-  update(oldData) {
+  update() {
     if (this.data.isSelected) {
       this.el.setAttribute('material', 'color', '#0074D9');
     }
@@ -23,7 +23,7 @@ AFRAME.registerComponent('selectable', {
     }
   },
 
-  handleEvent(event) {
+  handleEvent() {
     if (!this.data.active) { return; }
     // Notify the system we have been selected.
     this.system.setSelected(this.el);

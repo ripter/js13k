@@ -7,7 +7,7 @@ export class Item {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.id = uuid(),
+    this.el.id = uuid();
     this.el.classList.add('item');
     this.state = {
       class: props.shape,

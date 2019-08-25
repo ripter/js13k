@@ -13,7 +13,7 @@ AFRAME.registerComponent('orbit', {
   },
 
   // Update position to orbit around the center
-  tick(time, timeDelta) {
+  tick() {
     if (!this.data.active) { return; }
     const { center, deltaTheta, radius } = this.data;
     const { position } = this.el.object3D;
