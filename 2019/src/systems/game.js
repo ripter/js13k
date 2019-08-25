@@ -37,14 +37,13 @@ AFRAME.registerSystem('game', {
 
       this.startGame();
 
+      // Audio requires a user click to start, so use the VR enter/exit events.
       this.sceneEl.addEventListener('enter-vr', (event) => {
         const elBGMusic = document.querySelector('#bgMusic');
-        console.log('entered VR', event);
         elBGMusic.components.sound.playSound();
       });
       this.sceneEl.addEventListener('exit-vr', (event) => {
         const elBGMusic = document.querySelector('#bgMusic');
-        console.log('exit VR', event);
         elBGMusic.components.sound.stopSound();
       });
     },
@@ -126,8 +125,6 @@ AFRAME.registerSystem('game', {
       for (let i=0; i < TOTAL_ITEMS; i++) {
         this.items.push(this.createNewItem(shapes[i]));
       }
-
-      console.log('startGame this', this);
     },
 
     // Creates a new orbiting item with shape and random y-axis
