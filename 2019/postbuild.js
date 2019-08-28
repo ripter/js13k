@@ -40,12 +40,12 @@ archive.on('error', function (err) {
 archive.pipe(output);
 archive.append(
   fs.createReadStream('./dist/index.html'), {
-    name: 'index.html'
+    name: 'index.html',
   },
 );
 // archive.append(
-//   fs.createReadStream('./dist/zelda_synth1.js'), {
-//     name: 'loopTwo.mp3'
+//   fs.createReadStream('./dist/happy_face.svg'), {
+//     name: 'happy_face.svg',
 //   }
 // );
 

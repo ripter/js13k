@@ -1,7 +1,7 @@
 import { noteNameToFreq } from '../utils/noteNameToFreq.js';
 import { Voice } from '../sound/Voice.js';
 import { songGenerator } from '../sound/songGenerator.js';
-import { MUSIC_BACKGROUND } from '../consts/sounds.js';
+import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
   schema: {
@@ -18,7 +18,14 @@ AFRAME.registerSystem('sound', {
     this.voices = {};
 
     // Start playing background music
-    this.playEffect(MUSIC_BACKGROUND, true);
+    if(document.monetization && document.monetization.state === 'started') {
+      // Paying users get upgraded sound`
+      this.playEffect(TTLS, true);
+    }
+    else {
+      // Play some Human music as the background
+      this.playEffect(MUSIC_BACKGROUND, true);
+    }
 
     // Setup Events
     this.sceneEl.addEventListener('enter-vr', this);
