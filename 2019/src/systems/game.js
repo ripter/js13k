@@ -5,7 +5,7 @@ import { Room } from '../entities/Room.js';
 import { Timer } from '../entities/Timer.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
-import { playNote } from '../utils/playNote.js';
+// import { playNote } from '../utils/playNote.js';
 
 
 const TOTAL_ITEMS = 30;
@@ -38,15 +38,6 @@ AFRAME.registerSystem('game', {
 
     this.startGame();
 
-    // Audio requires a user click to start, so use the VR enter/exit events.
-    this.sceneEl.addEventListener('enter-vr', () => {
-      const elBGMusic = document.querySelector('#bgMusic');
-      elBGMusic.components.sound.playSound();
-    });
-    this.sceneEl.addEventListener('exit-vr', () => {
-      const elBGMusic = document.querySelector('#bgMusic');
-      elBGMusic.components.sound.stopSound();
-    });
   },
 
 
@@ -87,7 +78,7 @@ AFRAME.registerSystem('game', {
       // Start the timer
       elTimer.setAttribute('timer', {isPlaying: true});
       // Play note
-      playNote('B4');
+      // playNote('B4');
       // Reset the selected so the user can pick again.
       setState('selectedGoal', null);
       setState('selectedItem', null);
