@@ -43,10 +43,10 @@ archive.append(
     name: 'index.html'
   },
 );
-archive.append(
-  fs.createReadStream('./dist/zelda_synth1.js'), {
-    name: 'loopTwo.mp3'
-  }
-);
+// archive.append(
+//   fs.createReadStream('./dist/zelda_synth1.js'), {
+//     name: 'loopTwo.mp3'
+//   }
+// );
 
 archive.finalize();
