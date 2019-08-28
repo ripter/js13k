@@ -12,22 +12,13 @@ AFRAME.registerSystem('sound', {
   // Lifecycle Method
   //
   init() {
-    const bgMusic = songGenerator(MUSIC_BACKGROUND, true);
 
     this.audioContext = null;
     this.queuedNotes = [];
     this.voices = {};
 
-
-    // Que up the bgMusic
-    const {isDone, value: [noteName, duration]} = bgMusic.next();
-    this.queuedNotes.push({
-      startTime: -1,
-      duration,
-      noteName,
-      noteIter: bgMusic,
-    });
-
+    // Start playing background music
+    this.playEffect(MUSIC_BACKGROUND, true);
 
     // Setup Events
     this.sceneEl.addEventListener('enter-vr', this);
@@ -101,8 +92,17 @@ AFRAME.registerSystem('sound', {
   // API
   //
 
-  playEffect(effect) {
-    console.log('play effect', effect);
+  playEffect(effect, repeat = false) {
+    // Turn the effect into a note Generator
+    const noteIter = songGenerator(effect, repeat);
+    // Add the first note to the que
+    const {isDone, value: [noteName, duration]} = noteIter.next();
+    this.queuedNotes.push({
+      startTime: -1,
+      duration,
+      noteName,
+      noteIter,
+    });
   },
 
   createAudioContext() {

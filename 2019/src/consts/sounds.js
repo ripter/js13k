@@ -1,6 +1,6 @@
 export const EFFECTS = {
-  FLOAT_TO_LOCK: 'FLOAT_TO_LOCK',
-  TIMER_TICK: 'TIMER_TICK',
+  FLOAT_TO_LOCK: [['G#6', 0.5], ['G6', 0.5], ['F#6', 0.5], ['F6', 0.5]],
+  TIMER_TICK: [['Eb3']],
 };
 
 
