@@ -1,4 +1,5 @@
 import { updateElement } from '../utils/updateElement.js';
+import { EFFECTS } from '../consts/sounds.js';
 
 const EVENTS = ['float-completed'];
 /**
@@ -16,6 +17,7 @@ AFRAME.registerComponent('lock-key', {
 
   init() {
     this.system = this.el.sceneEl.systems.game;
+    this.soundSystem = this.el.sceneEl.systems.sound;
     this.lockPosition = new THREE.Vector3();
     this.orbitPosition = new THREE.Vector3();
     this.didTest = false;
@@ -83,13 +85,8 @@ AFRAME.registerComponent('lock-key', {
         targetScale: {x: 0.25, y: 0.25, z: 0.25},
         active: true,
       },
-      // material: {
-      //   color: '#FF4136',
-      // },
     });
-    // this.el.setAttribute('material', {
-    //   color: '#FFDC00',
-    // });
+    this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
   },
 
   // Failed match with lock.

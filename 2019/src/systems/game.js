@@ -5,9 +5,6 @@ import { Room } from '../entities/Room.js';
 import { Timer } from '../entities/Timer.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
-// import { playNote } from '../utils/playNote.js';
-
-
 const TOTAL_ITEMS = 30;
 const TOTAL_GOALS = 3;
 
@@ -77,8 +74,6 @@ AFRAME.registerSystem('game', {
       });
       // Start the timer
       elTimer.setAttribute('timer', {isPlaying: true});
-      // Play note
-      // playNote('B4');
       // Reset the selected so the user can pick again.
       setState('selectedGoal', null);
       setState('selectedItem', null);

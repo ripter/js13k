@@ -1,4 +1,4 @@
-import { SHAPES, EXCLUDE_FROM_RANDOM } from '../shapes.js';
+import { SHAPES, EXCLUDE_FROM_RANDOM } from '../consts/shapes.js';
 const SHAPE_LIST = Object.keys(SHAPES).filter(icon => !EXCLUDE_FROM_RANDOM.includes(icon));
 
 export const getRandomShape = () => {

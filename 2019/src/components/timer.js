@@ -1,5 +1,5 @@
 import { formatTime } from '../utils/formatTime.js';
-import { playNote } from '../utils/playNote.js';
+import { EFFECTS } from '../consts/sounds.js';
 
 AFRAME.registerComponent('timer', {
   schema: {
@@ -9,16 +9,9 @@ AFRAME.registerComponent('timer', {
 
   init: function () {
     this.system = this.el.sceneEl.systems.game;
+    this.soundSystem = this.el.sceneEl.systems.sound;
     this.milliseconds = 0;
   },
-
-  // update(oldData) {
-  //   // handle isPlaying toggle
-  //   console.group('update');
-  //   console.log('newData', this.data);
-  //   console.log('oldData', oldData);
-  //   console.groupEnd();
-  // },
 
   tick(time, timeDelta) {
     if (!this.data.active || !this.data.isPlaying) { return; }
@@ -34,7 +27,7 @@ AFRAME.registerComponent('timer', {
       value: `${formatTime(this.milliseconds)}`,
     });
 
-    playNote('C2');
+    this.soundSystem.playEffect(EFFECTS.TIMER_TICK);
   },
 
 });

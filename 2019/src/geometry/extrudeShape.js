@@ -1,4 +1,4 @@
-import { SHAPES } from '../shapes.js';
+import { SHAPES } from '../consts/shapes.js';
 
 AFRAME.registerGeometry('extrudeShape', {
   schema: {
