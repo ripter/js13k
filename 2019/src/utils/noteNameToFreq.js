@@ -11,7 +11,7 @@ const noteValues = {
 };
 
 
-export function noteToFreq(note) {
+export function noteNameToFreq(note) {
   if (noteValues.hasOwnProperty(note)) {
     return noteValues[note];
   }

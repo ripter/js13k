@@ -1,3 +1,5 @@
+import { noteNameToFreq } from '../utils/noteNameToFreq.js';
+import { Voice } from '../sound/Voice.js';
 import { songBackground } from '../sound/songBackground.js';
 
 AFRAME.registerSystem('sound', {
@@ -13,6 +15,7 @@ AFRAME.registerSystem('sound', {
 
     this.audioContext = null;
     this.queuedNotes = [];
+    this.voices = {};
 
 
     // Que up the bgMusic
@@ -61,7 +64,11 @@ AFRAME.registerSystem('sound', {
     });
 
     // Play them notes!
-    notesToPlay.forEach(this.playNote.bind(this));
+    notesToPlay.forEach((note) => {
+      const { noteName, duration } = note;
+      const voice = this.getVoice(noteName);
+      voice.play(duration);
+    });
 
     // Update to the next note
     notesToPlay.forEach((note) => {
@@ -140,10 +147,12 @@ AFRAME.registerSystem('sound', {
   //
 
   // Plays a queued note object
-  playNote(note) {
-    const { noteName, duration } = note;
-    console.log('Beep boop', note);
-  },
+  // playNote(note) {
+  //   const { noteName, duration } = note;
+  //   const voice = this.getVoice(noteName);
+  //   voice.play(duration);
+  //   console.log('Beep boop', note);
+  // },
 
 
   createAudioContext() {
@@ -158,5 +167,18 @@ AFRAME.registerSystem('sound', {
     // Close and clear the refrence
     this.audioContext.close();
     this.audioContext = null;
+  },
+
+  getVoice(noteName) {
+    const { audioContext } = this;
+    let voice = this.voices[noteName];
+
+    // Create a new voice if we don't have one yet.
+    if (!voice) {
+      voice = new Voice(audioContext, noteNameToFreq(noteName));
+      this.voices[noteName] = voice;
+    }
+
+    return voice;
   },
 });
