@@ -197,5 +197,7 @@ module.exports = {
     'space-unary-ops': 2,
     // require 2 space indentations; switch statements should also be indented
     indent: ['error', 2, { 'SwitchCase': 1 }],
+    // Disable a silly default, its ok to use builtins, that's why they exist
+    'no-prototype-builtins': 0,
   }
 }

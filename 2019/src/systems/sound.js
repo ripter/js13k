@@ -26,14 +26,6 @@ AFRAME.registerSystem('sound', {
     window.addEventListener('click', this);
   },
 
-  play() {
-    console.log('sound system .play', this);
-  },
-
-  pause() {
-    console.log('sound system .pause', this);
-  },
-
   tick() {
     if (!this.audioContext) { return; }
     const { queuedNotes } = this;
@@ -59,7 +51,6 @@ AFRAME.registerSystem('sound', {
       // If there is no next note, remove it from the que
       if (done) {
         const index = queuedNotes.indexOf(note);
-        console.log('removing note at index', index);
         this.queuedNotes.splice(index, 1);
         return;
       }
@@ -69,12 +60,10 @@ AFRAME.registerSystem('sound', {
       note.startTime = currentTime;
       note.duration = duration;
       note.noteName = noteName;
-
     });
   },
 
   handleEvent(event) {
-    console.log('sound system event', event.type, event);
     switch(event.type) {
       case 'click':
       case 'enter-vr':
@@ -83,8 +72,9 @@ AFRAME.registerSystem('sound', {
         break;
       case 'exit-vr':
         this.dispose();
+        break;
       default:
-        console.error(`sound system does not have an event handler for "${event.type}"`)
+        // console.error(`sound system does not have an event handler for "${event.type}"`);
     }
   },
 
@@ -96,7 +86,7 @@ AFRAME.registerSystem('sound', {
     // Turn the effect into a note Generator
     const noteIter = songGenerator(effect, repeat);
     // Add the first note to the que
-    const {isDone, value: [noteName, duration]} = noteIter.next();
+    const {value: [noteName, duration]} = noteIter.next();
     this.queuedNotes.push({
       startTime: -1,
       duration,
@@ -109,7 +99,7 @@ AFRAME.registerSystem('sound', {
     if (this.audioContext) { return; }
     // Create the audio context so we can make some sounds!
     // We still need webkitAudioContext for Safari 🙄
-    return this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
   },
 
   dispose() {

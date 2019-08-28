@@ -8,7 +8,7 @@ export class Voice {
     // Create an oscillator set to the note frequency.
     this.oscillator = audioContext.createOscillator();
     this.oscillator.frequency.value = frequency;
-    this.oscillator.type = type
+    this.oscillator.type = type;
 
     // Create a gain so we can control the volume of this note.
     this.gain = audioContext.createGain();
