@@ -6,8 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="monetization" content="$pay.stronghold.co/1a136a73a59d52b475b94e49fdea69dae89">
   <title>JS13KGame 2019: Theme "Back"!</title>
-  <!-- <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script> -->
-  <script src="aframe.min.js"></script>
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
   <style>
 html,
 body {
@@ -23,7 +22,8 @@ body {
   <a-scene>
     <a-entity id="player" position="-0.20 0 0.5">
       <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
-      <a-entity id="hand" position="0 1 -0.25"></a-entity>
+      <!-- Mouse Input for browser play -->
+      <a-entity id="mouseHand" cursor="rayOrigin: mouse" raycaster="objects: [selectable]"></a-entity>
     </a-entity>
 
     <a-sky color="#7FDBFF"></a-sky>
