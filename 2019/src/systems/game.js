@@ -1,4 +1,3 @@
-import { Controller } from '../entities/controller.js';
 import { Goal } from '../entities/Goal.js';
 import { Item } from '../entities/Item.js';
 import { Room } from '../entities/Room.js';
@@ -23,8 +22,6 @@ AFRAME.registerSystem('game', {
       y: 0,
       z: -0.75,
     });
-    // Entity changes control schemes based on connected controllers.
-    this.controller = new Controller();
     this.elLeftHand = document.querySelector('#leftHand');
 
     this.state = {
