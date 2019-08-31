@@ -1,33 +1,8 @@
 import { updateElement } from '../utils/updateElement.js';
 
 
-const propsCardboard = {
-  cursor: {
-    rayOrigin: 'mouse',
-    // fuse: true,
-    // fuseTimeout: 500,
-  },
-  position: {
-    x: 0,
-    y: 0,
-    z: -1,
-  },
-  geometry: {
-    primitive: 'ring',
-    radiusInner: 0.02,
-    radiusOuter: 0.03,
-  },
-  material: {
-    color: 'black',
-    shader: 'flat',
-  },
-  raycaster: {
-    objects: '[selectable]',
-  },
-};
-
 //TODO: Make sure the default model isn't loaded, its from a CDN server and not allowed.
-const propsLeftHand = {
+const propsHand = {
   'laser-controls': { model: false },
   raycaster: {
     objects: '[selectable]',
@@ -36,33 +11,28 @@ const propsLeftHand = {
     color: 'red',
     opacity: 0.75,
   },
+  // rotation: {x: 0, y: 0, z: 25 },
 };
 
 // Handle Cardboard, Go, and Quest VR systems
 export class Controller {
   constructor() {
-    // Cardbard and VR without a controller use a camera cursor
-    const elCamera = this.elCamera = document.querySelector('#camera');
     // Go & Quest controller
-    const elLeftHand = this.elLeftHand = document.querySelector('#leftHand');
-
+    this.elHand = this.elHand = document.querySelector('#hand');
     // Create a base entity to update.
     this.el = document.createElement('a-entity');
+    // Put the entity in the right hand.
+    this.elHand.appendChild(this.el);
+    // wait for the controller to connect.
+    window.addEventListener('gamepadconnected', this);
+  }
 
-    // Default to Cardbard input
-    elCamera.appendChild(this.el);
-    updateElement(this.el, propsCardboard);
-
-    // On controller, switch input
-    window.addEventListener('gamepadconnected', () => {
-      this.el.remove();
-      this.el = document.createElement('a-entity');
-      // Set the new attributes
-      updateElement(this.el, propsLeftHand);
-      // Move the controller to the left hand
-      elLeftHand.appendChild(this.el);
-      // remove the position because it'll be the same as the IRL controller.
-      elLeftHand.removeAttribute('position');
-    });
+  handleEvent(event) {
+    // Set the new attributes
+    updateElement(this.el, propsHand);
+    // remove the position because it'll be the same as the IRL controller.
+    this.elHand.removeAttribute('position');
+    // remove the event listener
+    window.removeEventListener('gamepadconnected', this);
   }
 }
