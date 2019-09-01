@@ -34,7 +34,6 @@ AFRAME.registerSystem('game', {
     if (elm === oldElm) { return; }
     // Unselect the old one and select the new one
     if (this.state[selectedKey]) {
-      console.log('unselected', this.state[selectedKey]);
       this.state[selectedKey].setAttribute('selectable', 'isSelected', false);
     }
     this.state[selectedKey] = elm;
@@ -45,76 +44,17 @@ AFRAME.registerSystem('game', {
     // Activate the pair
     const elToybox = this.state.selectedToybox.closest('[toybox]');
     const toyboxPosition = elToybox.getAttribute('position');
-    this.state.selectedToy.emit('paired', {detail: {
-      toyboxPosition,
-    }})
-    // this.state.selectedToy.setAttribute('toy', 'toyboxPosition', toyboxPosition);
-
-    // this.state.selectedToy.setAttribute('toy', 'elLock', `#${elToybox.id}`);
-    // this.state.selectedToy.emit('')
-    // this.state.selectedToy.setAttribute('toy', {
-    //   elLock: `#${elToybox.id}`,
-    // });
+    this.state.selectedToy.emit('paired', {
+      position: toyboxPosition,
+    });
 
     // Let the user pick another toy
     this.state.selectedToy.setAttribute('selectable', 'isSelected', false);
     this.state.selectedToy = null;
   },
 
-  // Triggered by components (lock-key) when the key is used on a valid lock.
-  // unlockGoal() {
-  //   const elTimer = this.timer.el.querySelector('[timer]');
-  //
-  //   // Have we unlocked everything?
-  //   const isGameOver = this.goals.every(goal => goal.isUnlocked);
-  //   if (isGameOver) {
-  //     console.log('YOU WON!');
-  //     // Stop the timer
-  //     elTimer.setAttribute('timer', {isPlaying: false});
-  //   }
-  // },
-
   // Starts a new game!
   startGame() {
     resetGameState(this.state);
-
-    // const shapes = Array(TOTAL_ITEMS).fill().map(getRandomShape);
-    //
-    // // reset the lists
-    // this.items = [];
-    // this.goals = [];
-    //
-    // // Make a grid of goals around the player
-    // for (let x=0; x < TOTAL_GOALS; x++) {
-    //   for (let y=0; y < TOTAL_GOALS; y++) {
-    //     let i = x * TOTAL_GOALS + y;
-    //     this.goals.push(this.createNewGoal(x, y, shapes[i]));
-    //   }
-    // }
-    //
-    // // Fill with random shaped items
-    // for (let i=0; i < TOTAL_ITEMS; i++) {
-    //   this.items.push(this.createNewItem(shapes[i]));
-    // }
   },
-
-  // Creates a new orbiting item with shape and random y-axis
-  // createNewItem(shape) {
-  //   return new Item({
-  //     x: 0,
-  //     y: THREE.Math.randInt(2, 4),
-  //     z: 0,
-  //     shape,
-  //   });
-  // },
-
-  // Creates a new Goal at location with random shape
-  // createNewGoal(x, y, shape) {
-  //   return new Goal({
-  //     x: -0.75 + (x * 0.5),
-  //     y: 0.1,
-  //     z: -0.5 + (y * 0.5),
-  //     icon: shape,
-  //   });
-  // },
 });

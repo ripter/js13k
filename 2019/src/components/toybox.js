@@ -11,7 +11,7 @@ AFRAME.registerComponent('toybox', {
   },
 
   handleEvent(event) {
-    console.log('toybox.handleEvent', event.type, event);
+    // console.log('toybox.handleEvent', event.type, event);
     const elPlanes = this.el.querySelectorAll('a-plane');
 
 

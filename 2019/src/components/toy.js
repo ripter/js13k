@@ -31,49 +31,21 @@ AFRAME.registerComponent('toy', {
     EVENTS.forEach(eventName => this.el.removeEventListener(eventName, this));
   },
 
-  // sync local refrences when the data changes.
-  // update(oldData) {
-  //   if (!this.data.active) { return; }
-  //   console.log('toy.update', this.data);
-  //   if (null !== this.data.toyboxPosition) {
-  //     // Start floating when the lock changes.
-  //     this.floatToLock();
-  //   }
-  // },
-
 
   handleEvent(event) {
-    console.log('toy.handleEvent', event.type, event);
+    const { detail } = event;
+    // console.log('toy.handleEvent', event.type, detail, event);
 
-    /*
     switch (event.type) {
+      case 'paired':
+        this.moveToToybox(detail.position);
+        break;
       case 'selected':
-
         break;
       case 'float-completed':
-
+        break;
       default:
         // ignore
-    }
-    */
-    if (event.type !== 'float-completed') { return; }
-    const { toLock } = this;
-    const { elLock, key } = this.data;
-    const keyNeeded = elLock.getAttribute('key-needed');
-
-    // If it reached the lock
-    if (toLock) {
-      // Do we have the correct key for the lock?
-      if (key === keyNeeded) {
-        this.matchLock();
-      }
-      else {
-        this.floatToOrbit();
-      }
-    }
-    // if it reached orbit
-    else {
-      this.resumeOrbit();
     }
   },
 
@@ -82,28 +54,39 @@ AFRAME.registerComponent('toy', {
   // Actions
   //
 
-  // floats the element to the lockPosition.
-  floatToLock() {
-    console.log('floatToLock', this.el);
-    this.toLock = true;
-    // Get a copy of the positions
-    // this.orbitPosition.copy(this.el.object3D.position);
-    // this.data.elLock.object3D.getWorldPosition(this.lockPosition);
-
-    // update the components
-    updateElement(this.el, {
-      orbit: {
-        active: false,
-      },
-      'float-to': {
-        // targetPosition: this.lockPosition,
-        targetPosition: this.toyboxPosition,
-        targetScale: {x: 0.25, y: 0.25, z: 0.25},
-        active: true,
-      },
+  moveToToybox(position) {
+    const elParent = this.el.closest('[float-to]');
+    console.log('moveToToybox', position, elParent);
+    this.el.setAttribute('orbit', 'active', false);
+    elParent.setAttribute('float-to', {
+      targetPosition: position,
+      targetScale: {x: 0.25, y: 0.25, z: 0.25},
+      active: true,
     });
     this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
   },
+
+  // floats the element to the lockPosition.
+  // floatToLock() {
+  //   this.toLock = true;
+  //   // Get a copy of the positions
+  //   // this.orbitPosition.copy(this.el.object3D.position);
+  //   // this.data.elLock.object3D.getWorldPosition(this.lockPosition);
+  //
+  //   // update the components
+  //   updateElement(this.el, {
+  //     orbit: {
+  //       active: false,
+  //     },
+  //     'float-to': {
+  //       // targetPosition: this.lockPosition,
+  //       targetPosition: this.toyboxPosition,
+  //       targetScale: {x: 0.25, y: 0.25, z: 0.25},
+  //       active: true,
+  //     },
+  //   });
+  //   this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+  // },
 
   // Failed match with lock.
   // floats the element to orbitPosition
