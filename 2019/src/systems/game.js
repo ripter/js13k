@@ -18,30 +18,13 @@ AFRAME.registerSystem('game', {
     this.state = {
       toyboxes: (new Array(TOTAL_TOYBOXES)).fill().map(() => new ToyBox()),
       toys: (new Array(TOTAL_TOYS)).fill().map(() => new Toy()),
-      selectedItem: null,
-      selectedGoal: null,
+      selectedToy: null,
+      selectedToybox: null,
       goalPosition: new THREE.Vector3(),
     };
 
     this.elTimer = document.querySelector('[timer]');
-    // this.items = [];
-    // this.goals = [];
-
-    // this.timer = new Timer({
-    //   x: -0.75,
-    //   y: 0,
-    //   z: -0.75,
-    // });
-    // this.elLeftHand = document.querySelector('#leftHand');
-
-    // this.state = {
-    //   selectedItem: null,
-    //   selectedGoal: null,
-    //   goalPosition: new THREE.Vector3(),
-    // };
-
     this.startGame();
-
   },
 
 
@@ -49,6 +32,14 @@ AFRAME.registerSystem('game', {
   // Sets the element as selected, triggers lockAndKey if this makes a pair.
   setSelected(elm) {
     const { elTimer } = this;
+
+    // Did they click on a toy, or a toybox?
+    const selectedType = elm.getAttribute('selectable').type;
+    console.log('selectedType', selectedType);
+
+
+
+
     // Helper function because most of the logic the the same for both items
     const setState = (name, elmValue) => {
       // bail if it's already the selected entity
@@ -62,28 +53,29 @@ AFRAME.registerSystem('game', {
     };
 
     // Update selected state with the new entity
+    console.log('elm', elm);
     const isGoal = elm.classList.contains('goal');
     if (isGoal) {
       // bail if it's already the selected entity
-      if (!setState('selectedGoal', elm)) { return; }
+      if (!setState('selectedToybox', elm)) { return; }
     }
     else {
       // bail if it's already the selected entity
-      if (!setState('selectedItem', elm)) { return; }
+      if (!setState('selectedToy', elm)) { return; }
     }
 
     // Do we have both a Goal and an Item?
-    const { selectedGoal, selectedItem } = this.state;
-    if (selectedGoal !== null && selectedItem !== null ) {
+    const { selectedToybox, selectedToy } = this.state;
+    if (selectedToybox !== null && selectedToy !== null ) {
       // Start the lock & key
-      selectedItem.setAttribute('lock-key', {
-        elLock: `#${selectedGoal.id}`,
+      selectedToy.setAttribute('lock-key', {
+        elLock: `#${selectedToybox.id}`,
       });
       // Start the timer
       elTimer.setAttribute('timer', {isPlaying: true});
       // Reset the selected so the user can pick again.
-      setState('selectedGoal', null);
-      setState('selectedItem', null);
+      setState('selectedToybox', null);
+      setState('selectedToy', null);
     }
   },
 

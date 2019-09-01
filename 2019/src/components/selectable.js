@@ -2,6 +2,7 @@ AFRAME.registerComponent('selectable', {
   schema: {
     active: {default: true},
     isSelected: {default: false},
+    type: {default: 'toy'},
   },
 
   init: function () {

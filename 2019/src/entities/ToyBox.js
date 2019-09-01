@@ -14,6 +14,8 @@ export class ToyBox {
       <a-plane position="${x+WIDTH/2} ${y+HEIGHT/2} ${z}" rotation="0 90 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="${x-WIDTH/2} ${y+HEIGHT/2} ${z}" rotation="0 90 0"   height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="${x} ${y} ${z}" rotation="-90 0 0" height="${DEPTH}" width="${WIDTH}"></a-plane>
+      <!-- Collision Box -->
+      <a-entity selectable="type: toybox" geometry="primitive: box; width: 1; height: 1; depth: 1" material="visible: false"></a-entity>
     `;
 
     this.scene.appendChild(this.el);
