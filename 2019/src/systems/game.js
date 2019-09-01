@@ -1,5 +1,4 @@
 import { ToyBox } from '../entities/ToyBox.js';
-import { Toy } from '../entities/Toy.js';
 // import { Goal } from '../entities/Goal.js';
 // import { Item } from '../entities/Item.js';
 // import { getRandomShape } from '../utils/getRandomShape.js';
@@ -17,7 +16,7 @@ AFRAME.registerSystem('game', {
   init() {
     this.state = {
       toyboxes: (new Array(TOTAL_TOYBOXES)).fill().map(() => new ToyBox()),
-      toys: (new Array(TOTAL_TOYS)).fill().map(() => new Toy()),
+      toys: (new Array(TOTAL_TOYS)).fill(),
       selectedToy: null,
       selectedToybox: null,
       goalPosition: new THREE.Vector3(),
@@ -28,11 +27,8 @@ AFRAME.registerSystem('game', {
   },
 
 
-  // Triggered by components (selectable) when the user selects an item/goal.
-  // Sets the element as selected, triggers lockAndKey if this makes a pair.
+  // Triggered by components/selectable when the user clicks on the entity.
   setSelected(elm) {
-    // const { elTimer } = this;
-
     // Did they click on a toy, or a toybox?
     const selectedType = elm.getAttribute('selectable').type;
     const oldElm = this.state[`selected${selectedType}`];
@@ -45,55 +41,13 @@ AFRAME.registerSystem('game', {
     if (!this.state.selectedToy || !this.state.selectedToybox) { return; }
 
     // Activate the pair
-    const elToybox = this.state.selectedToybox.closest('.toybox');
+    const elToybox = this.state.selectedToybox.closest('[toybox]');
     this.state.selectedToy.setAttribute('lock-key', {
       elLock: `#${elToybox.id}`,
     });
 
-    console.log('selectedType', selectedType);
-
-    /*
-
-
-
-    // Helper function because most of the logic the the same for both items
-    const setState = (name, elmValue) => {
-      // bail if it's already the selected entity
-      if (elmValue === this.state[name]) { return false; }
-      // set the old as unselected, as long as the new one isn't null.
-      if (elmValue !== null && this.state[name] !== null) { this.state[name].setAttribute('selectable', {isSelected: false}); }
-      // set the new as selected
-      if (elmValue !== null) { elmValue.setAttribute('selectable', {isSelected: true}); }
-      this.state[name] = elmValue;
-      return true;
-    };
-
-    // Update selected state with the new entity
-    console.log('elm', elm);
-    const isGoal = elm.classList.contains('goal');
-    if (isGoal) {
-      // bail if it's already the selected entity
-      if (!setState('selectedToybox', elm)) { return; }
-    }
-    else {
-      // bail if it's already the selected entity
-      if (!setState('selectedToy', elm)) { return; }
-    }
-
-    // Do we have both a Goal and an Item?
-    const { selectedToybox, selectedToy } = this.state;
-    if (selectedToybox !== null && selectedToy !== null ) {
-      // Start the lock & key
-      selectedToy.setAttribute('lock-key', {
-        elLock: `#${selectedToybox.id}`,
-      });
-      // Start the timer
-      elTimer.setAttribute('timer', {isPlaying: true});
-      // Reset the selected so the user can pick again.
-      setState('selectedToybox', null);
-      setState('selectedToy', null);
-    }
-    */
+    // Let the user pick another toy
+    this.state.selectedToy = null;
   },
 
   // Triggered by components (lock-key) when the key is used on a valid lock.

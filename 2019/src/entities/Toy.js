@@ -1,21 +1,15 @@
 import { uuid } from '../utils/uuid.js';
-import { getRandomShape } from '../utils/getRandomShape.js';
-
 
 export class Toy {
-  constructor() {
-    const shape = getRandomShape();
+  constructor(shape) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-
     this.el.id = uuid();
-    this.el.classList.add('item');
-
     this.el.innerHTML = `<a-entity
       selectable
+      toybox="key: ${shape}"
       float-to="active: false; speed: 0.05"
-      lock-key="key: ${shape}"
       geometry="primitive: extrudeShape; icon: ${shape}"
       material="opacity: 1; shader: standard"
       position="0 ${THREE.Math.randInt(2, 4)} 0"
@@ -28,5 +22,13 @@ export class Toy {
     `;
 
     this.scene.appendChild(this.el);
+  }
+
+  update(newData) {
+    this.el.setAttribute('toybox', { key: newData.shape });
+    this.el.setAttribute('geometry', {
+      primitive: 'extrudeShape',
+      icon: newData.shape,
+    });
   }
 }

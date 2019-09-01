@@ -1,3 +1,4 @@
+import { getRandomShape } from '../utils/getRandomShape.js';
 import { uuid } from '../utils/uuid.js';
 const HEIGHT = 0.25;
 const WIDTH = 0.5;
@@ -9,7 +10,6 @@ export class ToyBox {
     this.el = document.createElement('a-entity');
 
     this.el.id = uuid();
-    this.el.className = 'toybox';
     this.el.innerHTML = `
       <a-plane position="${x} ${y+HEIGHT/2} ${z+DEPTH/2}" rotation="0 0 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="${x} ${y+HEIGHT/2} ${z-DEPTH/2}" rotation="0 0 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
@@ -20,6 +20,16 @@ export class ToyBox {
       <a-entity selectable="type: Toybox" geometry="primitive: box; width: 1; height: 1; depth: 1" material="visible: false"></a-entity>
     `;
 
+    this.update({
+      position: `${x} ${y} ${z}`,
+      shape: getRandomShape(),
+    });
+
     this.scene.appendChild(this.el);
+  }
+
+  update(newData) {
+    this.el.setAttribute('position', newData.position);
+    this.el.setAttribute('toybox', { key: newData.shape });
   }
 }
