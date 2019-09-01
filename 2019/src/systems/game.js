@@ -5,10 +5,6 @@ const TOTAL_TOYS = TOTAL_TOYBOXES * 4;
 
 
 AFRAME.registerSystem('game', {
-  // schema: {
-  //
-  // },
-
   init() {
     this.state = {
       toyboxes: (new Array(TOTAL_TOYBOXES)).fill(),

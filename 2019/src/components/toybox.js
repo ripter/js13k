@@ -14,7 +14,6 @@ AFRAME.registerComponent('toybox', {
     // console.log('toybox.handleEvent', event.type, event);
     const elPlanes = this.el.querySelectorAll('a-plane');
 
-
     switch (event.type) {
       case 'selected':
         elPlanes.forEach(el => {
