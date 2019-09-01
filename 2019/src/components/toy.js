@@ -57,13 +57,14 @@ AFRAME.registerComponent('toy', {
 
   // Activate the components to move the toy to the toybox
   moveToToybox(elToybox) {
-    const position = elToybox.getAttribute('position');
+    const position = this.el.getAttribute('position');
+    const toyboxPosition = elToybox.getAttribute('position');
     // update state
     this.elToybox = elToybox;
     this.orbitPosition.copy(position);
     // start effects
     this.moveTo({
-      position,
+      position: toyboxPosition,
       scale: {x: 0.25, y: 0.25, z: 0.25},
       eventName: 'at-toybox',
     });
