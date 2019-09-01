@@ -33,7 +33,7 @@ export function newState() {
 
   // Put the toyboxes into position
   //TODO: auto place in a semi-circle around the player
-  ['-2 0.1 -1', '0 0.1 -1', '2 0.1 -1'].forEach((position, index) => {
+  ['-1.5 0.1 -1', '0 0.1 -1', '1.5 0.1 -1'].forEach((position, index) => {
     state.toyboxes[index] = new ToyBox({
       shape: availableShapes[index],
       totalToys: TOYS_PER_BOX,

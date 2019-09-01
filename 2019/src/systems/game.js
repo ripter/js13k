@@ -44,11 +44,17 @@ AFRAME.registerSystem('game', {
     // Let the user pick another toy
     this.state.selectedToy.setAttribute('selectable', 'isSelected', false);
     this.state.selectedToy = null;
+
+    // Make sure the timer is running
+    this.elTimer.setAttribute('timer', 'isPlaying', true);
   },
 
   // Triggered by components/toybox when it is full of toys
-  toyboxFilled(elToybox) {
+  toyboxFilled() {
     const isGameover = this.state.toyboxes.every(box => box.el.getAttribute('toybox').isFull);
-    console.log('isGameover', isGameover);
+    if (!isGameover) { return; }
+
+    // Stop the timer
+    this.elTimer.setAttribute('timer', 'isPlaying', false);
   },
 });

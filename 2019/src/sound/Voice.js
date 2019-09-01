@@ -25,8 +25,8 @@ export class Voice {
   // Plays the note in an AttackEnvelope (or my best aproximation of one)
   // https://en.wikipedia.org/wiki/Envelope_(music)
   play(duration) {
-    const attackTime = 0.001;
-    const releaseTime = 0.001;
+    const attackTime = 0.00001;
+    const releaseTime = 0.0001;
     const { gain } = this.gain;
     const { currentTime } = this.context;
     gain.cancelScheduledValues(currentTime);
