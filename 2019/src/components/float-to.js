@@ -5,7 +5,7 @@ AFRAME.registerComponent('float-to', {
     targetScale: {type: 'vec3'},
     speed: {type: 'number'},
     active: {default: false},
-    eventName: {default: 'float-completed'}
+    eventName: {default: 'float-completed'},
   },
 
   init() {

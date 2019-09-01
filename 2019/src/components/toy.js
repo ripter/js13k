@@ -31,22 +31,19 @@ AFRAME.registerComponent('toy', {
     switch (event.type) {
       case 'paired':
         return this.moveToToybox(detail.elToybox);
-        break;
       case 'selected':
         break;
       case 'at-toybox':
         if (this.canPutToyInBox()) {
-          this.onMatchSucceed();
+          return this.onMatchSucceed();
         }
-        else {
-          this.onMatchFailed();
-        }
-        break;
+        return this.onMatchFailed();
       case 'at-orbit':
         return this.resumeOrbit();
       default:
         // ignore
     }
+    return false;
   },
 
 
@@ -67,7 +64,7 @@ AFRAME.registerComponent('toy', {
       scale: {x: 0.25, y: 0.25, z: 0.25},
       eventName: 'at-toybox',
     });
-    // this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+    this.soundSystem.playEffect(EFFECTS.MOVE_TO_TOYBOX);
   },
 
   moveToOrbit() {
@@ -78,7 +75,7 @@ AFRAME.registerComponent('toy', {
       scale: {x: 1, y: 1, z: 1},
       eventName: 'at-orbit',
     });
-    // this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+    this.soundSystem.playEffect(EFFECTS.MOVE_TO_ORBIT);
   },
 
   resumeOrbit() {
