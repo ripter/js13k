@@ -1,7 +1,4 @@
 import { ToyBox } from '../entities/ToyBox.js';
-// import { Goal } from '../entities/Goal.js';
-// import { Item } from '../entities/Item.js';
-// import { getRandomShape } from '../utils/getRandomShape.js';
 import { resetGameState } from '../utils/resetGameState.js';
 
 const TOTAL_TOYBOXES = 3;
@@ -31,11 +28,17 @@ AFRAME.registerSystem('game', {
   setSelected(elm) {
     // Did they click on a toy, or a toybox?
     const selectedType = elm.getAttribute('selectable').type;
-    const oldElm = this.state[`selected${selectedType}`];
+    const selectedKey = `selected${selectedType}`;
+    const oldElm = this.state[selectedKey];
 
     // ignore unless the selected item changed
     if (elm === oldElm) { return; }
-    this.state[`selected${selectedType}`] = elm;
+    // Unselect the old one and select the new one
+    if (this.state[selectedKey]) {
+      console.log('unselected', this.state[selectedKey]);
+      this.state[selectedKey].setAttribute('selectable', 'isSelected', false);
+    }
+    this.state[selectedKey] = elm;
 
     // ignore unless we have both a Toy and a Toybox selected.
     if (!this.state.selectedToy || !this.state.selectedToybox) { return; }

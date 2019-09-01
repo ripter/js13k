@@ -18,6 +18,8 @@ export class ToyBox {
       <a-plane position="${x} ${y} ${z}" rotation="-90 0 0" height="${DEPTH}" width="${WIDTH}"></a-plane>
       <!-- Collision Box -->
       <a-entity selectable="type: Toybox" geometry="primitive: box; width: 1; height: 1; depth: 1" material="visible: false"></a-entity>
+      <!-- Sign for the user -->
+      <a-entity class="sign" position="-${WIDTH/3} 0 ${DEPTH/2}" scale="0.25 0.25 0.25"></a-entity>
     `;
 
     this.update({
@@ -29,7 +31,14 @@ export class ToyBox {
   }
 
   update(newData) {
-    this.el.setAttribute('position', newData.position);
-    this.el.setAttribute('toybox', { key: newData.shape });
+    const { position, shape } = newData;
+    const elSign = this.el.querySelector('.sign');
+
+    this.el.setAttribute('position', position);
+    this.el.setAttribute('toybox', { key: shape });
+    elSign.setAttribute('geometry', {
+      primitive: 'extrudeShape',
+      icon: shape,
+    });
   }
 }
