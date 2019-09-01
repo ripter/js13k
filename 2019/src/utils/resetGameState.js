@@ -1,4 +1,5 @@
 import { Toy } from '../entities/Toy.js';
+import { ToyBox } from '../entities/ToyBox.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
 // Modifies state.
@@ -12,7 +13,7 @@ export function resetGameState(state) {
   // Put the toyboxes into position
   //TODO: this is the wrong place for this code. The toyboxes do not move between games.
   ['-2 0.1 -1', '0 0.1 -1', '2 0.1 -1'].forEach((position, index) => {
-    toyboxes[index].update({
+    toyboxes[index] = new ToyBox({
       shape: availableShapes[index],
       position,
     });

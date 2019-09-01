@@ -8,7 +8,7 @@ export class Toy {
     this.el.id = uuid();
     this.el.innerHTML = `<a-entity
       selectable
-      toybox="key: ${shape}"
+      toy="key: ${shape}"
       float-to="active: false; speed: 0.05"
       geometry="primitive: extrudeShape; icon: ${shape}"
       material="opacity: 1; shader: standard"

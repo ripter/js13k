@@ -8,7 +8,7 @@ const EVENTS = ['float-completed'];
  *
  * @type {Component}
  */
-AFRAME.registerComponent('lock-key', {
+AFRAME.registerComponent('toy', {
   schema: {
     active: {default: true},
     elLock: {type: 'selector'},
@@ -112,16 +112,7 @@ AFRAME.registerComponent('lock-key', {
       color: '#FF4136',
     });
 
-    // Notify the lock that the key failed.
-    updateElement(this.data.elLock, {
-      'lock-goal': {
-        isUnlocked: false,
-      },
-      selectable: {
-        isSelected: false,
-        active: true,
-      },
-    });
+    this.onMatchFailed();
   },
 
   // Stops floating and starts orbiting
@@ -141,7 +132,6 @@ AFRAME.registerComponent('lock-key', {
 
   // Successful match with the lock!
   matchLock() {
-    const { elLock } = this.data;
     // disable and hide the item.
     updateElement(this.el, {
       'float-to': {
@@ -152,15 +142,20 @@ AFRAME.registerComponent('lock-key', {
       },
       visible: false,
     });
-    // Notify the lock that the key worked.
-    updateElement(elLock, {
-      'lock-goal': {
-        isUnlocked: true,
-      },
-    });
-    // Notify the system it worked.
-    // Failed match with lock.
-    this.system.unlockGoal(this.el, elLock);
+    this.onMatchSucceed();
+  },
+
+
+  onMatchSucceed() {
+    const { elLock } = this.data;
+    this.el.emit('match-succeed');
+    elLock.emit('match-succeed');
+  },
+
+  onMatchFailed() {
+    const { elLock } = this.data;
+    this.el.emit('match-failed');
+    elLock.emit('match-failed');
   },
 
 });

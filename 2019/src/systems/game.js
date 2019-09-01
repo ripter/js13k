@@ -1,4 +1,3 @@
-import { ToyBox } from '../entities/ToyBox.js';
 import { resetGameState } from '../utils/resetGameState.js';
 
 const TOTAL_TOYBOXES = 3;
@@ -12,7 +11,7 @@ AFRAME.registerSystem('game', {
 
   init() {
     this.state = {
-      toyboxes: (new Array(TOTAL_TOYBOXES)).fill().map(() => new ToyBox()),
+      toyboxes: (new Array(TOTAL_TOYBOXES)).fill(),
       toys: (new Array(TOTAL_TOYS)).fill(),
       selectedToy: null,
       selectedToybox: null,
@@ -54,17 +53,17 @@ AFRAME.registerSystem('game', {
   },
 
   // Triggered by components (lock-key) when the key is used on a valid lock.
-  unlockGoal() {
-    const elTimer = this.timer.el.querySelector('[timer]');
-
-    // Have we unlocked everything?
-    const isGameOver = this.goals.every(goal => goal.isUnlocked);
-    if (isGameOver) {
-      console.log('YOU WON!');
-      // Stop the timer
-      elTimer.setAttribute('timer', {isPlaying: false});
-    }
-  },
+  // unlockGoal() {
+  //   const elTimer = this.timer.el.querySelector('[timer]');
+  //
+  //   // Have we unlocked everything?
+  //   const isGameOver = this.goals.every(goal => goal.isUnlocked);
+  //   if (isGameOver) {
+  //     console.log('YOU WON!');
+  //     // Stop the timer
+  //     elTimer.setAttribute('timer', {isPlaying: false});
+  //   }
+  // },
 
   // Starts a new game!
   startGame() {
