@@ -7,17 +7,17 @@ import './components/toybox.js';
 import './components/timer.js';
 import './systems/game.js';
 import './systems/sound.js';
-import { TEXTURES } from './consts/textures.js';
+// import { TEXTURES } from './consts/textures.js';
 //
 // console.log(TEXTURES);
 
-const elCanvas = document.createElement('canvas');
-const context = elCanvas.getContext('2d');
+// const elCanvas = document.createElement('canvas');
+// const context = elCanvas.getContext('2d');
 
-TEXTURES.HAPPY_FACE.draw(context);
+// TEXTURES.HAPPY_FACE.draw(context);
 
-elCanvas.id = 'testTexture';
+// elCanvas.id = 'testTexture';
 // elCanvas.width = 1;
 // elCanvas.height = 1;
 // document.body.appendChild(elCanvas);
-window.elCanvas = elCanvas;
+// window.elCanvas = elCanvas;
