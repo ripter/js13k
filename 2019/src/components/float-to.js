@@ -8,13 +8,11 @@ AFRAME.registerComponent('float-to', {
   },
 
   init() {
-    console.log('float-to: init', this.el, this);
     this.targetPosition = new THREE.Vector3();
     this.totalDistance = 0;
   },
 
   update() {
-    console.log('float-to: update', this.data);
     this.targetPosition.copy(this.data.targetPosition);
     this.totalDistance = this.el.object3D.position.distanceToSquared(this.data.targetPosition);
   },
@@ -31,9 +29,8 @@ AFRAME.registerComponent('float-to', {
     this.el.object3D.scale.lerp(targetScale, alpha);
 
     if (distance <= speed) {
-      this.el.emit('float-completed', { el: this.el });
-      // This doesn't seem to work 🙁
-      // this.el.setAttribute('active', false);
+      // this.el.emit('float-completed', { el: this.el });
+      this.el.setAttribute('float-to', 'active', false);
     }
   },
 

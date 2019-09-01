@@ -116,6 +116,7 @@ AFRAME.registerComponent('toy', {
 
   // Stops floating and starts orbiting
   resumeOrbit() {
+    console.log('resumeOrbit', this.el);
     updateElement(this.el, {
       orbit: {
         active: true,
