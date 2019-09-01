@@ -23,12 +23,4 @@ export class Toy {
 
     this.scene.appendChild(this.el);
   }
-
-  update(newData) {
-    this.el.setAttribute('toybox', { key: newData.shape });
-    this.el.setAttribute('geometry', {
-      primitive: 'extrudeShape',
-      icon: newData.shape,
-    });
-  }
 }

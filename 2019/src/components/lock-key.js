@@ -70,7 +70,6 @@ AFRAME.registerComponent('lock-key', {
 
   // floats the element to the lockPosition.
   floatToLock() {
-    console.log('floating to lock', this);
     this.toLock = true;
     // Get a copy of the positions
     this.orbitPosition.copy(this.el.object3D.position);
