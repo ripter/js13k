@@ -31,7 +31,7 @@ AFRAME.registerSystem('game', {
   // Triggered by components (selectable) when the user selects an item/goal.
   // Sets the element as selected, triggers lockAndKey if this makes a pair.
   setSelected(elm) {
-    const { elTimer } = this;
+    // const { elTimer } = this;
 
     // Did they click on a toy, or a toybox?
     const selectedType = elm.getAttribute('selectable').type;
