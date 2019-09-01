@@ -5,23 +5,25 @@ AFRAME.registerComponent('orbit', {
     deltaTheta: {type: 'number'},
     radius: {type: 'number'},
     active: {default: true},
-    center: {type: 'vec3', default: {x: 0, y:0, z:0}},
+    center: {type: 'vec3'},
   },
 
-  init: function () {
+  init() {
     this.theta = this.data.startTheta;
-  },
 
+    this.cameraPosition = (document.querySelector('#camera')).getAttribute('position');
+  },
 
   // Update position to orbit around the center
   tick() {
     if (!this.data.active) { return; }
     const { center, deltaTheta, radius } = this.data;
     const { position } = this.el.object3D;
-    const { theta } = this;
+    const { theta, cameraPosition } = this;
     const x = center.x + radius * Math.cos(theta);
     const z = center.y + radius * Math.sin(theta);
 
+    this.el.object3D.lookAt(cameraPosition);
     this.theta += deltaTheta;
     position.set(x, position.y, z);
   },

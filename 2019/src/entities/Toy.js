@@ -7,6 +7,7 @@ export class Toy {
 
     this.el.id = uuid();
     this.el.setAttribute('position', `0 ${THREE.Math.randInt(2, 4)} 0`);
+    this.el.setAttribute('rotation', '0 0 0');
     this.el.setAttribute('float-to', {speed: 0.05});
     this.el.setAttribute('toy', {key: shape});
     this.el.setAttribute('orbit', {

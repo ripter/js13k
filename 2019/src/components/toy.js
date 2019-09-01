@@ -43,8 +43,7 @@ AFRAME.registerComponent('toy', {
         }
         break;
       case 'at-orbit':
-        console.log('Reached orbit');
-        return;
+        return this.resumeOrbit();
       default:
         // ignore
     }
@@ -79,11 +78,15 @@ AFRAME.registerComponent('toy', {
       scale: {x: 1, y: 1, z: 1},
       eventName: 'at-orbit',
     });
-    // this.moveTo(this.orbitPosition, {x: 1, y: 1, z: 1});
     // this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
   },
 
+  resumeOrbit() {
+    this.el.setAttribute('orbit', 'active', true);
+  },
 
+
+  // Sets float-to to move the entity
   moveTo({position, scale, eventName}) {
     this.el.setAttribute('orbit', 'active', false);
     this.el.setAttribute('float-to', {
@@ -125,29 +128,29 @@ AFRAME.registerComponent('toy', {
 
   // Failed match with lock.
   // floats the element to orbitPosition
-  floatToOrbit() {
-    this.toLock = false;
-    // update the components
-    updateElement(this.el, {
-      orbit: {
-        active: false,
-      },
-      'float-to': {
-        targetPosition: this.orbitPosition,
-        targetScale: {x: 1, y: 1, z: 1},
-        active: true,
-      },
-      selectable: {
-        isSelected: false,
-        active: true,
-      },
-    });
-    this.el.setAttribute('material', {
-      color: '#FF4136',
-    });
-
-    this.onMatchFailed();
-  },
+  // floatToOrbit() {
+  //   this.toLock = false;
+  //   // update the components
+  //   updateElement(this.el, {
+  //     orbit: {
+  //       active: false,
+  //     },
+  //     'float-to': {
+  //       targetPosition: this.orbitPosition,
+  //       targetScale: {x: 1, y: 1, z: 1},
+  //       active: true,
+  //     },
+  //     selectable: {
+  //       isSelected: false,
+  //       active: true,
+  //     },
+  //   });
+  //   this.el.setAttribute('material', {
+  //     color: '#FF4136',
+  //   });
+  //
+  //   this.onMatchFailed();
+  // },
 
   // Stops floating and starts orbiting
   // resumeOrbit() {
