@@ -1,20 +1,15 @@
 import { noteNameToFreq } from '../utils/noteNameToFreq.js';
-import { Voice } from '../sound/Voice.js';
+import { playNote } from '../sound/playNote.js';
 import { songGenerator } from '../sound/songGenerator.js';
 import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
-  schema: {
-    // autoplay: {default: false}
-  },
-
   //
   // Lifecycle Method
   //
   init() {
     this.audioContext = null;
     this.queuedNotes = [];
-    this.voices = {};
 
     // Start playing background music
     if(document.monetization && document.monetization.state === 'started') {
@@ -46,8 +41,8 @@ AFRAME.registerSystem('sound', {
     // Play them notes!
     notesToPlay.forEach((note) => {
       const { noteName, duration } = note;
-      const voice = this.getVoice(noteName);
-      voice.play(duration);
+      const freq = noteNameToFreq(noteName);
+      playNote(this.audioContext, freq, duration);
     });
 
     // Update to the next note
@@ -113,18 +108,5 @@ AFRAME.registerSystem('sound', {
     // Close and clear the refrence
     this.audioContext.close();
     this.audioContext = null;
-  },
-
-  getVoice(noteName) {
-    const { audioContext } = this;
-    let voice = this.voices[noteName];
-
-    // Create a new voice if we don't have one yet.
-    if (!voice) {
-      voice = new Voice(audioContext, noteNameToFreq(noteName));
-      this.voices[noteName] = voice;
-    }
-
-    return voice;
   },
 });
