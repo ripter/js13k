@@ -1,4 +1,4 @@
-import { updateElement } from '../utils/updateElement.js';
+// import { updateElement } from '../utils/updateElement.js';
 import { EFFECTS } from '../consts/sounds.js';
 
 const EVENTS = ['float-completed', 'selected', 'paired'];
@@ -10,10 +10,8 @@ AFRAME.registerComponent('toy', {
   },
 
   init() {
-    this.system = this.el.sceneEl.systems.game;
+    // this.system = this.el.sceneEl.systems.game;
     this.soundSystem = this.el.sceneEl.systems.sound;
-    // this.lockPosition = new THREE.Vector3();
-    // this.orbitPosition = new THREE.Vector3();
   },
 
   play() {
@@ -27,15 +25,22 @@ AFRAME.registerComponent('toy', {
 
   handleEvent(event) {
     const { detail } = event;
-    // console.log('toy.handleEvent', event.type, detail, event);
+    console.log('toy.handleEvent', event.type, detail, event);
 
     switch (event.type) {
       case 'paired':
+        this.elToybox = detail.elToybox;
         this.moveToToybox(detail.position);
         break;
       case 'selected':
         break;
       case 'float-completed':
+        if (this.canPutToyInBox(this.elToybox)) {
+          this.onMatchSucceed();
+        }
+        else {
+          this.onMatchFailed();
+        }
         break;
       default:
         // ignore
@@ -56,6 +61,12 @@ AFRAME.registerComponent('toy', {
       active: true,
     });
     this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+  },
+
+  // Returns bool if the toy can be put into the toyboy
+  canPutToyInBox(elToybox) {
+    const key = elToybox.getAttribute('toybox').key;
+    return key === this.data.key;
   },
 
   // floats the element to the lockPosition.
@@ -139,16 +150,18 @@ AFRAME.registerComponent('toy', {
   // },
 
 
-  // onMatchSucceed() {
-  //   const { elLock } = this.data;
-  //   this.el.emit('match-succeed');
-  //   elLock.emit('match-succeed');
-  // },
+  onMatchSucceed() {
+    console.log('Matched!');
+    // const { elLock } = this.data;
+    // this.el.emit('match-succeed');
+    // elLock.emit('match-succeed');
+  },
 
-  // onMatchFailed() {
-  //   const { elLock } = this.data;
-  //   this.el.emit('match-failed');
-  //   elLock.emit('match-failed');
-  // },
+  onMatchFailed() {
+    console.log('Rejected!');
+    // const { elLock } = this.data;
+    // this.el.emit('match-failed');
+    // elLock.emit('match-failed');
+  },
 
 });

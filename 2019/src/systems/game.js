@@ -46,6 +46,7 @@ AFRAME.registerSystem('game', {
     const toyboxPosition = elToybox.getAttribute('position');
     this.state.selectedToy.emit('paired', {
       position: toyboxPosition,
+      elToybox,
     });
 
     // Let the user pick another toy

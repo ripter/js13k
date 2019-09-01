@@ -29,5 +29,5 @@ AFRAME.registerComponent('toybox', {
       default:
         // warning?
     }
-  }
+  },
 });

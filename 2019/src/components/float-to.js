@@ -29,8 +29,8 @@ AFRAME.registerComponent('float-to', {
     this.el.object3D.scale.lerp(targetScale, alpha);
 
     if (distance <= speed) {
-      // this.el.emit('float-completed', { el: this.el });
       this.el.setAttribute('float-to', 'active', false);
+      this.el.emit('float-completed', { el: this.el });
     }
   },
 

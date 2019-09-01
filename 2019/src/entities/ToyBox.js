@@ -1,4 +1,3 @@
-import { getRandomShape } from '../utils/getRandomShape.js';
 import { uuid } from '../utils/uuid.js';
 const HEIGHT = 0.25;
 const WIDTH = 0.5;
