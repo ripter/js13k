@@ -46,8 +46,9 @@ AFRAME.registerSystem('game', {
     this.state.selectedToy = null;
   },
 
-  // Starts a new game!
-  // startGame() {
-  //   resetGameState(this.state);
-  // },
+  // Triggered by components/toybox when it is full of toys
+  toyboxFilled(elToybox) {
+    const isGameover = this.state.toyboxes.every(box => box.el.getAttribute('toybox').isFull);
+    console.log('isGameover', isGameover);
+  },
 });

@@ -4,6 +4,7 @@ AFRAME.registerComponent('toybox', {
   schema: {
     key: {type: 'string'},
     totalToys: {type: 'int'},
+    isFull: {default: false},
   },
 
   init() {
@@ -20,8 +21,6 @@ AFRAME.registerComponent('toybox', {
   },
 
   handleEvent(event) {
-    // console.log('toybox.handleEvent', event.type, event);
-    // const elPlanes = this.el.querySelectorAll('a-plane');
     const { elPlanes } = this;
 
     switch (event.type) {
@@ -45,7 +44,11 @@ AFRAME.registerComponent('toybox', {
 
   putAway(/*toy*/) {
     this.putAwayCount += 1;
-    // console.log('putting away the toy', toy);
-    // console.log('There are ', this.data.totalToys - this.putAwayCount, 'toys left');
+    const leftToPutAway = this.data.totalToys - this.putAwayCount;
+
+    if (leftToPutAway === 0) {
+      this.el.setAttribute('toybox', 'isFull', true);
+      this.system.toyboxFilled(this.el);
+    }
   },
 });
