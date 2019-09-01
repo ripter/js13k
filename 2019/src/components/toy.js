@@ -64,7 +64,6 @@ AFRAME.registerComponent('toy', {
   },
 
   moveToOrbit() {
-    console.log('moving to orbit', this.orbitPosition);
     // start effects
     this.moveTo({
       position: this.orbitPosition,
@@ -98,12 +97,11 @@ AFRAME.registerComponent('toy', {
   },
 
   onMatchSucceed() {
-    console.log('Matched!');
+    // console.log('Matched!');
     // TODO: move into a nice position in the box.
   },
 
   onMatchFailed() {
-    console.log('Rejected!');
     this.moveToOrbit();
   },
 

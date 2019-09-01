@@ -11,7 +11,6 @@ AFRAME.registerSystem('game', {
       toys: (new Array(TOTAL_TOYS)).fill(),
       selectedToy: null,
       selectedToybox: null,
-      goalPosition: new THREE.Vector3(),
     };
 
     this.elTimer = document.querySelector('[timer]');
@@ -38,10 +37,7 @@ AFRAME.registerSystem('game', {
     if (!this.state.selectedToy || !this.state.selectedToybox) { return; }
 
     // Activate the pair
-    // const elToybox = this.state.selectedToybox.closest('[toybox]');
-    // const toyboxPosition = elToybox.getAttribute('position');
     this.state.selectedToy.emit('paired', {
-      // position: toyboxPosition,
       elToybox: this.state.selectedToybox.closest('[toybox]'),
     });
 

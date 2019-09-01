@@ -13,6 +13,7 @@ module.exports = {
     AFRAME: 'readonly',
   },
   rules: {
+    'no-console': 2,
     //
     // Best Practices
     //

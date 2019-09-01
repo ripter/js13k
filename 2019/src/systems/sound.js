@@ -12,7 +12,6 @@ AFRAME.registerSystem('sound', {
   // Lifecycle Method
   //
   init() {
-
     this.audioContext = null;
     this.queuedNotes = [];
     this.voices = {};
