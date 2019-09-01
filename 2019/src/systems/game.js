@@ -44,11 +44,20 @@ AFRAME.registerSystem('game', {
 
     // Activate the pair
     const elToybox = this.state.selectedToybox.closest('[toybox]');
-    this.state.selectedToy.setAttribute('lock-key', {
-      elLock: `#${elToybox.id}`,
-    });
+    const toyboxPosition = elToybox.getAttribute('position');
+    this.state.selectedToy.emit('paired', {detail: {
+      toyboxPosition,
+    }})
+    // this.state.selectedToy.setAttribute('toy', 'toyboxPosition', toyboxPosition);
+
+    // this.state.selectedToy.setAttribute('toy', 'elLock', `#${elToybox.id}`);
+    // this.state.selectedToy.emit('')
+    // this.state.selectedToy.setAttribute('toy', {
+    //   elLock: `#${elToybox.id}`,
+    // });
 
     // Let the user pick another toy
+    this.state.selectedToy.setAttribute('selectable', 'isSelected', false);
     this.state.selectedToy = null;
   },
 

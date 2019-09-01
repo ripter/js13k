@@ -13,6 +13,8 @@ AFRAME.registerComponent('float-to', {
   },
 
   update() {
+    if (!this.data.active) { return; }
+    console.log('float-to update', this.data);
     this.targetPosition.copy(this.data.targetPosition);
     this.totalDistance = this.el.object3D.position.distanceToSquared(this.data.targetPosition);
   },
@@ -24,6 +26,7 @@ AFRAME.registerComponent('float-to', {
     const distance = this.el.object3D.position.distanceToSquared(targetPosition);
     const alpha = (totalDistance - distance) / totalDistance;
 
+    console.log('targetPosition', targetPosition);
     this.el.object3D.lookAt(targetPosition);
     this.el.object3D.translateZ(speed);
     this.el.object3D.scale.lerp(targetScale, alpha);

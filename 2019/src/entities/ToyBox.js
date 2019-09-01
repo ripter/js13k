@@ -28,16 +28,4 @@ export class ToyBox {
 
     this.scene.appendChild(this.el);
   }
-
-  // update(newData) {
-  //   const { position, shape } = newData;
-  //   const elSign = this.el.querySelector('.sign');
-  //
-  //   this.el.setAttribute('position', position);
-  //   this.el.setAttribute('toybox', { key: shape });
-  //   elSign.setAttribute('geometry', {
-  //     primitive: 'extrudeShape',
-  //     icon: shape,
-  //   });
-  // }
 }

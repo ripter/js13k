@@ -1,7 +1,7 @@
 import { updateElement } from '../utils/updateElement.js';
 import { EFFECTS } from '../consts/sounds.js';
 
-const EVENTS = ['float-completed'];
+const EVENTS = ['float-completed', 'selected', 'paired'];
 /**
  * Lets the entity be used as a 'key' to a phyiscal 'lock'.
  * Manages `float-to` and `orbit` components shared on the entity.
@@ -11,7 +11,8 @@ const EVENTS = ['float-completed'];
 AFRAME.registerComponent('toy', {
   schema: {
     active: {default: true},
-    elLock: {type: 'selector'},
+    // elLock: {type: 'selector'},
+    toyboxPosition: {type: 'vec3'},
     key: {type: 'string'},
   },
 
@@ -20,7 +21,6 @@ AFRAME.registerComponent('toy', {
     this.soundSystem = this.el.sceneEl.systems.sound;
     this.lockPosition = new THREE.Vector3();
     this.orbitPosition = new THREE.Vector3();
-    this.didTest = false;
   },
 
   play() {
@@ -32,16 +32,30 @@ AFRAME.registerComponent('toy', {
   },
 
   // sync local refrences when the data changes.
-  update(oldData) {
-    if (null !== this.data.elLock
-      && oldData.elLock !== this.data.elLock) {
-      // Start floating when the lock changes.
-      this.floatToLock();
-    }
-  },
+  // update(oldData) {
+  //   if (!this.data.active) { return; }
+  //   console.log('toy.update', this.data);
+  //   if (null !== this.data.toyboxPosition) {
+  //     // Start floating when the lock changes.
+  //     this.floatToLock();
+  //   }
+  // },
 
 
   handleEvent(event) {
+    console.log('toy.handleEvent', event.type, event);
+
+    /*
+    switch (event.type) {
+      case 'selected':
+
+        break;
+      case 'float-completed':
+
+      default:
+        // ignore
+    }
+    */
     if (event.type !== 'float-completed') { return; }
     const { toLock } = this;
     const { elLock, key } = this.data;
@@ -70,10 +84,11 @@ AFRAME.registerComponent('toy', {
 
   // floats the element to the lockPosition.
   floatToLock() {
+    console.log('floatToLock', this.el);
     this.toLock = true;
     // Get a copy of the positions
-    this.orbitPosition.copy(this.el.object3D.position);
-    this.data.elLock.object3D.getWorldPosition(this.lockPosition);
+    // this.orbitPosition.copy(this.el.object3D.position);
+    // this.data.elLock.object3D.getWorldPosition(this.lockPosition);
 
     // update the components
     updateElement(this.el, {
@@ -81,7 +96,8 @@ AFRAME.registerComponent('toy', {
         active: false,
       },
       'float-to': {
-        targetPosition: this.lockPosition,
+        // targetPosition: this.lockPosition,
+        targetPosition: this.toyboxPosition,
         targetScale: {x: 0.25, y: 0.25, z: 0.25},
         active: true,
       },
