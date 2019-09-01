@@ -1,7 +1,7 @@
 // import { updateElement } from '../utils/updateElement.js';
 import { EFFECTS } from '../consts/sounds.js';
 
-const EVENTS = ['float-completed', 'selected', 'paired'];
+const EVENTS = ['selected', 'paired', 'at-toybox', 'at-orbit'];
 AFRAME.registerComponent('toy', {
   schema: {
     active: {default: true},
@@ -12,6 +12,7 @@ AFRAME.registerComponent('toy', {
   init() {
     // this.system = this.el.sceneEl.systems.game;
     this.soundSystem = this.el.sceneEl.systems.sound;
+    this.orbitPosition = new THREE.Vector3();
   },
 
   play() {
@@ -29,19 +30,21 @@ AFRAME.registerComponent('toy', {
 
     switch (event.type) {
       case 'paired':
-        this.elToybox = detail.elToybox;
-        this.moveToToybox(detail.position);
+        return this.moveToToybox(detail.elToybox);
         break;
       case 'selected':
         break;
-      case 'float-completed':
-        if (this.canPutToyInBox(this.elToybox)) {
+      case 'at-toybox':
+        if (this.canPutToyInBox()) {
           this.onMatchSucceed();
         }
         else {
           this.onMatchFailed();
         }
         break;
+      case 'at-orbit':
+        console.log('Reached orbit');
+        return;
       default:
         // ignore
     }
@@ -53,18 +56,46 @@ AFRAME.registerComponent('toy', {
   //
 
   // Activate the components to move the toy to the toybox
-  moveToToybox(position) {
+  moveToToybox(elToybox) {
+    const position = elToybox.getAttribute('position');
+    // update state
+    this.elToybox = elToybox;
+    this.orbitPosition.copy(position);
+    // start effects
+    this.moveTo({
+      position,
+      scale: {x: 0.25, y: 0.25, z: 0.25},
+      eventName: 'at-toybox',
+    });
+    // this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+  },
+
+  moveToOrbit() {
+    console.log('moving to orbit', this.orbitPosition);
+    // start effects
+    this.moveTo({
+      position: this.orbitPosition,
+      scale: {x: 1, y: 1, z: 1},
+      eventName: 'at-orbit',
+    });
+    // this.moveTo(this.orbitPosition, {x: 1, y: 1, z: 1});
+    // this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
+  },
+
+
+  moveTo({position, scale, eventName}) {
     this.el.setAttribute('orbit', 'active', false);
     this.el.setAttribute('float-to', {
       targetPosition: position,
-      targetScale: {x: 0.25, y: 0.25, z: 0.25},
+      targetScale: scale,
       active: true,
+      eventName,
     });
-    this.soundSystem.playEffect(EFFECTS.FLOAT_TO_LOCK);
   },
 
   // Returns bool if the toy can be put into the toyboy
-  canPutToyInBox(elToybox) {
+  canPutToyInBox() {
+    const { elToybox } = this;
     const key = elToybox.getAttribute('toybox').key;
     return key === this.data.key;
   },
@@ -93,29 +124,29 @@ AFRAME.registerComponent('toy', {
 
   // Failed match with lock.
   // floats the element to orbitPosition
-  // floatToOrbit() {
-  //   this.toLock = false;
-  //   // update the components
-  //   updateElement(this.el, {
-  //     orbit: {
-  //       active: false,
-  //     },
-  //     'float-to': {
-  //       targetPosition: this.orbitPosition,
-  //       targetScale: {x: 1, y: 1, z: 1},
-  //       active: true,
-  //     },
-  //     selectable: {
-  //       isSelected: false,
-  //       active: true,
-  //     },
-  //   });
-  //   this.el.setAttribute('material', {
-  //     color: '#FF4136',
-  //   });
-  //
-  //   this.onMatchFailed();
-  // },
+  floatToOrbit() {
+    this.toLock = false;
+    // update the components
+    updateElement(this.el, {
+      orbit: {
+        active: false,
+      },
+      'float-to': {
+        targetPosition: this.orbitPosition,
+        targetScale: {x: 1, y: 1, z: 1},
+        active: true,
+      },
+      selectable: {
+        isSelected: false,
+        active: true,
+      },
+    });
+    this.el.setAttribute('material', {
+      color: '#FF4136',
+    });
+
+    this.onMatchFailed();
+  },
 
   // Stops floating and starts orbiting
   // resumeOrbit() {
@@ -159,6 +190,7 @@ AFRAME.registerComponent('toy', {
 
   onMatchFailed() {
     console.log('Rejected!');
+    this.moveToOrbit();
     // const { elLock } = this.data;
     // this.el.emit('match-failed');
     // elLock.emit('match-failed');

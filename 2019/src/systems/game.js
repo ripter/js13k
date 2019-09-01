@@ -42,11 +42,11 @@ AFRAME.registerSystem('game', {
     if (!this.state.selectedToy || !this.state.selectedToybox) { return; }
 
     // Activate the pair
-    const elToybox = this.state.selectedToybox.closest('[toybox]');
-    const toyboxPosition = elToybox.getAttribute('position');
+    // const elToybox = this.state.selectedToybox.closest('[toybox]');
+    // const toyboxPosition = elToybox.getAttribute('position');
     this.state.selectedToy.emit('paired', {
-      position: toyboxPosition,
-      elToybox,
+      // position: toyboxPosition,
+      elToybox: this.state.selectedToybox.closest('[toybox]'),
     });
 
     // Let the user pick another toy
