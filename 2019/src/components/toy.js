@@ -3,20 +3,18 @@ import { EFFECTS } from '../consts/sounds.js';
 const EVENTS = ['at-orbit', 'at-toybox', 'paired'];
 AFRAME.registerComponent('toy', {
   schema: {
-    active: {default: true},
-    toyboxPosition: {type: 'vec3'},
     key: {type: 'string'},
   },
 
   init() {
     this.soundSystem = this.el.sceneEl.systems.sound;
+    this.elToybox = null;
     this.orbitPosition = new THREE.Vector3();
   },
 
   play() {
     EVENTS.forEach(eventName => this.el.addEventListener(eventName, this));
   },
-
   pause() {
     EVENTS.forEach(eventName => this.el.removeEventListener(eventName, this));
   },
@@ -97,8 +95,10 @@ AFRAME.registerComponent('toy', {
   },
 
   onMatchSucceed() {
-    // console.log('Matched!');
-    // TODO: move into a nice position in the box.
+    const { elToybox } = this;
+    elToybox.emit('put-away', {
+      toy: this.el,
+    });
   },
 
   onMatchFailed() {

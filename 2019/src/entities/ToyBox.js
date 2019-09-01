@@ -5,14 +5,17 @@ const DEPTH = 0.5;
 
 export class ToyBox {
   constructor(props) {
-    const { position, shape } = props;
+    const { position, shape, totalToys } = props;
     // const { x, y, z } = position;
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
     this.el.id = uuid();
     this.el.setAttribute('position', position);
-    this.el.setAttribute('toybox', { key: shape });
+    this.el.setAttribute('toybox', {
+      key: shape,
+      totalToys,
+    });
     this.el.innerHTML = `
       <a-plane position="0 ${HEIGHT/2} ${DEPTH/2}" rotation="0 0 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="0 ${HEIGHT/2} ${-DEPTH/2}" rotation="0 0 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>

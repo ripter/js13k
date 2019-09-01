@@ -1,20 +1,20 @@
-import { resetGameState } from '../utils/resetGameState.js';
+import { newState } from '../utils/newState.js';
 
-const TOTAL_TOYBOXES = 3;
-const TOTAL_TOYS = TOTAL_TOYBOXES * 4;
 
 
 AFRAME.registerSystem('game', {
   init() {
-    this.state = {
-      toyboxes: (new Array(TOTAL_TOYBOXES)).fill(),
-      toys: (new Array(TOTAL_TOYS)).fill(),
+    this.state = Object.assign({}, newState(), {
       selectedToy: null,
       selectedToybox: null,
-    };
+    });
+    // this.state = {
+    //   toyboxes: (new Array(TOTAL_TOYBOXES)).fill(TOYS_PER_BOX),
+    //   toys: (new Array(TOTAL_TOYS)).fill(),
+    // };
 
     this.elTimer = document.querySelector('[timer]');
-    this.startGame();
+    // this.startGame();
   },
 
 
@@ -47,7 +47,7 @@ AFRAME.registerSystem('game', {
   },
 
   // Starts a new game!
-  startGame() {
-    resetGameState(this.state);
-  },
+  // startGame() {
+  //   resetGameState(this.state);
+  // },
 });
