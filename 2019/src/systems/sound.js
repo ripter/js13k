@@ -4,10 +4,6 @@ import { songGenerator } from '../sound/songGenerator.js';
 import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
-  // schema: {
-  // autoplay: {default: false}
-  // },
-
   //
   // Lifecycle Method
   //
