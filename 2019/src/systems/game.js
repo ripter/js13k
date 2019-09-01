@@ -1,11 +1,11 @@
+import { ToyBox } from '../entities/ToyBox.js';
 import { Goal } from '../entities/Goal.js';
 import { Item } from '../entities/Item.js';
-import { Room } from '../entities/Room.js';
-import { Timer } from '../entities/Timer.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
+import { resetGameState } from '../utils/resetGameState.js';
 
 const TOTAL_ITEMS = 30;
-const TOTAL_GOALS = 3;
+const TOTAL_TOYBOXES = 3;
 
 
 AFRAME.registerSystem('game', {
@@ -14,21 +14,28 @@ AFRAME.registerSystem('game', {
   },
 
   init() {
-    this.items = [];
-    this.goals = [];
-    this.room = new Room();
-    this.timer = new Timer({
-      x: -0.75,
-      y: 0,
-      z: -0.75,
-    });
-    this.elLeftHand = document.querySelector('#leftHand');
-
     this.state = {
+      toyboxes: (new Array(TOTAL_TOYBOXES)).fill().map(() => new ToyBox()),
+      toys: [],
       selectedItem: null,
       selectedGoal: null,
       goalPosition: new THREE.Vector3(),
     };
+    // this.items = [];
+    // this.goals = [];
+
+    // this.timer = new Timer({
+    //   x: -0.75,
+    //   y: 0,
+    //   z: -0.75,
+    // });
+    // this.elLeftHand = document.querySelector('#leftHand');
+
+    // this.state = {
+    //   selectedItem: null,
+    //   selectedGoal: null,
+    //   goalPosition: new THREE.Vector3(),
+    // };
 
     this.startGame();
 
@@ -92,24 +99,26 @@ AFRAME.registerSystem('game', {
 
   // Starts a new game!
   startGame() {
-    const shapes = Array(TOTAL_ITEMS).fill().map(getRandomShape);
+    resetGameState(this.state);
 
-    // reset the lists
-    this.items = [];
-    this.goals = [];
-
-    // Make a grid of goals around the player
-    for (let x=0; x < TOTAL_GOALS; x++) {
-      for (let y=0; y < TOTAL_GOALS; y++) {
-        let i = x * TOTAL_GOALS + y;
-        this.goals.push(this.createNewGoal(x, y, shapes[i]));
-      }
-    }
-
-    // Fill with random shaped items
-    for (let i=0; i < TOTAL_ITEMS; i++) {
-      this.items.push(this.createNewItem(shapes[i]));
-    }
+    // const shapes = Array(TOTAL_ITEMS).fill().map(getRandomShape);
+    //
+    // // reset the lists
+    // this.items = [];
+    // this.goals = [];
+    //
+    // // Make a grid of goals around the player
+    // for (let x=0; x < TOTAL_GOALS; x++) {
+    //   for (let y=0; y < TOTAL_GOALS; y++) {
+    //     let i = x * TOTAL_GOALS + y;
+    //     this.goals.push(this.createNewGoal(x, y, shapes[i]));
+    //   }
+    // }
+    //
+    // // Fill with random shaped items
+    // for (let i=0; i < TOTAL_ITEMS; i++) {
+    //   this.items.push(this.createNewItem(shapes[i]));
+    // }
   },
 
   // Creates a new orbiting item with shape and random y-axis

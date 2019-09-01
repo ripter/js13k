@@ -22,12 +22,22 @@ body {
   <a-scene>
     <a-entity id="player" position="-0.20 0 0.5">
       <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
-      <!-- Mouse Input for browser play -->
       <a-entity id="mouseHand" cursor="rayOrigin: mouse" raycaster="objects: [selectable]"></a-entity>
       <a-entity id="controllerHand" laser-controls="model: false" raycaster="objects: [selectable]" line="color: #FF4136; opacity: 0.75;"></a-entity>
     </a-entity>
 
     <a-sky color="#7FDBFF"></a-sky>
+    <a-plane color="#3D9970" height="100" width="100" rotation="-90 0 0" ></a-plane>
+    <a-entity rotation="0 -60 180">
+      <a-entity timer position="0.1 -0.43 0.25" rotation="45 -90 180"
+        text="value: 00:00; color: #000; align: center; width: 4;"></a-entity>
+      <a-entity
+        scale="0.5 0.5 0.5"
+        geometry="primitive: extrudeShape; icon: TIMER; extrudeDepth: 1;"
+        material="color: #AAAAAA;"
+        ></a-entity>
+    </a-entity>
+
   </a-scene>
 </body>
 </html>
