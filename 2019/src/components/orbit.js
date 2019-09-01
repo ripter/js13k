@@ -12,6 +12,7 @@ AFRAME.registerComponent('orbit', {
     this.theta = this.data.startTheta;
   },
 
+
   // Update position to orbit around the center
   tick() {
     if (!this.data.active) { return; }
