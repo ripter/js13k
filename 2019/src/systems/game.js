@@ -35,8 +35,24 @@ AFRAME.registerSystem('game', {
 
     // Did they click on a toy, or a toybox?
     const selectedType = elm.getAttribute('selectable').type;
+    const oldElm = this.state[`selected${selectedType}`];
+
+    // ignore unless the selected item changed
+    if (elm === oldElm) { return; }
+    this.state[`selected${selectedType}`] = elm;
+
+    // ignore unless we have both a Toy and a Toybox selected.
+    if (!this.state.selectedToy || !this.state.selectedToybox) { return; }
+
+    // Activate the pair
+    const elToybox = this.state.selectedToybox.closest('.toybox');
+    this.state.selectedToy.setAttribute('lock-key', {
+      elLock: `#${elToybox.id}`,
+    });
+
     console.log('selectedType', selectedType);
 
+    /*
 
 
 
@@ -77,6 +93,7 @@ AFRAME.registerSystem('game', {
       setState('selectedToybox', null);
       setState('selectedToy', null);
     }
+    */
   },
 
   // Triggered by components (lock-key) when the key is used on a valid lock.
