@@ -1,26 +1,29 @@
 import { ToyBox } from '../entities/ToyBox.js';
-import { Goal } from '../entities/Goal.js';
-import { Item } from '../entities/Item.js';
-import { getRandomShape } from '../utils/getRandomShape.js';
+import { Toy } from '../entities/Toy.js';
+// import { Goal } from '../entities/Goal.js';
+// import { Item } from '../entities/Item.js';
+// import { getRandomShape } from '../utils/getRandomShape.js';
 import { resetGameState } from '../utils/resetGameState.js';
 
-const TOTAL_ITEMS = 30;
 const TOTAL_TOYBOXES = 3;
+const TOTAL_TOYS = TOTAL_TOYBOXES * 4;
 
 
 AFRAME.registerSystem('game', {
-  schema: {
-
-  },
+  // schema: {
+  //
+  // },
 
   init() {
     this.state = {
       toyboxes: (new Array(TOTAL_TOYBOXES)).fill().map(() => new ToyBox()),
-      toys: [],
+      toys: (new Array(TOTAL_TOYS)).fill().map(() => new Toy()),
       selectedItem: null,
       selectedGoal: null,
       goalPosition: new THREE.Vector3(),
     };
+
+    this.elTimer = document.querySelector('[timer]');
     // this.items = [];
     // this.goals = [];
 
@@ -45,7 +48,7 @@ AFRAME.registerSystem('game', {
   // Triggered by components (selectable) when the user selects an item/goal.
   // Sets the element as selected, triggers lockAndKey if this makes a pair.
   setSelected(elm) {
-    const elTimer = this.timer.el.querySelector('[timer]');
+    const { elTimer } = this;
     // Helper function because most of the logic the the same for both items
     const setState = (name, elmValue) => {
       // bail if it's already the selected entity
@@ -122,22 +125,22 @@ AFRAME.registerSystem('game', {
   },
 
   // Creates a new orbiting item with shape and random y-axis
-  createNewItem(shape) {
-    return new Item({
-      x: 0,
-      y: THREE.Math.randInt(2, 4),
-      z: 0,
-      shape,
-    });
-  },
+  // createNewItem(shape) {
+  //   return new Item({
+  //     x: 0,
+  //     y: THREE.Math.randInt(2, 4),
+  //     z: 0,
+  //     shape,
+  //   });
+  // },
 
   // Creates a new Goal at location with random shape
-  createNewGoal(x, y, shape) {
-    return new Goal({
-      x: -0.75 + (x * 0.5),
-      y: 0.1,
-      z: -0.5 + (y * 0.5),
-      icon: shape,
-    });
-  },
+  // createNewGoal(x, y, shape) {
+  //   return new Goal({
+  //     x: -0.75 + (x * 0.5),
+  //     y: 0.1,
+  //     z: -0.5 + (y * 0.5),
+  //     icon: shape,
+  //   });
+  // },
 });
