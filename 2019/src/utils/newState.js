@@ -4,7 +4,7 @@ import { getRandomShape } from '../utils/getRandomShape.js';
 
 const TOTAL_TOYBOXES = 3;
 const TOYS_PER_BOX = 4;
-const TOTAL_TOYS = TOTAL_TOYBOXES * TOYS_PER_BOX;
+// const TOTAL_TOYS = TOTAL_TOYBOXES * TOYS_PER_BOX;
 
 // Creates a new game state
 export function newState() {
@@ -24,14 +24,12 @@ export function newState() {
     }
     availableShapes.push(randomShape);
   }
-  console.log('availableShapes', availableShapes);
 
   // Create enough toys to fill each box
   state.toys = availableShapes.reduce((acc, shape) => {
     const toys = (new Array(TOYS_PER_BOX)).fill().map(() => new Toy(shape));
     return acc.concat(toys);
   }, []);
-  console.log('toys', state.toys);
 
   // Put the toyboxes into position
   //TODO: auto place in a semi-circle around the player

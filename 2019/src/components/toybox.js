@@ -29,22 +29,23 @@ AFRAME.registerComponent('toybox', {
         elPlanes.forEach(el => {
           el.setAttribute('material', 'color', '#0074D9');
         });
-        return;
+        return true;
       case 'unselected':
         elPlanes.forEach(el => {
           el.setAttribute('material', 'color', '#DDDDDD');
         });
-        return;
+        return true;
       case 'put-away':
         return this.putAway(event.detail.toy);
       default:
         // warning?
     }
+    return false;
   },
 
-  putAway(toy) {
+  putAway(/*toy*/) {
     this.putAwayCount += 1;
-    console.log('putting away the toy', toy);
-    console.log('There are ', this.data.totalToys - this.putAwayCount, 'toys left');
+    // console.log('putting away the toy', toy);
+    // console.log('There are ', this.data.totalToys - this.putAwayCount, 'toys left');
   },
 });
