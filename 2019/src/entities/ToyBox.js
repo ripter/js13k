@@ -22,9 +22,7 @@ export class ToyBox {
       <a-plane position="${WIDTH/2} ${HEIGHT/2} 0" rotation="0 90 0" height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="${-WIDTH/2} ${HEIGHT/2} 0" rotation="0 90 0"   height="${HEIGHT}" width="${WIDTH}" material="side: double"></a-plane>
       <a-plane position="0 0 0" rotation="-90 0 0" height="${DEPTH}" width="${WIDTH}"></a-plane>
-      <!-- Collision Box -->
       <a-entity selectable="type: Toybox" geometry="primitive: box; width: 1; height: 1; depth: 1" material="visible: false"></a-entity>
-      <!-- Sign for the user -->
       <a-entity position="-${WIDTH/3} 0 ${DEPTH/2}" scale="0.25 0.25 0.25" geometry="primitive: extrudeShape; icon: ${shape}"></a-entity>
     `;
 
