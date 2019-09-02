@@ -1,5 +1,5 @@
 import { formatTime } from '../utils/formatTime.js';
-import { EFFECTS } from '../consts/sounds.js';
+// import { EFFECTS } from '../consts/sounds.js';
 
 AFRAME.registerComponent('timer', {
   schema: {
@@ -9,7 +9,7 @@ AFRAME.registerComponent('timer', {
 
   init: function () {
     this.system = this.el.sceneEl.systems.game;
-    this.soundSystem = this.el.sceneEl.systems.sound;
+    // this.soundSystem = this.el.sceneEl.systems.sound;
     this.milliseconds = 0;
   },
 
@@ -27,7 +27,7 @@ AFRAME.registerComponent('timer', {
       value: `${formatTime(this.milliseconds)}`,
     });
 
-    this.soundSystem.playEffect(EFFECTS.TIMER_TICK);
+    // this.soundSystem.playEffect(EFFECTS.TIMER_TICK);
   },
 
 });
