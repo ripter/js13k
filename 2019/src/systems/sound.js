@@ -1,7 +1,7 @@
 import { noteNameToFreq } from '../utils/noteNameToFreq.js';
 import { playNote } from '../sound/playNote.js';
 import { songGenerator } from '../sound/songGenerator.js';
-import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
+import { FALLEN_KINGDOM, MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
   //
@@ -19,6 +19,10 @@ AFRAME.registerSystem('sound', {
     else {
       // Play some Human music as the background
       this.playEffect(MUSIC_BACKGROUND, true);
+      // FALLEN_KINGDOM.forEach(track => {
+      //   this.playEffect(track, true);
+      // });
+
     }
 
     // Setup Events
