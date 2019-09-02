@@ -1,5 +1,5 @@
 // Thanks to: http://marcgg.com/blog/2016/11/01/javascript-audio/
-export function playNote(audioContext, frequency, duration, type = 'sine') {
+export function playNote(audioContext, frequency, duration, type = 'triangle') {
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
   oscillator.type = type;

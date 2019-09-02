@@ -13,7 +13,7 @@ export class Toy {
     this.el.setAttribute('orbit', {
       radius: THREE.Math.randInt(3, 6),
       startTheta: THREE.Math.randFloat(0, 2 * Math.PI),
-      deltaTheta: (THREE.Math.randInt(0, 1) === 0 ? 1 : -1) * ((2 * Math.PI) / Math.pow(10, THREE.Math.randFloat(3, 4))),
+      deltaTheta: (THREE.Math.randInt(0, 1) === 0 ? 1 : -1) * ((2 * Math.PI) / Math.pow(10, THREE.Math.randFloat(2.5, 3.5))),
     });
     this.el.innerHTML = `<a-entity
       selectable

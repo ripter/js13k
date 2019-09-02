@@ -1,3 +1,4 @@
+import { EFFECTS } from '../consts/sounds.js';
 
 const EVENTS = ['selected', 'unselected', 'put-away'];
 AFRAME.registerComponent('toybox', {
@@ -9,8 +10,10 @@ AFRAME.registerComponent('toybox', {
 
   init() {
     this.system = this.el.sceneEl.systems.game;
+    this.soundSystem = this.el.sceneEl.systems.sound;
     this.elPlanes = this.el.querySelectorAll('a-plane');
     this.putAwayCount = 0;
+    this.leftToPutAway = this.data.totalToys;
   },
 
   play() {
@@ -21,19 +24,15 @@ AFRAME.registerComponent('toybox', {
   },
 
   handleEvent(event) {
-    const { elPlanes } = this;
+    const { leftToPutAway } = this;
 
     switch (event.type) {
       case 'selected':
-        elPlanes.forEach(el => {
-          el.setAttribute('material', 'color', '#0074D9');
-        });
-        return true;
+        if (leftToPutAway === 0) { return false; }
+        return this.colorModel('#0074D9');
       case 'unselected':
-        elPlanes.forEach(el => {
-          el.setAttribute('material', 'color', '#DDDDDD');
-        });
-        return true;
+        if (leftToPutAway === 0) { return false; }
+        return this.colorModel('#DDDDDD');
       case 'put-away':
         return this.putAway(event.detail.toy);
       default:
@@ -44,11 +43,20 @@ AFRAME.registerComponent('toybox', {
 
   putAway(/*toy*/) {
     this.putAwayCount += 1;
-    const leftToPutAway = this.data.totalToys - this.putAwayCount;
+    this.leftToPutAway = this.data.totalToys - this.putAwayCount;
 
-    if (leftToPutAway === 0) {
+    if (this.leftToPutAway === 0) {
+      this.colorModel('#2ECC40');
       this.el.setAttribute('toybox', 'isFull', true);
       this.system.toyboxFilled(this.el);
+      this.soundSystem.playEffect(EFFECTS.WIN);
     }
+  },
+
+  colorModel(color) {
+    const { elPlanes } = this;
+    elPlanes.forEach(el => {
+      el.setAttribute('material', 'color', color);
+    });
   },
 });

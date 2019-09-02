@@ -22,7 +22,6 @@ AFRAME.registerComponent('toy', {
 
   handleEvent(event) {
     const { detail } = event;
-    // console.log('toy.handleEvent', event.type, detail, event);
 
     switch (event.type) {
       case 'paired':
@@ -96,6 +95,7 @@ AFRAME.registerComponent('toy', {
 
   onMatchSucceed() {
     const { elToybox } = this;
+
     elToybox.emit('put-away', {
       toy: this.el,
     });

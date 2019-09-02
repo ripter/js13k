@@ -1,7 +1,7 @@
 import { noteNameToFreq } from '../utils/noteNameToFreq.js';
 import { playNote } from '../sound/playNote.js';
 import { songGenerator } from '../sound/songGenerator.js';
-import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
+import { HUMAN_MUSIC, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
   //
@@ -14,15 +14,11 @@ AFRAME.registerSystem('sound', {
     // Start playing background music
     if(document.monetization && document.monetization.state === 'started') {
       // Paying users get upgraded sound`
-      this.playEffect(TTLS, true);
+      this.replaceBackgroundMusic(TTLS);
     }
     else {
-      // Play some Human music as the background
-      this.playEffect(MUSIC_BACKGROUND, true);
-      // FALLEN_KINGDOM.forEach(track => {
-      //   this.playEffect(track, true);
-      // });
-
+      // Free users get Rick and Morty Refrence
+      this.replaceBackgroundMusic(HUMAN_MUSIC);
     }
 
     // Setup Events
@@ -87,7 +83,7 @@ AFRAME.registerSystem('sound', {
   // API
   //
 
-  playEffect(effect, repeat = false) {
+  playEffect(effect, repeat = false, effectName = '') {
     // Turn the effect into a note Generator
     const noteIter = songGenerator(effect, repeat);
     // Add the first note to the que
@@ -97,6 +93,18 @@ AFRAME.registerSystem('sound', {
       duration,
       noteName,
       noteIter,
+      effectName,
+    });
+  },
+
+  // replaces the old background music with a new one.
+  replaceBackgroundMusic(trackList) {
+    const NAME = 'background-music';
+    // Remove the old background music
+    this.queuedNotes = this.queuedNotes.filter(trackMeta => trackMeta.effectName !== NAME);
+    // Play all the tracks in the new music
+    trackList.forEach(track => {
+      this.playEffect(track, true, NAME);
     });
   },
 

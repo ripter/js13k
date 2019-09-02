@@ -1,4 +1,5 @@
 import { newState } from '../utils/newState.js';
+import { WIN_MUSIC } from '../consts/sounds.js';
 
 
 
@@ -13,6 +14,7 @@ AFRAME.registerSystem('game', {
     //   toys: (new Array(TOTAL_TOYS)).fill(),
     // };
 
+    this.soundSystem = this.el.sceneEl.systems.sound;
     this.elTimer = document.querySelector('[timer]');
     // this.startGame();
   },
@@ -56,5 +58,9 @@ AFRAME.registerSystem('game', {
 
     // Stop the timer
     this.elTimer.setAttribute('timer', 'isPlaying', false);
+
+    // Switch to the winning music
+    const soundSystem = this.el.sceneEl.systems.sound;
+    soundSystem.replaceBackgroundMusic(WIN_MUSIC);
   },
 });

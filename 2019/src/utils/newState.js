@@ -3,7 +3,7 @@ import { ToyBox } from '../entities/ToyBox.js';
 import { getRandomShape } from '../utils/getRandomShape.js';
 
 const TOTAL_TOYBOXES = 3;
-const TOYS_PER_BOX = 4;
+const TOYS_PER_BOX = 5;
 // const TOTAL_TOYS = TOTAL_TOYBOXES * TOYS_PER_BOX;
 
 // Creates a new game state
