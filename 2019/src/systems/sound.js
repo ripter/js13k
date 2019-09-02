@@ -1,7 +1,7 @@
 import { noteNameToFreq } from '../utils/noteNameToFreq.js';
 import { playNote } from '../sound/playNote.js';
 import { songGenerator } from '../sound/songGenerator.js';
-import { FALLEN_KINGDOM, MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
+import { MUSIC_BACKGROUND, TTLS } from '../consts/sounds.js';
 
 AFRAME.registerSystem('sound', {
   //
