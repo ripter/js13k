@@ -10,7 +10,7 @@ AFRAME.registerGeometry('extrudeShape', {
   init(data) {
     const shapeCommands = SHAPES[data.icon];
     //TODO: this guard can be removed in the prod version.
-    if (!shapeCommands) { throw new Error(`Unknown icon "${data.icon}". Did you mean "${data.icon.toUpperCase()}"?`); }
+    // if (!shapeCommands) { throw new Error(`Unknown icon "${data.icon}". Did you mean "${data.icon.toUpperCase()}"?`); }
 
     // Convert the array of commands into the shape.
     const shape = new THREE.Shape();
@@ -27,9 +27,6 @@ AFRAME.registerGeometry('extrudeShape', {
       bevelEnabled: false,
     };
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-    // Icons import upside down, so flip it the right way.
-    // geometry.rotateX(3.14159);
-
     // update with the new shape.
     // geometry.computeBoundingBox();
     // geometry.mergeVertices();
