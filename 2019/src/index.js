@@ -5,5 +5,6 @@ import './components/selectable.js';
 import './components/toy.js';
 import './components/toybox.js';
 import './components/timer.js';
+import './components/info-gamestate.js';
 import './systems/game.js';
 import './systems/sound.js';

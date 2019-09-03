@@ -9,14 +9,10 @@ AFRAME.registerSystem('game', {
       selectedToy: null,
       selectedToybox: null,
     });
-    // this.state = {
-    //   toyboxes: (new Array(TOTAL_TOYBOXES)).fill(TOYS_PER_BOX),
-    //   toys: (new Array(TOTAL_TOYS)).fill(),
-    // };
 
     this.soundSystem = this.el.sceneEl.systems.sound;
     this.elTimer = document.querySelector('[timer]');
-    // this.startGame();
+    this.elInfoGamestate = document.querySelector('[info-gamestate]');
   },
 
 
@@ -56,10 +52,15 @@ AFRAME.registerSystem('game', {
     const isGameover = this.state.toyboxes.every(box => box.el.getAttribute('toybox').isFull);
     if (!isGameover) { return; }
 
+    //
+    // Player Wins!!
+
     // Stop the timer
     this.elTimer.setAttribute('timer', 'isPlaying', false);
+    this.elInfoGamestate.setAttribute('info-gamestate', 'isGameover', isGameover);
+    // this.elInfo.setAttribute('text', 'value', 'Winner Winner!\nCan you do it faster next time?');
 
-    // Switch to the winning music
+    // Switch to the reward music
     const soundSystem = this.el.sceneEl.systems.sound;
     soundSystem.replaceBackgroundMusic(WIN_MUSIC);
   },
