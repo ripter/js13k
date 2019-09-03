@@ -1,4 +1,3 @@
-import { uuid } from '../utils/uuid.js';
 const HEIGHT = 0.25;
 const WIDTH = 0.5;
 const DEPTH = 0.5;
@@ -6,11 +5,9 @@ const DEPTH = 0.5;
 export class ToyBox {
   constructor(props) {
     const { position, shape, totalToys } = props;
-    // const { x, y, z } = position;
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.id = uuid();
     this.el.setAttribute('position', position);
     this.el.setAttribute('toybox', {
       key: shape,

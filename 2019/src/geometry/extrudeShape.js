@@ -21,17 +21,16 @@ AFRAME.registerGeometry('extrudeShape', {
       shape[method].apply(shape, params);
     }
 
-
     const extrudeSettings = {
       depth: data.extrudeDepth,
       bevelEnabled: false,
     };
-    const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+    this.geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
     // update with the new shape.
     // geometry.computeBoundingBox();
     // geometry.mergeVertices();
     // geometry.computeFaceNormals();
     // geometry.computeVertexNormals();
-    this.geometry = geometry;
+    // this.geometry = geometry;
   },
 });

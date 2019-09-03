@@ -1,11 +1,8 @@
-import { uuid } from '../utils/uuid.js';
-
 export class Toy {
   constructor(shape) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.id = uuid();
     this.el.setAttribute('position', `0 ${THREE.Math.randInt(2, 4)} 0`);
     this.el.setAttribute('rotation', '0 0 0');
     this.el.setAttribute('float-to', {speed: 0.05});
