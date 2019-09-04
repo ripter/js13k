@@ -23,7 +23,10 @@ AFRAME.registerGeometry('extrudeShape', {
 
     const extrudeSettings = {
       depth: data.extrudeDepth,
-      bevelEnabled: false,
+      // bevelEnabled: false,
+      bevelEnabled: true,
+    	bevelThickness: 0.05,
+      bevelSize: 0.06,
     };
     this.geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
     // update with the new shape.

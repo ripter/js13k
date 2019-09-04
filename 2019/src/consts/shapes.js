@@ -160,7 +160,7 @@ export const SHAPES = {
     ],
   },
   GEAR: {
-    color: '#001f3f',
+    color: '#FFFFFF',
     cmds: [
       'moveTo',[0.963,0.306],
       'bezierCurveTo',[0.988,0.366,1,0.43,1,0.5],
