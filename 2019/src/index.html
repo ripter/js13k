@@ -22,7 +22,7 @@ body {
   <a-scene>
     <!-- Player -->
     <a-entity id="player" position="-0.20 0 0.5">
-      <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+      <a-entity id="camera" camera look-controls position="0 1.6 0"></a-entity>
       <a-entity id="mouseHand" cursor="rayOrigin: mouse" raycaster="objects: [selectable]"></a-entity>
       <a-entity id="controllerHand" laser-controls="model: false" raycaster="objects: [selectable]" line="color: #FF4136; opacity: 0.75;"></a-entity>
     </a-entity>
@@ -41,7 +41,7 @@ body {
     </a-entity>
 
     <!-- Ground and Sky -->
-    <a-sky material="shader: gradient; topColor: #0074D9; bottomColor: #FFF;"></a-sky>
+    <a-sky material="shader: gradient; color: #0074D9; bottomColor: #FFF;"></a-sky>
     <a-plane color="#3D9970" height="100" width="100" rotation="-90 0 0" ></a-plane>
   </a-scene>
 </body>

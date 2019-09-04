@@ -1,5 +1,8 @@
+import { SHAPES } from '../consts/shapes.js';
+
 export class Toy {
   constructor(shape) {
+    const shapeColor = SHAPES[shape].color;
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
@@ -15,7 +18,7 @@ export class Toy {
     this.el.innerHTML = `<a-entity
       selectable
       geometry="primitive: extrudeShape; icon: ${shape}"
-      material="opacity: 1; shader: flat;"
+      material="opacity: 1; shader: flat; color: ${shapeColor}"
       >
     </a-entity>`;
 

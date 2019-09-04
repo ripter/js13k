@@ -16,13 +16,9 @@ AFRAME.registerComponent('selectable', {
   update() {
     if (this.data.isSelected) {
       this.el.emit('selected');
-      //TODO: move this to components/toy
-      this.el.setAttribute('material', 'color', '#0074D9');
     }
     else {
       this.el.emit('unselected');
-      //TODO: move this to components/toy
-      this.el.setAttribute('material', 'color', '#DDDDDD');
     }
   },
 

@@ -8,7 +8,7 @@ AFRAME.registerGeometry('extrudeShape', {
 
 
   init(data) {
-    const shapeCommands = SHAPES[data.icon];
+    const shapeCommands = SHAPES[data.icon].cmds;
     //TODO: this guard can be removed in the prod version.
     // if (!shapeCommands) { throw new Error(`Unknown icon "${data.icon}". Did you mean "${data.icon.toUpperCase()}"?`); }
 
