@@ -15,7 +15,7 @@ export class Toy {
     this.el.innerHTML = `<a-entity
       selectable
       geometry="primitive: extrudeShape; icon: ${shape}"
-      material="opacity: 1; shader: standard"
+      material="opacity: 1; shader: flat;"
       >
     </a-entity>`;
 
