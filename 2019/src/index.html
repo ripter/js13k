@@ -30,7 +30,7 @@ body {
     <!-- Info billboard -->
     <a-entity id="billboard" position="0 0 -3">
       <a-cylinder position="-1 0 0" color="#DDD" height="3" radius="0.025"></a-cylinder>
-      <a-plane    position="0 1.2 0" color="#AAA" height="1" width="2" rotation="0 0 0" >
+      <a-plane position="0 1.2 0" color="#AAA" height="1" width="2" rotation="0 0 0" >
         <a-entity info-gamestate position="0 0.25 0"
           text="color: #000; align: center; width: 4;"></a-entity>
 
@@ -41,23 +41,8 @@ body {
     </a-entity>
 
     <!-- Ground and Sky -->
-    <!-- <a-sky color="#7FDBFF"></a-sky> -->
     <a-sky material="shader: gradient; topColor: #0074D9; bottomColor: #FFF;"></a-sky>
-    <!-- <a-sky material="shader: universe-nursery; color: #FFF;"></a-sky> -->
-    <!-- <a-plane material="shader: water; color: blue;" height="100" width="100" rotation="-90 0 0" ></a-plane> -->
     <a-plane color="#3D9970" height="100" width="100" rotation="-90 0 0" ></a-plane>
-
-    <!-- Timer -->
-    <!-- <a-entity rotation="0 0 180" position="-3 0 0">
-      <a-entity timer position="0.1 -0.43 0.25" rotation="45 -90 180"
-        text="value: 00:00; color: #000; align: center; width: 4;"></a-entity>
-      <a-entity
-        scale="0.5 0.5 0.5"
-        geometry="primitive: extrudeShape; icon: TIMER; extrudeDepth: 1;"
-        material="color: #AAAAAA;"
-        ></a-entity>
-    </a-entity> -->
-
   </a-scene>
 </body>
 </html>
