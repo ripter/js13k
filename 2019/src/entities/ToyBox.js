@@ -6,7 +6,6 @@ const DEPTH = 0.5;
 export class ToyBox {
   constructor(props) {
     const { position, shape, totalToys } = props;
-    const shapeColor = SHAPES[shape].color;
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
@@ -25,12 +24,30 @@ export class ToyBox {
       <a-entity
         position="-${WIDTH/3} 0 ${DEPTH/2}"
         scale="0.25 0.25 0.25"
-        geometry="primitive: extrudeShape; icon: ${shape}"
-        material="color: ${shapeColor}; shader: flat;"
         >
-        </a-entity>
+      ${this.getModelHTML(shape)}
+      </a-entity>
     `;
 
     this.scene.appendChild(this.el);
+  }
+
+  getModelHTML(shape) {
+    // Paying users get premium toys, just like in real life.
+    if(false){//document.monetization && document.monetization.state === 'started') {
+      return `<a-entity
+        position="0.43 .95 0.056"
+        toy-premium="toy: ${shape};"></a-entity>
+      `;
+    }
+    else {
+      const color = SHAPES[shape].color;
+      return `<a-entity
+        geometry="primitive: extrudeShape; icon: ${shape}"
+        material="color: ${color}; shader: flat;"
+        >
+      </a-entity>
+      `;
+    }
   }
 }

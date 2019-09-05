@@ -13,6 +13,17 @@ AFRAME.registerSystem('game', {
     this.soundSystem = this.el.sceneEl.systems.sound;
     this.elTimer = document.querySelector('[timer]');
     this.elInfoGamestate = document.querySelector('[info-gamestate]');
+
+
+    // Special preview for paying users
+    const preview = document.createElement('a-entity');
+    preview.innerHTML = `
+      <a-entity position="-0.75 2 2.4" toy-premium="toy: PICKAX;"></a-entity>
+      <a-entity position="0 2 2.4" toy-premium="toy: HAMMER;"></a-entity>
+      <a-entity position="0.75 2 2.4" toy-premium="toy: SHOVEL;"></a-entity>
+    `;
+    console.log('this', this);
+
   },
 
 
