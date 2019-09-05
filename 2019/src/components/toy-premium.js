@@ -31,6 +31,6 @@ AFRAME.registerComponent('toy-premium', {
         return new THREE.Mesh(geometry, material);
       })
     );
-  }
+  },
 
 });

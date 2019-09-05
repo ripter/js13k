@@ -3,7 +3,7 @@
 AFRAME.registerShader('universe-nursery', {
   schema: {
     color: {type: 'color', is: 'uniform'},
-    timeMsec: {type: 'time', is: 'uniform'}
+    timeMsec: {type: 'time', is: 'uniform'},
   },
   raw: false,
   vertexShader: `
@@ -78,5 +78,5 @@ void main() {
   // and provides temporal filtering under true motion.
   gl_FragColor = vec4( starColor * color, 1.0 );
 }
-`
+`,
 });

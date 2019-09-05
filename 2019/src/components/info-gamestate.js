@@ -13,6 +13,6 @@ AFRAME.registerComponent('info-gamestate', {
     else {
       this.el.setAttribute('text', 'value', this.data.msgPlaying);
     }
-  }
+  },
 
 });

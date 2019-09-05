@@ -1,5 +1,4 @@
 import { PICKAX } from '../../media/v3/pickax/index.js';
-console.log('PICKAX', PICKAX);
 
 //extrudeCompoundShape.js
 //
@@ -10,20 +9,18 @@ AFRAME.registerGeometry('extrudeCompoundShape', {
   },
 
 
-  init(data) {
+  init() {
     const shape = PICKAX;
     const compoundGeometry = new THREE.Geometry();
 
     // create and process each shape into a colored mesh
     const meshList = shape.parts.map(this.createShapeGeometry).map((geo, index) => {
-      console.log('color', shape.colors[index]);
       const mat = new THREE.MeshToonMaterial({
         color: shape.colors[index],
       });
       return new THREE.Mesh(geo, mat);
     });
 
-    console.log('meshList', meshList);
     // merge all the meshes together
     meshList.forEach((mesh, index) => {
       mesh.updateMatrix();
@@ -54,5 +51,5 @@ AFRAME.registerGeometry('extrudeCompoundShape', {
       bevelEnabled: false,
     };
     return new THREE.ExtrudeGeometry( shape, extrudeSettings );
-  }
+  },
 });

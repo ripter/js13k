@@ -13,6 +13,17 @@ AFRAME.registerSystem('game', {
     this.soundSystem = this.el.sceneEl.systems.sound;
     this.elTimer = document.querySelector('[timer]');
     this.elInfoGamestate = document.querySelector('[info-gamestate]');
+
+    // Demo for paying users
+    if(document.monetization && document.monetization.state === 'started') {
+      const elWrapper = document.createElement('a-entity');
+      elWrapper.innerHTML = `
+      <a-entity position="-0.75 2 2.4" toy-premium="toy: PICKAX;"></a-entity>
+      <a-entity position="0 2 2.4" toy-premium="toy: HAMMER;"></a-entity>
+      <a-entity position="0.75 2 2.4" toy-premium="toy: SHOVEL;"></a-entity>
+      `;
+      this.sceneEl.appendChild(elWrapper);
+    }
   },
 
 

@@ -25,7 +25,7 @@ AFRAME.registerGeometry('extrudeShape', {
       depth: data.extrudeDepth,
       bevelEnabled: false,
       // bevelEnabled: true,
-    	// bevelThickness: 0.05,
+      // bevelThickness: 0.05,
       // bevelSize: 0.06,
     };
     this.geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
