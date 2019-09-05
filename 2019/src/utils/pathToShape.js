@@ -8,5 +8,12 @@ export function pathToShape(commands, extrudeSettings = {depth: 0.15, bevelEnabl
     const params = commands[i+1];
     shape[method].apply(shape, params);
   }
-  return new THREE.ExtrudeGeometry( shape, extrudeSettings );
+
+  const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+  geometry.computeBoundingBox();
+  geometry.mergeVertices();
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+  geometry.rotateX(180 * THREE.Math.DEG2RAD);
+  return geometry;
 }

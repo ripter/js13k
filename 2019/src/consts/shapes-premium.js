@@ -1,12 +1,12 @@
 
-
-export const PICKAX = {
-  colors: [
-    '#b47b41',
-    '#f7f7f7',
-    '#eeeeee',
-  ],
-  parts: [
+export const SHAPES_PREMIUM = {
+  PICKAX: {
+    colors: [
+      '#b47b41',
+      '#f7f7f7',
+      '#eeeeee',
+    ],
+    parts: [
       // Handle
       [
         'moveTo', [32.5,16.55],
@@ -44,5 +44,7 @@ export const PICKAX = {
         'lineTo', [35.5,15.5],
         'lineTo', [39.4,6.45],
       ],
-  ],
+    ],
+  },
+
 }
