@@ -1,4 +1,5 @@
 import './geometry/extrudeShape.js';
+import './geometry/extrudeCompoundShape.js';
 // import './shaders/universe-nursery.js';
 // import './shaders/displacement.js';
 import './shaders/gradient.js';

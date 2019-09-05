@@ -22,9 +22,17 @@ body {
   <a-scene>
     <!-- Player -->
     <a-entity id="player" position="-0.20 0 0.5">
-      <a-entity id="camera" camera look-controls position="0 1.6 0"></a-entity>
+      <a-entity id="camera" camera look-controls wasd-controls position="0 1.6 0"></a-entity>
       <a-entity id="mouseHand" cursor="rayOrigin: mouse" raycaster="objects: [selectable]"></a-entity>
       <a-entity id="controllerHand" laser-controls="model: false" raycaster="objects: [selectable]" line="color: #FF4136; opacity: 0.75;"></a-entity>
+    </a-entity>
+
+
+    <a-entity
+      position="0 2 -3"
+      geometry="primitive: extrudeCompoundShape; shape: PICKAX;"
+      material="color: #FFF;"
+      >
     </a-entity>
 
     <!-- Info billboard -->
