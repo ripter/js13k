@@ -24,6 +24,9 @@ make server
 This will setup a server listening at `http://localhost:8080/`.
 
 
+### Original Model
+![original screenshot](media/original screenshot.png)
+
 
 # JS13K A-Frame Boilerplate
 
