@@ -44,6 +44,11 @@ archive.append(
     name: 'index.html',
   },
 );
+archive.append(
+  fs.createReadStream('./dist/original.glb'), {
+    name: 'original.glb',
+  },
+);
 // archive.append(
 //   fs.createReadStream('./dist/happy_face.svg'), {
 //     name: 'happy_face.svg',
