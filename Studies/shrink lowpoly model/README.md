@@ -25,7 +25,7 @@ This will setup a server listening at `http://localhost:8080/`.
 
 
 ### Original Model
-![original screenshot](./media/original screenshot.png)
+![original screenshot](./media/original_screenshot.png)
 
 
 # JS13K A-Frame Boilerplate
