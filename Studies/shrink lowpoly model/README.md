@@ -1,3 +1,5 @@
+Live: https://codepen.io/ripter/full/vYYLQMY
+
 ### Prerequisites
 
 - You need [node](https://nodejs.org/en/download/current/) installed.
@@ -48,9 +50,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 The model is a cute [Vending Machine](https://sketchfab.com/3d-models/vending-machine-242eaa6efeb3457a96a5086039583966)
 
-* GLB (Model + Textures): 2,663,596 bytes. (2.6MB)
+* GLB (Model + Textures): **2,663,596 bytes. (2.6MB)**
     * gziped: 1,950,561 bytes (2MB)
-* GLTF & BIN (Models & Textures): 1,820,832 bytes.
+* GLTF & BIN (Models & Textures): **1,820,832 bytes.**
     * GLTF: 15,382 bytes. (16KB)
     * BIN: 150,036 bytes. (150KB)
     * Textures: 1,655,414 bytes (1.6MB)
@@ -94,7 +96,7 @@ The great news is that GLTF files are JSON files. I'll just open it up in my fav
 
 ![Documentation of the GLTF buffer to BIN layout](./media/docs_GLTF_buffer.png)
 
-So, if I want to read a GLTF & BIN file, to get the vertex list, I'm going to have to do all of this work. I wonder if there are any existing tools out there that I could use. I am not thrilled to write code needed to decode all of that. But If I want to create a tool that will take a model and export the smaller file format. I will probably have too. Although, I could probably cheat a little. I could load the original file with THREE.js, let it decode the binary into a vertex list, and get the list from that. I like that idea. It will be less fragile, (THREE.js is well tested and maintained) and I will have to do less work. It might mean that I need a browser however. I don't know if THREE.js can work on the command line, but it [looks possible](https://threejs.org/docs/#manual/en/buildTools/Testing-with-NPM).
+So, if I want to read a GLTF & BIN file, to get the vertex list, I'm going to have to do all of this work. I wonder if there are any existing tools out there that I could use. I am not thrilled to write code needed to decode all of that. But If I want to create a tool that will take a model and export the smaller file format. I will probably have too. Although, I could probably cheat a little. I could load the original file with THREE.js, let it decode the binary into a vertex list, and get the list from that. I like that idea. It will be less fragile, (THREE.js is well tested and maintained) and I will have to do less work. It might mean that I need a browser, however. I don't know if THREE.js can work on the command line, but it [looks possible](https://threejs.org/docs/#manual/en/buildTools/Testing-with-NPM).
 
 ### What I want
 I want to pick/upload a gltf/glb file and get an array of vertices back.
@@ -147,7 +149,7 @@ loader.load(url, (gltf) => {
 I don't care about the lighting or the camera. So a simple filter can remove those by name.
 ```
 // Filter out children we don't care about by name.
-    const children = gltf.scene.children.filter(obj => ['Light', 'Camera'].indexOf(obj.name) === -1);
+const children = gltf.scene.children.filter(obj => ['Light', 'Camera'].indexOf(obj.name) === -1);
 ```
 
 That results in an array with one [Object3D](https://threejs.org/docs/index.html#api/en/core/Object3D). The root of the model.
@@ -209,3 +211,32 @@ function extractGeometries(url) {
   });
 }
 ```
+
+### It works!
+
+You can check it out [on codepen](https://codepen.io/ripter/pen/vYYLQMY?editors=0010)
+
+Put in a URL for the GLTF/GLB model, and it will extract all the mesh vertices. Or just hit extract and let it work on the sample model.
+
+* Uncompressed: **105,744 bytes (104K)**
+* Compressed: **9,410 bytes (9.2K)**
+
+
+9K might be acceptable in the JS13K game. I also wonder if I need all the meshes to render the model. I don't care about the mesh, the floor, or the sky. Right now I don't know if I'm getting that data or not.
+
+There is one more easy compression I can add right now. Each point has 16 decimal places. This is great for accuracy, but we don't care if there is some data loss. So I can round those numbers to something much smaller, and easier to compress.
+
+```
+function round(x) {
+  return Number.parseFloat(x).toFixed(3);
+}
+```
+
+And I use it on the button function, before displaying it to the user. I do it here instead of the extract function. The extract function returns the base list, it is the display to the user/output that wants the trimmed version. I might want to re-use this function later. So I'm trying to keep a separation of concerns.
+
+* Uncompressed: **71,825 bytes (71KB)**
+* Compressed: **5,736 bytes (5.7KB)**
+
+Rounding saved **3,674 bytes!**
+
+I can't see how this will look yet, so I hope I can keep the rounding. A 3KB saving is significant.
