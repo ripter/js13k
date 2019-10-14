@@ -52,7 +52,7 @@ The model is a cute [Vending Machine](https://sketchfab.com/3d-models/vending-ma
 
 * GLB (Model + Textures): **2,663,596 bytes. (2.6MB)**
     * gziped: 1,950,561 bytes (2MB)
-* GLTF & BIN (Models & Textures): **1,820,832 bytes.**
+* GLTF & BIN (Models & Textures): **1,820,832 bytes. (1.8MB)**
     * GLTF: 15,382 bytes. (16KB)
     * BIN: 150,036 bytes. (150KB)
     * Textures: 1,655,414 bytes (1.6MB)
@@ -216,6 +216,8 @@ function extractGeometries(url) {
 
 You can check it out [on codepen](https://codepen.io/ripter/pen/vYYLQMY?editors=0010)
 
+
+
 Put in a URL for the GLTF/GLB model, and it will extract all the mesh vertices. Or just hit extract and let it work on the sample model.
 
 * Uncompressed: **105,744 bytes (104K)**
@@ -230,9 +232,28 @@ There is one more easy compression I can add right now. Each point has 16 decima
 function round(x) {
   return Number.parseFloat(x).toFixed(3);
 }
+
+function btnOnSubmit() {
+  const url = window.inputURL.value;
+  console.log('Starting Extraction');
+  extractGeometries(url).then((result) => {
+    result.forEach(geo => {
+      const name = geo.parent.name;
+      const vertices = geo.vertices.map((vert) => {
+        return {
+          x: round(vert.x),
+          y: round(vert.y),
+          z: round(vert.z),
+        };
+      });
+      const value = JSON.stringify(vertices, null, 2);
+      window.output.value += `\n//NAME: ${name}\n const ${name} = ${value};\n\n`;
+    });
+  });
+}
 ```
 
-And I use it on the button function, before displaying it to the user. I do it here instead of the extract function. The extract function returns the base list, it is the display to the user/output that wants the trimmed version. I might want to re-use this function later. So I'm trying to keep a separation of concerns.
+I use it on the button function, before displaying it to the user. I do it here instead of the extract function. The extract function returns the base list, it is the display to the user/output that wants the trimmed version. I might want to re-use this function later. So I'm trying to keep a separation of concerns.
 
 * Uncompressed: **71,825 bytes (71KB)**
 * Compressed: **5,736 bytes (5.7KB)**
@@ -240,3 +261,9 @@ And I use it on the button function, before displaying it to the user. I do it h
 Rounding saved **3,674 bytes!**
 
 I can't see how this will look yet, so I hope I can keep the rounding. A 3KB saving is significant.
+
+Although, It's not really fair to compaire the verticies size to the entire model. The BIN file holds the actual data, so we can compaire that to our list.
+
+* BIN: **150,036 bytes. (150KB)**
+* Compress vertices array: **5,736 bytes (5.7KB)**
+* Savings: **144,300 bytes (144KB)**
