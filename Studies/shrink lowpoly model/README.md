@@ -1,50 +1,7 @@
 Live: https://codepen.io/ripter/full/vYYLQMY
 
-### Prerequisites
-
-- You need [node](https://nodejs.org/en/download/current/) installed.
-
-## TL;DR
-```bash
-make
-```
-That will build from source, and then start the server.
-
-### Building & Zipping
-
-```bash
-make build
-```
-
-### Start server
-
-
-```bash
-make server
-```
-
-This will setup a server listening at `http://localhost:8080/`.
-
-
 ### Original Model
 ![original screenshot](./media/original_screenshot.png)
-
-
-# JS13K A-Frame Boilerplate
-
-This project started as a boilerplate based on [A-Frame](https://aframe.io/) and [Webpack](https://webpack.js.org/) for the [js13k competition](https://2019.js13kgames.com/).
-
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## References
-
-* This project is based on [https://github.com/sz-piotr/js13k-webpack-starter](https://github.com/sz-piotr/js13k-webpack-starter) by Piotr Szlachciak.
-
-
-
 
 # Study - Reducing the size of an existing model.
 
@@ -260,10 +217,56 @@ I use it on the button function, before displaying it to the user. I do it here 
 
 Rounding saved **3,674 bytes!**
 
-I can't see how this will look yet, so I hope I can keep the rounding. A 3KB saving is significant.
+I can't see how this will look yet, so I hope I can keep the rounding. 3KB saving is significant.
 
-Although, It's not really fair to compaire the verticies size to the entire model. The BIN file holds the actual data, so we can compaire that to our list.
+Although, It's not fair to compare the vertices size to the entire model. The BIN file holds the actual data, so we can compare that to our list.
 
 * BIN: **150,036 bytes. (150KB)**
 * Compress vertices array: **5,736 bytes (5.7KB)**
 * Savings: **144,300 bytes (144KB)**
+
+## Rendering the Vertices
+
+Having the vertices is great, but it would be even better to see the model. So I'm going to do that next.
+
+![Extracted Geometries.png](./media/screenshot_extracted_geometries.png)
+
+```
+// Turn a geometry into an object and add it to the scene.
+const addByGeometry = (geometry) => {
+  const material = new THREE.MeshToonMaterial({
+    color: 0x2194ce,
+  });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+}
+```
+
+This renders, and if there is light, has color! The scales and positions are wrong. That information was in the wrappers I threw away. If I want it to look like the original model; I will need to apply all the transformations before returning the vertices. For the moment I'm going to skip that part. I am rendering the raw geometries right now. Next, I need to render the vertices, which have been rounded.
+
+
+![screenshot_rounded_vertices](./media/screenshot_rounded_vertices.png)
+
+Rendering with the rounded vertices! It looks pretty good compared to the non-rounded version. The rounding saved 3,674 bytes with little difference in quality so far.
+
+### Faces
+I had hoped that I wouldn't need to store the face information. That I could calculate it or something to save space. But so far I need it to render properly.  This means my file size is not as small as I had thought.
+
+* Uncompressed: **1,182,368 bytes (1.2MB)**
+* Compressed: **44,263 bytes (44KB)**
+
+Ouch, that face data hurts, a lot.
+
+Time to research!
+
+The three required values of each face are `a, b, c` which hold index values into the vertices array. There is a bit of indirection going on here. Each Face is made up of three vertices. They are traditionally called `a, b, c`.  Instead of holding a reference to the vertex in the `a`, `b`, or `c` directly. Which would allow something like `face.a.x`. Instead, it holds the index from the vertices array. So you need something more like `vertices[face.a].x` instead. Since that is the only requirement, I'm only going to include those properties on my export.
+
+![Screen Shot - Extract 04](./media/screenshot_extract_04.png)
+
+* Uncompressed: **208,947 bytes (205K)**
+* Compressed: **19,937 bytes (20K)**
+* Original: **165,418 bytes (165K)**
+
+Wow, that is kind of depressing.  When it was just the vertices, I thought this might work. But now that I have included the faces, it seems impossible. I'm already larger than the original file size, even though I have a lot less data. That is because the original files are designed to be efficient. Storing all of that data in binary format results in smaller file size.
+
+But there might be hope.
