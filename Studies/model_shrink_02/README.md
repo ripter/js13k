@@ -7,7 +7,7 @@
 This model was designed to be *low poly* which means the artist created this using as few faces as possible. This model has 201 faces and 331 vertices. That is very tiny compared to something like this [Vending Machine](https://sketchfab.com/3d-models/vending-machine-242eaa6efeb3457a96a5086039583966) which has 2.1K faces and 1.1k vertices.
 
 * Uncompressed: 420,128 bytes (411K)
-* Compressed: 405,733 bytes (397K)
+* Compressed: **405,733 bytes (397K)**
 * 201 Faces, 331 Vertices, Textures
 
 ## Premise
@@ -20,7 +20,7 @@ Model files are already optimized. But if we are willing to lose precision, we c
 
 ## How
 
-A [Geometry](https://threejs.org/docs/#api/en/core/Geometry) requires two things. A list of `[Vector3](https://threejs.org/docs/#api/en/math/Vector3)` called vertices; and a list of `[Face3](https://threejs.org/docs/#api/en/core/Face3)` called faces. In really requires just the faces, but each face requires three `Vector3` objects. To avoid duplication, the `Face3` holds the index to the `Vector3` it uses.
+A [Geometry](https://threejs.org/docs/#api/en/core/Geometry) requires two things. A list of [Vector3](https://threejs.org/docs/#api/en/math/Vector3) called `vertices`; and a list of [Face3](https://threejs.org/docs/#api/en/core/Face3) called `faces`. In really requires just the faces, but each face requires three `Vector3` objects. To avoid duplication, the `Face3` holds the index to the `Vector3` it uses.
 
 ```
 const { vertices, faces } = geometry;
@@ -41,4 +41,10 @@ Using a tool I created on [Codepen](https://codepen.io/ripter/full/vYYLQMY),  I 
 
 I'm still missing a few things like rotation and texture, but the basic shape works.
 
-![screenshot_export_01](./media/screenshot_export_01.png)
+![rotating export](./media/extract_01.gif)
+
+## Matrix and Rotation
+
+As you can see in the screenshot above, the geometry is there but rotated the wrong way. There are two ways I can think of two fixes. I could either update all the vertices so they incorporate the position/rotation. I do not know how to do this, but I assume it can be done with math. The other way is to include the position and rotation information in the export. This way sounds easier, but something would like to avoid. It would increase the file size because I would need to store more metadata.
+
+I've been trying to use applyMatrix, but so far I have not been successful.
