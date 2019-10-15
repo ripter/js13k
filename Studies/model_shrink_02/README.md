@@ -1,5 +1,5 @@
 ### Original Model
-![original screenshot](./media/original.png)
+![original screenshot](./media/chest_original.png)
 [Source on SketchFab](https://sketchfab.com/3d-models/low-poly-adventure-asset-pack-bda2fd1158df425fb703f53d926b1ec6)
 
 # Study - Reducing the size of an existing model.
