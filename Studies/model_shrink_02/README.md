@@ -166,3 +166,10 @@ const addByVertices = (vertices, faces) => {
 };
 
 ```
+
+
+
+## Models Minified
+
+### Lamp 985 bytes [saved 2,345 bytes]
+![Lamp](./media/lamp.gif)
