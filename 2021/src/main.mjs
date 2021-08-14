@@ -113,6 +113,44 @@ window.ENTITIES = [
       'sprite', 'conveyor',
     ]),
   },
+  {
+    x: 24, y: 64,
+    sprites: [
+      'wall_0',
+      'wall_1',
+      'wall_2',
+    ],
+    components: new Set([
+      'sprite_group',
+    ]),
+  },
+  {
+    id: 'wall_0',
+    tileID: 17,
+    color: 'green',
+    offset_x: 0, offset_y: 0,
+    components: new Set([
+      'sprite',
+    ]),
+  },
+  {
+    id: 'wall_1',
+    tileID: 17,
+    color: 'green',
+    offset_x: 0, offset_y: 8,
+    components: new Set([
+      'sprite',
+    ]),
+  },
+  {
+    id: 'wall_2',
+    tileID: 17,
+    color: 'green',
+    offset_x: 0, offset_y: -8,
+    components: new Set([
+      'sprite',
+    ]),
+  },
 ];
 
 
