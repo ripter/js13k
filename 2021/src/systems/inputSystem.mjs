@@ -24,20 +24,29 @@ window.addEventListener('keyup', mapKey.bind(null, 'delete'));
 
 
 
+let delay = 0;
 export function inputSystem(delta) {
   const SPEED = 100;
   const player = byID('player');
 
+  // create a delay between responding to button presses.
+  delay += delta;
+  if (delay < 0.25) {
+    return;
+  }
+  delay = 0;
+
+
   if (downKeys.has('left')) {
-    player.deltaX -= delta * SPEED;
+    player.deltaX -= 8;
   }
   else if (downKeys.has('right')) {
-    player.deltaX += delta * SPEED;
+    player.deltaX += 8;
   }
   if (downKeys.has('up')) {
-    player.deltaY -= delta * SPEED;
+    player.deltaY -= 8;
   }
   else if (downKeys.has('down')) {
-    player.deltaY += delta * SPEED;
+    player.deltaY += 8;
   }
 }
