@@ -2,6 +2,7 @@ import { addColorImage } from './canvas/addColorImage.mjs';
 import { inputSystem } from './systems/inputSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { physicsSystem } from './systems/physicsSystem.mjs';
+import { groupSpriteSystem } from './systems/groupSpriteSystem.mjs';
 /**
  * POC One: user input moves around player sprite.
  * Step 1: render player sprite.
@@ -40,7 +41,47 @@ window.ENTITIES = [
     components: new Set([
       'sprite', 'movable',
     ]),
-  }
+  },
+  {
+    id: 'trash_1',
+    x: 100, y: 100,
+    sprites: [
+      'trash_piece_0',
+      'trash_piece_1',
+      'trash_piece_2',
+    ],
+    components: new Set([
+      'sprite_group',
+    ]),
+  },
+  {
+    id: 'trash_piece_0',
+    tileID: 99,
+    color: 'brown',
+    offset_x: 0, offset_y: 0,
+    components: new Set([
+      'sprite',
+    ]),
+  },
+  {
+    id: 'trash_piece_1',
+    tileID: 100,
+    color: 'brown',
+    offset_x: 8, offset_y: 0,
+    components: new Set([
+      'sprite',
+    ]),
+  },
+  {
+    id: 'trash_piece_2',
+    tileID: 95,
+    rotate: 90 * Math.PI / 180,
+    color: 'red',
+    offset_x: 0, offset_y: 8,
+    components: new Set([
+      'sprite',
+    ]),
+  },
 ];
 
 
@@ -57,6 +98,7 @@ let lastTime = 0;
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
     physicsSystem,
+    groupSpriteSystem,
     spriteSystem,
     inputSystem,
   ].forEach(system => system(delta));
