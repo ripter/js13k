@@ -83,6 +83,36 @@ window.ENTITIES = [
       'sprite',
     ]),
   },
+  {
+    tileID: 101,
+    x: 32, y: 64,
+    color: 'white',
+    rotate: 180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
+  {
+    tileID: 87,
+    x: 40, y: 64,
+    color: 'white',
+    rotate: 180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
+  {
+    tileID: 101,
+    x: 48, y: 64,
+    color: 'white',
+    rotate: 180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
 ];
 
 
