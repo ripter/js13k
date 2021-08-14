@@ -1,7 +1,7 @@
 import { byComponents } from '../components/byComponents.mjs';
 import { byIDs } from '../components/byIDs.mjs';
 import { byID } from '../components/byID.mjs';
-import { isTouching } from '../utils/isTouching.mjs';
+import { willCollide } from '../utils/isTouching.mjs';
 
 
 export function physicsSystem(delta) {
@@ -14,8 +14,8 @@ export function physicsSystem(delta) {
   pushableGroupEntities.forEach(groupEntity => {
     const spriteEntities = byIDs(groupEntity.sprites);
 
-    // is the player touching any of the sprites?
-    let touchingID = groupEntity.sprites.find(spriteID => isTouching(spriteEntities.get(spriteID), playerEntity));
+    // Will the player collide with one of the sprites?
+    let touchingID = groupEntity.sprites.find(spriteID => willCollide(playerEntity, spriteEntities.get(spriteID)));
     if (touchingID) {
       groupEntity.deltaX = playerEntity.deltaX;
       groupEntity.deltaY = playerEntity.deltaY;

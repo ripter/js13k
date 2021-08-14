@@ -36,7 +36,7 @@ window.ENTITIES = [
     id: 'player',
     tileID: 5,
     color: 'cyan',
-    x: 50, y: 50,
+    x: 24, y: 24,
     deltaX: 0, deltaY: 0,
     components: new Set([
       'sprite', 'movable',
@@ -44,7 +44,7 @@ window.ENTITIES = [
   },
   {
     id: 'trash_1',
-    x: 100, y: 100,
+    x: 80, y: 80,
     deltaX: 0, deltaY: 0,
     sprites: [
       'trash_piece_0',
