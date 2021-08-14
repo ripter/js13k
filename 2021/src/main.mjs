@@ -45,13 +45,14 @@ window.ENTITIES = [
   {
     id: 'trash_1',
     x: 100, y: 100,
+    deltaX: 0, deltaY: 0,
     sprites: [
       'trash_piece_0',
       'trash_piece_1',
       'trash_piece_2',
     ],
     components: new Set([
-      'sprite_group',
+      'sprite_group', 'pushable', 'movable',
     ]),
   },
   {
