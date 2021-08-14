@@ -1,5 +1,7 @@
 import { addColorImage } from './canvas/addColorImage.mjs';
+import { inputSystem } from './systems/inputSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
+import { physicsSystem } from './systems/physicsSystem.mjs';
 /**
  * POC One: user input moves around player sprite.
  * Step 1: render player sprite.
@@ -32,11 +34,11 @@ window.ENTITIES = [
   {
     id: 'player',
     tileID: 5,
-    x: 50,
-    y: 50,
     color: 'cyan',
+    x: 50, y: 50,
+    deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite',
+      'sprite', 'movable',
     ]),
   }
 ];
@@ -46,14 +48,20 @@ window.ENTITIES = [
 window.ctx = window.c.getContext('2d');
 
 // Game loop
+let lastTime = 0;
 (function gameLoop() {
+  let currentTime = Date.now();
+  let delta = (currentTime - lastTime) / 1000;
 
   // Run the systems.
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
+    physicsSystem,
     spriteSystem,
-  ].forEach(system => system());
+    inputSystem,
+  ].forEach(system => system(delta));
 
+  lastTime = currentTime;
   // loop as long as the game is running.
   // global for easy debugging on the console.
   if (window.IS_RUNNING) {

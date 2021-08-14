@@ -1,0 +1,14 @@
+{
+  "name": "space_js13k_2021",
+  "version": "1.0.0",
+  "description": "Entry for JS13K 2021",
+  "main": "src/main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Richards",
+  "license": "MIT",
+  "dependencies": {
+    "rollup": "^2.56.2"
+  }
+}
