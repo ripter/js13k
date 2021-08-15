@@ -16,6 +16,6 @@ export function willCollide(entity1, entity2) {
  * axis-aligned bounding box collision test.
 */
 export function collisionAABB(entity1, entity2) {
-  return (entity1.x <= (entity2.x+8) && (entity1.x+8) >= entity2.x) &&
-         (entity1.y <= (entity2.y+8) && (entity1.y+8) >= entity2.y);
+  return (entity1.x < (entity2.x+8) && (entity1.x+8) > entity2.x) &&
+         (entity1.y < (entity2.y+8) && (entity1.y+8) > entity2.y);
 }

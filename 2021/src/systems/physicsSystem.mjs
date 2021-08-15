@@ -1,12 +1,13 @@
 import { byComponents } from '../components/byComponents.mjs';
 import { byIDs } from '../components/byIDs.mjs';
 import { byID } from '../components/byID.mjs';
-import { willCollide, collisionAABB } from '../utils/isTouching.mjs';
+import { willCollide, collisionAABB } from '../utils/collision.mjs';
 
 
 export function physicsSystem(delta) {
   const playerEntity = byID('player');
   const pushableGroupEntities = byComponents(['pushable', 'sprite_group']);
+  const solidEntities = byComponents(['solid']);
   const conveyorEntities = byComponents(['conveyor']);
   const movableEntities = byComponents(['movable']);
 
@@ -27,11 +28,27 @@ export function physicsSystem(delta) {
     conveyorEntities.forEach(conveyorEntity => {
       let collidingID = groupEntity.sprites.find(spriteID => collisionAABB(conveyorEntity, spriteEntities.get(spriteID)));
       if (collidingID) {
-        groupEntity.deltaX += conveyorEntity.beltDirection.x;
-        groupEntity.deltaY += conveyorEntity.beltDirection.y;
+        groupEntity.deltaX = conveyorEntity.beltDirection.x;
+        groupEntity.deltaY = conveyorEntity.beltDirection.y;
+      }
+    });
+
+    // Has it hit a solid?
+    solidEntities.forEach(solidEntity => {
+      let collidingID = groupEntity.sprites.find(spriteID => {
+        const spriteEntity = spriteEntities.get(spriteID);
+        return collisionAABB(solidEntity, {
+          x: spriteEntity.x + groupEntity.deltaX,
+          y: spriteEntity.y + groupEntity.deltaY,
+        })
+      });
+      if (collidingID) {
+        groupEntity.deltaX = 0;
+        groupEntity.deltaY = 0;
       }
     });
   });
+
 
   // Update the position of movable entities
   movableEntities.forEach(entity => {

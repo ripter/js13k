@@ -31,7 +31,7 @@ export function inputSystem(delta) {
 
   // create a delay between responding to button presses.
   delay += delta;
-  if (delay < 0.25) {
+  if (delay < 0.13) {
     return;
   }
   delay = 0;

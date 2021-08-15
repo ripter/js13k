@@ -10,8 +10,8 @@ export function groupSpriteSystem(delta) {
   entities.forEach(entity => {
     const sprites = byIDs(entity.sprites);
     sprites.forEach(sprite => {
-      sprite.x = entity.x + sprite.offset_x;
-      sprite.y = entity.y + sprite.offset_y;
+      sprite.x = entity.x + sprite.offsetX;
+      sprite.y = entity.y + sprite.offsetY;
     });
   });
 }

@@ -3,6 +3,7 @@ import { inputSystem } from './systems/inputSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { physicsSystem } from './systems/physicsSystem.mjs';
 import { groupSpriteSystem } from './systems/groupSpriteSystem.mjs';
+import { addTrashBlock } from './entities/addTrashBlock.mjs';
 /**
  * POC One: user input moves around player sprite.
  * Step 1: render player sprite.
@@ -31,63 +32,33 @@ addColorImage('white', [0xFF, 0xFF, 0xFF]);
 window.IS_RUNNING = true;
 // list of all entities in the game.
 window.ENTITIES = [
-  // create the player entity and components.
+  // Player
   {
     id: 'player',
     tileID: 5,
-    color: 'cyan',
+    color: 'light_magenta',
     x: 24, y: 24,
     deltaX: 0, deltaY: 0,
     components: new Set([
       'sprite', 'movable',
     ]),
   },
+  // Conveyor
   {
-    id: 'trash_1',
-    x: 80, y: 80,
-    deltaX: 0, deltaY: 0,
-    sprites: [
-      'trash_piece_0',
-      'trash_piece_1',
-      'trash_piece_2',
-    ],
-    components: new Set([
-      'sprite_group', 'pushable', 'movable',
-    ]),
-  },
-  {
-    id: 'trash_piece_0',
-    tileID: 99,
-    color: 'brown',
-    offset_x: 0, offset_y: 0,
-    components: new Set([
-      'sprite',
-    ]),
-  },
-  {
-    id: 'trash_piece_1',
-    tileID: 100,
-    color: 'brown',
-    offset_x: 8, offset_y: 0,
-    components: new Set([
-      'sprite',
-    ]),
-  },
-  {
-    id: 'trash_piece_2',
-    tileID: 95,
-    rotate: 90 * Math.PI / 180,
-    color: 'red',
-    offset_x: 0, offset_y: 8,
-    components: new Set([
-      'sprite',
-    ]),
-  },
-  {
-    tileID: 101,
+    tileID: 40,
     x: 32, y: 64,
-    color: 'white',
-    rotate: 180 * Math.PI/180,
+    color: 'cyan',
+    rotate: 0, //180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
+  {
+    tileID: 40,
+    x: 40, y: 64,
+    color: 'cyan',
+    rotate: 0, //180 * Math.PI/180,
     beltDirection: {x: -8, y: 0},
     components: new Set([
       'sprite', 'conveyor',
@@ -104,15 +75,46 @@ window.ENTITIES = [
     ]),
   },
   {
-    tileID: 101,
+    tileID: 40,
     x: 48, y: 64,
-    color: 'white',
-    rotate: 180 * Math.PI/180,
+    color: 'cyan',
+    rotate: 0, //180 * Math.PI/180,
     beltDirection: {x: -8, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
   },
+  {
+    tileID: 40,
+    x: 56, y: 64,
+    color: 'cyan',
+    rotate: 0, //180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
+  // {
+  //   tileID: 101,
+  //   x: 48, y: 64,
+  //   color: 'white',
+  //   rotate: 180 * Math.PI/180,
+  //   beltDirection: {x: -8, y: 0},
+  //   components: new Set([
+  //     'sprite', 'conveyor',
+  //   ]),
+  // },
+  {
+    tileID: 40,
+    x: 48, y: 64,
+    color: 'cyan',
+    rotate: 0,// 180 * Math.PI/180,
+    beltDirection: {x: -8, y: 0},
+    components: new Set([
+      'sprite', 'conveyor',
+    ]),
+  },
+  // Wall
   {
     x: 24, y: 64,
     sprites: [
@@ -128,30 +130,44 @@ window.ENTITIES = [
     id: 'wall_0',
     tileID: 17,
     color: 'green',
-    offset_x: 0, offset_y: 0,
+    offsetX: 0, offsetY: 0,
     components: new Set([
-      'sprite',
+      'sprite', 'solid',
     ]),
   },
   {
     id: 'wall_1',
     tileID: 17,
     color: 'green',
-    offset_x: 0, offset_y: 8,
+    offsetX: 0, offsetY: 8,
     components: new Set([
-      'sprite',
+      'sprite', 'solid',
     ]),
   },
   {
     id: 'wall_2',
     tileID: 17,
     color: 'green',
-    offset_x: 0, offset_y: -8,
+    offsetX: 0, offsetY: -8,
     components: new Set([
-      'sprite',
+      'sprite', 'solid',
     ]),
   },
 ];
+
+
+// Create Trash blocks
+addTrashBlock(10, 5, [
+  [71, 'brown',       0,  0],
+  [70, 'light_blue',  0,  1, 45 * Math.PI / 180],
+  [71, 'yellow',      0,  2],
+]);
+
+addTrashBlock(10, 15, [
+  [71, 'brown',       1,  0],
+  [70, 'light_blue',  1,  1, 45 * Math.PI / 180],
+  [71, 'yellow',      0,  2],
+]);
 
 
 // Get the 2d Context
