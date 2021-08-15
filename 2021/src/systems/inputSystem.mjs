@@ -38,15 +38,15 @@ export function inputSystem(delta) {
 
 
   if (downKeys.has('left')) {
-    player.deltaX -= 8;
+    player.deltaX = -1;
   }
   else if (downKeys.has('right')) {
-    player.deltaX += 8;
+    player.deltaX = 1;
   }
   if (downKeys.has('up')) {
-    player.deltaY -= 8;
+    player.deltaY = -1;
   }
   else if (downKeys.has('down')) {
-    player.deltaY += 8;
+    player.deltaY = 1;
   }
 }

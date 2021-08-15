@@ -1,70 +1,70 @@
 import { byComponents } from '../components/byComponents.mjs';
-import { byIDs } from '../components/byIDs.mjs';
 import { byID } from '../components/byID.mjs';
-import { willCollide, collisionAABB } from '../utils/collision.mjs';
+import { createEntityTable } from '../utils/createEntityTable.mjs';
+import { getPosKey } from '../utils/getPosKey.mjs';
+import { getTilePos } from '../utils/getTilePos.mjs';
+import { inGroup } from '../entities/inGroup.mjs';
 
 
 export function physicsSystem(delta) {
   const playerEntity = byID('player');
-  const pushableGroupEntities = byComponents(['pushable', 'sprite_group']);
-  const solidEntities = byComponents(['solid']);
-  const conveyorEntities = byComponents(['conveyor']);
-  const movableEntities = byComponents(['movable']);
+  const playerPos = getTilePos(playerEntity);
+  // Create a map of all the pusher tiles.
+  const pusherMap =  createEntityTable(byComponents(['pusher']));
+  // Create a map of all solid entities.
+  const solidMap = createEntityTable(byComponents(['solid']));
+  // Create a map of all the pushable entities.
+  const pushableMap = createEntityTable(byComponents(['pushable']));
 
-  // check each pushable sprite group for collision.
-  // transfer momentum
-  pushableGroupEntities.forEach(groupEntity => {
-    const spriteEntities = byIDs(groupEntity.sprites);
+  // The player is pushing in the direction they are moving.
+  playerEntity.pushX = playerEntity.deltaX;
+  playerEntity.pushY = playerEntity.deltaY;
+  // Add the player to the PushMap it their next position since the pushers work by colliding
+  pusherMap.set(playerPos.nextKey, playerEntity);
 
-    // Will the player collide with one of the sprites?
-    let touchingID = groupEntity.sprites.find(spriteID => willCollide(playerEntity, spriteEntities.get(spriteID)));
-    if (touchingID) {
-      // Push the group in the same direction the player is moving.
-      groupEntity.deltaX = playerEntity.deltaX;
-      groupEntity.deltaY = playerEntity.deltaY;
+
+
+  // Pushables can't move past solids
+  pushableMap.forEach(pushableEntity => {
+    let [ pushX, pushY ] = [0, 0];
+    let pos;
+    const pushablePos = getTilePos(pushableEntity);
+
+    // Is the pushable colliding with a pusher?
+    const pusherEntity = pusherMap.get(pushablePos.key);
+    if (pusherEntity) {
+      pushX = pusherEntity.pushX;
+      pushY = pusherEntity.pushY;
     }
 
-    // is it touching another pushable group?
-    // pushableGroupEntities.forEach(groupEntity2 => {
-    //   const spriteEntities2 = byIDs(groupEntity2.sprites);
-    //   let collidingID = groupEntity.sprites.find(spriteID => groupEntity2.sprites.find(spriteID2 => {
-    //     if (spriteID === spriteID2) { return false; }
-    //     return willCollide(spriteEntities.get(spriteID), spriteEntities2.get(spriteID2));
-    //   }));
-    //   if (collidingID) {
-    //     groupEntity.deltaX = 0;
-    //     groupEntity.deltaY = 0;
-    //   }
-    // });
+    // if the push would push us into a solid block, cancel it.
+    // ignore solid blocks in our own group.
+    pos = getPosKey(pushableEntity, pushX, pushY);
+    const solidEntity = solidMap.get(pos.deltaKey);
+    if (solidEntity && solidEntity.parentID !== pushableEntity.parentID) {
+      pushX = 0;
+      pushY = 0;
+    }
 
-    // Is it on a conveyor?
-    conveyorEntities.forEach(conveyorEntity => {
-      let collidingID = groupEntity.sprites.find(spriteID => collisionAABB(conveyorEntity, spriteEntities.get(spriteID)));
-      if (collidingID) {
-        groupEntity.deltaX = conveyorEntity.beltDirection.x;
-        groupEntity.deltaY = conveyorEntity.beltDirection.y;
-      }
+    // bail if we don't need to update the delta.
+    if (pushX === 0 && pushY === 0) {
+      return;
+    }
+
+    // Move all the sprites in the group by push delta
+    inGroup(pushableEntity).forEach(groupedEntity => {
+      groupedEntity.deltaX = pushX;
+      groupedEntity.deltaY = pushY;
     });
-
-    // Has it hit a solid?
-    solidEntities.forEach(solidEntity => {
-      let collidingID = groupEntity.sprites.find(spriteID => willCollide(spriteEntities.get(spriteID), solidEntity))
-      if (collidingID) {
-        groupEntity.deltaX = 0;
-        groupEntity.deltaY = 0;
-      }
-    });
-
-    // Have we collided with another pushable group?
   });
 
 
+  const movableEntities = byComponents(['movable']);
   // Update the position of movable entities
   movableEntities.forEach(entity => {
     // Apply Deltas
-    entity.x += entity.deltaX;
-    entity.y += entity.deltaY;
-
+    entity.x += entity.deltaX*8;
+    entity.y += entity.deltaY*8;
     // clear the deltas
     entity.deltaX = 0;
     entity.deltaY = 0;
