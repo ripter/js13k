@@ -106,21 +106,10 @@ window.ENTITIES = [
   },
   // Wall
   {
-    x: 24, y: 64,
-    sprites: [
-      'wall_0',
-      'wall_1',
-      'wall_2',
-    ],
-    components: new Set([
-      'sprite_group',
-    ]),
-  },
-  {
     id: 'wall_0',
     tileID: 17,
     color: 'green',
-    offsetX: 0, offsetY: 0,
+    x: 24, y: 64,
     components: new Set([
       'sprite', 'solid',
     ]),
@@ -129,7 +118,7 @@ window.ENTITIES = [
     id: 'wall_1',
     tileID: 17,
     color: 'green',
-    offsetX: 0, offsetY: 8,
+    x: 24, y: 64+8,
     components: new Set([
       'sprite', 'solid',
     ]),
@@ -138,7 +127,7 @@ window.ENTITIES = [
     id: 'wall_2',
     tileID: 17,
     color: 'green',
-    offsetX: 0, offsetY: -8,
+    x: 24, y: 64-8,
     components: new Set([
       'sprite', 'solid',
     ]),
@@ -160,7 +149,7 @@ addTrashBlock(10, 15, [
 ]);
 
 addTrashBlock(15, 10, [
-  [70, 'light_blue',  1,  1, 45 * Math.PI / 180],
+  [36, 'magenta',  1,  1],
 ]);
 
 
