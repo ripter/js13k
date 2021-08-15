@@ -35,10 +35,10 @@ export function physicsSystem(delta) {
     });
   }
 
-  // Check if a pushable would move into a solid block.
+  // Pushables can't move past solids
   pushableMap.forEach(pushableEntity => {
     const pushablePos = getTilePos(pushableEntity);
-    const collidedEntity = pushableMap.get(pushablePos.nextKey);
+    const collidedEntity = solidMap.get(pushablePos.nextKey);
     // Skip if there is no collision.
     if (!collidedEntity) { return; }
     // skip entities that share a parent
