@@ -7,11 +7,13 @@ import { byIDs } from '../components/byIDs.mjs';
 export function groupSpriteSystem(delta) {
   const entities = byComponents(['sprite_group']);
 
-  entities.forEach(entity => {
-    const sprites = byIDs(entity.sprites);
+  entities.forEach(group => {
+    const sprites = byIDs(group.sprites);
     sprites.forEach(sprite => {
-      sprite.x = entity.x + sprite.offsetX;
-      sprite.y = entity.y + sprite.offsetY;
+      sprite.x = group.x + sprite.offsetX;
+      sprite.y = group.y + sprite.offsetY;
+      sprite.deltaX = group.deltaX;
+      sprite.deltaY = group.deltaY;
     });
   });
 }

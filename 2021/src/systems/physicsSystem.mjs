@@ -24,6 +24,19 @@ export function physicsSystem(delta) {
       groupEntity.deltaY = playerEntity.deltaY;
     }
 
+    // is it touching another pushable group?
+    // pushableGroupEntities.forEach(groupEntity2 => {
+    //   const spriteEntities2 = byIDs(groupEntity2.sprites);
+    //   let collidingID = groupEntity.sprites.find(spriteID => groupEntity2.sprites.find(spriteID2 => {
+    //     if (spriteID === spriteID2) { return false; }
+    //     return willCollide(spriteEntities.get(spriteID), spriteEntities2.get(spriteID2));
+    //   }));
+    //   if (collidingID) {
+    //     groupEntity.deltaX = 0;
+    //     groupEntity.deltaY = 0;
+    //   }
+    // });
+
     // Is it on a conveyor?
     conveyorEntities.forEach(conveyorEntity => {
       let collidingID = groupEntity.sprites.find(spriteID => collisionAABB(conveyorEntity, spriteEntities.get(spriteID)));
@@ -35,18 +48,14 @@ export function physicsSystem(delta) {
 
     // Has it hit a solid?
     solidEntities.forEach(solidEntity => {
-      let collidingID = groupEntity.sprites.find(spriteID => {
-        const spriteEntity = spriteEntities.get(spriteID);
-        return collisionAABB(solidEntity, {
-          x: spriteEntity.x + groupEntity.deltaX,
-          y: spriteEntity.y + groupEntity.deltaY,
-        })
-      });
+      let collidingID = groupEntity.sprites.find(spriteID => willCollide(spriteEntities.get(spriteID), solidEntity))
       if (collidingID) {
         groupEntity.deltaX = 0;
         groupEntity.deltaY = 0;
       }
     });
+
+    // Have we collided with another pushable group?
   });
 
 
