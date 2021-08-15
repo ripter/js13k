@@ -1,12 +1,9 @@
 import { byComponents } from '../components/byComponents.mjs';
-import { byIDs } from '../components/byIDs.mjs';
 import { byID } from '../components/byID.mjs';
-// import { byParentID } from '../components/byParentID.mjs';
-import { willCollide, collisionAABB } from '../utils/collision.mjs';
 import { createEntityTable } from '../utils/createEntityTable.mjs';
+import { getPosKey } from '../utils/getPosKey.mjs';
 import { getTilePos } from '../utils/getTilePos.mjs';
 import { inGroup } from '../entities/inGroup.mjs';
-import { getPosKey } from '../utils/getPosKey.mjs';
 
 
 export function physicsSystem(delta) {
@@ -41,13 +38,13 @@ export function physicsSystem(delta) {
     }
 
     // if the push would push us into a solid block, cancel it.
+    // ignore solid blocks in our own group.
     pos = getPosKey(pushableEntity, pushX, pushY);
     const solidEntity = solidMap.get(pos.deltaKey);
-    if (solidEntity) {
+    if (solidEntity && solidEntity.parentID !== pushableEntity.parentID) {
       pushX = 0;
       pushY = 0;
     }
-
 
     // bail if we don't need to update the delta.
     if (pushX === 0 && pushY === 0) {
