@@ -4,10 +4,8 @@ import { spriteSystem } from './systems/spriteSystem.mjs';
 import { physicsSystem } from './systems/physicsSystem.mjs';
 import { groupSpriteSystem } from './systems/groupSpriteSystem.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
-/**
- * POC One: user input moves around player sprite.
- * Step 1: render player sprite.
-*/
+import { addCompactor } from './entities/addCompactor.mjs';
+
 
 // create colored sprite sheets.
 addColorImage('black', [0x00, 0x00, 0x00]);
@@ -40,102 +38,18 @@ window.ENTITIES = [
     x: 24, y: 24,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'movable', 
-    ]),
-  },
-  // Conveyor
-  {
-    tileID: 40,
-    x: 32, y: 64,
-    color: 'cyan',
-    rotate: 0, //180 * Math.PI/180,
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'conveyor', 'pusher',
-    ]),
-  },
-  {
-    tileID: 40,
-    x: 40, y: 64,
-    color: 'cyan',
-    rotate: 0, //180 * Math.PI/180,
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'conveyor', 'pusher',
-    ]),
-  },
-  {
-    tileID: 87,
-    x: 40, y: 64,
-    color: 'white',
-    rotate: 180 * Math.PI/180,
-    components: new Set([
-      'sprite', 'conveyor',
-    ]),
-  },
-  {
-    tileID: 40,
-    x: 48, y: 64,
-    color: 'cyan',
-    rotate: 0, //180 * Math.PI/180,
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'conveyor', 'pusher',
-    ]),
-  },
-  {
-    tileID: 40,
-    x: 56, y: 64,
-    color: 'cyan',
-    rotate: 0, //180 * Math.PI/180,
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'conveyor', 'pusher',
-    ]),
-  },
-  {
-    tileID: 40,
-    x: 48, y: 64,
-    color: 'cyan',
-    rotate: 0,// 180 * Math.PI/180,
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'conveyor', 'pusher',
-    ]),
-  },
-  // Wall
-  {
-    id: 'wall_0',
-    tileID: 17,
-    color: 'green',
-    x: 24, y: 64,
-    components: new Set([
-      'sprite', 'solid',
-    ]),
-  },
-  {
-    id: 'wall_1',
-    tileID: 17,
-    color: 'green',
-    x: 24, y: 64+8,
-    components: new Set([
-      'sprite', 'solid',
-    ]),
-  },
-  {
-    id: 'wall_2',
-    tileID: 17,
-    color: 'green',
-    x: 24, y: 64-8,
-    components: new Set([
-      'sprite', 'solid',
+      'sprite', 'movable',
     ]),
   },
 ];
 
 
+// Create the Trash compactor with conveyors
+addCompactor(1, 5);
+
+
 // Create Trash blocks
-addTrashBlock(10, 5, [
+addTrashBlock(12, 5, [
   [71, 'brown',       0,  0],
   [70, 'light_blue',  0,  1, 45 * Math.PI / 180],
   [71, 'yellow',      0,  2],

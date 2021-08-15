@@ -65,6 +65,10 @@ export function physicsSystem(delta) {
     // Apply Deltas
     entity.x += entity.deltaX*8;
     entity.y += entity.deltaY*8;
+
+    if (isNaN(entity.x)) {
+      debugger;
+    }
     // clear the deltas
     entity.deltaX = 0;
     entity.deltaY = 0;
