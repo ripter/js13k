@@ -40,7 +40,7 @@ window.ENTITIES = [
     x: 24, y: 24,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'movable',
+      'sprite', 'movable', 
     ]),
   },
   // Conveyor
@@ -49,9 +49,9 @@ window.ENTITIES = [
     x: 32, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
+    pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'conveyor',
+      'sprite', 'conveyor', 'pusher',
     ]),
   },
   {
@@ -59,9 +59,9 @@ window.ENTITIES = [
     x: 40, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
+    pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'conveyor',
+      'sprite', 'conveyor', 'pusher',
     ]),
   },
   {
@@ -69,7 +69,6 @@ window.ENTITIES = [
     x: 40, y: 64,
     color: 'white',
     rotate: 180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -79,9 +78,9 @@ window.ENTITIES = [
     x: 48, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
+    pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'conveyor',
+      'sprite', 'conveyor', 'pusher',
     ]),
   },
   {
@@ -89,9 +88,9 @@ window.ENTITIES = [
     x: 56, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
+    pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'conveyor',
+      'sprite', 'conveyor', 'pusher',
     ]),
   },
   {
@@ -99,9 +98,9 @@ window.ENTITIES = [
     x: 48, y: 64,
     color: 'cyan',
     rotate: 0,// 180 * Math.PI/180,
-    beltDirection: {x: -1, y: 0},
+    pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'conveyor',
+      'sprite', 'conveyor', 'pusher',
     ]),
   },
   // Wall
