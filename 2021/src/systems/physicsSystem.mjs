@@ -34,6 +34,24 @@ export function physicsSystem(delta) {
       groupedEntity.deltaY = playerEntity.deltaY;
     });
   }
+
+  // Check if a pushable would move into a solid block.
+  pushableMap.forEach(pushableEntity => {
+    const pushablePos = getTilePos(pushableEntity);
+    const collidedEntity = pushableMap.get(pushablePos.nextKey);
+    // Skip if there is no collision.
+    if (!collidedEntity) { return; }
+    // skip entities that share a parent
+    if (pushableEntity.parentID === collidedEntity.parentID) { return; }
+
+    // don't move anyone in the group.
+    inGroup(pushableEntity).forEach(groupedEntity => {
+      groupedEntity.deltaX = 0;
+      groupedEntity.deltaY = 0;
+    });
+  });
+
+
   // const pushableCollidedWithNextPlayer = pushableMap.get(playerPos.nextKey);
   // if (pushableCollidedWithNextPlayer) {
   //   // let entitiesToUpdate;
@@ -116,17 +134,17 @@ export function physicsSystem(delta) {
   const movableEntities = byComponents(['movable']);
   // Update the position of movable entities
   movableEntities.forEach(entity => {
-    const pos = getTilePos(entity);
-    // const solidCollidedWithDelta = solidMap.get(pos.nextKey);
-    const solidCollide = solidMap.get(pos.nextKey);
-
-    // if we collide, the entire group is colliding.
-    if (solidCollide) {
-      inGroup(entity).forEach(groupedEntity => {
-        groupedEntity.deltaX = 0;
-        groupedEntity.deltaY = 0;
-      })
-    }
+    // const pos = getTilePos(entity);
+    // // const solidCollidedWithDelta = solidMap.get(pos.nextKey);
+    // const solidCollide = solidMap.get(pos.nextKey);
+    //
+    // // if we collide, the entire group is colliding.
+    // if (solidCollide) {
+    //   inGroup(entity).forEach(groupedEntity => {
+    //     groupedEntity.deltaX = 0;
+    //     groupedEntity.deltaY = 0;
+    //   })
+    // }
 
     // // Only apply delta if it won't cause us to run into a solid tile.
     // // ignore solid blocks in our group.
