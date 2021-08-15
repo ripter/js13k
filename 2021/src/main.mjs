@@ -49,7 +49,7 @@ window.ENTITIES = [
     x: 32, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -59,7 +59,7 @@ window.ENTITIES = [
     x: 40, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -69,7 +69,7 @@ window.ENTITIES = [
     x: 40, y: 64,
     color: 'white',
     rotate: 180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -79,7 +79,7 @@ window.ENTITIES = [
     x: 48, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -89,27 +89,17 @@ window.ENTITIES = [
     x: 56, y: 64,
     color: 'cyan',
     rotate: 0, //180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
   },
-  // {
-  //   tileID: 101,
-  //   x: 48, y: 64,
-  //   color: 'white',
-  //   rotate: 180 * Math.PI/180,
-  //   beltDirection: {x: -8, y: 0},
-  //   components: new Set([
-  //     'sprite', 'conveyor',
-  //   ]),
-  // },
   {
     tileID: 40,
     x: 48, y: 64,
     color: 'cyan',
     rotate: 0,// 180 * Math.PI/180,
-    beltDirection: {x: -8, y: 0},
+    beltDirection: {x: -1, y: 0},
     components: new Set([
       'sprite', 'conveyor',
     ]),
@@ -169,6 +159,11 @@ addTrashBlock(10, 15, [
   [71, 'yellow',      0,  2],
 ]);
 
+addTrashBlock(15, 10, [
+  [70, 'light_blue',  1,  1, 45 * Math.PI / 180],
+]);
+
+
 
 // Get the 2d Context
 window.ctx = window.c.getContext('2d');
@@ -182,10 +177,10 @@ let lastTime = 0;
   // Run the systems.
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
-    physicsSystem,
-    groupSpriteSystem,
-    spriteSystem,
     inputSystem,
+    physicsSystem,
+    // groupSpriteSystem,
+    spriteSystem,
   ].forEach(system => system(delta));
 
   lastTime = currentTime;
