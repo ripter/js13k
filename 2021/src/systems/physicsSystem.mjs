@@ -4,73 +4,66 @@ import { createEntityTable } from '../utils/createEntityTable.mjs';
 import { getPosKey } from '../utils/getPosKey.mjs';
 import { getTilePos } from '../utils/getTilePos.mjs';
 import { inGroup } from '../entities/inGroup.mjs';
+import { getKey } from '../utils/key.mjs';
+import { createCollisionMap } from '../utils/createCollisionMap.mjs';
 
 
 export function physicsSystem(delta) {
   const playerEntity = byID('player');
-  const playerPos = getTilePos(playerEntity);
-  // Create a map of all the pusher tiles.
-  const pusherMap =  createEntityTable(byComponents(['pusher']));
-  // Create a map of all solid entities.
-  const solidMap = createEntityTable(byComponents(['solid']));
-  // Create a map of all the pushable entities.
+  const movableMap = createEntityTable(byComponents(['movable']));
   const pushableMap = createEntityTable(byComponents(['pushable']));
+  const pusherMap =  createEntityTable(byComponents(['pusher']));
+  const solidMap = createEntityTable(byComponents(['solid']));
 
   // The player is pushing in the direction they are moving.
   playerEntity.pushX = playerEntity.deltaX;
   playerEntity.pushY = playerEntity.deltaY;
-  // Add the player to the PushMap it their next position since the pushers work by colliding
-  pusherMap.set(playerPos.nextKey, playerEntity);
 
 
-
-  // Pushables can't move past solids
-  pushableMap.forEach(pushableEntity => {
-    let [ pushX, pushY ] = [0, 0];
-    let pos;
-    const pushablePos = getTilePos(pushableEntity);
-
-    // Is the pushable colliding with a pusher?
-    const pusherEntity = pusherMap.get(pushablePos.key);
-    if (pusherEntity) {
-      pushX = pusherEntity.pushX;
-      pushY = pusherEntity.pushY;
-    }
-
-    // if the push would push us into a solid block, cancel it.
-    // ignore solid blocks in our own group.
-    pos = getPosKey(pushableEntity, pushX, pushY);
-    const solidEntity = solidMap.get(pos.deltaKey);
-    if (solidEntity && solidEntity.parentID !== pushableEntity.parentID) {
-      pushX = 0;
-      pushY = 0;
-    }
-
-    // bail if we don't need to update the delta.
-    if (pushX === 0 && pushY === 0) {
-      return;
-    }
-
-    // Move all the sprites in the group by push delta
+  // collision check: Pushables colliding with Pushers
+  // when a pusher is colliding with a pushable, it will apply it's push value as delta value.
+  // Conveyor's and the Player use this to push around groups of trash blocks.
+  createCollisionMap(pushableMap, pusherMap).forEach(collisionEntities => {
+    const entries = Array.from(collisionEntities);
+    const pusherEntity = entries.find(entity => entity.components.has('pusher'));
+    const pushableEntity = entries.find(entity => entity.components.has('pushable'));
+    // Move all the pushable entities.
     inGroup(pushableEntity).forEach(groupedEntity => {
-      groupedEntity.deltaX = pushX;
-      groupedEntity.deltaY = pushY;
+      groupedEntity.deltaX = pusherEntity.pushX;
+      groupedEntity.deltaY = pusherEntity.pushY;
     });
   });
 
+  // colision check: Movables colliding with Solids
+  // When a mover is trying to move, don't let it move though a solid.
+  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
+  // Run again now that some items have had their delta canceled.
+  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
+  // And a third time!
+  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
 
-  const movableEntities = byComponents(['movable']);
-  // Update the position of movable entities
-  movableEntities.forEach(entity => {
-    // Apply Deltas
+  // Update the position of movable entities by applying delta.
+  movableMap.forEach(entity => {
+    // Apply Deltas, tiles are 8x8 pixels.
     entity.x += entity.deltaX*8;
     entity.y += entity.deltaY*8;
 
-    if (isNaN(entity.x)) {
-      debugger;
-    }
     // clear the deltas
     entity.deltaX = 0;
     entity.deltaY = 0;
   });
+}
+
+/**
+ * Cancels the delta on the movable collision entities.
+*/
+function cancelDeltaOnMovable(collisionEntities) {
+  Array.from(collisionEntities)
+    .filter(entity => entity.components.has('movable'))
+    .forEach(entity => {
+      inGroup(entity).forEach(groupedEntity => {
+        groupedEntity.deltaX = 0;
+        groupedEntity.deltaY = 0;
+      });
+    });
 }

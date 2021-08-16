@@ -19,6 +19,7 @@ export function addCompactor(tileX, tileY) {
       tileID, color, rotate,
       x: (tileX*8) + (tileOffsetX*8),
       y: (tileY*8) + (tileOffsetY*8),
+      deltaX: 0, deltaY: 0,
       components: new Set([
         'sprite', 'solid',
       ]),

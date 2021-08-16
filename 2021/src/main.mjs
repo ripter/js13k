@@ -38,7 +38,7 @@ window.ENTITIES = [
     x: 24, y: 24,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'movable',
+      'sprite', 'movable', 'solid', 'pusher'
     ]),
   },
 ];
