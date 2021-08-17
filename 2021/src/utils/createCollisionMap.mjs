@@ -16,11 +16,18 @@ export function createCollisionMap(map1, map2) {
       // We only care about colliding names.
       if (key1 !== key2) { return; }
 
-      // Mark them as colliding
-      collisionMap.set(key1, new Set([
-        entity1,
-        entity2,
-      ]));
+      // Get the existing set or create a new one.
+      let colliderSet = new Set();
+      if (collisionMap.has(key1)) {
+        colliderSet = collisionMap.get(key1);
+      }
+
+      // Add both items, the set will dedupe
+      colliderSet.add(entity1);
+      colliderSet.add(entity2);
+
+      // Save the updated set in the map.
+      collisionMap.set(key1, colliderSet);
     });
   });
 

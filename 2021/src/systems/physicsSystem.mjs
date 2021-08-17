@@ -36,18 +36,19 @@ export function physicsSystem(delta) {
 
   // colision check: Movables colliding with Solids
   // When a mover is trying to move, don't let it move though a solid.
-  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
-  // Run again now that some items have had their delta canceled.
-  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
-  // And a third time!
-  createCollisionMap(solidMap, movableMap).forEach(cancelDeltaOnMovable);
+  // We do this by clearing the mover delta values. This changes their position on the collision map.
+  // Keep checking until there are no more collisions.
+  let solidCollisionMap = createCollisionMap(solidMap, movableMap);
+  while (solidCollisionMap.size > 0) {
+    solidCollisionMap.forEach(cancelDeltaOnMovable);
+    solidCollisionMap = createCollisionMap(solidMap, movableMap);
+  }
 
   // Update the position of movable entities by applying delta.
   movableMap.forEach(entity => {
     // Apply Deltas, tiles are 8x8 pixels.
     entity.x += entity.deltaX*8;
     entity.y += entity.deltaY*8;
-
     // clear the deltas
     entity.deltaX = 0;
     entity.deltaY = 0;
