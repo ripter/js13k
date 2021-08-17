@@ -1,19 +1,17 @@
 import { byComponents } from '../components/byComponents.mjs';
 import { byID } from '../components/byID.mjs';
-import { createEntityTable } from '../utils/createEntityTable.mjs';
-import { getPosKey } from '../utils/getPosKey.mjs';
-import { getTilePos } from '../utils/getTilePos.mjs';
-import { inGroup } from '../entities/inGroup.mjs';
-import { getKey } from '../utils/key.mjs';
 import { createCollisionMap } from '../utils/createCollisionMap.mjs';
+import { createEntityMap } from '../utils/createEntityMap.mjs';
+import { getKey } from '../utils/key.mjs';
+import { inGroup } from '../entities/inGroup.mjs';
 
 
 export function physicsSystem(delta) {
   const playerEntity = byID('player');
-  const movableMap = createEntityTable(byComponents(['movable']));
-  const pushableMap = createEntityTable(byComponents(['pushable']));
-  const pusherMap =  createEntityTable(byComponents(['pusher']));
-  const solidMap = createEntityTable(byComponents(['solid']));
+  const movableMap = createEntityMap(byComponents(['movable']));
+  const pushableMap = createEntityMap(byComponents(['pushable']));
+  const pusherMap =  createEntityMap(byComponents(['pusher']));
+  const solidMap = createEntityMap(byComponents(['solid']));
 
   // The player is pushing in the direction they are moving.
   playerEntity.pushX = playerEntity.deltaX;

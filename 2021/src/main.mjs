@@ -2,7 +2,6 @@ import { addColorImage } from './canvas/addColorImage.mjs';
 import { inputSystem } from './systems/inputSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { physicsSystem } from './systems/physicsSystem.mjs';
-import { groupSpriteSystem } from './systems/groupSpriteSystem.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
 import { addCompactor } from './entities/addCompactor.mjs';
 
@@ -81,7 +80,6 @@ let lastTime = 0;
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
     inputSystem,
     physicsSystem,
-    // groupSpriteSystem,
     spriteSystem,
   ].forEach(system => system(delta));
 
