@@ -31,6 +31,8 @@ export function addCompactor(tileX, tileY) {
     [40, 'cyan', 1, 1], [40, 'cyan', 2, 1], [40, 'cyan', 3, 1], [40, 'cyan', 4, 1], [39, 'cyan', 5, 1, 180*Math.PI/180], [40, 'cyan', 5, 0, 90*Math.PI/180],
     [40, 'cyan', 1, 3], [40, 'cyan', 2, 3], [40, 'cyan', 3, 3], [40, 'cyan', 4, 3], [40, 'cyan', 5, 3], [40, 'cyan', 5, 3],
     [40, 'cyan', 1, 5], [40, 'cyan', 2, 5], [40, 'cyan', 3, 5], [40, 'cyan', 4, 5], [39, 'cyan', 5, 5, -90*Math.PI/180], [40, 'cyan', 5, 6, 90*Math.PI/180],
+
+    [40, 'cyan', 5, 7, 90*Math.PI/180], [40, 'cyan', 5, 8, 90*Math.PI/180],
   ].forEach((block, idx) => {
     const [tileID, color, tileOffsetX, tileOffsetY, rotate] = block;
     window.ENTITIES.push({

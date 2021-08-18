@@ -64,6 +64,12 @@ addTrashBlock(15, 10, [
   [36, 'magenta',  1,  1],
 ]);
 
+addTrashBlock(20, 15, [
+  [111, 'brown',       1,  0],
+  [125, 'light_blue',  1,  1],
+  [139, 'yellow',      0,  2],
+  [109, 'yellow',      0,  1],
+]);
 
 
 // Get the 2d Context
