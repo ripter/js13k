@@ -3,7 +3,6 @@ import { inputSystem } from './systems/inputSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { physicsSystem } from './systems/physicsSystem.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
-import { addCompactor } from './entities/addCompactor.mjs';
 import { addMap } from './entities/addMap.mjs';
 
 
@@ -45,7 +44,6 @@ window.ENTITIES = [
 
 
 // Create the Trash compactor with conveyors
-// addCompactor(1, 5);
 addMap([
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
