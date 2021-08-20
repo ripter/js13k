@@ -142,4 +142,22 @@ const mapValues = [
       'sprite', 'pusher',
     ]),
   }),
+  // 14 is cyan track horizontal right.
+  (tileX, tileY) => ({
+    tileID: 40, color: 'cyan',
+    x: (tileX*8), y: (tileY*8),
+    pushX: 1, pushY: 0,
+    components: new Set([
+      'sprite', 'pusher',
+    ]),
+  }),
+  // 15 is cyan track turned right-down.
+  (tileX, tileY) => ({
+    tileID: 39, color: 'cyan', rotate: -90*Math.PI/180,
+    x: (tileX*8), y: (tileY*8),
+    pushX: 0, pushY: 1,
+    components: new Set([
+      'sprite', 'pusher',
+    ]),
+  }),
 ];
