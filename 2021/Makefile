@@ -19,7 +19,7 @@ build.rollup: node_modules/
 	npx html-minifier --collapse-boolean-attributes --collapse-whitespace --decode-entities --no-html5 --minify-css --minify-js --minify-urls --process-conditional-comments --remove-attribute-quotes --remove-comments --remove-empty-attributes --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --sort-attributes --use-short-doctype  -o dist/index.html dist/index.html
 	node postbuild.js
 
-server.compressed: build lint
+server.dist: 
 	npx http-server dist/
 
 server:
