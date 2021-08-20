@@ -160,4 +160,14 @@ const mapValues = [
       'sprite', 'pusher',
     ]),
   }),
+  // 16 is cyan track turned left-down.
+  (tileX, tileY) => ({
+    tileID: 39, color: 'cyan', rotate: Math.PI,
+    x: (tileX*8), y: (tileY*8),
+    pushX: 0, pushY: -1,
+    components: new Set([
+      'sprite', 'pusher',
+    ]),
+  }),
+
 ];
