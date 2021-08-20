@@ -79,13 +79,13 @@ const mapValues = [
       'sprite', 'solid',
     ]),
   }),
-  // 7 is cyan track horizontal left.
+  // 7 is cyan track horizontal moving left.
   (tileX, tileY) => ({
     tileID: 40, color: 'cyan',
     x: (tileX*8), y: (tileY*8),
     pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
   // 8 is cyan track turned left-up.
@@ -94,7 +94,7 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
   // 9 is cyan track turned left-down.
@@ -103,34 +103,34 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     pushX: -1, pushY: 0,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
-  // 10 is cyan track vertical down.
+  // 10 is cyan track vertical moving down.
   (tileX, tileY) => ({
     tileID: 40, color: 'cyan', rotate: 90*Math.PI/180,
     x: (tileX*8), y: (tileY*8),
     pushX: 0, pushY: 1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
-  // 11 is cyan track vertical up.
+  // 11 is cyan track vertical moving up.
   (tileX, tileY) => ({
     tileID: 40, color: 'cyan', rotate: 90*Math.PI/180,
     x: (tileX*8), y: (tileY*8),
     pushX: 0, pushY: -1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
-  // 12 is cyan track turned up-right.
+  // 12 is cyan track down-left moving down..
   (tileX, tileY) => ({
     tileID: 39, color: 'cyan',
     x: (tileX*8), y: (tileY*8),
-    pushX: -1, pushY: 0,
+    pushX: 0, pushY: 1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
   // 13 is cyan track turned down-right.
@@ -139,16 +139,16 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     pushX: 0, pushY: -1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
-  // 14 is cyan track horizontal right.
+  // 14 is cyan track horizontal moving right.
   (tileX, tileY) => ({
     tileID: 40, color: 'cyan',
     x: (tileX*8), y: (tileY*8),
     pushX: 1, pushY: 0,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
   // 15 is cyan track turned right-down.
@@ -157,7 +157,7 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     pushX: 0, pushY: 1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
   // 16 is cyan track turned left-down.
@@ -166,7 +166,7 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     pushX: 0, pushY: -1,
     components: new Set([
-      'sprite', 'pusher',
+      'sprite', 'pusher', 'track',
     ]),
   }),
 
