@@ -17,6 +17,12 @@ export function spriteSystem() {
     // Draw collision box
     // ctx.strokeStyle = 'orange';
     // ctx.strokeRect(sprite.x, sprite.y, 8, 8);
+
+    // check if this sprite wants a back ground color.
+    if (sprite.bgColor) {
+      ctx.fillStyle = sprite.bgColor;
+      ctx.fillRect(sprite.x, sprite.y, 8, 8)
+    }
     // draw sprite.
     drawTile(sprite.tileID, sprite.x, sprite.y, sprite.color);
     // restore the previous state
