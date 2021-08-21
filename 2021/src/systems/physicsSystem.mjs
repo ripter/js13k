@@ -12,6 +12,8 @@ export function physicsSystem(delta) {
   const pushableMap = createEntityMap(byComponents(['pushable']));
   const pusherMap =  createEntityMap(byComponents(['pusher']));
   const solidMap = createEntityMap(byComponents(['solid']));
+  const entitiesOnTrack = createEntityMap(byComponents(['on-track']));
+  const entitiesTracks = createEntityMap(byComponents(['track']));
 
   // The player is pushing in the direction they are moving.
   playerEntity.pushX = playerEntity.deltaX;
@@ -32,6 +34,16 @@ export function physicsSystem(delta) {
     });
   });
 
+  // Entities on track move in the track's push direction.
+  createCollisionMap(entitiesOnTrack, entitiesTracks).forEach(collisionEntities => {
+    const entries = Array.from(collisionEntities);
+    const entityOnTrack = entries.find(entity => entity.components.has('on-track'));
+    const entityTrack = entries.find(entity => entity.components.has('track'));
+    entityOnTrack.deltaX = entityTrack.pushX;
+    entityOnTrack.deltaY = entityTrack.pushY;
+  });
+
+
   // colision check: Movables colliding with Solids
   // When a mover is trying to move, don't let it move though a solid.
   // We do this by clearing the mover delta values. This changes their position on the collision map.
@@ -42,14 +54,29 @@ export function physicsSystem(delta) {
     solidCollisionMap = createCollisionMap(solidMap, movableMap);
   }
 
+
+
   // Update the position of movable entities by applying delta.
   movableMap.forEach(entity => {
-    // Apply Deltas, tiles are 8x8 pixels.
-    entity.x += entity.deltaX*8;
-    entity.y += entity.deltaY*8;
-    // clear the deltas
-    entity.deltaX = 0;
-    entity.deltaY = 0;
+    // velocity based movement instead of tile based.
+    if (entity.velocity) {
+      if (entity.deltaX !== 0) {
+        console.log('delta', delta, 'deltaX', entity.deltaX, 'velocity', entity.velocity);
+        entity.x += delta * entity.deltaX * entity.velocity;
+      }
+      if (entity.deltaY !== 0) {
+        console.log('delta', delta, 'deltaY', entity.deltaY, 'velocity', entity.velocity);
+        entity.y += delta * entity.deltaY * entity.velocity;
+      }
+    }
+    else {
+      // Apply Deltas, tiles are 8x8 pixels.
+      entity.x += entity.deltaX*8;
+      entity.y += entity.deltaY*8;
+      // clear the deltas
+      entity.deltaX = 0;
+      entity.deltaY = 0;
+    }
   });
 }
 
