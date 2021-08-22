@@ -137,7 +137,7 @@ const mapValues = [
   (tileX, tileY) => ({
     tileID: 39, color: 'cyan', rotate: 90*Math.PI/180,
     x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: -1,
+    pushX: -1, pushY: -1,
     components: new Set([
       'sprite', 'pusher', 'track',
     ]),
