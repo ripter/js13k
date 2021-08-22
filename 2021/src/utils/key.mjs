@@ -7,3 +7,7 @@ export function getKey(entity, tileDeltaX=0, tileDeltaY=0) {
   const y = 0| (entity.y/8);
   return `${x+tileDeltaX},${y+tileDeltaY}`;
 }
+
+export function getDeltaKey(entity) {
+  return getKey(entity, entity.deltaX, entity.deltaY);
+}

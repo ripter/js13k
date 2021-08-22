@@ -43,6 +43,8 @@ window.ENTITIES = [
     ]),
   },
 ];
+// keep a cache of the entity maps used each tick.
+window.CACHE_MAP = new Map();
 
 
 // Create the Trash compactor with conveyors
@@ -105,6 +107,7 @@ let lastTime = 0;
   // Run the systems.
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
+    () => window.CACHE_MAP.clear(),
     inputSystem,
     trackSystem,
     physicsSystem,

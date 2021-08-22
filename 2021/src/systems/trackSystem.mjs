@@ -1,14 +1,16 @@
 import { byComponents } from '../components/byComponents.mjs';
 import { createCollisionMap } from '../utils/createCollisionMap.mjs';
 import { createEntityMap } from '../utils/createEntityMap.mjs';
+import { logicANDMaps } from '../utils/logicANDMaps.mjs';
 
 /**
  * Handles blocks on the track.
  */
 export function trackSystem(delta) {
-  const pushableMap = createEntityMap(byComponents(['pushable']));
-  const trackMap = createEntityMap(byComponents(['track']));
-  const collisionMap = createCollisionMap(pushableMap, trackMap);
+  const pushableMap = byComponents(['pushable']);
+  const trackMap = byComponents(['track']);
+  const collisionMap = logicANDMaps(pushableMap, trackMap);
+  // const collisionMap = createCollisionMap(pushableMap, trackMap);
 
   // When a pushable and a track collide,
   // split the pushable into a single entity and switch it to being on-track instead.

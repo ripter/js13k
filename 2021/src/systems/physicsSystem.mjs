@@ -4,16 +4,17 @@ import { createCollisionMap } from '../utils/createCollisionMap.mjs';
 import { createEntityMap } from '../utils/createEntityMap.mjs';
 import { getKey } from '../utils/key.mjs';
 import { inGroup } from '../entities/inGroup.mjs';
+import { logicANDMaps } from '../utils/logicANDMaps.mjs';
 
 
 export function physicsSystem(delta) {
   const playerEntity = byID('player');
-  const movableMap = createEntityMap(byComponents(['movable']));
-  const pushableMap = createEntityMap(byComponents(['pushable']));
-  const pusherMap =  createEntityMap(byComponents(['pusher']));
-  const solidMap = createEntityMap(byComponents(['solid']));
-  const entitiesOnTrack = createEntityMap(byComponents(['on-track']));
-  const entitiesTracks = createEntityMap(byComponents(['track']));
+  const movableMap = byComponents(['movable']);
+  const pushableMap = byComponents(['pushable']);
+  const pusherMap =  byComponents(['pusher']);
+  const solidMap = byComponents(['solid']);
+  const entitiesOnTrack = byComponents(['on-track']);
+  const entitiesTracks = byComponents(['track']);
 
   // The player is pushing in the direction they are moving.
   playerEntity.pushX = playerEntity.deltaX;
@@ -23,7 +24,7 @@ export function physicsSystem(delta) {
   // collision check: Pushables colliding with Pushers
   // when a pusher is colliding with a pushable, it will apply it's push value as delta value.
   // Conveyor's and the Player use this to push around groups of trash blocks.
-  createCollisionMap(pushableMap, pusherMap).forEach(collisionEntities => {
+  logicANDMaps(pushableMap, pusherMap).forEach(collisionEntities => {
     const entries = Array.from(collisionEntities);
     const pusherEntity = entries.find(entity => entity.components.has('pusher'));
     const pushableEntity = entries.find(entity => entity.components.has('pushable'));
@@ -35,7 +36,7 @@ export function physicsSystem(delta) {
   });
 
   // Entities on track move in the track's push direction.
-  createCollisionMap(entitiesOnTrack, entitiesTracks).forEach(collisionEntities => {
+  logicANDMaps(entitiesOnTrack, entitiesTracks).forEach(collisionEntities => {
     const entries = Array.from(collisionEntities);
     const entityOnTrack = entries.find(entity => entity.components.has('on-track'));
     const entityTrack = entries.find(entity => entity.components.has('track'));
@@ -48,10 +49,10 @@ export function physicsSystem(delta) {
   // When a mover is trying to move, don't let it move though a solid.
   // We do this by clearing the mover delta values. This changes their position on the collision map.
   // Keep checking until there are no more collisions.
-  let solidCollisionMap = createCollisionMap(solidMap, movableMap);
+  let solidCollisionMap = logicANDMaps(solidMap, movableMap);
   while (solidCollisionMap.size > 0) {
     solidCollisionMap.forEach(cancelDeltaOnMovable);
-    solidCollisionMap = createCollisionMap(solidMap, movableMap);
+    solidCollisionMap = logicANDMaps(solidMap, movableMap);
   }
 
 
