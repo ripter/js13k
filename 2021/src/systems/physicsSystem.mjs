@@ -55,28 +55,28 @@ export function physicsSystem(delta) {
   }
 
 
-
+  // Move all the movable entities!
   // Update the position of movable entities by applying delta.
   movableMap.forEach(entity => {
     // velocity based movement instead of tile based.
     if (entity.velocity) {
       if (entity.deltaX !== 0) {
-        console.log('delta', delta, 'deltaX', entity.deltaX, 'velocity', entity.velocity);
         entity.x += delta * entity.deltaX * entity.velocity;
       }
       if (entity.deltaY !== 0) {
-        console.log('delta', delta, 'deltaY', entity.deltaY, 'velocity', entity.velocity);
         entity.y += delta * entity.deltaY * entity.velocity;
       }
     }
     else {
-      // Apply Deltas, tiles are 8x8 pixels.
+      // Apply Deltas; tiles are 8x8 pixels.
       entity.x += entity.deltaX*8;
       entity.y += entity.deltaY*8;
-      // clear the deltas
-      entity.deltaX = 0;
-      entity.deltaY = 0;
     }
+
+    // The physics checks use the tile delta to control movement.
+    // So we need to clear in all cases so they can set it again.
+    entity.deltaX = 0;
+    entity.deltaY = 0;
   });
 }
 
