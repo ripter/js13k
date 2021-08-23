@@ -1,12 +1,12 @@
-import { byComponents } from '../components/byComponents.mjs';
+import { byComponents } from '../entities/byComponents.mjs';
 import { drawTile } from '../canvas/drawTile.mjs';
 
 // Renders sprites on the screen.
 export function spriteSystem() {
   const { ctx } = window;
-  const sprites  = byComponents(['sprite']);
 
-  for (let sprite of sprites) {
+  // render all the sprites
+  byComponents(['sprite']).forEach(sprite => {
     // save the current state
     ctx.save();
     // update state to draw the image with rotation.
@@ -27,5 +27,15 @@ export function spriteSystem() {
     drawTile(sprite.tileID, sprite.x, sprite.y, sprite.color);
     // restore the previous state
     ctx.restore();
-  }
+  });
+  /*
+  const spriteEntities  = byComponents(['sprite']);
+
+  sprites.forEach(entities => {
+    entities.forEach(sprite => {
+    });
+  });
+  // for (let sprite of sprites) {
+  // }
+  */
 }

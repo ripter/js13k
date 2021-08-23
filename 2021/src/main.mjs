@@ -3,9 +3,9 @@ import { addMap } from './entities/addMap.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
 import { createRandomTrashBlocks } from './utils/createRandomTrashBlocks.mjs';
 import { inputSystem } from './systems/inputSystem.mjs';
-import { physicsSystem } from './systems/physicsSystem.mjs';
+// import { physicsSystem } from './systems/physicsSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
-import { trackSystem } from './systems/trackSystem.mjs';
+// import { trackSystem } from './systems/trackSystem.mjs';
 
 
 // create colored sprite sheets.
@@ -109,8 +109,8 @@ let lastTime = 0;
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
     () => window.CACHE_MAP.clear(),
     inputSystem,
-    trackSystem,
-    physicsSystem,
+    // trackSystem,
+    // physicsSystem,
     spriteSystem,
   ].forEach(system => system(delta));
 

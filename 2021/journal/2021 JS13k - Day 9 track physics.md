@@ -18,6 +18,14 @@ So I attempted to stuff `track, on-track` in the existing push physics system in
 
 I resisted not using such a good bit of code. If everyone's delta's where applied, who would collide? Don't apply delta's to those entities. I spend a bunch of time writing it, so I wanted to use it! And in doing so, I ended up with a check for `velocity` before deciding how to apply the delta to the entity's position. But I need a different way to calculte the moving blocks position. So I guess I need to break things up into their own systems.
 
+## Caching an refactoring
+
+I had written `byComponents()` that returned an array of all the entities with the matching components. Then I passed that to `createEntityMap` that converted the list into a Map with the position (or delta position) as the key. This makes it easy to find an entity from the tile position. Passing these Maps into `createCollisionMap` finds the entities that have conflicting keys, aka they are on the same tile position.
+
+I decided to refactor `byComponents()` to return a Map of entities. This saves the step of always passing the result to `createEntityMap()`. I added a simple cache so that multiple calls with the same component list will return the existing map instead of createing a new one each time.
+
+
+
 ## `pusher, pushable` system
 
 When a `pusher` and a `pushable` collide, The `pushable` entity should move in the pushed direction.
