@@ -28,14 +28,4 @@ export function spriteSystem() {
     // restore the previous state
     ctx.restore();
   });
-  /*
-  const spriteEntities  = byComponents(['sprite']);
-
-  sprites.forEach(entities => {
-    entities.forEach(sprite => {
-    });
-  });
-  // for (let sprite of sprites) {
-  // }
-  */
 }
