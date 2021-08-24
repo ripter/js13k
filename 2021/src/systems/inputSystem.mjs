@@ -70,27 +70,54 @@ export function inputSystem(delta) {
     player.deltaY = 0;
   }
 
-
-  // const playerKey = getDeltaKey(player);
-  // Will moving cause the player to collide with a movable-group?
-  // let collisionEntities = Array.from(movableEntities.values()).find(entity => getKey(entity) === getDeltaKey(player));
   const playerDeltaKey = getDeltaKey(player);
-  // Player can push movable-group entities.
-  let collisionEntities = getCollisionByKey(playerDeltaKey, getKey, movableEntities); //.filter(entity => entity !== player);
-  collisionEntities.forEach(movableEntity => {
-    const movableDeltaKey = getKey(movableEntity, player.deltaX, player.deltaY);
-    // check, if we moved this entity by delta, would it collide with a solid?
-    const solidCollisions = getCollisionByKey(movableDeltaKey, getDeltaKey, solidEntities).filter(entity => entity !== player);
-    if (solidCollisions?.length > 0) {
-      console.log('solidCollisions', solidCollisions);
-    }
-  });
 
-  
+  // Player can push movable-group entities by pushing on any entity in the group.
+  // if any entity in the group would collide when moved, then don't move the group.
+  const pushedEntities = getCollisionByKey(playerDeltaKey, getKey, movableEntities);
+  if (pushedEntities?.length > 0) {
+    // There should only be a single item the player is pushing.
+    const { parentID } = pushedEntities[0];
+    const groupEntities = Array.from(byParentID(parentID).values());
+    // Check if any entity in the group will collide with a solid if pushed.
+    const collisionEntity = groupEntities.find(groupEntity => {
+      const groupKey = getKey(groupEntity, player.deltaX, player.deltaY);
+      const solidCollsions = getCollisionByKey(groupKey, getDeltaKey, solidEntities)
+        .filter(entity => entity.parentID !== parentID);
+      return solidCollsions.length > 0;
+    });
+
+    // No collision, move everyone in the group.
+    if (!collisionEntity) {
+      groupEntities.forEach(entity => {
+        entity.deltaX = player.deltaX;
+        entity.deltaY = player.deltaY;
+        entitiesToMove.add(entity);
+      });
+    }
+    // Collision, don't move anyone.
+    else {
+      player.deltaX = 0;
+      player.deltaY = 0;
+      entitiesToMove.delete(player);
+    }
+
+  }
+  // collisionEntities.forEach(movableEntity => {
+  //   const movableDeltaKey = getKey(movableEntity, player.deltaX, player.deltaY);
+  //   console.log('movableDeltaKey', movableDeltaKey);
+  //   // check, if we moved this entity by delta, would it collide with a solid?
+  //   const solidCollisions = getCollisionByKey(movableDeltaKey, getDeltaKey, solidEntities).filter(entity => entity !== player);
+  //   if (solidCollisions?.length > 0) {
+  //     console.log('solidCollisions', solidCollisions);
+  //   }
+  // });
+
+
   // Don't let the player collide with a solid.
   // Clear the delta if the player's delta position would be in the same space as a solid's delta position.
-  collisionEntities = getCollisionByKey(playerDeltaKey, getDeltaKey, solidEntities).filter(entity => entity !== player);
-  if (collisionEntities?.length > 0) {
+  const solidCollisions = getCollisionByKey(playerDeltaKey, getDeltaKey, solidEntities).filter(entity => entity !== player);
+  if (solidCollisions?.length > 0) {
     player.deltaX = 0;
     player.deltaY = 0;
   }
@@ -125,5 +152,8 @@ export function inputSystem(delta) {
   entitiesToMove.forEach(entity => {
     entity.x += entity.deltaX * 8;
     entity.y += entity.deltaY * 8;
+    // Reset their delta after the move.
+    entity.deltaX = 0;
+    entity.deltaY = 0;
   });
 }
