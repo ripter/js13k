@@ -6,12 +6,13 @@
  */
 export function createRandomTrashBlocks() {
   const shape = shapes[0|Math.random()*shapes.length];
+  const color = colors[0|Math.random()*colors.length];
   const result = [];
 
   for (let i=0; i < shape.length; i += 2) {
     result.push([
       randomTrashTile(),
-      colors[0|Math.random()*colors.length],
+      color,
       shape[i],
       shape[i+1],
     ]);
@@ -24,7 +25,7 @@ export function createRandomTrashBlocks() {
  * Returns a random trash tile.
  */
 function randomTrashTile() {
-  const illegalTiles = [0,1,3,5,14,15,17,28,31,39,40,104];
+  const illegalTiles = [0,1,3,5,14,15,17,28,31,39,40,43,44,45,104];
   let result;
   do {
     result = 0|Math.random()*140;
