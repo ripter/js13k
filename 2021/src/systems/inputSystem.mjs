@@ -1,5 +1,5 @@
 import { byComponents } from '../entities/byComponents.mjs';
-import { byID } from '../components/byID.mjs';
+import { byID } from '../entities/byID.mjs';
 import { byParentID } from '../entities/byParentID.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey, getDeltaKey } from '../utils/key.mjs';
