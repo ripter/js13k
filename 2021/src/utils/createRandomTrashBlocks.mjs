@@ -6,12 +6,13 @@
  */
 export function createRandomTrashBlocks() {
   const shape = shapes[0|Math.random()*shapes.length];
+  const color = colors[0|Math.random()*colors.length];
   const result = [];
 
   for (let i=0; i < shape.length; i += 2) {
     result.push([
       randomTrashTile(),
-      colors[0|Math.random()*colors.length],
+      color,
       shape[i],
       shape[i+1],
     ]);

@@ -22,7 +22,7 @@ export function addTrashBlock(tileX, tileY, blocks) {
       y: (tileY*8) + (tileOffsetY*8),
       deltaX: 0, deltaY: 0,
       components: new Set([
-        'sprite', 'solid', 'movable', 'pushable',
+        'sprite', 'solid',
         'movable-group',
       ]),
     });
