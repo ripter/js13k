@@ -100,7 +100,7 @@ addMap([
   addTrashBlock(x, y, createRandomTrashBlocks());
 });
 
-// addTrashBlock(0, 0, [[48, 'red', 0, 0]])
+// addTrashBlock(0, 0, [[131, 'red', 0, 0]])
 
 
 // Get the 2d Context

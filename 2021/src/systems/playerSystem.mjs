@@ -12,10 +12,11 @@ export function playerSystem(delta) {
   const solidEntities = byComponents(['solid']);
 
   //
-  // If a key is down, the player can move.
-  if (downKeys.size > 0) {
-    entitiesToMove.add(player);
+  // If there are no keys down, we can skip the rest of the system.
+  if (downKeys.size === 0) {
+    return;
   }
+
   //
   // Set the delta direction the player wants to move.
   if (downKeys.has('left')) {
@@ -37,7 +38,11 @@ export function playerSystem(delta) {
     player.deltaY = 0;
   }
 
+  // Get the key for the delta position.
   const playerDeltaKey = getDeltaKey(player);
+  // Add the player to the list of entities to move.
+  entitiesToMove.add(player);
+
 
   // Player can push movable-group entities by pushing on any entity in the group.
   // if any entity in the group would collide when moved, then don't move the group.
@@ -78,6 +83,7 @@ export function playerSystem(delta) {
   if (solidCollisions?.length > 0) {
     player.deltaX = 0;
     player.deltaY = 0;
+    entitiesToMove.delete(player);
   }
 
   //
