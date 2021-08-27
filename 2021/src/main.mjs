@@ -5,6 +5,7 @@ import { createRandomTrashBlocks } from './utils/createRandomTrashBlocks.mjs';
 import { playerSystem } from './systems/playerSystem.mjs';
 import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
+import { inputSystem } from './systems/inputSystem.mjs';
 
 
 // create colored sprite sheets.
@@ -115,6 +116,7 @@ let lastTime = 0;
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
     () => window.CACHE_MAP.clear(),
+    inputSystem,
     playerSystem,
     pushButtonSystem,
     spriteSystem,

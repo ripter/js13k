@@ -4,49 +4,16 @@ import { byParentID } from '../entities/byParentID.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey, getDeltaKey } from '../utils/key.mjs';
 
-const downKeys = new Set();
-
-function mapKey(method, evt) {
-  switch (evt.code) {
-    case 'KeyA':
-    case 'ArrowLeft':
-      return downKeys[method]('left');
-    case 'KeyD':
-    case 'ArrowRight':
-      return downKeys[method]('right');
-    case 'KeyS':
-    case 'ArrowDown':
-      return downKeys[method]('down');
-    case 'KeyW':
-    case 'ArrowUp':
-      return downKeys[method]('up');
-  }
-}
-
-window.addEventListener('keydown', mapKey.bind(null, 'add'));
-window.addEventListener('keyup', mapKey.bind(null, 'delete'));
-
-
-
-const DELAY_TIME = 0.10;
-let delay = 0;
 export function playerSystem(delta) {
-  const player = byID('player');
+  const { downKeys } = byID('input');
   const entitiesToMove = new Set();
-
-  // create a delay between responding to button presses.
-  delay -= delta;
-  if (delay >= 0) {
-    return;
-  }
-
-  const solidEntities = byComponents(['solid']);
   const movableEntities = byComponents(['movable-group']);
+  const player = byID('player');
+  const solidEntities = byComponents(['solid']);
 
   //
-  // If a key is down, rest the input delay.
+  // If a key is down, the player can move.
   if (downKeys.size > 0) {
-    delay = DELAY_TIME;
     entitiesToMove.add(player);
   }
   //
