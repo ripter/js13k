@@ -25,7 +25,7 @@ export function createRandomTrashBlocks() {
  * Returns a random trash tile.
  */
 function randomTrashTile() {
-  const illegalTiles = [0,1,3,5,14,15,17,28,31,39,40,43,44,45,104];
+  const illegalTiles = [0,1,3,5,14,15,17,28,31,39,40,43,44,45,48,53,54,104];
   let result;
   do {
     result = 0|Math.random()*140;

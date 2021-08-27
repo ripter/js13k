@@ -79,95 +79,13 @@ const mapValues = [
       'sprite', 'solid',
     ]),
   }),
-  // 7 is cyan track horizontal moving left.
+  // 7 is the compact button
   (tileX, tileY) => ({
-    tileID: 40, color: 'cyan',
+    tileID: 48, color: 'green',
     x: (tileX*8), y: (tileY*8),
-    pushX: -1, pushY: 0,
+    deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'pusher', 'track',
+      'sprite', 'solid',
     ]),
   }),
-  // 8 is cyan track turned left-up.
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan', rotate: Math.PI,
-    x: (tileX*8), y: (tileY*8),
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 9 is cyan track turned left-down.
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan', rotate: -90*Math.PI/180,
-    x: (tileX*8), y: (tileY*8),
-    pushX: -1, pushY: 0,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 10 is cyan track vertical moving down.
-  (tileX, tileY) => ({
-    tileID: 40, color: 'cyan', rotate: 90*Math.PI/180,
-    x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: 1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 11 is cyan track vertical moving up.
-  (tileX, tileY) => ({
-    tileID: 40, color: 'cyan', rotate: 90*Math.PI/180,
-    x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: -1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 12 is cyan track down-left moving down..
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan',
-    x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: 1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 13 is cyan track turned down-right.
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan', rotate: 90*Math.PI/180,
-    x: (tileX*8), y: (tileY*8),
-    pushX: -1, pushY: -1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 14 is cyan track horizontal moving right.
-  (tileX, tileY) => ({
-    tileID: 40, color: 'cyan',
-    x: (tileX*8), y: (tileY*8),
-    pushX: 1, pushY: 0,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 15 is cyan track turned right-down.
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan', rotate: -90*Math.PI/180,
-    x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: 1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-  // 16 is cyan track turned left-down.
-  (tileX, tileY) => ({
-    tileID: 39, color: 'cyan', rotate: Math.PI,
-    x: (tileX*8), y: (tileY*8),
-    pushX: 0, pushY: -1,
-    components: new Set([
-      'sprite', 'pusher', 'track',
-    ]),
-  }),
-
 ];
