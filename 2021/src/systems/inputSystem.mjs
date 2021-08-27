@@ -1,5 +1,6 @@
 import { byID } from '../entities/byID.mjs';
 
+let useGamepad = false;
 const pressedKeys = new Set();
 
 function mapKey(method, evt) {
@@ -19,13 +20,67 @@ function mapKey(method, evt) {
   }
 }
 
+function mapGamepad() {
+  if (!navigator.getGamepads) {
+    useGamepad = false;
+    console.warn('This browser requires https to support gamepads.');
+    return;
+  }
+  const gamepads = navigator.getGamepads();
+  // check if we still have a connected gamepad.
+  if (gamepads.length === 0) {
+    useGamepad = false;
+  }
+
+  // We only care about the first gamepad.
+  const gamepad = gamepads[0];
+  const leftRight = 0| gamepad.axes[0];
+  const upDown = 0| gamepad.axes[1];
+
+  if (leftRight === -1) {
+    pressedKeys.add('left');
+    pressedKeys.delete('right');
+  }
+  else if (leftRight === 1) {
+    pressedKeys.add('right');
+    pressedKeys.delete('left');
+  }
+  else {
+    pressedKeys.delete('right');
+    pressedKeys.delete('left');
+  }
+
+  if (upDown === -1) {
+    return pressedKeys.add('up');
+    pressedKeys.delete('down');
+  }
+  else if (upDown === 1) {
+    return pressedKeys.add('down');
+    pressedKeys.delete('up');
+  }
+  else {
+    pressedKeys.delete('up');
+    pressedKeys.delete('down');
+  }
+}
+
+
+// Listen to widnow events.
 window.addEventListener('keydown', mapKey.bind(null, 'add'));
 window.addEventListener('keyup', mapKey.bind(null, 'delete'));
+window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; console.log('gamepad', evt.gamepad); });
+window.addEventListener('gamepaddisconnected', () => { useGamepad = false; });
+
 
 const DELAY_TIME = 0.10;
 let delay = 0;
 export function inputSystem(delta) {
   const inputEntity = byID('input');
+
+  // If we have a gamepad, get it's input too.
+  if (useGamepad) {
+    mapGamepad();
+  }
 
   // If there is no delay and a key was pressed.
   // Set it on the entity.
