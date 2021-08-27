@@ -30,7 +30,7 @@ window.addEventListener('keyup', mapKey.bind(null, 'delete'));
 
 const DELAY_TIME = 0.10;
 let delay = 0;
-export function inputSystem(delta) {
+export function playerSystem(delta) {
   const player = byID('player');
   const entitiesToMove = new Set();
 

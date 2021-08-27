@@ -85,7 +85,7 @@ const mapValues = [
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid',
+      'sprite', 'solid', 'push-button'
     ]),
   }),
 ];

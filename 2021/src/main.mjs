@@ -2,7 +2,8 @@ import { addColorImage } from './canvas/addColorImage.mjs';
 import { addMap } from './entities/addMap.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
 import { createRandomTrashBlocks } from './utils/createRandomTrashBlocks.mjs';
-import { inputSystem } from './systems/inputSystem.mjs';
+import { playerSystem } from './systems/playerSystem.mjs';
+import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 
 
@@ -29,6 +30,13 @@ addColorImage('white', [0xFF, 0xFF, 0xFF]);
 window.IS_RUNNING = true;
 // list of all entities in the game.
 window.ENTITIES = [
+  {
+    id: 'input',
+    downKeys: new Set(),
+    components: new Set([
+      'input'
+    ]),
+  },
   // Player
   {
     id: 'player',
@@ -37,7 +45,7 @@ window.ENTITIES = [
     x: 8, y: 8,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'movable', 'solid', 'pusher'
+      'sprite', 'solid',
     ]),
   },
 ];
@@ -51,7 +59,7 @@ addMap([
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [2, 4, 4, 4, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -59,7 +67,7 @@ addMap([
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [3, 4, 4, 4, 4, 4, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -91,7 +99,7 @@ addMap([
   addTrashBlock(x, y, createRandomTrashBlocks());
 });
 
-addTrashBlock(0, 0, [[48, 'red', 0, 0]])
+// addTrashBlock(0, 0, [[48, 'red', 0, 0]])
 
 
 // Get the 2d Context
@@ -107,7 +115,8 @@ let lastTime = 0;
   [
     () => window.ctx.clearRect(0, 0, window.c.width, window.c.height),
     () => window.CACHE_MAP.clear(),
-    inputSystem,
+    playerSystem,
+    pushButtonSystem,
     spriteSystem,
   ].forEach(system => system(delta));
 
