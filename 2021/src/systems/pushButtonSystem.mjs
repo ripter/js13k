@@ -1,6 +1,7 @@
 import { byComponents } from '../entities/byComponents.mjs';
 import { byID } from '../entities/byID.mjs';
 import { getKey } from '../utils/key.mjs';
+import { pushAnimation } from '../animations/pushButton.mjs';
 
 
 export function pushButtonSystem(delta) {
@@ -20,9 +21,14 @@ export function pushButtonSystem(delta) {
   for (let pushButton of pushButtonEntities) {
     // Get get for the direction the player should be in to push it.
     const buttonKey = getKey(pushButton, 0, 1);
-    if (playerKey === buttonKey) {
-      // Button Pressed!
-      console.log('Button Pressed!');
+    if (playerKey !== buttonKey) {
+      continue;
     }
+    // Play the push animation on the button.
+    pushButton.animate = pushAnimation();
+    pushButton.components.add('animate');
+    // Remove us from push-button so we don't show up in this reducer until the animation is over.
+    pushButton.components.delete('push-button');
+
   }
 }

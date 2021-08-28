@@ -68,7 +68,7 @@ function mapGamepad() {
 // Listen to widnow events.
 window.addEventListener('keydown', mapKey.bind(null, 'add'));
 window.addEventListener('keyup', mapKey.bind(null, 'delete'));
-window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; console.log('gamepad', evt.gamepad); });
+window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; });
 window.addEventListener('gamepaddisconnected', () => { useGamepad = false; });
 
 

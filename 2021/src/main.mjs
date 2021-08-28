@@ -1,11 +1,12 @@
 import { addColorImage } from './canvas/addColorImage.mjs';
 import { addMap } from './entities/addMap.mjs';
 import { addTrashBlock } from './entities/addTrashBlock.mjs';
+import { animationSystem } from './systems/animationSystem.mjs';
 import { createRandomTrashBlocks } from './utils/createRandomTrashBlocks.mjs';
+import { inputSystem } from './systems/inputSystem.mjs';
 import { playerSystem } from './systems/playerSystem.mjs';
 import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
-import { inputSystem } from './systems/inputSystem.mjs';
 
 
 // create colored sprite sheets.
@@ -46,7 +47,7 @@ window.ENTITIES = [
     x: 8, y: 8,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid',
+      'sprite', 'solid', 'player',
     ]),
   },
 ];
@@ -119,6 +120,7 @@ let lastTime = 0;
     inputSystem,
     playerSystem,
     pushButtonSystem,
+    animationSystem,
     spriteSystem,
   ].forEach(system => system(delta));
 

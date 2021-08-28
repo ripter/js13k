@@ -8,7 +8,7 @@ export function playerSystem(delta) {
   const { downKeys } = byID('input');
   const entitiesToMove = new Set();
   const movableEntities = byComponents(['movable-group']);
-  const player = byID('player');
+  const playerEntities = byComponents(['player']);
   const solidEntities = byComponents(['solid']);
 
   //
@@ -16,6 +16,10 @@ export function playerSystem(delta) {
   if (downKeys.size === 0) {
     return;
   }
+  if (playerEntities.size === 0) {
+    return;
+  }
+  const player = Array.from(playerEntities)[0];
 
   //
   // Set the delta direction the player wants to move.
