@@ -32,9 +32,8 @@ export function pushButtonSystem(delta) {
     // Remove us from push-button so we don't show up in this reducer until the animation is over.
     pushButton.components.delete('push-button');
 
-
+    // Animate the crushing wall.
     byComponents(['crush-wall']).forEach(wallEntity => {
-      console.log('wall', wallEntity);
       wallEntity.animate = crushWallAnimation();
       wallEntity.components.add('animate');
     });
