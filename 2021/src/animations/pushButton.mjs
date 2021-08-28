@@ -1,10 +1,14 @@
 
+/**
+ * Animated button press
+ * @return {Generator}
+ */
 export function* pushAnimation() {
   const DURATION = 0.5;
   const FRAME_DELAY = 0.25;
   let position = 0;
   let delay = 0;
-  let props;// { entity, deltaTime }
+  let props;
 
   while (position <= DURATION) {
     // YIELD
