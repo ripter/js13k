@@ -2,6 +2,7 @@ import { byComponents } from '../entities/byComponents.mjs';
 import { byID } from '../entities/byID.mjs';
 import { getKey } from '../utils/key.mjs';
 import { pushAnimation } from '../animations/pushButton.mjs';
+import { crushWallAnimation } from '../animations/crushWall.mjs';
 
 
 export function pushButtonSystem(delta) {
@@ -31,6 +32,12 @@ export function pushButtonSystem(delta) {
     // Remove us from push-button so we don't show up in this reducer until the animation is over.
     pushButton.components.delete('push-button');
 
+
+    byComponents(['crush-wall']).forEach(wallEntity => {
+      console.log('wall', wallEntity);
+      wallEntity.animate = crushWallAnimation();
+      wallEntity.components.add('animate');
+    });
 
 
     // Remove the player so they can not do anything until the animation is over.

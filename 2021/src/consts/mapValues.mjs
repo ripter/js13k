@@ -70,4 +70,14 @@ export const mapValues = [
       'sprite', 'solid', 'push-button'
     ]),
   }),
+  // 8 is the moving wall
+  (tileX, tileY) => ({
+    tileID: 104, color: 'green',
+    rotate: -90*Math.PI/180,
+    x: (tileX*8), y: (tileY*8),
+    deltaX: 0, deltaY: 0,
+    components: new Set([
+      'crush-wall'
+    ]),
+  }),
 ];
