@@ -20,7 +20,6 @@ export function* crushWallAnimation() {
       case 5:
       case 6:
       case 7:
-      // case 8:
         entity.x -= 8;
         compressNextTile(entity);
         break;
@@ -31,13 +30,18 @@ export function* crushWallAnimation() {
       case 13:
       case 14:
         entity.x += 8;
-        entity.color = 'dark_gray';
         break;
       case 15:
+        entity.color = 'dark_gray';
+        break;
+      case 16:
+        entity.color = 'light_gray';
+        break;
+      case 17:
         entity.components.delete('sprite');
         break;
       default:
-      // do nothing.
+        // do nothing.
     }
   });
   // first call is init.
@@ -52,6 +56,9 @@ export function* crushWallAnimation() {
 }
 
 
+/**
+ * Compresses solid tile in the path of entity, except for jaw entities.
+ */
 function compressNextTile(entity) {
   const solidEntities = byComponents(['solid']);
   const keyToCompress = getKey(entity);
