@@ -1,5 +1,15 @@
+import { genFrameAnimation } from './genFrameAnimation.mjs';
 
 export function* crushWallAnimation() {
+  // const frameAnimation = genFrameAnimation(18, 0.25, (frame) => {
+  //   console.log('genFrameAnimation callback frame', frame);
+  // });
+  // console.log('frameAnimation', frameAnimation);
+
+  // for (let frameItem of genFrameAnimation(18, 0.25)) {
+  //   console.log('frameItem', frameItem);
+  // }
+
   const DURATION = 18;
   const FRAME_DELAY = 0.25;
   let frame = 0;

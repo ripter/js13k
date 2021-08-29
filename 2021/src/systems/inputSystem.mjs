@@ -51,11 +51,11 @@ function mapGamepad() {
   }
 
   if (upDown === -1) {
-    return pressedKeys.add('up');
+    pressedKeys.add('up');
     pressedKeys.delete('down');
   }
   else if (upDown === 1) {
-    return pressedKeys.add('down');
+    pressedKeys.add('down');
     pressedKeys.delete('up');
   }
   else {
