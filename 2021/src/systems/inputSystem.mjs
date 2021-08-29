@@ -51,11 +51,11 @@ function mapGamepad() {
   }
 
   if (upDown === -1) {
-    return pressedKeys.add('up');
+    pressedKeys.add('up');
     pressedKeys.delete('down');
   }
   else if (upDown === 1) {
-    return pressedKeys.add('down');
+    pressedKeys.add('down');
     pressedKeys.delete('up');
   }
   else {
@@ -68,7 +68,7 @@ function mapGamepad() {
 // Listen to widnow events.
 window.addEventListener('keydown', mapKey.bind(null, 'add'));
 window.addEventListener('keyup', mapKey.bind(null, 'delete'));
-window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; console.log('gamepad', evt.gamepad); });
+window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; });
 window.addEventListener('gamepaddisconnected', () => { useGamepad = false; });
 
 
