@@ -2,7 +2,6 @@ import { genFrameAnimation } from './genFrameAnimation.mjs';
 
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
-    console.log('callback', props);
     const { entity, frame } = props;
     switch (frame) {
       case 0:
@@ -43,20 +42,12 @@ export function* crushWallAnimation() {
     }
   });
   // first call is init.
-  var { value, done } = generator.next();
-
-  console.log('crusWall value', value, 'done', done);
-
+  generator.next();
 
   // Run the Generator
-  // yield* generator;
-  let props = yield;
-  while (!done) {
-    var { value, done } = generator.next(props);
-    console.log('while(!done)', 'value', value, 'done', done);
-    // yield* generator;
+  let props, result;
+  do {
     props = yield;
-    console.log('props', props);
-  }
-
+    result = generator.next(props);
+  } while (!result.done);
 }
