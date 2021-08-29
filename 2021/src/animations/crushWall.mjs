@@ -2,6 +2,8 @@ import { genFrameAnimation } from './genFrameAnimation.mjs';
 import { byComponents } from '../entities/byComponents.mjs';
 import { getKey } from '../utils/key.mjs';
 
+let COMPRESSED_UID = 0;
+
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
     const { entity, frame } = props;
@@ -39,6 +41,7 @@ export function* crushWallAnimation() {
         break;
       case 17:
         entity.components.delete('sprite');
+        COMPRESSED_UID += 1;
         break;
       default:
         // do nothing.
@@ -74,6 +77,7 @@ function compressNextTile(entity) {
   // move the colliding block.
   blocksToCompress.forEach(block => {
     block.x -= 8;
-    delete block.parentID;
+    block.parentID = `compressed_${COMPRESSED_UID}`;
   });
+
 }

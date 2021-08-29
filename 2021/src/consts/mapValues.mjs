@@ -80,4 +80,24 @@ export const mapValues = [
       'crush-wall', 'jaw',
     ]),
   }),
+  // 9 is vertical with wall on the right side.
+  (tileX, tileY) => ({
+    tileID: 104, color: 'green',
+    rotate: -90*Math.PI/180,
+    x: (tileX*8), y: (tileY*8),
+    deltaX: 0, deltaY: 0,
+    components: new Set([
+      'sprite', 'solid', 'jaw', 'collect-wall',
+    ]),
+  }),
+  // 10 is a retracting wall
+  (tileX, tileY) => ({
+    tileID: 1, color: 'green',
+    // rotate: -90*Math.PI/180,
+    x: (tileX*8), y: (tileY*8),
+    deltaX: 0, deltaY: 0,
+    components: new Set([
+      'sprite', 'solid', 'jaw', 'collect-wall',
+    ]),
+  }),
 ];

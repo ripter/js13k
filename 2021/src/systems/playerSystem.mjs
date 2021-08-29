@@ -12,13 +12,12 @@ export function playerSystem(delta) {
   const solidEntities = byComponents(['solid']);
 
   //
-  // If there are no keys down, we can skip the rest of the system.
-  if (downKeys.size === 0) {
+  // If there are no keys down, or there is no player
+  // we can skip the rest of the system.
+  if (downKeys.size === 0 || playerEntities.size === 0) {
     return;
   }
-  if (playerEntities.size === 0) {
-    return;
-  }
+  // We only support one player.
   const player = Array.from(playerEntities)[0];
 
   //
@@ -54,7 +53,7 @@ export function playerSystem(delta) {
   if (pushedEntities?.length > 0) {
     // There should only be a single item the player is pushing.
     const { parentID } = pushedEntities[0];
-    const groupEntities = Array.from(byParentID(parentID).values());
+    const groupEntities = parentID ? Array.from(byParentID(parentID).values()) : pushedEntities;
     // Check if any entity in the group will collide with a solid if pushed.
     const collisionEntity = groupEntities.find(groupEntity => {
       const groupKey = getKey(groupEntity, player.deltaX, player.deltaY);
