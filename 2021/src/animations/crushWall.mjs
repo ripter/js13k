@@ -41,6 +41,7 @@ export function* crushWallAnimation() {
         break;
       case 17:
         entity.components.delete('sprite');
+        entity.components.add('animate-finished');
         COMPRESSED_UID += 1;
         break;
       default:

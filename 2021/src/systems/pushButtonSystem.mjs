@@ -8,9 +8,29 @@ import { crushWallAnimation } from '../animations/crushWall.mjs';
 export function pushButtonSystem(delta) {
   const { downKeys } = byID('input');
   const playerEntities = byComponents(['player']);
+  const disabledPlayerEntities = byComponents(['player-disabled']);
   const pushButtonEntities = byComponents(['push-button']);
+  const finishedEntities = byComponents(['animate-finished']);
 
-  // If the player isn't pressing up, we can skip the system.
+
+  console.log('finishedEntities.size', finishedEntities.size);
+  // When all the animations finish, return control to the player.
+  if (finishedEntities.size === 5) {
+    // re-enable the player
+    for (let disabledPlayer of disabledPlayerEntities) {
+      disabledPlayer.components.delete('player-disabled');
+      disabledPlayer.components.add('player');
+    }
+    // clear finished
+    for (let finishedEntity of finishedEntities) {
+      finishedEntity.components.delete('animate-finished');
+    }
+    return;
+  }
+
+
+
+  // If the player isn't pressing up, we can skip the checks.
   // The button is hardcoded to be on the bottom of the compactor,
   // if this changes, we will need a prop to know the button direction.
   if (playerEntities.size === 0 || !downKeys.has('up')) {
@@ -26,21 +46,18 @@ export function pushButtonSystem(delta) {
     if (playerKey !== buttonKey) {
       continue;
     }
-    // Play the push animation on the button.
+    // disable the player while the animation plays.
+    player.components.delete('player');
+    player.components.add('player-disabled');
+
+    // Animate the button.
     pushButton.animate = pushAnimation();
     pushButton.components.add('animate');
-    // Remove us from push-button so we don't show up in this reducer until the animation is over.
-    // pushButton.components.delete('push-button');
 
     // Animate the crushing wall.
     byComponents(['crush-wall']).forEach(wallEntity => {
       wallEntity.animate = crushWallAnimation();
       wallEntity.components.add('animate');
     });
-
-
-    // Remove the player so they can not do anything until the animation is over.
-    // player.components.delete('player');
-    // player.components.add('player-disabled');
   }
 }

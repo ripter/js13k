@@ -1,5 +1,9 @@
-import { getKey, getDeltaKey } from '../utils/key.mjs';
 
+/**
+ * Returns a Set of all the entities that have every component in the list.
+ * @param  {[string]} list
+ * @return {Set}
+ */
 export function byComponents(list) {
   const cacheKey = `byComponents(${JSON.stringify(list)})`;
 
