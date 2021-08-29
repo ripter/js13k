@@ -11,7 +11,7 @@ export const mapValues = [
     rotate: 90*Math.PI/180,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid',
+      'sprite', 'solid', 'jaw',
     ]),
   }),
   // 2 is green compactor top-left.
@@ -77,7 +77,7 @@ export const mapValues = [
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'crush-wall'
+      'crush-wall', 'jaw',
     ]),
   }),
 ];

@@ -1,4 +1,6 @@
 import { genFrameAnimation } from './genFrameAnimation.mjs';
+import { byComponents } from '../entities/byComponents.mjs';
+import { getKey } from '../utils/key.mjs';
 
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
@@ -18,8 +20,9 @@ export function* crushWallAnimation() {
       case 5:
       case 6:
       case 7:
-      case 8:
+      // case 8:
         entity.x -= 8;
+        compressNextTile(entity);
         break;
       case 9:
       case 10:
@@ -27,14 +30,10 @@ export function* crushWallAnimation() {
       case 12:
       case 13:
       case 14:
-      case 15:
         entity.x += 8;
-        entity.color = 'light_gray';
-        break;
-      case 16:
         entity.color = 'dark_gray';
         break;
-      case 17:
+      case 15:
         entity.components.delete('sprite');
         break;
       default:
@@ -50,4 +49,24 @@ export function* crushWallAnimation() {
     props = yield;
     result = generator.next(props);
   } while (!result.done);
+}
+
+
+function compressNextTile(entity) {
+  const solidEntities = byComponents(['solid']);
+  const keyToCompress = getKey(entity);
+
+  let blocksToCompress = Array.from(solidEntities)
+    .filter(solidEntity => getKey(solidEntity) === keyToCompress)
+    .filter(solidEntity => !solidEntity.components.has('jaw'));
+
+  if (blocksToCompress.length === 0) {
+    return;
+  }
+
+  // move the colliding block.
+  blocksToCompress.forEach(block => {
+    block.x -= 8;
+    delete block.parentID;
+  });
 }
