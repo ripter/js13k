@@ -1,11 +1,15 @@
-import { genFrameAnimation } from './genFrameAnimation.mjs';
 import { byComponents } from '../entities/byComponents.mjs';
+import { retractWallAnimation } from './retractWallAnimation.mjs';
+import { genFrameAnimation } from './genFrameAnimation.mjs';
 import { getKey } from '../utils/key.mjs';
 
 let COMPRESSED_UID = 0;
 
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
+    const retractWallEntities = byComponents(['retract-wall']);
+    const clearJawEntity = Array.from(byComponents(['collect-wall-jaw']))[0];
+
     const { entity, frame } = props;
     switch (frame) {
       case 0:
@@ -26,6 +30,10 @@ export function* crushWallAnimation() {
         compressNextTile(entity);
         break;
       case 9:
+        for (let retractWall of retractWallEntities) {
+          retractWall.animate = retractWallAnimation();
+          retractWall.components.add('animate');
+        }
       case 10:
       case 11:
       case 12:

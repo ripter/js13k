@@ -13,7 +13,7 @@ export function pushButtonSystem(delta) {
   const finishedEntities = byComponents(['animate-finished']);
 
 
-  console.log('finishedEntities.size', finishedEntities.size);
+  // console.log('finishedEntities.size', finishedEntities.size);
   // When all the animations finish, return control to the player.
   if (finishedEntities.size === 5) {
     // re-enable the player

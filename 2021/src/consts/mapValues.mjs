@@ -87,17 +87,27 @@ export const mapValues = [
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid', 'jaw', 'collect-wall',
+      'sprite', 'solid', 'jaw', 'collect-wall-jaw',
     ]),
   }),
   // 10 is a retracting wall
   (tileX, tileY) => ({
-    tileID: 1, color: 'green',
-    // rotate: -90*Math.PI/180,
+    tileID: 1, color: 'red',
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid', 'jaw', 'collect-wall',
+      'sprite', 'solid', 'retract-wall',
+    ]),
+  }),
+  // 11 is a hidden jaw that moves trash into the collection area.
+  (tileX, tileY) => ({
+    tileID: 104, color: 'yellow',
+    // rotate: -90*Math.PI/180,
+    rotate: 180*Math.PI/180,
+    x: (tileX*8), y: (tileY*8),
+    deltaX: 0, deltaY: 0,
+    components: new Set([
+      'sprite', 'solid', 'collect-wall-jaw', 'retract-wall',
     ]),
   }),
 ];
