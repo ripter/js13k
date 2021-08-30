@@ -23,7 +23,7 @@ export function addTrashBlock(tileX, tileY, blocks) {
       deltaX: 0, deltaY: 0,
       components: new Set([
         'sprite', 'solid',
-        'movable-group',
+        'movable-group', 'trash-block',
       ]),
     });
   });

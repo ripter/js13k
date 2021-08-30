@@ -92,7 +92,7 @@ export const mapValues = [
   }),
   // 10 is a retracting wall
   (tileX, tileY) => ({
-    tileID: 1, color: 'red',
+    tileID: 1, color: 'green',
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
