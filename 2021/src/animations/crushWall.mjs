@@ -1,5 +1,6 @@
 import { byComponents } from '../entities/byComponents.mjs';
 import { retractWallAnimation } from './retractWallAnimation.mjs';
+import { sweepIntoCollectionAnimation } from './sweepIntoCollectionAnimation.mjs';
 import { genFrameAnimation } from './genFrameAnimation.mjs';
 import { getKey } from '../utils/key.mjs';
 
@@ -8,7 +9,7 @@ let COMPRESSED_UID = 0;
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
     const retractWallEntities = byComponents(['retract-wall']);
-    const clearJawEntity = Array.from(byComponents(['collect-wall-jaw']))[0];
+    const verticalJawEntities = byComponents(['wall-jaw-vertical']);
 
     const { entity, frame } = props;
     switch (frame) {
@@ -33,6 +34,10 @@ export function* crushWallAnimation() {
         for (let retractWall of retractWallEntities) {
           retractWall.animate = retractWallAnimation();
           retractWall.components.add('animate');
+        }
+        for (let verticalJaw of verticalJawEntities) {
+          verticalJaw.animate = sweepIntoCollectionAnimation();
+          verticalJaw.components.add('animate');
         }
       case 10:
       case 11:

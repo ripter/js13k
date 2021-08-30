@@ -5,16 +5,16 @@ import { byComponents } from '../entities/byComponents.mjs';
  * Animated
  * @return {Generator}
  */
-export function* retractWallAnimation() {
+export function* extendWallAnimation() {
   const generator = genFrameAnimation(2, 0.25, (props) => {
     const { entity, frame } = props;
 
     switch (frame) {
       case 0:
-        entity.color = 'dark_gray';
+        entity.components.add('sprite');
         break;
       case 1:
-        entity.components.delete('sprite');
+        entity.color = 'green';
       default:
         // ignore
     }
