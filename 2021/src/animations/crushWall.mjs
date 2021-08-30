@@ -5,7 +5,6 @@ import { sweepIntoCollectionAnimation } from './sweepIntoCollectionAnimation.mjs
 import { setToMapByKey } from '../utils/setToMapByKey.mjs';
 import { moveEntities } from '../utils/moveEntities.mjs';
 
-let COMPRESSED_UID = 0;
 
 /**
  * Main crushing arm of the compactor. It pushes everything into a single column.
@@ -39,7 +38,6 @@ export function* crushWallAnimation() {
         // move self
         entity.x -= 8;
       }
-        // compressNextTile(entity);
         break;
       case 9:
         // Start the 2nd arm animation.
@@ -63,7 +61,6 @@ export function* crushWallAnimation() {
       case 17:
         entity.components.delete('sprite');
         entity.components.add('animate-finished');
-        COMPRESSED_UID += 1;
         break;
       default:
         // do nothing.
@@ -78,29 +75,4 @@ export function* crushWallAnimation() {
     props = yield;
     result = generator.next(props);
   } while (!result.done);
-}
-
-
-/**
- * Compresses solid tile in the path of entity, except for jaw entities.
- */
-function compressNextTile(entity) {
-  const trashMap = setToMapByKey(byComponents(['trash']), getKey);
-  // const solidEntities = byComponents(['trash']);
-  // const keyToCompress = getKey(entity);
-
-  let blocksToCompress = Array.from(solidEntities)
-    .filter(solidEntity => getKey(solidEntity) === keyToCompress)
-    .filter(solidEntity => !solidEntity.components.has('jaw'));
-
-  if (blocksToCompress.length === 0) {
-    return;
-  }
-
-  // move the colliding block.
-  blocksToCompress.forEach(block => {
-    block.x -= 8;
-    block.parentID = `compressed_${COMPRESSED_UID}`;
-  });
-
 }
