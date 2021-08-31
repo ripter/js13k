@@ -64,36 +64,12 @@ export function* sweepIntoCollectionAnimation() {
       case 8:
       case 9:
       case 10:
-      // {
-      //   // With the trash compacted, now push it off screen.
-      //   const trashMap = setToMapByKey(byComponents(['trash-block']), getKey);
-      //   const collectJawEntities = byComponents(['collect-wall-jaw']);
-      //   moveEntities(collectJawEntities, -1, 0);
-      //   // Push all the entities to the left of the jaws.
-      //   for (let collectJaw of collectJawEntities) {
-      //     const keyToTheLeft = getKey(collectJaw);
-      //     moveEntities(trashMap.get(keyToTheLeft), -1, 0);
-      //     console.log('sweeping', keyToTheLeft, trashMap.get(keyToTheLeft));
-      //   }
-      // }
       case 11:
       case 12:
-        {
-          // // move the collect jaw back into place.
-          // const collectJawEntities = byComponents(['collect-wall-jaw']);
-          // moveEntities(collectJawEntities, 1, 0);
-
-          entity.y -= 8;
-        }
+        entity.y -= 8;
         break;
       case 13:
-        {
-          // // move the collect jaw back into place.
-          // const collectJawEntities = byComponents(['collect-wall-jaw']);
-          // moveEntities(collectJawEntities, 1, 0);
-
-          entity.tileID = 1;
-        }
+        entity.tileID = 1;
         break;
       default:
         // ignore
