@@ -1,11 +1,12 @@
 import { byComponents } from '../entities/byComponents.mjs';
+import { collectJawAnimation } from './collectJawAnimation.mjs';
 import { extendWallAnimation } from './extendWallAnimation.mjs';
 import { genFrameAnimation } from './genFrameAnimation.mjs';
+import { getKey } from '../utils/key.mjs';
+import { moveEntities } from '../utils/moveEntities.mjs';
 import { pushSolidColumn } from '../utils/pushSolidColumn.mjs';
 import { retractWallAnimation } from './retractWallAnimation.mjs';
 import { setToMapByKey } from '../utils/setToMapByKey.mjs';
-import { moveEntities } from '../utils/moveEntities.mjs';
-import { getKey } from '../utils/key.mjs';
 
 /**
  * Animated 2nd crush arm that sweeps the row of blocks into the collection zone.
@@ -19,12 +20,12 @@ export function* sweepIntoCollectionAnimation() {
     switch (frame) {
       case 0:
       {
+        // on frame 0, retract the retractable walls.
         const retractedWallEntities = byComponents(['retract-wall']);
         for (let retractWall of retractedWallEntities) {
           retractWall.animate = retractWallAnimation();
           retractWall.components.add('animate');
         }
-        console.log('sweepIntoCollectionAnimation', frame, entity);
         entity.tileID = 104;
       }
         break;
@@ -35,6 +36,8 @@ export function* sweepIntoCollectionAnimation() {
       case 5:
       case 6:
       {
+        // Each frame, move the trash blocks under me down one tile.
+        // This makes it look like we are pushing them down.
         const trashMap = setToMapByKey(byComponents(['trash-block']), getKey);
         const keyBelowMe = getKey(entity, 0, 1);
         // Move all the entities down one.
@@ -45,21 +48,52 @@ export function* sweepIntoCollectionAnimation() {
         break;
       case 7:
       {
+        // Once all the blocks have been pushed down, put the retracting wall back up.
         const retractedWallEntities = byComponents(['retract-wall'])
         for (let retractedWall of retractedWallEntities) {
           retractedWall.animate = extendWallAnimation();
           retractedWall.components.add('animate');
         }
+        // Start the animation to push the block off screen.
+        const collectJawEntities = byComponents(['collect-wall-jaw']);
+        for (let collectJaw of collectJawEntities) {
+          collectJaw.animate = collectJawAnimation();
+          collectJaw.components.add('animate');
+        }
       }
       case 8:
       case 9:
       case 10:
+      // {
+      //   // With the trash compacted, now push it off screen.
+      //   const trashMap = setToMapByKey(byComponents(['trash-block']), getKey);
+      //   const collectJawEntities = byComponents(['collect-wall-jaw']);
+      //   moveEntities(collectJawEntities, -1, 0);
+      //   // Push all the entities to the left of the jaws.
+      //   for (let collectJaw of collectJawEntities) {
+      //     const keyToTheLeft = getKey(collectJaw);
+      //     moveEntities(trashMap.get(keyToTheLeft), -1, 0);
+      //     console.log('sweeping', keyToTheLeft, trashMap.get(keyToTheLeft));
+      //   }
+      // }
       case 11:
       case 12:
-        entity.y -= 8;
+        {
+          // // move the collect jaw back into place.
+          // const collectJawEntities = byComponents(['collect-wall-jaw']);
+          // moveEntities(collectJawEntities, 1, 0);
+
+          entity.y -= 8;
+        }
         break;
       case 13:
-        entity.tileID = 1;
+        {
+          // // move the collect jaw back into place.
+          // const collectJawEntities = byComponents(['collect-wall-jaw']);
+          // moveEntities(collectJawEntities, 1, 0);
+
+          entity.tileID = 1;
+        }
         break;
       default:
         // ignore

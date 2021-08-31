@@ -76,7 +76,6 @@ export function playerSystem(delta) {
       player.deltaY = 0;
       entitiesToMove.delete(player);
     }
-
   }
 
   //
