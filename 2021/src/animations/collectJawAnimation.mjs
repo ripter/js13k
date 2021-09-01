@@ -3,6 +3,7 @@ import { genFrameAnimation } from './genFrameAnimation.mjs';
 import { getKey } from '../utils/key.mjs';
 import { moveEntities } from '../utils/moveEntities.mjs';
 import { setToMapByKey } from '../utils/setToMapByKey.mjs';
+import { byID } from '../entities/byID.mjs';
 
 
 /**
@@ -13,6 +14,7 @@ export function* collectJawAnimation() {
   const generator = genFrameAnimation(4, 0.25, (props) => {
     const { entity, frame } = props;
     const trashMap = setToMapByKey(byComponents(['trash-block']), getKey);
+    const hudEntity = byID('hud');
 
 
     switch (frame) {
@@ -32,7 +34,8 @@ export function* collectJawAnimation() {
             scoreEntity.score = scoreEntities.size;
             totalScore += scoreEntity.score;
           }
-          console.log('Scored', totalScore);
+          hudEntity.totalScore += totalScore;
+          // console.log('Scored', totalScore);
         }
       case 3:
         entity.x += 8;

@@ -7,6 +7,7 @@ import { inputSystem } from './systems/inputSystem.mjs';
 import { playerSystem } from './systems/playerSystem.mjs';
 import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
+import { hudSystem } from './systems/hudSystem.mjs';
 
 
 // create colored sprite sheets.
@@ -32,11 +33,19 @@ addColorImage('white', [0xFF, 0xFF, 0xFF]);
 window.IS_RUNNING = true;
 // list of all entities in the game.
 window.ENTITIES = [
+  // Input Keys/Gamepad Entity.
   {
     id: 'input',
     downKeys: new Set(),
     components: new Set([
       'input'
+    ]),
+  },
+  {
+    id: 'hud',
+    totalScore: 0,
+    components: new Set([
+      'ui', 'hud',
     ]),
   },
   // Player
@@ -122,6 +131,7 @@ let lastTime = 0;
     pushButtonSystem,
     animationSystem,
     spriteSystem,
+    hudSystem,
   ].forEach(system => system(delta));
 
   lastTime = currentTime;
