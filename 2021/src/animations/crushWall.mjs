@@ -8,7 +8,6 @@ import { moveEntities } from '../utils/moveEntities.mjs';
 
 /**
  * Main crushing arm of the compactor. It pushes everything into a single column.
- * @return {Generator} [description]
  */
 export function* crushWallAnimation() {
   const generator = genFrameAnimation(18, 0.25, (props) => {
@@ -60,7 +59,7 @@ export function* crushWallAnimation() {
         break;
       case 17:
         entity.components.delete('sprite');
-        entity.components.add('animate-finished');
+        // entity.components.add('animate-finished');
         break;
       default:
         // do nothing.

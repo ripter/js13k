@@ -8,27 +8,7 @@ import { crushWallAnimation } from '../animations/crushWall.mjs';
 export function pushButtonSystem(delta) {
   const { downKeys } = byID('input');
   const playerEntities = byComponents(['player']);
-  const disabledPlayerEntities = byComponents(['player-disabled']);
   const pushButtonEntities = byComponents(['push-button']);
-  const finishedEntities = byComponents(['animate-finished']);
-
-
-  // console.log('finishedEntities.size', finishedEntities.size);
-  // When all the animations finish, return control to the player.
-  if (finishedEntities.size === 5) {
-    // re-enable the player
-    for (let disabledPlayer of disabledPlayerEntities) {
-      disabledPlayer.components.delete('player-disabled');
-      disabledPlayer.components.add('player');
-    }
-    // clear finished
-    for (let finishedEntity of finishedEntities) {
-      finishedEntity.components.delete('animate-finished');
-    }
-    return;
-  }
-
-
 
   // If the player isn't pressing up, we can skip the checks.
   // The button is hardcoded to be on the bottom of the compactor,

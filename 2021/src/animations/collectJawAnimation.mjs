@@ -7,8 +7,7 @@ import { byID } from '../entities/byID.mjs';
 
 
 /**
- * Animated
- * @return {Generator}
+ * Collects the compressed trash block and updates the score.
  */
 export function* collectJawAnimation() {
   const generator = genFrameAnimation(4, 0.25, (props) => {
@@ -19,6 +18,12 @@ export function* collectJawAnimation() {
 
     switch (frame) {
       case 0:
+      {
+        for (let disabledPlayer of byComponents(['player-disabled'])) {
+          disabledPlayer.components.delete('player-disabled');
+          disabledPlayer.components.add('player');
+        }
+      }
       case 1:
         moveEntities(trashMap.get(getKey(entity, -1, 0)), -1, 0);
         entity.x -= 8;
@@ -35,7 +40,6 @@ export function* collectJawAnimation() {
             totalScore += scoreEntity.score;
           }
           hudEntity.totalScore += totalScore;
-          // console.log('Scored', totalScore);
         }
       case 3:
         entity.x += 8;

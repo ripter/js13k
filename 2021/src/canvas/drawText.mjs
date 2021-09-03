@@ -1,7 +1,7 @@
 
 
-export function drawText(msg, x, y, font = '10px monospace') {
+export function drawText(msg, x, y, color = '#FFF', font = '10px monospace') {
   window.ctx.font = font;
-  window.ctx.fillStyle = '#FFF';
+  window.ctx.fillStyle = color;
   window.ctx.fillText(msg, x, y);
 }
