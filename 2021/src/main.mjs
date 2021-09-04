@@ -56,7 +56,7 @@ window.ENTITIES = [
     x: 8, y: 8,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid', 'player',
+      'sprite', 'solid', 'player-disabled',
     ]),
   },
 ];
@@ -89,6 +89,7 @@ addMap([
 
 
 
+/*
 // Areas that can spawn a trash block.
 [
   [ 1, 2,  3, 3],
@@ -109,6 +110,7 @@ addMap([
   const y = 0|Math.random() * (maxY - minY + 1) + minY;
   addTrashBlock(x, y, createRandomTrashBlocks());
 });
+*/
 
 // addTrashBlock(0, 0, [[17, 'red', 0, 0]])
 
