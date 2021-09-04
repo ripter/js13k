@@ -72,7 +72,9 @@ window.addEventListener('gamepadconnected', (evt) => { useGamepad = true; });
 window.addEventListener('gamepaddisconnected', () => { useGamepad = false; });
 
 
-const DELAY_TIME = 0.10;
+window.INPUT_DELAY = 0.5;
+// const DELAY_TIME = 1.00;
+// const DELAY_TIME = 0.10;
 let delay = 0;
 export function inputSystem(delta) {
   const inputEntity = byID('input');
@@ -87,7 +89,7 @@ export function inputSystem(delta) {
   if (delay <= 0 && pressedKeys.size > 0) {
     for (let key of pressedKeys) {
       inputEntity.downKeys.add(key);
-      delay = DELAY_TIME;
+      delay = window.INPUT_DELAY;
     }
   }
   // If we are in delay, clear the key set.

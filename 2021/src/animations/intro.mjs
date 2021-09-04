@@ -1,7 +1,8 @@
-import { drawText } from '../canvas/drawText.mjs';
-import { byID } from '../entities/byID.mjs'
 import { addTrashBlock } from '../entities/addTrashBlock.mjs';
+import { byComponents } from '../entities/byComponents.mjs';
+import { byID } from '../entities/byID.mjs'
 import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
+import { drawText } from '../canvas/drawText.mjs';
 
 
 const COLORS = [
@@ -23,18 +24,64 @@ export function* introAnimation(args) {
     animateTitle.next({deltaTime});
   }
 
+  // Point out the player
   yield; // pause for a tick.
   while (inputEntity.downKeys.size === 0) {
     yield;
     drawText('<- This is you.', playerEntity.x + 10, playerEntity.y+2, COLORS[0], 1);
   }
 
+  // Point out trash
   yield; // pause for a tick.
-  addTrashBlock(17, 9, createRandomTrashBlocks());
+  addTrashBlock(18, 9, createRandomTrashBlocks());
   while (inputEntity.downKeys.size === 0) {
     yield;
-    drawText('This is trash ->', playerEntity.x + 10, playerEntity.y+2, COLORS[0], 1);
+    drawText('This is trash. ->', playerEntity.x + 10, playerEntity.y+2, COLORS[0], 1);
   }
+
+  // Point out the compactor
+  yield;
+  while (inputEntity.downKeys.size === 0) {
+    yield;
+    drawText('This is the Trash Compactor.', 16, 32, COLORS[0], 1);
+    drawText('VVVV', 16, 40, COLORS[0], 1);
+  }
+
+  // Point out the button.
+  yield;
+  while (inputEntity.downKeys.size === 0) {
+    yield;
+    drawText('<- This is the compact button.', 56, 108, COLORS[0], 1);
+  }
+
+  // How to play
+  yield;
+  while (inputEntity.downKeys.size === 0) {
+    yield;
+    drawText('Push trash in the Compactor.', 80, 112, COLORS[0], 1);
+    drawText('Push the button to compress it.', 80, 120, COLORS[0], 1);
+  }
+
+  // Wait until the player compresses the block.
+  yield;
+  playerEntity.components.delete('player-disabled');
+  playerEntity.components.add('player');
+  window.INPUT_DELAY = 0.1;
+  let scoreEntities;
+  do {
+    scoreEntities = byComponents(['score']);
+    yield;
+  } while (scoreEntities.size === 0);
+
+
+  window.INPUT_DELAY = 0.5;
+  while (inputEntity.downKeys.size === 0) {
+    yield;
+    drawText('The more trash you compress, ', 80, 112, COLORS[0], 1);
+    drawText('the higher the score.', 80, 120, COLORS[0], 1);
+  }
+
+
 
   return;
 }

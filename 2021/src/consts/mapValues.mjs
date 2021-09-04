@@ -63,7 +63,7 @@ export const mapValues = [
   }),
   // 7 is the compact button
   (tileX, tileY) => ({
-    tileID: 48, color: 'green',
+    tileID: 48, color: 'light_green',
     x: (tileX*8), y: (tileY*8),
     deltaX: 0, deltaY: 0,
     components: new Set([
