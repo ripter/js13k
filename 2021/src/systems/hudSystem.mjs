@@ -12,5 +12,7 @@ export function hudSystem(deltaTime) {
   // render the HUD.
   // console.log('draw Score');
   // drawText(`Score: ${hudEntity.totalScore}`, 8, 152);
-  drawText(`Score: ${hudEntity.totalScore}`, 8, 150);
+  if (hudEntity.components.has('display-score')) {
+    drawText(`Score: ${hudEntity.totalScore}`, 8, 150);
+  }
 }

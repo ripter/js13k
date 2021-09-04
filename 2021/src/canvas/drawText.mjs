@@ -12,7 +12,7 @@ export function drawText(msg, xPos, yPos, color = '#FFF', size = 1) {
       continue;
     }
 
-    let currY = 0 + yPos;
+    let currY = yPos;
     let addX = 0;
     for (let y = 0; y < letter.length; y++) {
       let row = letter[y];

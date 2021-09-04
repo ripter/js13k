@@ -8,6 +8,7 @@ import { playerSystem } from './systems/playerSystem.mjs';
 import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { hudSystem } from './systems/hudSystem.mjs';
+import { introAnimation } from './animations/intro.mjs';
 
 
 // create colored sprite sheets.
@@ -44,8 +45,9 @@ window.ENTITIES = [
   {
     id: 'hud',
     totalScore: 0,
+    animate: introAnimation(),
     components: new Set([
-      'ui', 'hud',
+      'ui', 'hud', 'animate',
     ]),
   },
   // Player
@@ -53,7 +55,7 @@ window.ENTITIES = [
     id: 'player',
     tileID: 5,
     color: 'light_magenta',
-    x: 8, y: 8,
+    x: 64, y: 72,
     deltaX: 0, deltaY: 0,
     components: new Set([
       'sprite', 'solid', 'player-disabled',
