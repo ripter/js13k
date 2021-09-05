@@ -3,6 +3,7 @@ import { byComponents } from '../entities/byComponents.mjs';
 import { byID } from '../entities/byID.mjs'
 import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
 import { drawText } from '../canvas/drawText.mjs';
+import { startNewLevel } from './startNewLevel.mjs';
 
 
 const COLORS = [
@@ -15,6 +16,7 @@ const COLORS = [
 export function* introAnimation(args) {
   const inputEntity = byID('input');
   const playerEntity = byID('player');
+  const hudEntity = byID('hud');
   const animateTitle = colorTitle();
 
   // Show Title unill a button is pressed.
@@ -81,8 +83,18 @@ export function* introAnimation(args) {
     drawText('the higher the score.', 80, 120, COLORS[0], 1);
   }
 
+  yield;
+  while (inputEntity.downKeys.size === 0) {
+    yield;
+    drawText('Clear the SPACE', 80, 112, COLORS[0], 1);
+    drawText('and get the highest score!', 80, 120, COLORS[0], 1);
+  }
 
-
+  console.log('done with intro', hudEntity);
+  // Start a new Game.
+  hudEntity.animate = startNewLevel();
+  yield; // We need to yield after setting a new animation so that this animation
+        // won't terminate and remove the component.
   return;
 }
 
