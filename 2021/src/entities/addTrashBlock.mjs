@@ -30,4 +30,5 @@ export function addTrashBlock(tileX, tileY, blocks) {
 
   // cheap UUID
   UUID += 1;
+  return parentID;
 }

@@ -93,8 +93,10 @@ export function* introAnimation(args) {
   console.log('done with intro', hudEntity);
   // Start a new Game.
   hudEntity.animate = startNewLevel();
-  yield; // We need to yield after setting a new animation so that this animation
-        // won't terminate and remove the component.
+  // We need to yield after setting a new animation so that this animation
+  // won't terminate and remove the component.
+  yield;
+  // return ends the Generator.
   return;
 }
 
