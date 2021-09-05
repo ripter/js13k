@@ -6,7 +6,7 @@ import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey } from '../utils/key.mjs';
 
-const BLOCKS_TO_CREATE = 10;
+const BLOCKS_TO_CREATE = 35;
 export function* startNewLevel() {
   // let the player move faster with a lower input delay
   window.INPUT_DELAY = 0.1;

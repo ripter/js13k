@@ -10,6 +10,8 @@ import { spriteSystem } from './systems/spriteSystem.mjs';
 import { hudSystem } from './systems/hudSystem.mjs';
 import { introAnimation } from './animations/intro.mjs';
 
+import { startNewLevel } from './animations/startNewLevel.mjs';
+
 
 // create colored sprite sheets.
 addColorImage('black', [0x00, 0x00, 0x00]);
@@ -46,6 +48,7 @@ window.ENTITIES = [
     id: 'hud',
     totalScore: 0,
     animate: introAnimation(),
+    // animate: startNewLevel(),
     components: new Set([
       'ui', 'hud', 'animate',
     ]),
@@ -91,31 +94,7 @@ addMap([
 
 
 
-/*
-// Areas that can spawn a trash block.
-[
-  [ 1, 2,  3, 3],
-  // [ 2,13,  2,18],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-].forEach(range => {
-  const [minX, minY, maxX, maxY] = range;
-  const x = 0|Math.random() * (maxX - minX + 1) + minX;
-  const y = 0|Math.random() * (maxY - minY + 1) + minY;
-  addTrashBlock(x, y, createRandomTrashBlocks());
-});
-*/
-
 // addTrashBlock(0, 0, [[17, 'red', 0, 0]])
-
 
 // Get the 2d Context
 window.ctx = window.c.getContext('2d');
