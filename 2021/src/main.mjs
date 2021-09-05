@@ -8,6 +8,9 @@ import { playerSystem } from './systems/playerSystem.mjs';
 import { pushButtonSystem } from './systems/pushButtonSystem.mjs';
 import { spriteSystem } from './systems/spriteSystem.mjs';
 import { hudSystem } from './systems/hudSystem.mjs';
+import { introAnimation } from './animations/intro.mjs';
+
+import { startNewLevel } from './animations/startNewLevel.mjs';
 
 
 // create colored sprite sheets.
@@ -44,8 +47,10 @@ window.ENTITIES = [
   {
     id: 'hud',
     totalScore: 0,
+    animate: introAnimation(),
+    // animate: startNewLevel(),
     components: new Set([
-      'ui', 'hud',
+      'ui', 'hud', 'animate',
     ]),
   },
   // Player
@@ -53,10 +58,10 @@ window.ENTITIES = [
     id: 'player',
     tileID: 5,
     color: 'light_magenta',
-    x: 8, y: 8,
+    x: 64, y: 72,
     deltaX: 0, deltaY: 0,
     components: new Set([
-      'sprite', 'solid', 'player',
+      'sprite', 'solid', 'player-disabled',
     ]),
   },
 ];
@@ -89,29 +94,7 @@ addMap([
 
 
 
-// Areas that can spawn a trash block.
-[
-  [ 1, 2,  3, 3],
-  // [ 2,13,  2,18],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13, 2, 30, 8],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-  [13,11, 30,18],
-].forEach(range => {
-  const [minX, minY, maxX, maxY] = range;
-  const x = 0|Math.random() * (maxX - minX + 1) + minX;
-  const y = 0|Math.random() * (maxY - minY + 1) + minY;
-  addTrashBlock(x, y, createRandomTrashBlocks());
-});
-
 // addTrashBlock(0, 0, [[17, 'red', 0, 0]])
-
 
 // Get the 2d Context
 window.ctx = window.c.getContext('2d');
