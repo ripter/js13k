@@ -47,8 +47,8 @@ window.ENTITIES = [
   {
     id: 'hud',
     totalScore: 0,
-    // animate: introAnimation(),
-    animate: startNewLevel(),
+    animate: introAnimation(),
+    // animate: startNewLevel(),
     components: new Set([
       'ui', 'hud', 'animate',
     ]),
