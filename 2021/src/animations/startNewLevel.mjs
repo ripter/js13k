@@ -6,7 +6,7 @@ import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey } from '../utils/key.mjs';
 
-const BLOCKS_TO_CREATE = 35;
+const BLOCKS_TO_CREATE = 25;
 export function* startNewLevel() {
   // let the player move faster with a lower input delay
   window.INPUT_DELAY = 0.1;
@@ -36,11 +36,17 @@ export function* startNewLevel() {
       doesCollide = trashData.find(block => {
         let collisionKey = getKey({x: tileX*8, y: tileY*8}, block[2], block[3]);
         let collisions = getCollisionByKey(collisionKey, getKey, solidEntities);
+        const blockX = tileX + block[2];
+        const blockY = tileY + block[3];
         // if there is a collision, or if the tile would be on the edge of off screen.
         // then return false so we can pick a new position.
         return collisions.length > 0
-          || (tileX + block[2]) >= 31
-          || (tileY + block[3]) >= 19;
+          // Check if the block would be on the edge
+          || blockX >= 31
+          || blockY >= 19
+          // don't place blocks in the gap next to the button.
+          // || blockY === 13
+
       });
     } while (doesCollide);
 

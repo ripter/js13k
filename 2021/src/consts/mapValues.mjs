@@ -1,4 +1,7 @@
-
+/**
+ * The map is 2d Array of numbers.
+ * This maps an index number to an entity.
+ */
 export const mapValues = [
   // 0 is empty, no entity.
   () => (null),
@@ -108,6 +111,13 @@ export const mapValues = [
     deltaX: 0, deltaY: 0,
     components: new Set([
       'sprite', 'solid', 'wall-jaw-vertical',
+    ]),
+  }),
+  // 12 is a no-trash allowed tile.
+  (tileX, tileY) => ({
+    x: (tileX*8), y: (tileY*8),
+    components: new Set([
+      'no-trash', 
     ]),
   }),
 ];
