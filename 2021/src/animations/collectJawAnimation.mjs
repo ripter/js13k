@@ -30,7 +30,7 @@ export function* collectJawAnimation() {
         break;
       case 2:
         {
-          const scoreEntities = trashMap.get(getKey(entity, -1, 0));
+          const scoreEntities = trashMap.get(getKey(entity, -1, 0)) ?? [];
           let totalScore = 0;
           for (let scoreEntity of scoreEntities) {
             // remove the trash-block component and give it a score.

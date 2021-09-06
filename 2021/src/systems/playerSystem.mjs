@@ -10,11 +10,7 @@ export function playerSystem(delta) {
   const movableEntities = byComponents(['movable-group']);
   const playerEntities = byComponents(['player']);
   const solidEntities = byComponents(['solid']);
-  const noTrashEntities = byComponents(['no-trash']);
-
-  // Combine the solid entities with the no-trash entities.
-  // The trash can't be pushed into either case.
-  solidEntities.forEach(entity => noTrashEntities.add(entity));
+  const noTrashEntities = byComponents(['solid'],['no-trash']);
 
   //
   // If there are no keys down, or there is no player
@@ -49,7 +45,7 @@ export function playerSystem(delta) {
   // Get the key for the delta position.
   const playerDeltaKey = getDeltaKey(player);
   // Add the player to the list of entities to move.
-  // entitiesToMove.add(player);
+  entitiesToMove.add(player);
 
 
   // Player can push movable-group entities by pushing on any entity in the group.
@@ -60,8 +56,6 @@ export function playerSystem(delta) {
     // If the entity isn't part of a group, then use the entity.
     const { parentID } = pushedEntities[0];
     const groupEntities = parentID ? Array.from(byParentID(parentID).values()) : pushedEntities;
-    // Combine solid and no-trash entities when checking if the trash entity can move.
-    noTrashEntities.forEach(entity => solidEntities.add(entity));
 
     // Check if any entity in the group will collide with a solid if pushed.
     const collisionEntity = groupEntities.find(groupEntity => {
@@ -78,12 +72,6 @@ export function playerSystem(delta) {
         entity.deltaY = player.deltaY;
         entitiesToMove.add(entity);
       });
-    }
-    // Collision, don't move anyone.
-    else {
-      player.deltaX = 0;
-      player.deltaY = 0;
-      entitiesToMove.delete(player);
     }
   }
 
@@ -106,11 +94,4 @@ export function playerSystem(delta) {
     entity.deltaX = 0;
     entity.deltaY = 0;
   });
-
-  //
-  // Move the player
-  player.x += player.deltaX * 8;
-  player.y += player.deltaY * 8;
-  player.deltaX = 0;
-  player.deltaY = 0;
 }
