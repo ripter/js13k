@@ -6,7 +6,7 @@ import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey } from '../utils/key.mjs';
 
-const BLOCKS_TO_CREATE = 25;
+const BLOCKS_TO_CREATE = 5;
 export function* startNewLevel() {
   // let the player move faster with a lower input delay
   window.INPUT_DELAY = 0.1;
@@ -21,8 +21,8 @@ export function* startNewLevel() {
   hudEntity.totalScore = 0;
   hudEntity.components.add('display-score');
 
-  // Get the solid entities and add fake ones for the border.
-  const solidEntities = byComponents(['solid']);
+  // get the entities that collide with a new trash block.
+  const noTrashEntities = byComponents(['solid'],['no-trash']);
   // Create the trash blocks for the level.
   for (let i=0; i < BLOCKS_TO_CREATE; i++) {
     // Create a random trash block.
@@ -35,7 +35,7 @@ export function* startNewLevel() {
       tileY = (0|(Math.random() * window.c.height)/8)+1;
       doesCollide = trashData.find(block => {
         let collisionKey = getKey({x: tileX*8, y: tileY*8}, block[2], block[3]);
-        let collisions = getCollisionByKey(collisionKey, getKey, solidEntities);
+        let collisions = getCollisionByKey(collisionKey, getKey, noTrashEntities);
         const blockX = tileX + block[2];
         const blockY = tileY + block[3];
         // if there is a collision, or if the tile would be on the edge of off screen.
@@ -43,9 +43,7 @@ export function* startNewLevel() {
         return collisions.length > 0
           // Check if the block would be on the edge
           || blockX >= 31
-          || blockY >= 19
-          // don't place blocks in the gap next to the button.
-          // || blockY === 13
+          || blockY >= 19;
 
       });
     } while (doesCollide);
@@ -54,7 +52,7 @@ export function* startNewLevel() {
     const parentID = addTrashBlock(tileX, tileY, trashData);
     // Update the set since it it cached each tick.
     byParentID(parentID).forEach(entity => {
-      solidEntities.add(entity)
+      noTrashEntities.add(entity)
     });
   }
 
