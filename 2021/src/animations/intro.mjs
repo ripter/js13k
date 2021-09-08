@@ -85,7 +85,6 @@ export function* introAnimation(args) {
     drawText('and get the highest score!', 80, 120, COLORS[0], 1);
   }
 
-  console.log('done with intro', hudEntity);
   // Start a new Game.
   hudEntity.animate = startNewLevel();
   // We need to yield after setting a new animation so that this animation
