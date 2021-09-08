@@ -86,6 +86,7 @@ export function* introAnimation(args) {
   }
 
   // Start a new Game.
+  window.level = 1;
   hudEntity.animate = startNewLevel();
   // We need to yield after setting a new animation so that this animation
   // won't terminate and remove the component.

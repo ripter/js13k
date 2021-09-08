@@ -6,9 +6,11 @@ import { cycleColorText } from './cycleColorText.mjs';
 import { deleteWithComponent } from '../entities/deleteWithComponent.mjs';
 import { drawText } from '../canvas/drawText.mjs';
 import { formatNumber } from '../utils/formatNumber.mjs';
+import { startNewLevel } from './startNewLevel.mjs';
 
 export function* endGameScene() {
   let genFlashScore, scoreEntities;
+  const hudEntity = byID('hud');
   // Setup the player to push around trash.
   const playerEntity = byID('player');
   window.INPUT_DELAY = 0.1;
@@ -42,7 +44,10 @@ export function* endGameScene() {
     props = yield;
   } while (scoreEntities.size === 0);
 
-  console.log('Load Next Level!');
+  // Start a new Game.
+  window.level += 1;
+  hudEntity.animate = startNewLevel();
+
 
   yield;
   return;
