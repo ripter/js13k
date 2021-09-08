@@ -3,10 +3,11 @@ import { byComponents } from '../entities/byComponents.mjs';
 import { byID } from '../entities/byID.mjs';
 import { byParentID } from '../entities/byParentID.mjs';
 import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
+import { endGameScene } from './endGameScene.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey } from '../utils/key.mjs';
 
-const BLOCKS_TO_CREATE = 5;
+const BLOCKS_TO_CREATE = 1;
 export function* startNewLevel() {
   // let the player move faster with a lower input delay
   window.INPUT_DELAY = 0.1;
@@ -66,6 +67,11 @@ export function* startNewLevel() {
     trashEntities = byComponents(['trash-block']);
     yield;
   } while (trashEntities.size > 0);
+
+  //
+  // Switch to end game
+  hudEntity.animate = endGameScene(),
+  yield;
 
   console.log('END startNewLevel');
 }
