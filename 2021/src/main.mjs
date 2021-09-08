@@ -47,10 +47,10 @@ window.ENTITIES = [
   },
   {
     id: 'hud',
-    totalScore: 0,
-    // animate: introAnimation(),
+    totalScore: 999999999,
+    animate: introAnimation(),
     // animate: startNewLevel(),
-    animate: endGameScene(),
+    // animate: endGameScene(),
     components: new Set([
       'ui', 'hud', 'animate',
     ]),

@@ -1,4 +1,5 @@
 import { drawText } from '../canvas/drawText.mjs';
+import { formatNumber } from '../utils/formatNumber.mjs';
 
 export function* endGameScene(args) {
   console.log('endGameScene', args);
@@ -7,9 +8,14 @@ export function* endGameScene(args) {
   console.log('props', props);
 
   while (true) {
-    drawText('Good Job!!', 30, 30, '#fff', 3);
+    const { entity } = props;
+    const score = formatNumber(entity.totalScore);
+    drawText('Good Job!!', 86, 30, '#fff', 3);
+    drawText(`Total Score: ${score}`, 8, 142, '#fff', 2);
+
+    // Yield till the next tick.
     props = yield;
-  }  
+  }
 
   yield;
   return;

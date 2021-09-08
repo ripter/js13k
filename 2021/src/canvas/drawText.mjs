@@ -8,6 +8,7 @@ export function drawText(msg, xPos, yPos, color = '#FFF', size = 1) {
   let currX = 0;
   for (let xMsgPos = 0; xMsgPos < msg.length; xMsgPos++) {
     const letter = LETTERS[msg[xMsgPos].toUpperCase()];
+    
     if (!letter) {
       continue;
     }
