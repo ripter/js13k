@@ -1,5 +1,6 @@
 import { byID } from '../entities/byID.mjs';
 import { drawText } from '../canvas/drawText.mjs';
+import { formatNumber } from '../utils/formatNumber.mjs';
 
 /**
  * Draws the game HUD
@@ -9,10 +10,9 @@ export function hudSystem(deltaTime) {
   const hudEntity = byID('hud');
 
 
-  // render the HUD.
-  // console.log('draw Score');
-  // drawText(`Score: ${hudEntity.totalScore}`, 8, 152);
+  // Render the score.
   if (hudEntity.components.has('display-score')) {
-    drawText(`Score: ${hudEntity.totalScore}`, 8, 150);
+    const score = formatNumber(hudEntity.totalScore)
+    drawText(`Score: ${score}`, 8, 150);
   }
 }

@@ -11,6 +11,7 @@ import { hudSystem } from './systems/hudSystem.mjs';
 import { introAnimation } from './animations/intro.mjs';
 
 import { startNewLevel } from './animations/startNewLevel.mjs';
+import { endGameScene } from './animations/endGameScene.mjs';
 
 
 // create colored sprite sheets.
@@ -46,9 +47,10 @@ window.ENTITIES = [
   },
   {
     id: 'hud',
-    totalScore: 0,
+    totalScore: 999999999,
     animate: introAnimation(),
     // animate: startNewLevel(),
+    // animate: endGameScene(),
     components: new Set([
       'ui', 'hud', 'animate',
     ]),
