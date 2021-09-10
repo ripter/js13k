@@ -4,6 +4,8 @@ import { getKey } from '../utils/key.mjs';
 import { sweepIntoCollectionAnimation } from './sweepIntoCollectionAnimation.mjs';
 import { setToMapByKey } from '../utils/setToMapByKey.mjs';
 import { moveEntities } from '../utils/moveEntities.mjs';
+import { playPiano } from '../utils/alphabetPiano.mjs';
+import { MUSIC } from '../consts/music.mjs';
 
 
 /**
@@ -17,6 +19,7 @@ export function* crushWallAnimation() {
     const { entity, frame } = props;
     switch (frame) {
       case 0:
+        playPiano(...MUSIC[1]);
         entity.components.add('sprite');
         entity.color = 'dark_gray';
         break;
