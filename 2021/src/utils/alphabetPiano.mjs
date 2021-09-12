@@ -4,12 +4,11 @@ import { NOTE_DURATION, TEMPO } from '../consts/music.mjs';
  * Plays a string with a piano sound.
  * Added ability for each note to define length with a pair of chars.
  * Inspired & heavily borrowed from: https://xem.github.io/alphabet-piano/
- * a == C4 (Middle C) Note. z === D6 (wistle) note. Z === f# Note
  * @param  {string} melody - string of charCode/Duration pairs.
  * @example - "aWbH" Duration W, H, Q, E, S
  * @param  {String} [waveform='sine'] - sine, triangle, square, or sawtooth.
  */
-export function playPiano(melody, waveform='sine') {
+export function playPiano(melody, maxGain = 1, waveform='sine') {
   const actx = new AudioContext();
   const gainNode = new GainNode(actx, { gain: 0 });
   const oscillatorNode = new OscillatorNode(actx, { type: waveform });
@@ -28,6 +27,7 @@ export function playPiano(melody, waveform='sine') {
     // bail if the note is 0
     if (melody[i] === '0') { continue; }
 
+    // console.log(melody[i], freq);
     // console.group('note');
     // console.log('note', melody[i]);
     // console.log('frequency', freq);
@@ -36,7 +36,7 @@ export function playPiano(melody, waveform='sine') {
     // Change the frequency for each note when it starts.
     oscillatorNode.frequency.setValueAtTime(freq, startTime);
     // Create a "beat" by turning up and down the gain.
-    gainNode.gain.setTargetAtTime(1, startTime, 0.05);
+    gainNode.gain.setTargetAtTime(maxGain, startTime, 0.05);
     gainNode.gain.setTargetAtTime(0, endTime-0.1, 0.05);
   }
 

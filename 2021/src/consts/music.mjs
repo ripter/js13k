@@ -15,13 +15,15 @@ export const MUSIC = [
     () => {
       // playPiano('a<a>a@@b<b>a<a>a@@b<b>a<a>a@@b<b>', 0.3, 'triangle');
       // playPiano('a<a>a@@b<b>a<a>a@@b<b>a<a>a@@b<b>', 0.3, 'sine');
+      playPiano('UWVWUW',2)
+      playPiano('aHbQcQdEdEeEaHfEfEfEgH', 1)
     },
     // 1 is a intro music.
     () => {
       const baseLine = 'RQRQRQRQTH0QTH'; // 9 beats
       const happyRift = 'fQfQgEdQdQ'; // 4.5 beats
-      playPiano(baseLine, 'sine');
-      playPiano(`fQfQ${happyRift}fQfQ`, 'sine');
+      playPiano(baseLine, 2, 'sine');
+      playPiano(`fQfQ${happyRift}fQfQ`, 1, 'sine');
       // playPiano('aWbWaHbHaQbQ', 'sine');
       // playPiano('Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0', 0.15, 'sine')
       // playPiano('hihi0why00hihi0why0querty0querty0hi0hi')
