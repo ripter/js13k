@@ -3,6 +3,7 @@ import { byID } from '../entities/byID.mjs';
 import { byParentID } from '../entities/byParentID.mjs';
 import { getCollisionByKey } from '../utils/getCollisions.mjs';
 import { getKey, getDeltaKey } from '../utils/key.mjs';
+import { MUSIC } from '../consts/music.mjs';
 
 export function playerSystem(delta) {
   const { downKeys } = byID('input');
@@ -72,6 +73,8 @@ export function playerSystem(delta) {
         entity.deltaY = player.deltaY;
         entitiesToMove.add(entity);
       });
+    } else {
+      MUSIC[2]();
     }
   }
 

@@ -19,7 +19,6 @@ export function* crushWallAnimation() {
     const { entity, frame } = props;
     switch (frame) {
       case 0:
-        playPiano(...MUSIC[1]);
         entity.components.add('sprite');
         entity.color = 'dark_gray';
         break;

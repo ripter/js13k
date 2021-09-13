@@ -33,7 +33,7 @@ addColorImage('light_gray', [0xAA, 0xAA, 0xAA]);
 addColorImage('white', [0xFF, 0xFF, 0xFF]);
 
 
-
+window.level = 1;
 window.IS_RUNNING = true;
 // list of all entities in the game.
 window.ENTITIES = [
