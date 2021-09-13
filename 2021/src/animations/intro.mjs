@@ -6,13 +6,15 @@ import { createRandomTrashBlocks } from '../utils/createRandomTrashBlocks.mjs';
 import { drawText } from '../canvas/drawText.mjs';
 import { startNewLevel } from './startNewLevel.mjs';
 import { cycleColorText } from './cycleColorText.mjs';
-
+import { playPiano } from '../utils/alphabetPiano.mjs';
+import { MUSIC } from '../consts/music.mjs';
 
 export function* introAnimation(args) {
   const inputEntity = byID('input');
   const playerEntity = byID('player');
   const hudEntity = byID('hud');
   const genHeader = cycleColorText('JS13kGame 2021 - "SPACE"', 8, 8, 2);
+
 
   // Show Title unill a button is pressed.
   while (inputEntity.downKeys.size === 0) {
@@ -21,6 +23,7 @@ export function* introAnimation(args) {
     genHeader.next({deltaTime});
   }
 
+  MUSIC[1]();
   // Point out the player
   yield; // pause for a tick.
   while (inputEntity.downKeys.size === 0) {
