@@ -39,7 +39,7 @@ export function* endGameScene() {
     drawText(`Total Score:`, 8, 142, '#fff', 2);
 
     drawText('Great Job!!', 86, 30, '#fff', 3);
-    drawText(`You beat level`, 86, 54, '#fff', 1);
+    drawText(`You beat`, 118, 54, '#fff', 1);
 
     drawText('Can you clear the next SPACE?', 86, 96, '#fff', 1);
     drawText(`Compress the trash to try level ${window.level+1}`, 86, 104, '#fff', 1);
