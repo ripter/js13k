@@ -1,22 +1,26 @@
-![js13k logo](./js13k-logo.png)
+![js13k logo](https://js13kgames.com/img/logo.png)
 
-## Theme:
+## Theme: SPACE
+
+Clear the SPACE by compressing trash into a small SPACE saving cube. The more trash you can fit into each cube, the higher your score!
+Use the WASD, Arrow Keys, or a Gamepad to move around.
 
 
 ### Prerequisites
 
-- You need [node](https://nodejs.org/en/download/current/) installed.
+- You will need [node](https://nodejs.org/en/download/current/) installed.
+- You will need a command line to run the bash commands.
 
 
-### Start the Server
+### Start development Server
 
+This will setup a server listening at `http://localhost:8080/`.
+This runs from `/src` with the unbuilt source code.
 
 ```bash
 make server
 ```
 
-This will setup a server listening at `http://localhost:8080/`.
-This runs from `/src` with the unbuilt source code.
 
 
 ### https Server
