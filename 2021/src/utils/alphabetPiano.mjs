@@ -8,7 +8,7 @@ import { NOTE_DURATION, TEMPO } from '../consts/music.mjs';
  * @example - "aWbH" Duration W, H, Q, E, S
  * @param  {String} [waveform='sine'] - sine, triangle, square, or sawtooth.
  */
-export function playPiano(melody, maxGain = 1, waveform='sine') {
+export function playPiano(melody, maxGain = 0.5, waveform='sine') {
   const actx = new AudioContext();
   const gainNode = new GainNode(actx, { gain: 0 });
   const oscillatorNode = new OscillatorNode(actx, { type: waveform });
@@ -45,9 +45,9 @@ export function playPiano(melody, maxGain = 1, waveform='sine') {
   oscillatorNode.stop(runningTime);
 
   oscillatorNode.onended = () => {
-    oscillatorNode.disconnect();
-    gainNode.disconnect();
-    actx.close();
+    // oscillatorNode.disconnect();
+    // gainNode.disconnect();
+    // actx.close();
   };
 }
 

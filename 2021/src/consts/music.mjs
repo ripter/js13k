@@ -1,4 +1,5 @@
 import { playPiano } from '../utils/alphabetPiano.mjs';
+import { zipString } from '../utils/zipString.mjs';
 
 export const TEMPO = 120;
 
@@ -15,15 +16,15 @@ export const MUSIC = [
     () => {
       // playPiano('a<a>a@@b<b>a<a>a@@b<b>a<a>a@@b<b>', 0.3, 'triangle');
       // playPiano('a<a>a@@b<b>a<a>a@@b<b>a<a>a@@b<b>', 0.3, 'sine');
-      playPiano('UWVWUW',2)
-      playPiano('aHbQcQdEdEeEaHfEfEfEgH', 1)
+      playPiano('UWVWUW',1)
+      playPiano('aHbQcQdEdEeEaHfEfEfEgH', 0.5)
     },
     // 1 is a intro music.
     () => {
       const baseLine = 'RQRQRQRQTH0QTH'; // 9 beats
       const happyRift = 'fQfQgEdQdQ'; // 4.5 beats
-      playPiano(baseLine, 2, 'sine');
-      playPiano(`fQfQ${happyRift}fQfQ`, 1, 'sine');
+      playPiano(baseLine, 1, 'sine');
+      playPiano(`fQfQ${happyRift}fQfQ`, 0.5, 'sine');
       // playPiano('aWbWaHbHaQbQ', 'sine');
       // playPiano('Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0Z0ZaaZ0Z0W0W0', 0.15, 'sine')
       // playPiano('hihi0why00hihi0why0querty0querty0hi0hi')
@@ -33,3 +34,15 @@ export const MUSIC = [
 
     },
 ];
+
+export const MELODY = [
+  // 0
+  'aaabccdde',
+];
+window.MELODY = MELODY;
+
+export const BEATS = [
+  // 0 is a build up
+  'EEEHQQSQH',
+];
+window.BEATS = BEATS;
