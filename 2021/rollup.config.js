@@ -7,7 +7,7 @@ import minify from 'rollup-plugin-babel-minify';
 export default {
 	input: 'src/main.mjs',
 	output: {
-		file: 'dist/main.js',
+		file: 'dist/main.mjs',
 		format: 'iife',
 		sourcemap: false,
 		globals: {
