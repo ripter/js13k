@@ -66,20 +66,14 @@ Still, my dream cache API would have solved this difference. And I liked being a
 ---
 ### Entity Cache
 
-Every system makes several calls to `byComponents([])`. They are often calling for the same list, like when getting all the entities with the `solid` component. So I implemented a very basic cache system on the `byComponents()` function.
+Systems work with lists of entities queried by their *Components* (or in my case *Tags*.) Several systems might get a list of `solid` entities. Generators might also get a list of `solid` entities. To avoid performing an `O(n)` operation for each call, I added a simple cache system in the `byComponents` function.
 
 1. The [cache system](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/main.mjs#L113) in the game is reset every tick.
-2. The function [byComponents](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/entities/byComponents.mjs) would check if the requested entities were already stored in the cache (`O(1)`). If not, then it would search all entities (`O(n)`) with `components.has(name)` and cache the result (`O(n)`).
-
-In this system, it only performed `O(n)` once per unique component list.
+2. The function [byComponents](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/entities/byComponents.mjs) checks if the requested entities were already stored in the cache (`O(1)`). If not, it performs an `O(n)` operation to create a new list. It adds this new list to the cache and returns the result.
 
 I wish I would have created `addComponent`, `removeComponent` functions. These functions would add/remove items from the cache instead of clearing it every turn. Then the `byComponents()` function could always use the cache.
 
-It would have been nice to cache the collision maps as well. Systems like `playerSystem` use the position to create a [collision map](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/systems/playerSystem.mjs#L54). Then the system can work on the colliding items.
-
- 
-
-
+It would have been nice to cache the collision maps as well. Systems like [playerSystem](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/systems/playerSystem.mjs#L54), and Generators like [startNewLevel](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/startNewLevel.mjs#L40) uses a simple collision detection by looking for entities on the same tile.
 
 
 ---
@@ -89,9 +83,32 @@ I had never used [Generators](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 I started using Generators when I added the [animationSystem](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/systems/animationSystem.mjs) I needed a way to do **something** at the start of each animation frame. A system, in contrast, does something every game tick. For example, the [pushButton](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/pushButton.mjs) animation moves the sprite by one pixel each frame (every 0.25 seconds).
 
-I could store the `delay`, `totalFrames`, and `animationCallback` on the Entity with the other data. Then the system could update the Entity and trigger the `animationCallback` for each frame. Instead, I created an [animation generator](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/genFrameAnimation.mjs#L9) that can keep the data in a private scope.
+I could store the `delay`, `totalFrames`, and `animationCallback` on the Entity with the other data. Then the system could update the Entity and trigger the `animationCallback` for each frame. Instead, I created an [animation generator](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/genFrameAnimation.mjs#L9) that keeps the frame animation data in a private scope.
 
-Using generators makes it easy for me to make the scenes, like the [introScene](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/intro.mjs#L12).  Instead of using frames. This allowed me to do things like display text until the user presses a button.
+```
+while (frame < totalFrames) {
+  // YIELD
+  const props = yield;
+  const { deltaTime } = props;
+  
+  // wait until the delay is over before doing the next animation.
+  if ((delay - deltaTime) > 0) {
+    delay -= deltaTime;
+    continue;
+  }
+
+  //
+  // do animation stuff once per frame.
+  //
+  
+  // Advance to the next frame and reset the delay.
+  frame += 1;
+  delay = frameDelay;
+}
+```
+
+I also found that the sequential style enabled by Generators made writing Scenes easier. A scene controls major aspects of the game flow, like start/end menus, enabling and disabling the main gameplay, and starting new levels. You can see in the [introScene](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/intro.mjs#L12) that the tutorial is written as a series of steps.
+
 
 ```
 // stay inside the loop until the user presses a key.
