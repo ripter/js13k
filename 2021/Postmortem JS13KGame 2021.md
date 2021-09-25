@@ -85,28 +85,60 @@ It would have been nice to cache the collision maps as well. Systems like `playe
 ---
 # 2. Generators
 
-I had never used [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) before this project. But, I had used coroutines in Lua, which are similar to generators.
+I had never used [Generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) before this project. But, I had used [coroutines in PICO-8](https://www.lexaloffle.com/bbs/?tid=3458), which are similar to generators.
 
-I started using Generators when I added the [animationSystem](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/systems/animationSystem.mjs) I needed a way to do *something* at the start of each animation frame. The issue is that a system is run every tick, while animations happen in seconds. My first animation [pushButton](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/pushButton.mjs) moves the sprite by one pixel each frame. It just waits and does nothing between frames.
+I started using Generators when I added the [animationSystem](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/systems/animationSystem.mjs) I needed a way to do **something** at the start of each animation frame. A system, in contrast, does something every game tick. For example, the [pushButton](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/pushButton.mjs) animation moves the sprite by one pixel each frame (every 0.25 seconds).
 
-I need things like `totalFrames`, `delayTime`, and `deltaTime` to know the current `frame`. Then I need code to wait until the frame changes. It's a lot of repeated code for each animation and obfuscates the important logic of what to do on each frame. I also didn't want to store all that data on the Entity since it's more bookkeeping than game logic.
+I could store the `delay`, `totalFrames`, and `animationCallback` on the Entity with the other data. Then the system could update the Entity and trigger the `animationCallback` for each frame. Instead, I created an [animation generator](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/genFrameAnimation.mjs#L9) that can keep the data in a private scope.
 
-Generators allow you to keep state between calls. So I was able to make an [animation generator](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/genFrameAnimation.mjs#L9) that calls the callback function at the start of each frame. Every tick provides a `deltaTime`. I keep the [generator in a loop](https://github.com/ripter/js13k/blob/e52d6d77b308d2f46dcc7bad3630e23895b6cb26/2021/src/animations/genFrameAnimation.mjs#L20) updating the `delay` until it is time to change frames. Once the delay is over, it triggers the callback once and then waits again.
+Using generators makes it easy for me to make the scenes, like the [introScene](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/intro.mjs#L12).  Instead of using frames. This allowed me to do things like display text until the user presses a button.
+
+```
+// stay inside the loop until the user presses a key.
+while (inputEntity.downKeys.size === 0) {
+  yield;
+  drawText('<- This is the compact button.', 56, 108, COLORS[0], 1);
+}
+```
+
+Or wait until the user compresses the trash block.
+
+```
+// Wait until the player compresses the block.
+let scoreEntities;
+do {
+  scoreEntities = byComponents(['score']);
+  yield;
+} while (scoreEntities.size === 0);
+```
 
 
+With generators, I was able to write [introAnimation](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/intro.mjs), [startNewLevel](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/startNewLevel.mjs), and [endGameScene](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/endGameScene.mjs). (The naming is dumb because I was still learning and trying to figure stuff out.) I use these three generators to control the game "scene". The scene controls things like the tutorial, end game, and playing the game.
 
-
-
-
+Because I wrote them with generators, they get an initialization step, they keep state, and can be written as a series of steps.
 
 
 
 ---
 # 3. In Retrospect
 
-I liked working with this hybrid Entity, Tag, Generator, System design. Thinking of Components as tags helped me do quick refactors of all my **Tags** (*Components*) as the game changed and evolved. I could try adding new Tags and removing old dead ones on a whim.
+I liked working with this hybrid ECS. Maybe it could be called an Entity, Tag, Generator, System (ETGS, or ETSG). Thinking of Components as tags helped me test and refactor ideas for Component combinations on a whim. Having all the data on the entity allows for a simple API because it is a plain JS object. `entity.x = 64` does the trick. Generators create a private scope of data not on the entity. Perfect for keeping implementation details out of the shared object. It also makes it easy to write sequential step-by-step code.
 
-One thing I missed, was being able to write tests. I like the Red/Green cycle of writing tests. Thinking back on it now, I could have probably created a tests.html file and imported all the tests. Then I would need to write some `describe()`,`it()`,`expect()` functions. That's assuming I want to test in a browser without a pre-processor. Since test files won't be included in the final zip file, I could also use a pre-processor and my traditional testing libraries.
+One thing I missed was writing tests. I like the Red/Green cycle and it helps ensure the code stays fixed. Thinking back on it now, I could have written tests, because the tests wouldn't be included in the final zip file. I could have used my normal testing libraries. I had limited time and hadn't set up a testing toolchain beforehand. I think for next year I'll have to better prepare my starter template.
 
+I'm excited to play around with more Generators. They have several advantages, but I'm not used to thinking "in generator". You can see in [animationSystem](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/systems/animationSystem.mjs#L10) that it doesn't take a lot of code to run them.
 
+```
+const animateEntities = byComponents(['animate']);
 
+// Run the animation generator on each entity with the animate component.
+for (let animateEntity of animateEntities) {
+  const { done } = animateEntity.animate.next({entity: animateEntity, deltaTime});
+  if (done) {
+    // Clean up the animation.
+    animateEntity.components.delete('animate');
+  }
+}
+```
+
+The object passed into `.next(props)` will be returned inside the generator's yield statement. `props = yeild`. This is how I pass the current Entity and `deltaTime` into each generator. Instead of writing a system that finds the 5 compressor entities for each tick and then decides how much to move them. I start a [crushWallAnimation](https://github.com/ripter/js13k/blob/js13kgame-entry-2021/2021/src/animations/crushWall.mjs) on each entity. Letting the animation system run, updating the position until completion.
