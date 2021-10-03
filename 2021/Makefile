@@ -8,7 +8,6 @@ lint: node_modules/
 
 build: node_modules/
 	npx rollup -c rollup.config.js
-	mv stats.html dist/stats.html
 	# cp src/index.html dist/index.html
 	# cp src/bw_tiny.png dist/bw_tiny.png
 	# npx inline-source dist/index.html dist/index.html
