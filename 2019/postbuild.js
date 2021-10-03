@@ -2,7 +2,7 @@ const fs = require('fs');
 const archiver = require('archiver');
 
 // Remove the temp files created by the build
-fs.unlinkSync('./dist/main.js');
+// fs.unlinkSync('./dist/main.js');
 // fs.unlinkSync('./dist/main.css');
 
 let output = fs.createWriteStream('./dist/build.zip');
@@ -43,10 +43,10 @@ archive.append(
     name: 'index.html',
   },
 );
-// archive.append(
-//   fs.createReadStream('./dist/happy_face.svg'), {
-//     name: 'happy_face.svg',
-//   }
-// );
+archive.append(
+  fs.createReadStream('./dist/main.js'), {
+    name: 'main.js',
+  },
+);
 
 archive.finalize();
