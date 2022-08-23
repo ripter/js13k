@@ -1,0 +1,18 @@
+{
+  "name": "space_js13k_2021",
+  "version": "1.0.0",
+  "description": "Entry for JS13K 2021",
+  "main": "src/main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Richards",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^13.0.0",
+    "rollup": "^2.56.2",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-visualizer": "^5.5.2"
+  }
+}
