@@ -1,23 +1,24 @@
-import './entities.mjs';
+import { Entity, addEntity } from './entities.mjs';
 import { ctx } from './canvas.mjs';
+import { STAGES } from './stages.mjs';
 import { StageGen } from './systems/stage.mjs';
+import { CardGen } from './systems/card.mjs';
 
 // Load Custom Fonts
 const fontJost = new FontFace('jost', 'url(./fonts/Jost-700-Bold.ttf)');
 await fontJost.load();
 document.fonts.add(fontJost);
 
+// Initial Entities.
+addEntity(new Entity({
+ 'load-stage': 'HOME', 
+}));
+
 
 // Setup Systems.
 const systems = [
-  StageGen([
-    'Home',
-    'Ouside Home',
-    'Train Station',
-    'Untaingled',
-    'Cleaning',
-    'Sorting',
-  ]),
+  StageGen(STAGES),
+  CardGen(),
 ];
 
 

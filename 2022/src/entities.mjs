@@ -1,11 +1,28 @@
-window.ENTITES = [];
+const ENTITES = [];
+window.ENTITES = ENTITES;
 
 
-// Allows accessing Map keys as object properties.
+export function getEntities(componentName) {
+	// Looping to find the entities each time is *slow*
+	// We can improve performance later if there is time.
+	// because we use add/remove functions, upgrading to a more performant approach should be easier.
+	const list = [];
+	for (const entity of ENTITES) {
+		if (componentName in entity) {
+			list.push(entity);
+		}
+	}	
+	return list;
+}
+
+
+// This proxy allows using a Map as if it was a plain object.
 // obj.name = 'Chris' // does obj.set('name', 'Chris')
 // 'name' in obj // return true if 'name' is a key in the Map.
 const mapProxyHandler = {
 	set(map, prop, value) {
+		//Known Bug: This lets the user set values that can no be read back.
+		// 				 : this is because the get checks for Map's native props first.
 		map.set(prop, value);
 	},
 	get(map, prop, value) {
@@ -29,9 +46,12 @@ const mapProxyHandler = {
 };
 
 
-// Entity extends Map with a Proxy.
-// Access keys with the object syntax with Map performance and Safety.
+/**
+ * Entities hold Components. That's all folks.
+ * Thanks to the power of Proxy, Entity is a Map that can be used as a plain object.
+ */
 export class Entity extends Map {
+	// component props is an object of {componentName: componentValues}
 	constructor(componentProps) {
 		// Map uses a nested array, [[key, value], ...]
 		// Entity takes an Object and converts it to the nested array.
@@ -39,15 +59,33 @@ export class Entity extends Map {
 			acc.push([prop, componentProps[prop]]);
 			return acc;
 		}, []);
+		// Run the native Map setup.
 		super(mapProps);
-		// Proxy allows unset properties to be stored as Key/Value pairs
-		// on the Map object.
+		// Return the Proxied version of ourselves.
 		return new Proxy(this, mapProxyHandler);
 	}
 }
 
 
+/**
+ * Adds an entity to the world.
+ */
+export function addEntity(entity) {
+	ENTITES.push(entity);	
+}
 
-export function addEntity(ent) {
-	window.ENTITES.push(ent);	
+/**
+ * Removes the entity from the world.
+ */
+export function removeEntity(entity) {
+	const idx = ENTITES.indexOf(entity);
+	if (idx === -1) return;
+	ENTITES.splice(idx, 1);
+}
+
+/**
+ * Removes all entities from the world.
+ */
+export function clearEntities() {
+	ENTITES.length = 0;	
 }
