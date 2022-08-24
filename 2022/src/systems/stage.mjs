@@ -36,13 +36,6 @@ function loadStage(config) {
 	// Reset the Entities
 	clearEntities();
 	
-	// Create an animated title card.
-	addEntity(new Entity({
-		card: {text: config.title, boxColor: '#FFF', textColor: '#000', font: 'jost', fontSize: 20},
-		position: {x: 4, y: 18},
-		animateTime: { duration: 0.5, effect: 'fadeIn' },	
-	}));
-	
 	// Load the Entities for this stage.
 	for (let entity of config.entities) {
 		addEntity(entity);

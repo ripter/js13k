@@ -8,7 +8,7 @@ const PADDING = 4;
  */
 export function* CardGen() {
 	let isRunning = true;
-	yield;	
+	// yield;	
 	
 	while(isRunning) {
 		const { delta } = yield;
@@ -26,7 +26,6 @@ export function* CardGen() {
 				(text.length * fontSize) - PADDING, // not perfect, but close enough for now. 
 				fontSize + (2.5*PADDING),	
 			];
-			
 			
 			// Draw the Box.
 			ctx.fillStyle = boxColor
