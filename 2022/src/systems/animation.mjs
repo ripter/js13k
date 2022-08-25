@@ -38,10 +38,8 @@ export function* AnimationGen() {
 			// check for end of animation
 			if (anim.currentTime > anim.duration) {
 				entity.animations.splice(0, 1);
-				console.log('animation finished', anim)
 			}
-			
-		}	
-	}
+		} // entity loop	
+	} // generator loop
 }
 

@@ -26,7 +26,19 @@ export const STAGES = {
 				],
 			}),
 			// Create the player mob.
-			new Entity({player: true}),
+			new Entity({
+				player: true,
+				position: {x: 24, y: 28}, 
+				mob: {
+					bones: [
+						{x: 0, y: 0, length: 10, slope: [0, 1]},	
+						{x: 0, y: 25, length: 15, slope: [1, 0]},	
+						// {x: 0, y: 25, length: 15, slope: 1.5},	
+						// {x: 0, y: 25, length: 25, slope: 1, direction: 0},	
+						// {x: 0, y: 25, length: 25, slope: 1, direction: 180},	
+					],
+				},
+			}),
 		],
 		paths: [],
 	},
