@@ -1,4 +1,4 @@
-import { ctx, clearScreen } from '../canvas.mjs';
+// import { ctx, clearScreen } from '../canvas.mjs';
 import { getEntities, addEntity, removeEntity, clearEntities, Entity } from '../entities.mjs';
 
 /**
@@ -14,7 +14,7 @@ export function* StageGen(stages) {
 		
 		// Clear the old, re-draw everything fresh because we are a jam and don't need to care about performance yet.
 		// This is probably not the correct place, but GAME JAM, so until I have need, it stays here.
-		clearScreen();
+		// clearScreen();
 		
 		// Look for stages to load
 		const loadStageEnts= getEntities('load-stage');
@@ -35,6 +35,8 @@ function loadStage(config) {
 	console.log('Loading Stage', config);	
 	// Reset the Entities
 	clearEntities();
+	// Reset the SVG
+	
 	
 	// Load the Entities for this stage.
 	for (let entity of config.entities) {

@@ -1,10 +1,9 @@
 import { Entity, addEntity } from './entities.mjs';
-import { ctx } from './canvas.mjs';
 import { STAGES } from './stages.mjs';
 import { StageGen } from './systems/stage.mjs';
 import { CardGen } from './systems/card.mjs';
 import { AnimationGen } from './systems/animation.mjs';
-import { MobGen } from './systems/mob.mjs';
+// import { MobGen } from './systems/mob.mjs';
 
 // Load Custom Fonts
 const fontJost = new FontFace('jost', 'url(./fonts/Jost-700-Bold.ttf)');
@@ -22,7 +21,7 @@ const systems = [
   StageGen(STAGES),
   AnimationGen(), // Animate before rendering so the positions are correct.
   // Rendering Generators
-  MobGen(),
+  // MobGen(),
   CardGen(),
 ];
 
