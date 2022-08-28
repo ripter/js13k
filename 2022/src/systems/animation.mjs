@@ -1,5 +1,5 @@
 import { getEntities } from '../entities.mjs';
-import { lerp } from '../math.mjs'
+import { cardElm } from '../svg.mjs';
 
 /**
  * Animates Entities
@@ -17,28 +17,23 @@ export function* AnimationGen() {
 			// delete the component when out of animations.
 			if (entity.animations.length === 0) {
 				delete entity.animations;
-				break;
+				continue;
 			}
 			// The active animation is the first one.
 			const anim = entity.animations[0];
-			// first time playing the animation, use the existing position as the from.
-			// this makes chaining animations easier.
-			if (!('currentTime' in anim)) {
-				anim.currentTime = 0;
-				anim.from = {...entity.position};	 // shallow clone
-			}
+			const {effect, duration, to, isPlaying = false } = anim;
+			// if the animation is playing, we can bail.
+			if (isPlaying) continue;
 			
-			// update the positions
-			entity.position.x = lerp(anim.from.x, anim.to.x, anim.currentTime/anim.duration);
-			entity.position.y = lerp(anim.from.y, anim.to.y, anim.currentTime/anim.duration);
-			
-			// Update the time
-			anim.currentTime += delta;
-			
-			// check for end of animation
-			if (anim.currentTime > anim.duration) {
-				entity.animations.splice(0, 1);
-			}
+			// Mark it as playing.
+			anim.isPlaying = true;
+			// Set a reference so the event can find this entity again.
+			cardElm.entity = entity;
+			// Set the animation styles.
+			cardElm.style.transitionTimingFunction = effect;
+			cardElm.style.transitionDuration = `${duration}s`;
+			// Set the end location.	
+			cardElm.style.transform = `translate(${to.x}px, ${to.y}px)`;
 		} // entity loop	
 	} // generator loop
 }

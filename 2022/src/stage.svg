@@ -8,7 +8,7 @@
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 47 21 L 47 70"/>
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 39 71 L 54 71"/>
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 39 70 L 38 99"/>
-  <g id="Card" origin="0 0">
+  <g id="Card" origin="0 0" transform="matrix(1, 0, 0, 1, 237.970581, 0)" >
     <title>Card</title>
     <path style="fill: rgb(195, 90, 90); stroke: rgb(186, 218, 85);" d="M 0 0 H 64.954 V 9.907 A 8 8 0 0 1 56.954 17.907 H 0 V 0 Z" bx:shape="rect 0 0 64.954 17.907 0 0 8 0 1@6ec635aa" bx:origin="0 0"/>
     <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9.9px;" x="6.987" y="12.41" bx:origin="-0.147547 -0.238611">Hello World</text>

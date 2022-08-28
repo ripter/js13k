@@ -16,13 +16,16 @@ export const STAGES = {
 		entities: [
 			// Create an animated title card.
 			new Entity({
-				card: {text: 'Home', boxColor: '#FFF', textColor: '#000', font: 'jost', fontSize: 20},
-				position: {x: 256+8, y: 18}, 
+				// card: {text: 'Home', boxColor: '#FFF', textColor: '#000', font: 'jost', fontSize: 20},
+				updateCard: {text: 'Home'},
+				position: {x: 256+8, y: 0}, 
 				animations: [
+					// dummy animation because of bug.
+					// { duration: 1, effect: 'lerp', to: {x: 256, y: 0} },
 					// slide-in
-					{ duration: 2.5, to: {x: 4, y: 18} },
+					{ duration: 2.5, effect: 'ease-in-out', to: {x: 0, y: 0} },
 					// slide-up	
-					{ duration: 1, to: {x: 4, y: -8} },
+					{ duration: 1, effect: 'ease-in-out', to: {x: 0, y: -50} },
 				],
 			}),
 			// Create the player mob.
