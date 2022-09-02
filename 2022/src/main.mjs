@@ -3,7 +3,7 @@ import { STAGES } from './stages.mjs';
 import { StageGen } from './systems/stage.mjs';
 import { CardGen } from './systems/card.mjs';
 import { AnimationGen } from './systems/animation.mjs';
-// import { MobGen } from './systems/mob.mjs';
+import { BindGen } from './systems/bind.mjs';
 
 // Load Custom Fonts
 const fontJost = new FontFace('jost', 'url(./fonts/Jost-700-Bold.ttf)');
@@ -18,6 +18,7 @@ addEntity(new Entity({
 
 // Setup Systems.
 const systems = [
+  BindGen(),
   StageGen(STAGES),
   AnimationGen(), // Animate before rendering so the positions are correct.
   // Rendering Generators

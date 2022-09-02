@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 235 100" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-  <rect width="235" height="100" rx="12" ry="12" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 47 1 L 47 21"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 30 21 L 60 21"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 29 21 L 14 45"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 61 21 L 69 49"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 47 21 L 47 70"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 39 71 L 54 71"/>
-  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 39 70 L 38 99"/>
-  <g id="Card" origin="0 0" transform="matrix(1, 0, 0, 1, 237.970581, 0)" >
+<svg viewBox="0 0 235 100" id="Stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="gradient-1" bx:pinned="true">
+      <title>pinkPurple</title>
+      <stop offset="0.026" style="stop-color: rgb(255, 72, 196);"/>
+      <stop offset="0.496" style="stop-color: rgb(192, 77, 249);"/>
+    </linearGradient>
+    <linearGradient id="gradient-2" bx:pinned="true">
+      <stop offset="0" style="stop-color: rgb(192, 77, 249);"/>
+      <stop offset="0.127" style="stop-color: rgb(243, 234, 95);"/>
+      <stop offset="0.497" style="stop-color: rgb(255, 63, 63);"/>
+    </linearGradient>
+    <linearGradient id="gradient-1-0" gradientUnits="userSpaceOnUse" x1="34.026" y1="21.735" x2="34.026" y2="32.002" gradientTransform="matrix(1, 0, 0, 1, -30.882902, -21.707245)" xlink:href="#gradient-1"/>
+    <linearGradient id="gradient-2-0" gradientUnits="userSpaceOnUse" x1="33.791" y1="31.283" x2="33.791" y2="40.884" gradientTransform="matrix(0.6242, 0, 0, 1, -17.60651, -21.707245)" xlink:href="#gradient-2"/>
+    <linearGradient id="gradient-1-1" gradientUnits="userSpaceOnUse" x1="28.891" y1="42.513" x2="28.891" y2="49.057" gradientTransform="matrix(1, 0, 0, 1, -28.256929, -23.49728)" xlink:href="#gradient-1"/>
+    <linearGradient id="gradient-1-2" gradientUnits="userSpaceOnUse" x1="28.891" y1="42.513" x2="28.891" y2="49.057" gradientTransform="matrix(1, 0, 0, 1, -22.594889, -23.497604)" xlink:href="#gradient-1"/>
+    <linearGradient id="color-0" bx:pinned="true">
+      <title>Pink</title>
+      <stop style="stop-color: rgb(255, 72, 196);"/>
+    </linearGradient>
+    <linearGradient id="color-1" bx:pinned="true">
+      <title>Blue</title>
+      <stop style="stop-color: rgb(43, 209, 252);"/>
+    </linearGradient>
+    <linearGradient id="color-2" bx:pinned="true">
+      <title>Yellow</title>
+      <stop style="stop-color: rgb(243, 234, 95);"/>
+    </linearGradient>
+    <linearGradient id="color-3" bx:pinned="true">
+      <title>Violet</title>
+      <stop style="stop-color: rgb(192, 77, 249);"/>
+    </linearGradient>
+    <linearGradient id="color-4" bx:pinned="true">
+      <title>Red</title>
+      <stop style="stop-color: rgb(255, 63, 63);"/>
+    </linearGradient>
+    <linearGradient id="color-5" bx:pinned="true">
+      <title>White</title>
+      <stop style="stop-color: rgb(255, 255, 255);"/>
+    </linearGradient>
+    <linearGradient id="color-6" bx:pinned="true">
+      <title>Black</title>
+      <stop style="stop-color: rgb(0, 0, 0);"/>
+    </linearGradient>
+  </defs>
+  <rect width="235" height="100" rx="12" ry="12" style="fill: url(#color-5); stroke: url(#color-6);"/>
+  <g id="Card" origin="0 0" transform="matrix(1, 0, 0, 1, 237.970581, 0)">
     <title>Card</title>
-    <path style="fill: rgb(195, 90, 90); stroke: rgb(186, 218, 85);" d="M 0 0 H 64.954 V 9.907 A 8 8 0 0 1 56.954 17.907 H 0 V 0 Z" bx:shape="rect 0 0 64.954 17.907 0 0 8 0 1@6ec635aa" bx:origin="0 0"/>
-    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9.9px;" x="6.987" y="12.41" bx:origin="-0.147547 -0.238611">Hello World</text>
+    <path style="fill: url(#color-1); stroke: url(#color-3);" d="M 0 0 H 64.954 V 9.907 A 8 8 0 0 1 56.954 17.907 H 0 V 0 Z" bx:shape="rect 0 0 64.954 17.907 0 0 8 0 1@6ec635aa" bx:origin="0 0"/>
+    <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 9.9px; stroke: url(#color-3); white-space: pre;" x="6.987" y="12.41" bx:origin="-0.147547 -0.238611">Hello World</text>
   </g>
+  <g transform="matrix(1, 0, 0, 1, 35.103638, 73.070702)" id="Player">
+    <title>Player</title>
+    <rect x="0.981" y="0.027" width="4.324" height="10.267" style="fill: url(#gradient-1-0);"/>
+    <rect x="0.009" y="9.575" width="6.953" height="9.601" style="fill: url(#gradient-2-0);"/>
+    <rect x="0.114" y="19.015" width="1.04" height="6.544" style="fill: url(#gradient-1-1);"/>
+    <rect x="5.776" y="19.015" width="1.04" height="6.544" style="fill: url(#gradient-1-2);"/>
+    <rect x="0.246" y="1.969" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;"/>
+    <rect x="2.643" y="1.969" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);"/>
+  </g>
+  <path style="stroke: rgb(0, 0, 0); fill: none;" d="M 18.771 91.647 L 113.397 92.636 L 201.537 63.47" id="path1" class="move-path">
+    <title>path1</title>
+  </path>
 </svg>

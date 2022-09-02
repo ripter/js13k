@@ -23,7 +23,7 @@ const mapProxyHandler = {
 	set(map, prop, value) {
 		//Known Bug: This lets the user set values that can no be read back.
 		// 				 : this is because the get checks for Map's native props first.
-		map.set(prop, value);
+		return map.set(prop, value);
 	},
 	get(map, prop, value) {
 		// if the prop exists on the native map, then pass it through.

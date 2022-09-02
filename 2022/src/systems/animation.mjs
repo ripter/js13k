@@ -25,6 +25,8 @@ export function* AnimationGen() {
 			// if the animation is playing, we can bail.
 			if (isPlaying) continue;
 			
+			console.log('entity', entity, 'anim', anim);
+			
 			// Mark it as playing.
 			anim.isPlaying = true;
 			// Set a reference so the event can find this entity again.

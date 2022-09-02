@@ -22,7 +22,6 @@ export function* StageGen(stages) {
 		if (loadStageEnts.length > 0) {
 			const stageEnt = loadStageEnts[0];
 			const stageName = stageEnt['load-stage'];
-			console.log('Load the stage', stageName);	
 			// remove the loading entity.
 			removeEntity(stageEnt);
 			loadStage(stages[stageName]);
@@ -32,11 +31,9 @@ export function* StageGen(stages) {
 }
 
 function loadStage(config) {
-	console.log('Loading Stage', config);	
 	// Reset the Entities
 	clearEntities();
 	// Reset the SVG
-	
 	
 	// Load the Entities for this stage.
 	for (let entity of config.entities) {
