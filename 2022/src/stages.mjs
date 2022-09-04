@@ -8,7 +8,17 @@ import { Entity } from './entities.mjs';
 //     'Cleaning',
 //     'Sorting',
 //   ]
+
+export const SCENES = [
+	{ 
+		dialog: [
+			'Death is patient. I promise dear Wife.\nI *will* bring you back.',	
+			'A JS13k game 2022\nBy @ripter001',
+		],
+	},
+];
 	
+/*
 export const STAGES = {
 	HOME: {
 		// title: 'Home',
@@ -46,3 +56,4 @@ export const STAGES = {
 		paths: [],
 	},
 };
+*/

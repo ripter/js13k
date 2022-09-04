@@ -1,3 +1,30 @@
+import { svg, elmDialogText } from './svg.mjs';
+
+
+// Main Event Handler for the entire game.
+// Every event starts here, and then is dispatched to specific functions.
+const GameEventHandler = {
+  handleEvent(evt) {
+    const { target, type } = evt;
+    console.log(type, target);    
+    
+    switch (type) {
+      case 'click':
+        console.log('update text', elmDialogText);
+        break;
+      default:
+        // Ignore the event.
+    }
+  }
+};
+
+
+// Click Anywhere
+svg.addEventListener('click', GameEventHandler);
+
+
+
+/*
 import { Entity, addEntity } from './entities.mjs';
 import { STAGES } from './stages.mjs';
 import { StageGen } from './systems/stage.mjs';
@@ -9,6 +36,7 @@ import { BindGen } from './systems/bind.mjs';
 const fontJost = new FontFace('jost', 'url(./fonts/Jost-700-Bold.ttf)');
 await fontJost.load();
 document.fonts.add(fontJost);
+
 
 // Initial Entities.
 addEntity(new Entity({
@@ -46,3 +74,5 @@ let lastTime = 0;
     window.requestAnimationFrame(gameLoop);
   }
 })();
+
+*/

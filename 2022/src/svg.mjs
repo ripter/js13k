@@ -1,7 +1,32 @@
 /**
  * References/Functions to work with the SVG
  */
-export const svg = window.stage;
+export const svg = window.Stage;
+
+export const elmDialogText = svg.querySelector('#dialog-text');
+
+
+
+
+
+// const feColorMatrixWaterEffect = document.querySelector('#watereffect feColorMatrix');
+// console.log('feColorMatrixWaterEffect', feColorMatrixWaterEffect);
+
+// setInterval(() => {
+//   const values = feColorMatrixWaterEffect.getAttribute('values');
+//   let val = parseInt(values, 10) + 15; 
+//   
+//   if (val >= 180) {
+//     val = -180;
+//   }
+//   
+//   // console.log('updating value', value);
+//   feColorMatrixWaterEffect.setAttribute('values', val);
+// }, 300);
+
+
+/*
+ * OLDDER
 export const cardElm = document.getElementById('Card');
 export const playerElm = document.getElementById('Player');
 
@@ -55,4 +80,5 @@ function clickOnPath(target, x, y) {
 // Bind events to the SVG elements.
 cardElm.addEventListener('transitionend', SVGEventHandler);
 
-document.querySelectorAll('.move-path').forEach(elm => elm.addEventListener('click', SVGEventHandler));
+document.querySelectorAll('.move-path').forEach(elm => elm.addEventListener('click', SVGEventHandler)); 
+*/
