@@ -1,16 +1,30 @@
-import { svg, elmDialogText } from './svg.mjs';
+import { svg } from './svg.mjs';
+import { SCENES } from './stages.mjs';
+import { dialogClick } from './dialogClick.mjs';
+import { loadScene } from './loadScene.mjs';
 
+const state = {
+	dialogIdx: 0, 
+  isDialogOpen: false,
+};
+
+// Load the first scene.
+loadScene(state, SCENES[0]);
+console.log('state', state);
 
 // Main Event Handler for the entire game.
 // Every event starts here, and then is dispatched to specific functions.
 const GameEventHandler = {
   handleEvent(evt) {
     const { target, type } = evt;
+    const { nextAction } = state;
     console.log(type, target);    
     
     switch (type) {
       case 'click':
-        console.log('update text', elmDialogText);
+        if (nextAction === 'dialog') {
+          dialogClick(state);
+        }
         break;
       default:
         // Ignore the event.

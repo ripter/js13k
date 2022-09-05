@@ -20,10 +20,15 @@ body {
   overflow: hidden;
 }
 
+#dialog {
+  visibility: hidden;
+}
+
   </style>
 </head>
 <body>
   
+
 <svg viewBox="0 0 235 100" id="Stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
   <defs>
     <linearGradient id="gradient-1" bx:pinned="true">
@@ -112,11 +117,6 @@ body {
   <rect x="208" y="41" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-0);" id="door1" class="door">
     <title>Door</title>
   </rect>
-  <g id="Card" origin="0 0" transform="matrix(1, 0, 0, 1, 237, 0)">
-    <title>Card</title>
-    <path style="fill: url(#color-1); stroke: url(#color-3);" d="M 0 0 H 64.954 V 9.907 A 8 8 0 0 1 56.954 17.907 H 0 V 0 Z" bx:shape="rect 0 0 64.954 17.907 0 0 8 0 1@6ec635aa" bx:origin="0 0"/>
-    <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 9.9px; stroke: url(#color-3); white-space: pre;" x="6.987" y="12.41" bx:origin="-0.147547 -0.238611">Hello World</text>
-  </g>
   <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" bx:origin="0 0">
     <title>Player</title>
     <g>
@@ -165,22 +165,22 @@ body {
   <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: none; visibility: hidden;">
     <title>BG</title>
   </rect>
-  <g>
+  <g id="dialog" style="">
     <title>Dialog</title>
     <rect x="7.943" y="6.661" width="216.74" height="32.219" style="fill: url(#color-5); stroke: url(#color-1);"/>
-    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan>I will bring you back.</text>
-  </g>
-  <g transform="matrix(1.820659, 0, 0, 1.820659, 12.230977, 12.235285)" style="">
-    <title>MCHeadIcon</title>
-    <rect x="1" y="0" width="4" height="10" style="fill: url(#gradient-1-4);">
-      <title>Head</title>
-    </rect>
-    <rect x="5" y="2" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
-      <title>Eye1</title>
-    </rect>
-    <rect x="3" y="2" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
-      <title>Eye2</title>
-    </rect>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+    <g transform="matrix(1.820659, 0, 0, 1.820659, 12.230977, 12.235285)" style="" id="icon-mc">
+      <title>MCHeadIcon</title>
+      <rect x="1" y="0" width="4" height="10" style="fill: url(#gradient-1-4);">
+        <title>Head</title>
+      </rect>
+      <rect x="5" y="2" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
+        <title>Eye1</title>
+      </rect>
+      <rect x="3" y="2" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
+        <title>Eye2</title>
+      </rect>
+    </g>
   </g>
 </svg>
 
