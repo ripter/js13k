@@ -79,13 +79,82 @@
     <linearGradient id="gradient-4-0" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#gradient-4"/>
     <linearGradient id="gradient-5-0" gradientUnits="userSpaceOnUse" x1="60.528" y1="0" x2="60.528" y2="100" gradientTransform="matrix(1.941266, 0, 0, 1, 0, 0)" xlink:href="#gradient-5"/>
     <linearGradient id="gradient-1-4" gradientUnits="userSpaceOnUse" x1="34.026" y1="21.735" x2="34.026" y2="32.002" gradientTransform="matrix(1, 0, 0, 1, -30.882902, -21.707245)" xlink:href="#gradient-1"/>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="117.5" cy="50" r="117.5" id="gradient-0-2" xlink:href="#gradient-0"/>
+    <linearGradient id="gradient-4-1" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -160.402664, -5.671119)" xlink:href="#gradient-4"/>
+    <linearGradient id="gradient-4-2" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -99.889175, -5.671468)" xlink:href="#gradient-4"/>
+    <linearGradient id="gradient-4-3" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -34.507641, -5.670938)" xlink:href="#gradient-4"/>
+    <linearGradient id="gradient-2-1" gradientUnits="userSpaceOnUse" x1="203.936" y1="84.335" x2="203.936" y2="97.734" xlink:href="#gradient-2"/>
   </defs>
-  <rect width="235" height="100" style="fill: url(#gradient-5-0);"/>
-  <path style="fill: none; stroke-width: 8px; stroke: url(#color-6);" d="M 26 96 L 121 96 L 220 74" id="path1" class="move-path">
-    <title>path1</title>
-  </path>
-  <rect x="208" y="41" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-0);" id="door1" class="clickable">
-    <title>Door</title>
+  <g style="">
+    <title>Level Home</title>
+    <g class="item" id="level-home" style="">
+      <title>lvlHome</title>
+      <rect width="235" height="100" style="fill: url(#gradient-5-0);"/>
+      <path style="fill: none; stroke-width: 8px; stroke: url(#color-6);" d="M 26 96 L 121 96 L 220 74" id="path1" class="move-path">
+        <title>path1</title>
+      </path>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -17, 42)" id="wife-jar" class="clickable item" style="">
+      <title>WifeHead</title>
+      <rect x="17" y="14" width="14" height="20" style="fill: url(#gradient-3-0);">
+        <title>Jar</title>
+      </rect>
+      <rect x="22" y="19.285" width="4.324" height="10.267" style="fill: url(#gradient-1-3); mix-blend-mode: color-burn;">
+        <title>Head</title>
+      </rect>
+      <rect x="26.66" y="21.227" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
+        <title>Eye1</title>
+      </rect>
+      <rect x="24.057" y="21.227" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
+        <title>Eye2</title>
+      </rect>
+      <rect x="18.151" y="14.179" width="11.982" height="18" style="filter: url(#watereffect); mix-blend-mode: multiply; fill: url(#gradient-0-0);">
+        <title>JarWater</title>
+      </rect>
+      <rect x="17" y="34" width="15" height="2" style="fill: url(#color-3); stroke-width: 0.5px;">
+        <title>base</title>
+      </rect>
+    </g>
+    <rect x="208" y="41" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-0);" id="door-to-bus" class="clickable item">
+      <title>DoorToBus</title>
+    </rect>
+  </g>
+  <g style="visibility: hidden;">
+    <title>Level Bus</title>
+    <g class="item" id="level-bus" bx:origin="0 0">
+      <title>lvlBus</title>
+      <rect width="235" height="100" style="fill: url(#gradient-0-2);"/>
+      <path style="stroke: rgb(0, 0, 0); stroke-width: 6px; fill: none; stroke-linecap: round; stroke-linejoin: round;" d="M 6 93 L 54.76 73.121 L 114.591 73.116 L 181.482 72.629 L 227 93"/>
+    </g>
+    <rect x="47.598" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-1);" id="door-to-math" class="clickable item">
+      <title>DoorToMath</title>
+    </rect>
+    <rect x="108.111" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-2);" id="door-to-collect" class="clickable item">
+      <title>DoorToCollect</title>
+    </rect>
+    <rect x="173.493" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-3);" id="door-to-music" class="clickable item">
+      <title>DoorToMusic</title>
+    </rect>
+  </g>
+  <g id="dialog" style="visibility: hidden;">
+    <title>Dialog</title>
+    <rect x="7.943" y="6.661" width="216.74" height="32.219" style="fill: url(#color-5); stroke: url(#color-1);"/>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+    <g transform="matrix(1.820659, 0, 0, 1.820659, 12.230977, 12.235285)" style="" id="icon-mc">
+      <title>MCHeadIcon</title>
+      <rect x="1" y="0" width="4" height="10" style="fill: url(#gradient-1-4);">
+        <title>Head</title>
+      </rect>
+      <rect x="5" y="2" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
+        <title>Eye1</title>
+      </rect>
+      <rect x="3" y="2" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
+        <title>Eye2</title>
+      </rect>
+    </g>
+  </g>
+  <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: url(#color-5); visibility: hidden;">
+    <title>BG</title>
   </rect>
   <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" bx:origin="0 0">
     <title>Player</title>
@@ -111,45 +180,10 @@
       <title>Leg2</title>
     </rect>
   </g>
-  <g transform="matrix(1, 0, 0, 1, -17, 42)" id="wife-jar" class="clickable">
-    <title>WifeHead</title>
-    <rect x="17" y="14" width="14" height="20" style="fill: url(#gradient-3-0);">
-      <title>Jar</title>
-    </rect>
-    <rect x="22" y="19.285" width="4.324" height="10.267" style="fill: url(#gradient-1-3); mix-blend-mode: color-burn;">
-      <title>Head</title>
-    </rect>
-    <rect x="26.66" y="21.227" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
-      <title>Eye1</title>
-    </rect>
-    <rect x="24.057" y="21.227" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
-      <title>Eye2</title>
-    </rect>
-    <rect x="18.151" y="14.179" width="11.982" height="18" style="filter: url(#watereffect); mix-blend-mode: multiply; fill: url(#gradient-0-0);">
-      <title>JarWater</title>
-    </rect>
-    <rect x="17" y="34" width="15" height="2" style="fill: url(#color-3); stroke-width: 0.5px;">
-      <title>base</title>
-    </rect>
-  </g>
-  <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: none; visibility: hidden;">
-    <title>BG</title>
-  </rect>
-  <g id="dialog" style="">
-    <title>Dialog</title>
-    <rect x="7.943" y="6.661" width="216.74" height="32.219" style="fill: url(#color-5); stroke: url(#color-1);"/>
-    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
-    <g transform="matrix(1.820659, 0, 0, 1.820659, 12.230977, 12.235285)" style="" id="icon-mc">
-      <title>MCHeadIcon</title>
-      <rect x="1" y="0" width="4" height="10" style="fill: url(#gradient-1-4);">
-        <title>Head</title>
-      </rect>
-      <rect x="5" y="2" width="0.397" height="0.559" style="stroke: url(#color-6); fill: none;">
-        <title>Eye1</title>
-      </rect>
-      <rect x="3" y="2" width="0.397" height="0.559" style="fill: none; stroke: url(#color-6);">
-        <title>Eye2</title>
-      </rect>
-    </g>
+  <g id="ui-money" transform="matrix(1, 0, 0, 1, 6.37501, 1.281345)">
+    <title>UIMoney</title>
+    <rect x="186.063" y="84.335" width="35.746" height="13.399" style="fill: url(#color-3); stroke: url(#gradient-2-1);" rx="3.913" ry="3.913"/>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="188.839" y="93.653">🤖</text>
+    <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 7.5px; white-space: pre;" x="198.839" y="93.653">1,000</text>
   </g>
 </svg>

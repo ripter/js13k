@@ -1,4 +1,4 @@
-import { updateDialog } from './svg.mjs';
+import { updateDialog, updateItems } from './svg.mjs';
 
 // Loads the scene into state.
 export function loadScene(state, scene) {
@@ -13,6 +13,7 @@ export function loadScene(state, scene) {
 	
 	// Load the item map.
 	state.items = {...scene.items};
+	updateItems(state.items);
 	
 	// Load the starting action.	
 	state.nextAction = scene.nextAction;
