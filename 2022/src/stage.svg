@@ -84,7 +84,7 @@
   <path style="fill: none; stroke-width: 8px; stroke: url(#color-6);" d="M 26 96 L 121 96 L 220 74" id="path1" class="move-path">
     <title>path1</title>
   </path>
-  <rect x="208" y="41" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-0);" id="door1" class="door">
+  <rect x="208" y="41" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-0);" id="door1" class="clickable">
     <title>Door</title>
   </rect>
   <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" bx:origin="0 0">
@@ -111,7 +111,7 @@
       <title>Leg2</title>
     </rect>
   </g>
-  <g transform="matrix(1, 0, 0, 1, -17, 42)">
+  <g transform="matrix(1, 0, 0, 1, -17, 42)" id="wife-jar" class="clickable">
     <title>WifeHead</title>
     <rect x="17" y="14" width="14" height="20" style="fill: url(#gradient-3-0);">
       <title>Jar</title>

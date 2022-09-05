@@ -1,19 +1,20 @@
 import { updateDialog, elmDialog, elmDialogText } from './svg.mjs';
 
 
-// Handle clicking during a dialog.
+// Moves to the next dialog line or closes the dialog.
 // Mutates the state object
 export function dialogClick(state) {
-	const { dialogIdx, dialogs, isDialogOpen, dialogNextAction } = state;
-	const line = dialogs[dialogIdx];
+	const { dialogs } = state;
+	// Use the *next* item, this is in response, so dialogIdx has already rendered.
+	const idx = state.dialogIdx + 1; 
+	const line = dialogs[idx];
 	const isOpen = !!line; // close when out of lines.
 	
 	// Update the SVG
 	updateDialog(isOpen, line);
 	
-	// Update the State.
+	// Update the State
 	state.isDialogOpen = isOpen;
-	state.dialogIdx = isOpen ? (dialogIdx+1) : 0;
-	state.nextAction = isOpen ? state.nextAction : dialogNextAction;
+	state.dialogIdx = idx;
 }
 
