@@ -20,9 +20,10 @@ body {
   overflow: hidden;
 }
 
-#dialog {
-  visibility: hidden;
+.choice, .clickable{
+  cursor: pointer;
 }
+
 
   </style>
 </head>
@@ -182,6 +183,30 @@ body {
       </rect>
     </g>
   </g>
+  <g id="ui-choice" style="visibility: hidden;" transform="matrix(1, 0, 0, 1, -37, 50.867428)">
+    <title>UIChoice</title>
+    <rect x="90" y="-8" width="129" height="48" style="fill: url(#color-5); stroke: url(#color-1);"/>
+    <g id="choice-1" class="choice">
+      <title>Choice1</title>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, 40, -19)" id="choice-1-text">This is your first choice option.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="95.052" y="1.048" transform="matrix(1, 0, 0, 1, 0, 0.930002)">🍎<tspan x="95.052001953125" dy="1em">​</tspan><tspan x="95.052001953125" dy="1em">​</tspan></text>
+    </g>
+    <g class="choice" id="choice-2">
+      <title>Choice2</title>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, 40, -8)" id="choice-2-text">This is your first choice option.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="95.052" y="1.048" transform="matrix(1, 0, 0, 1, 0, 11.930002)">🥦<tspan x="95.052001953125" dy="1em">​</tspan><tspan x="95.052001953125" dy="1em">​</tspan></text>
+    </g>
+    <g class="choice" id="choice-3">
+      <title>Choice3</title>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, 40, 3)" id="choice-3-text">This is your first choice option.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="95.052" y="1.048" transform="matrix(1, 0, 0, 1, 0, 22.930002)">🧅<tspan x="95.052001953125" dy="1em">​</tspan><tspan x="95.052001953125" dy="1em">​</tspan></text>
+    </g>
+    <g class="choice" id="choice-4">
+      <title>Choice4</title>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, 40, 14)" id="choice-4-text">This is your first choice option.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+      <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="95.052" y="1.048" transform="matrix(1, 0, 0, 1, 0, 33.930004)">🥚<tspan x="95.052001953125" dy="1em">​</tspan><tspan x="95.052001953125" dy="1em">​</tspan></text>
+    </g>
+  </g>
   <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: url(#color-5); visibility: hidden;">
     <title>BG</title>
   </rect>
@@ -215,8 +240,8 @@ body {
     <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="188.839" y="93.653">🤖</text>
     <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 7.5px; white-space: pre;" x="198.839" y="93.653" id="ui-money-text">1,000</text>
   </g>
-</svg>
-
+</svg>  
+  
   <script type="module" src="./main.mjs"></script>
 </body>
 </html>

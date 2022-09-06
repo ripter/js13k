@@ -26,6 +26,7 @@ export const SCENES = [
 	{
 		dialogs: [
 			'I miss you 我的爱',
+			'Ok, what should I do?',
 		],
 		choices: {
 			'Restoration progress': -1,
