@@ -1,11 +1,11 @@
 import { svg } from './svg.mjs';
 import { SCENES } from './stages.mjs';
 import { dialogClick } from './dialogClick.mjs';
-import { itemClick } from './itemClick.mjs';
+import { actionClick } from './actionClick.mjs';
 import { loadScene } from './loadScene.mjs';
 
 const state = {
-  
+  money: 10, 
 };
 
 // Load the first scene.
@@ -28,7 +28,11 @@ const GameEventHandler = {
         else {
           const elmItem = target.closest('.clickable');
           if (!elmItem) return;
-          itemClick(elmItem.id, state);
+          if (elmItem.classList.contains('item')) {
+            actionClick(state, state.items[elmItem.id]);
+          }
+          // itemClick(elmItem.id, state);
+          // actionClick(state,)
         }
         break;
       default:

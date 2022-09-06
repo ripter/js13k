@@ -184,6 +184,6 @@
     <title>UIMoney</title>
     <rect x="186.063" y="84.335" width="35.746" height="13.399" style="fill: url(#color-3); stroke: url(#gradient-2-1);" rx="3.913" ry="3.913"/>
     <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="188.839" y="93.653">🤖</text>
-    <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 7.5px; white-space: pre;" x="198.839" y="93.653">1,000</text>
+    <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 7.5px; white-space: pre;" x="198.839" y="93.653" id="ui-money-text">1,000</text>
   </g>
 </svg>

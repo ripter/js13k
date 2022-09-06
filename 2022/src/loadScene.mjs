@@ -1,6 +1,7 @@
-import { updateDialog, updateItems } from './svg.mjs';
+import { updateDialog, updateItems, updateUI } from './svg.mjs';
 
 // Loads the scene into state.
+// Re-Renders the SVG
 export function loadScene(state, scene) {
 	// Load Dialog items
 	state.dialogs = [...scene.dialogs];
@@ -11,10 +12,12 @@ export function loadScene(state, scene) {
 	updateDialog(state.isDialogOpen, state.dialogs[state.dialogIdx]);
 	
 	
-	// Load the item map.
-	state.items = {...scene.items};
-	updateItems(state.items);
+	// If items is defined in the scene, reset with the new list.
+	if ('items' in scene) {
+		state.items = {...scene.items};
+		updateItems(state.items);
+	}
 	
-	// Load the starting action.	
-	state.nextAction = scene.nextAction;
+	// Update the UI.
+	updateUI(state.money);
 }

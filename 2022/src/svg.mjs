@@ -5,6 +5,7 @@ export const svg = window.Stage;
 
 export const elmDialog = svg.querySelector('#dialog');
 export const elmDialogText = svg.querySelector('#dialog-text');
+export const elmUIMoneyText = svg.querySelector('#ui-money-text');
 
 export const elmIconMC = svg.querySelector('#icon-mc');
 
@@ -35,4 +36,9 @@ export function updateItems(visibleItems) {
     if (!elm) return;
     elm.style.visibility = 'visible';
   });
+}
+
+
+export function updateUI(money) {
+  elmUIMoneyText.innerHTML = ('' + money).padStart(5, 0);
 }
