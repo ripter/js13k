@@ -8,6 +8,7 @@
 //   ]
 
 export const SCENES = [
+	// 0 - Intro Scene
 	{ 
 		dialogs: [
 			'Death is patient.', 
@@ -17,10 +18,30 @@ export const SCENES = [
 		],
 		items: {
 			'level-home': -1,
-			'wife-jar': 0,
-			'door-to-bus': 1,
+			'wife-jar': 1,
+			'door-to-bus': 3,
 		},
 	},
+	// 1 - Wife Status
+	{
+		dialogs: [
+			'I miss you 我的爱',
+		],
+		choices: {
+			'Restoration progress': -1,
+			'Buy a Wife Part': -1,
+			'Say something nice': 2,
+		}
+	},
+	// 2 - Home without Dialog.
+	{
+		items: {
+			'level-home': -1,
+			'wife-jar': 1,
+			'door-to-bus': 2,
+		},
+	},
+	// 3 - Bus Stop
 	{
 		dialogs: [
 			'Bus Stop.',

@@ -3,13 +3,16 @@ import { updateDialog, updateItems, updateUI } from './svg.mjs';
 // Loads the scene into state.
 // Re-Renders the SVG
 export function loadScene(state, scene) {
-	// Load Dialog items
-	state.dialogs = [...scene.dialogs];
-	state.dialogIdx = 0;
-	// Open the dialog.
-	state.isDialogOpen = true;
-	// Reset the SVG.
-	updateDialog(state.isDialogOpen, state.dialogs[state.dialogIdx]);
+	// if the dialog is defined, load and start it.
+	if ('dialogs' in scene) {
+		// Load Dialog items
+		state.dialogs = [...scene.dialogs];
+		state.dialogIdx = 0;
+		// Open the dialog.
+		state.isDialogOpen = true;
+		// Reset the SVG.
+		updateDialog(state.isDialogOpen, state.dialogs[state.dialogIdx]);
+	}
 	
 	
 	// If items is defined in the scene, reset with the new list.
