@@ -14,12 +14,13 @@ export function loadScene(state, scene) {
 		updateDialog(state.isDialogOpen, state.dialogs[state.dialogIdx]);
 	} else {
 		// close the dialog if it was open.
+		state.isDialogOpen = false;
 		updateDialog(false);
 	}
 	
+	state.isChoiceOpen = false;
 	if ('choices' in scene) {
 		state.choices = {...scene.choices};
-		updateChoiceUI(true, Object.keys(scene.choices));
 	}
 	else {
 		updateChoiceUI(false);

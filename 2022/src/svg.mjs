@@ -3,13 +3,13 @@
  */
 export const svg = window.Stage;
 
-export const elmDialog = svg.getElementById('dialog');
-export const elmDialogText = svg.getElementById('dialog-text');
-export const elmUIMoneyText = svg.getElementById('ui-money-text');
+export const elmDialog = svg.querySelector('#dialog');
+export const elmDialogText = svg.querySelector('#dialog-text');
+export const elmUIMoneyText = svg.querySelector('#ui-money-text');
 
-export const elmUIChoice = svg.getElementById('ui-choice');
+export const elmUIChoice = svg.querySelector('#ui-choice');
 
-export const elmIconMC = svg.getElementById('icon-mc');
+// export const elmIconMC = svg.querySelector('#icon-mc');
 
 
 // Updates the Dialog SVG
@@ -63,6 +63,10 @@ export function updateChoiceUI(isOpen, choices) {
   }
   else {
     hideElm(elmUIChoice); 
+    for (let i=1; i < 5; i++) {
+      const elmChoice = svg.getElementById(`choice-${i}`); 
+      hideElm(elmChoice);
+    }
   }
 }
 

@@ -39,7 +39,7 @@ export const SCENES = [
 		items: {
 			'level-home': -1,
 			'wife-jar': 1,
-			'door-to-bus': 2,
+			'door-to-bus': 3,
 		},
 	},
 	// 3 - Bus Stop

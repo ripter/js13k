@@ -17,22 +17,28 @@ console.log('state', state);
 const GameEventHandler = {
   handleEvent(evt) {
     const { target, type } = evt;
-    const { nextAction } = state;
+    const { isChoiceOpen, isDialogOpen } = state;
+    const elmClicked = target.closest('.clickable');
+    const clickID = elmClicked?.id ?? null;
+    
+    
+
     console.log(type, target);    
     
     switch (type) {
       case 'click':
-        if (state.isDialogOpen) {
+        if (isChoiceOpen) {
+          const elmText = elmClicked.querySelector(`#${clickID}-text`);
+          const text = elmText.innerHTML;
+          console.log('Choice clicked', clickID, '\n', elmClicked, '\n', text); 
+          actionClick(state, state.choices[text]);
+        }
+        else if (state.isDialogOpen) {
           dialogClick(state);
         }
         else {
-          const elmItem = target.closest('.clickable');
-          if (!elmItem) return;
-          if (elmItem.classList.contains('item')) {
-            actionClick(state, state.items[elmItem.id]);
-          }
-          // itemClick(elmItem.id, state);
-          // actionClick(state,)
+          if (!elmClicked) return;
+          actionClick(state, state.items[clickID]);
         }
         break;
       default:
