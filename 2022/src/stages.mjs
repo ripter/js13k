@@ -49,16 +49,25 @@ export const SCENES = [
 		dialogs: [
 			'Bus Stop.',
 			'I only have time for one job a day.',
-			'Gardening, Research, Trash, or Music',
+			'Gardening, Captcha Entry, or Investing',
 		],
 		items: {
 			'level-bus': -1,	
-			'door-to-garden': 4,
-			'door-to-collect': -1,
-			'door-to-music': -1,
+			'door-to-garden': 5,
+			'door-to-captcha': 6,
+			'door-to-investing': 7,
 		},
 	},
-	// 4 - Garden Stop [Intro]
+	// 4 - Bus Stop without dialog.
+	{
+		items: {
+			'level-bus': -1,	
+			'door-to-garden': 5,
+			'door-to-captcha': 6,
+			'door-to-investing': 7,
+		},
+	},
+	// 5 - Garden Stop [Intro]
 	{
 		dialogs: [
 			'Gardening is a lot of upfront work.',
@@ -68,7 +77,33 @@ export const SCENES = [
 		],
 		choices: {
 			'Yes': -1,
-			'No': [backeOne],
+			'No': 4,
+		},
+	},
+	// 6 - Captcha Entry [Intro] 
+	{
+		dialogs: [
+			'Captcha Entry',
+			'Pays a little for each solved captcha.',
+			'But the bus ride costs 10',
+			'Should I spend the day entering Captchas?',
+		],
+		choices: {
+			'Yes': -1,
+			'No': 4,
+		},
+	},
+	// 7 - Something [Intro] 
+	{
+		dialogs: [
+			'"Investing" \n(aka Gambling)',
+			'Risk a little or Risk a lot.',
+			'But the bus ride costs 100',
+			'Should I spend the day Investing?',
+		],
+		choices: {
+			'Yes': -1,
+			'No': 4,
 		},
 	},
 ];

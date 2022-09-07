@@ -129,11 +129,11 @@
     <rect x="47.598" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-1);" id="door-to-garden" class="clickable item">
       <title>Garden Bus</title>
     </rect>
-    <rect x="108.111" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-2);" id="door-to-collect" class="clickable item">
-      <title>DoorToCollect</title>
+    <rect x="108.111" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-2);" id="door-to-captcha" class="clickable item">
+      <title>Captcha Entry</title>
     </rect>
-    <rect x="173.493" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-3);" id="door-to-music" class="clickable item">
-      <title>DoorToMusic</title>
+    <rect x="173.493" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-3);" id="door-to-investing" class="clickable item">
+      <title>Investing</title>
     </rect>
   </g>
   <g id="dialog" style="visibility: hidden;">
