@@ -23,6 +23,7 @@ export function loadScene(state, scene) {
 		state.choices = {...scene.choices};
 	}
 	else {
+		delete state.choices;
 		updateChoiceUI(false);
 	}
 	

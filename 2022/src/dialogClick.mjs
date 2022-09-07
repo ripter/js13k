@@ -7,23 +7,32 @@ export function dialogClick(state) {
 	const { dialogs } = state;
 	// Use the *next* item, this is in response, so dialogIdx has already rendered.
 	let idx = state.dialogIdx + 1; 
-	const length = dialogs.length-1;
-	let line, isOpen;
-	
+	// const length = dialogs.length-1;
+	let line = dialogs[idx];
+	let isOpen = !!line; // close when out of lines.
+		
 	// If there are choices, stay on the last line of dialog.
 	if ('choices' in state) {
 		// Keep the dialog open.
 		isOpen = true;
-		// if the index is past the end, and the choice isn't open yet.
-		// open the choice dialog.
-		if (idx >= length && !state.isChoiceOpen) {
-			line = dialogs[length];
+		
+		// when on the last line, open the choice ui
+		if (idx >= (dialogs.length-1)) {
+			idx = (dialogs.length-1);
 			state.isChoiceOpen = true;
 			updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices));
 		}
-	} else {
-		line = dialogs[idx];
-		isOpen = !!line; // close when out of lines.
+		
+		// if the index is past the end, and the choice isn't open yet.
+		// open the choice dialog.
+		// if (idx >= length && !state.isChoiceOpen) {
+		// 	line = dialogs[length];
+		// 	state.isChoiceOpen = true;
+		// 	updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices));
+		// }
+	// } else {
+	// 	line = dialogs[idx];
+	// 	isOpen = !!line; // close when out of lines.
 	}
 	
 	// Update the SVG

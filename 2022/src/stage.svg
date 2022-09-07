@@ -85,7 +85,7 @@
     <linearGradient id="gradient-4-3" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -34.507641, -5.670938)" xlink:href="#gradient-4"/>
     <linearGradient id="gradient-2-1" gradientUnits="userSpaceOnUse" x1="203.936" y1="84.335" x2="203.936" y2="97.734" xlink:href="#gradient-2"/>
   </defs>
-  <g style="">
+  <g style="visibility: hidden;">
     <title>Level Home</title>
     <g class="item" id="level-home" style="">
       <title>lvlHome</title>
@@ -119,15 +119,15 @@
       <title>DoorToBus</title>
     </rect>
   </g>
-  <g style="visibility: hidden;">
+  <g style="">
     <title>Level Bus</title>
     <g class="item" id="level-bus" bx:origin="0 0">
       <title>lvlBus</title>
       <rect width="235" height="100" style="fill: url(#gradient-0-2);"/>
       <path style="stroke: rgb(0, 0, 0); stroke-width: 6px; fill: none; stroke-linecap: round; stroke-linejoin: round;" d="M 6 93 L 54.76 73.121 L 114.591 73.116 L 181.482 72.629 L 227 93"/>
     </g>
-    <rect x="47.598" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-1);" id="door-to-math" class="clickable item">
-      <title>DoorToMath</title>
+    <rect x="47.598" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-1);" id="door-to-garden" class="clickable item">
+      <title>Garden Bus</title>
     </rect>
     <rect x="108.111" y="35.329" width="15" height="30" style="stroke: rgb(0, 0, 0); fill: url(#gradient-4-2);" id="door-to-collect" class="clickable item">
       <title>DoorToCollect</title>

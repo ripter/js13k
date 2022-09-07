@@ -1,3 +1,5 @@
+import { backeOne } from './actions/backOne.mjs';
+
 // [
 //     'Home',
 //     'Ouside Home',
@@ -47,14 +49,27 @@ export const SCENES = [
 		dialogs: [
 			'Bus Stop.',
 			'I only have time for one job a day.',
-			'Research, Trash, or Music',
+			'Gardening, Research, Trash, or Music',
 		],
 		items: {
 			'level-bus': -1,	
-			'door-to-math': -1,
+			'door-to-garden': 4,
 			'door-to-collect': -1,
 			'door-to-music': -1,
 		},
-	}
+	},
+	// 4 - Garden Stop [Intro]
+	{
+		dialogs: [
+			'Gardening is a lot of upfront work.',
+			'Payment is not guaranteed.',
+			'But the bus ride is free.',
+			'Should I spend the day Gardening?',
+		],
+		choices: {
+			'Yes': -1,
+			'No': [backeOne],
+		},
+	},
 ];
 	

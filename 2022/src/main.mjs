@@ -2,14 +2,14 @@ import { svg } from './svg.mjs';
 import { SCENES } from './stages.mjs';
 import { dialogClick } from './dialogClick.mjs';
 import { actionClick } from './actionClick.mjs';
-import { loadScene } from './loadScene.mjs';
 
 const state = {
   money: 10, 
+  sceneIndex: 3,
 };
 
 // Load the first scene.
-loadScene(state, SCENES[0]);
+actionClick(state, state.sceneIndex);
 console.log('state', state);
 
 // Main Event Handler for the entire game.
