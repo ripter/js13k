@@ -24,8 +24,8 @@ export function loadScene(state, scene) {
 	}
 	else {
 		delete state.choices;
-		updateChoiceUI(false);
 	}
+	updateChoiceUI(state.isChoiceOpen);
 	
 	// If items is defined in the scene, reset with the new list.
 	if ('items' in scene) {

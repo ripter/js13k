@@ -5,7 +5,13 @@ import { actionClick } from './actionClick.mjs';
 
 const state = {
   money: 10, 
-  sceneIndex: 3,
+  sceneIndex: 2,
+  wifeParts: {
+    'Neural Link': 0,
+    'Torso': 0,
+    'Arms': 0,
+    'Legs': 0,
+  },
 };
 
 // Load the first scene.
@@ -20,17 +26,12 @@ const GameEventHandler = {
     const { isChoiceOpen, isDialogOpen } = state;
     const elmClicked = target.closest('.clickable');
     const clickID = elmClicked?.id ?? null;
-    
-    
 
-    console.log(type, target);    
-    
     switch (type) {
       case 'click':
-        if (isChoiceOpen) {
+        if (isChoiceOpen && clickID) {
           const elmText = elmClicked.querySelector(`#${clickID}-text`);
           const text = elmText.innerHTML;
-          console.log('Choice clicked', clickID, '\n', elmClicked, '\n', text); 
           actionClick(state, state.choices[text]);
         }
         else if (state.isDialogOpen) {

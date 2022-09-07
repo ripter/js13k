@@ -1,13 +1,6 @@
 import { backeOne } from './actions/backOne.mjs';
+import { restoreProgress } from './actions/restoreProgress.mjs';
 
-// [
-//     'Home',
-//     'Ouside Home',
-//     'Train Station',
-//     'Untaingled',
-//     'Cleaning',
-//     'Sorting',
-//   ]
 
 export const SCENES = [
 	// 0 - Intro Scene
@@ -31,7 +24,7 @@ export const SCENES = [
 			'Ok, what should I do?',
 		],
 		choices: {
-			'Restoration progress': -1,
+			'Restoration progress': [restoreProgress, 8],
 			'Buy a Wife Part': -1,
 			'Say something nice': 2,
 		}
@@ -93,7 +86,7 @@ export const SCENES = [
 			'No': 4,
 		},
 	},
-	// 7 - Something [Intro] 
+	// 7 - Investing [Intro] 
 	{
 		dialogs: [
 			'"Investing" \n(aka Gambling)',
@@ -105,6 +98,13 @@ export const SCENES = [
 			'Yes': -1,
 			'No': 4,
 		},
+	},
+	// 8 - Wife Restoration progress.
+	{
+		dialogs: [],	
+		choices: {
+			'Back': 2,
+		}
 	},
 ];
 	

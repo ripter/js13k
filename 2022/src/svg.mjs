@@ -9,8 +9,6 @@ export const elmUIMoneyText = svg.querySelector('#ui-money-text');
 
 export const elmUIChoice = svg.querySelector('#ui-choice');
 
-// export const elmIconMC = svg.querySelector('#icon-mc');
-
 
 // Updates the Dialog SVG
 export function updateDialog(isOpen, text) {
@@ -51,7 +49,6 @@ export function updateChoiceUI(isOpen, choices) {
       const elmChoice = svg.getElementById(`choice-${i}`); 
       const elmText = svg.getElementById(`choice-${i}-text`); 
       const text = choices[i-1];
-      console.log(text, elmText);
       
       if (text) {
         showElm(elmChoice);

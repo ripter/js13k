@@ -9,8 +9,9 @@ export function actionClick(state, args) {
 	
 	// if the args are an array the first element is the function to call.
 	if (args instanceof Array) {
-		const func = args.shift();	
-		nextSceneIdx = func.apply(state, args);
+		const params = [...args];
+		const func = params.shift();	
+		nextSceneIdx = func.apply(state, params);
 	}
 	else if (typeof args === 'number') {
 		nextSceneIdx = identity(args);
@@ -22,5 +23,4 @@ export function actionClick(state, args) {
 		state.sceneIndex = nextSceneIdx;
 		loadScene(state, SCENES[state.sceneIndex]);
 	}
-	console.log('state', state);
 }

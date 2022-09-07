@@ -19,20 +19,10 @@ export function dialogClick(state) {
 		// when on the last line, open the choice ui
 		if (idx >= (dialogs.length-1)) {
 			idx = (dialogs.length-1);
+			line = dialogs[idx];
 			state.isChoiceOpen = true;
 			updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices));
 		}
-		
-		// if the index is past the end, and the choice isn't open yet.
-		// open the choice dialog.
-		// if (idx >= length && !state.isChoiceOpen) {
-		// 	line = dialogs[length];
-		// 	state.isChoiceOpen = true;
-		// 	updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices));
-		// }
-	// } else {
-	// 	line = dialogs[idx];
-	// 	isOpen = !!line; // close when out of lines.
 	}
 	
 	// Update the SVG
