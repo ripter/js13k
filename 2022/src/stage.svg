@@ -84,6 +84,15 @@
     <linearGradient id="gradient-4-2" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -99.889175, -5.671468)" xlink:href="#gradient-4"/>
     <linearGradient id="gradient-4-3" gradientUnits="userSpaceOnUse" x1="216.328" y1="41.294" x2="216.328" y2="71.276" gradientTransform="matrix(1, 0, 0, 1, -34.507641, -5.670938)" xlink:href="#gradient-4"/>
     <linearGradient id="gradient-2-1" gradientUnits="userSpaceOnUse" x1="203.936" y1="84.335" x2="203.936" y2="97.734" xlink:href="#gradient-2"/>
+    <filter id="filter-0" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feFlood result="flood-0" style="flood-color: rgb(247, 14, 14);"/>
+      <feTurbulence result="turbulence-0" baseFrequency="0.2" type="turbulence"/>
+      <feComposite result="composite-0" in="flood-0" in2="turbulence-0"/>
+    </filter>
+    <filter id="captcha1" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feTurbulence result="turbulence-0" baseFrequency="0.1" numOctaves="3" type="fractalNoise" seed="14"/>
+      <feDisplacementMap result="displacement-map-0" in="SourceGraphic" in2="turbulence-0" scale="0.05" xChannelSelector="G"/>
+    </filter>
   </defs>
   <g style="visibility: hidden;">
     <title>Level Home</title>
@@ -119,7 +128,7 @@
       <title>DoorToBus</title>
     </rect>
   </g>
-  <g style="">
+  <g style="visibility: hidden;">
     <title>Level Bus</title>
     <g class="item" id="level-bus" bx:origin="0 0">
       <title>lvlBus</title>
@@ -136,10 +145,10 @@
       <title>Investing</title>
     </rect>
   </g>
-  <g id="dialog" style="visibility: hidden;">
+  <g id="dialog" style="">
     <title>Dialog</title>
     <rect x="7.943" y="6.661" width="216.74" height="32.219" style="fill: url(#color-5); stroke: url(#color-1);"/>
-    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="67.722" y="20.978" transform="matrix(1, 0, 0, 1, -27.496523, -0.848139)" id="dialog-text" class="captcha-text">Death is patient. I promise dear Wife.<tspan x="67.72200012207031" dy="1em">​</tspan></text>
     <g transform="matrix(1.820659, 0, 0, 1.820659, 12.230977, 12.235285)" style="" id="icon-mc">
       <title>MCHeadIcon</title>
       <rect x="1" y="0" width="4" height="10" style="fill: url(#gradient-1-4);">
@@ -152,6 +161,9 @@
         <title>Eye2</title>
       </rect>
     </g>
+    <rect width="216.74" height="32.219" style="fill: url(#color-5); stroke: url(#color-1); filter: url(#filter-0); mix-blend-mode: color-dodge; visibility: hidden;" x="7.943" y="6.661">
+      <title>filterRect</title>
+    </rect>
   </g>
   <g id="ui-choice" style="visibility: hidden;" transform="matrix(1, 0, 0, 1, -37, 50.867428)">
     <title>UIChoice</title>
@@ -180,7 +192,7 @@
   <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: url(#color-5); visibility: hidden;">
     <title>BG</title>
   </rect>
-  <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" bx:origin="0 0">
+  <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" style="" bx:origin="0 0">
     <title>Player</title>
     <g>
       <title>Head</title>
@@ -209,5 +221,10 @@
     <rect x="186.063" y="84.335" width="35.746" height="13.399" style="fill: url(#color-3); stroke: url(#gradient-2-1);" rx="3.913" ry="3.913"/>
     <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="188.839" y="93.653">🤖</text>
     <text style="fill: url(#color-1); font-family: Arial, sans-serif; font-size: 7.5px; white-space: pre;" x="198.839" y="93.653" id="ui-money-text">1,000</text>
+  </g>
+  <g transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 15.12700081115046, -36.553931646968365)" style="visibility: hidden;">
+    <title>UICaptcha</title>
+    <rect x="21.551" y="50.805" width="50.001" height="23.67" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="28.226" y="65.792">fooBar != BarFoo</text>
   </g>
 </svg>

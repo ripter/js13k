@@ -5,22 +5,22 @@ import { identity } from './actions/identity.mjs';
 // handles item/choice clicks. 
 export function actionClick(state, args) {
 	if (args === -1) return; // -1 takes no action when clicked.
-	let nextSceneIdx = -1;
+	let nextScene;
 	
 	// if the args are an array the first element is the function to call.
 	if (args instanceof Array) {
 		const params = [...args];
 		const func = params.shift();	
-		nextSceneIdx = func.apply(state, params);
+		nextScene = func.apply(state, params);
 	}
 	else if (typeof args === 'number') {
-		nextSceneIdx = identity(args);
+		nextScene = SCENES[identity(args)];
 	}
 	
 	// Load the next scene
-	if (-1 !== nextSceneIdx) {
-		state.lastSceneIndex = state.sceneIndex;
-		state.sceneIndex = nextSceneIdx;
-		loadScene(state, SCENES[state.sceneIndex]);
+	if (nextScene) {
+		// state.lastSceneIndex = state.sceneIndex;
+		// state.sceneIndex = nextSceneIdx;
+		loadScene(state, nextScene);
 	}
 }

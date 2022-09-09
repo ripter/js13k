@@ -4,8 +4,8 @@ import { dialogClick } from './dialogClick.mjs';
 import { actionClick } from './actionClick.mjs';
 
 const state = {
-  money: 10, 
-  sceneIndex: 2,
+  money: 0, 
+  sceneIndex: 4,
   wifeParts: {
     'Neural Link': 0,
     'Torso': 0,

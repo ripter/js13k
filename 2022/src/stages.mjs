@@ -1,5 +1,6 @@
-import { backeOne } from './actions/backOne.mjs';
+// import { backeOne } from './actions/backOne.mjs';
 import { restoreProgress } from './actions/restoreProgress.mjs';
+import { captchaGame } from './actions/captchaGame.mjs';
 
 
 export const SCENES = [
@@ -82,7 +83,7 @@ export const SCENES = [
 			'Should I spend the day entering Captchas?',
 		],
 		choices: {
-			'Yes': -1,
+			'Yes': [captchaGame, 4],
 			'No': 4,
 		},
 	},
