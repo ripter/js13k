@@ -1,7 +1,5 @@
 import { SCENES } from '../stages.mjs';
-import { updateCaptchaLevel } from '../svg/updateCaptchaLevel.mjs';
-import { randomizeText } from '../gameCaptcha/randomizeText.mjs';
-import { CAPTCHA } from '../gameCaptcha/const.mjs';
+import { createCaptcha } from '../gameCaptcha/createCaptcha.mjs';
 
 // Runs the Captcha game by creating a new Scene for each round.
 export function captchaGame(doneIdx) {
@@ -9,24 +7,18 @@ export function captchaGame(doneIdx) {
 		captchaIdx = 0, 
 		showCaptchaIntro = true 
 	} = this;
-	const { text, options, settings } = CAPTCHA[captchaIdx];
-	const labelAnswer = randomizeText(text);
-	// Create a list of options with randomization.
-	const choiceOptions = [
-		labelAnswer,
-		...options.map(choiceText => randomizeText(choiceText)),
-	].sort(() => Math.random() - 0.5);
+	const { text, options, settings } = createCaptcha.call(this);
 	//
 	// Create the scene	
 	const scene = {
 		isChoiceOpen: true,
 		captcha: settings,
 		dialogs: [
-			labelAnswer,
+			text,
 		],
-		choices: choiceOptions.reduce((acc, label) => {
+		choices: options.reduce((acc, label) => {
 			// if this is the right answer
-			if (label=== labelAnswer) {
+			if (label === text) {
 				acc[label] = [rightAnswer, doneIdx];
 			}
 			// else this is the wrong answer
@@ -37,19 +29,15 @@ export function captchaGame(doneIdx) {
 			return acc;
 		}, {}),
 	};
-
-	// updateCaptchaLevel(1);
-	
-	console.log('captchaGame', this);
 	return scene;
 }
 
 
 // Clears the captcha filter.
 export function cleanup(doneIdx) {
-	updateCaptchaLevel(0);
+	// updateCaptchaLevel(0);
 	// Show the intro the next game.
-	this.showCaptchaIntro = true;
+	// this.showCaptchaIntro = true;
 	return SCENES[doneIdx];
 }
 
@@ -62,7 +50,7 @@ export function rightAnswer(doneIdx) {
 	const scene = {
 		isChoiceOpen: true,
 		dialogs: [
-			`Success\nYou earn ${winAmount}`,
+			`Successful Session\nYou earn ${winAmount}`,
 		],
 		choices: {
 			'Next': [captchaGame, doneIdx],
@@ -73,6 +61,7 @@ export function rightAnswer(doneIdx) {
 }
 
 export function wrongAnswer(doneIdx) {
+	this.captchaIdx = this.captchaIdx ? this.captchaIdx + 1 : 1;
 	
 	return {
 		isChoiceOpen: true,
