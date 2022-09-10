@@ -1,8 +1,10 @@
 import { updateDialog, updateItems, updateUI, updateChoiceUI } from './svg.mjs';
+import { updateCaptchaLevel } from './svg/updateCaptchaLevel.mjs';
 
 // Loads the scene into state.
 // Re-Renders the SVG
 export function loadScene(state, scene) {
+	//
 	// if the dialog is defined, load and start it.
 	if ('dialogs' in scene) {
 		// Load Dialog items
@@ -17,16 +19,22 @@ export function loadScene(state, scene) {
 		state.isDialogOpen = false;
 		updateDialog(false);
 	}
-	
-	state.isChoiceOpen = false;
+	//	
+	// Choice Options
+	state.isChoiceOpen = scene?.isChoiceOpen ?? false;
 	if ('choices' in scene) {
 		state.choices = {...scene.choices};
 	}
 	else {
 		delete state.choices;
 	}
-	updateChoiceUI(state.isChoiceOpen);
+	updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices  ?? []));
 	
+	//
+	// Captcha Filters.
+	updateCaptchaLevel(scene.captcha);
+	
+	//
 	// If items is defined in the scene, reset with the new list.
 	if ('items' in scene) {
 		state.items = {...scene.items};

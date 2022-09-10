@@ -71,38 +71,6 @@ export function updateChoiceUI(isOpen, choices) {
 }
 
 
-export function updateCaptchaLevel(newLevel) {
-  svg.querySelectorAll('.captcha-text').forEach(elmText => {
-    elmText.style.filter = '';
-    
-    switch (newLevel) {
-      case 0:
-        elmText.style.filter = '';
-        return;
-      case 1: {
-        filterCaptchaDisplacement.setAttribute('scale', '0.01');
-        filterCaptchaTurbulence.setAttribute('baseFrequency', '0.1');
-        elmText.style.filter = 'url("#captcha1")';
-        return;
-      }
-      case 2: {
-        filterCaptchaDisplacement.setAttribute('scale', '0.03');
-        filterCaptchaTurbulence.setAttribute('baseFrequency', '0.05');
-        elmText.style.filter = 'url("#captcha1")';
-        return;
-      }
-      case 3: {
-        filterCaptchaDisplacement.setAttribute('scale', '0.05');
-        filterCaptchaTurbulence.setAttribute('baseFrequency', '0.1');
-        elmText.style.filter = 'url("#captcha1")';
-        return;
-      }
-      default:
-        return; 
-    }  
-  }); 
-}
-window.updateCaptchaLevel = updateCaptchaLevel;
 
 // filter: url("#captcha1")
 

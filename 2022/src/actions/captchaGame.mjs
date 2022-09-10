@@ -1,29 +1,37 @@
 import { SCENES } from '../stages.mjs';
-import { updateCaptchaLevel } from '../svg.mjs';
+import { updateCaptchaLevel } from '../svg/updateCaptchaLevel.mjs';
+import { randomizeText } from '../gameCaptcha/randomizeText.mjs';
+import { CAPTCHA } from '../gameCaptcha/const.mjs';
 
 // Runs the Captcha game by creating a new Scene for each round.
 export function captchaGame(doneIdx) {
-	const { captchaIdx = 0, showCaptchaIntro = true } = this;
-	const { text, options } = CAPTCHA[captchaIdx];
-	
-	// Add the text to the options
-	const choiceOptions = [text, ...options].sort(() => Math.random() - 0.5);
-	
+	const { 
+		captchaIdx = 0, 
+		showCaptchaIntro = true 
+	} = this;
+	const { text, options, settings } = CAPTCHA[captchaIdx];
+	const labelAnswer = randomizeText(text);
+	// Create a list of options with randomization.
+	const choiceOptions = [
+		labelAnswer,
+		...options.map(choiceText => randomizeText(choiceText)),
+	].sort(() => Math.random() - 0.5);
+	//
+	// Create the scene	
 	const scene = {
+		isChoiceOpen: true,
+		captcha: settings,
 		dialogs: [
-			text,
+			labelAnswer,
 		],
-		choices: choiceOptions.reduce((acc, choiceText) => {
-			const label = choiceText
-				.replaceAll('*', () => 0|Math.random() * 10)
-				.replaceAll('#', () => (Math.random() + 1).toString(36).substr(-1));
-			// acc[label] = ;
-			
-			if (choiceText === text) {
+		choices: choiceOptions.reduce((acc, label) => {
+			// if this is the right answer
+			if (label=== labelAnswer) {
 				acc[label] = [rightAnswer, doneIdx];
 			}
+			// else this is the wrong answer
 			else {
-				acc[label] = -1;
+				acc[label] = [wrongAnswer, doneIdx];
 			}
 			
 			return acc;
@@ -36,20 +44,23 @@ export function captchaGame(doneIdx) {
 	return scene;
 }
 
+
 // Clears the captcha filter.
-export function clearCaptcha(doneIdx) {
+export function cleanup(doneIdx) {
 	updateCaptchaLevel(0);
 	// Show the intro the next game.
 	this.showCaptchaIntro = true;
 	return SCENES[doneIdx];
 }
 
+// Returns the scene on a successful captcha answer.
 export function rightAnswer(doneIdx) {
 	this.captchaIdx = this.captchaIdx ? this.captchaIdx + 1 : 1;
 	const winAmount = this.captchaIdx;
 	this.money += winAmount;
 	
 	const scene = {
+		isChoiceOpen: true,
 		dialogs: [
 			`Success\nYou earn ${winAmount}`,
 		],
@@ -61,10 +72,15 @@ export function rightAnswer(doneIdx) {
 	return scene;
 }
 
-/**
- * Captchas 
- */
-export const CAPTCHA = [
-	{text: 'fOo B4r', options: ['H3ll0 W0rld', 'F** Y*#', 'L337 H83R'], settings: {}},
-	{text: 'H3ll0 W0rld', settings: {}},
-];
+export function wrongAnswer(doneIdx) {
+	
+	return {
+		isChoiceOpen: true,
+		dialogs: [
+			"Falure. Time to go home for the night.\n F",
+		],
+		choices: {
+			'End for the Day': [cleanup, doneIdx],
+		}
+	};
+}
