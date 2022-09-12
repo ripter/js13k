@@ -6,7 +6,7 @@ import { choiceClick } from './clickHandlers/choiceClick.mjs';
 
 const state = {
   money: 0, 
-  sceneIndex: 4,
+  sceneIndex: 2,
   wifeParts: {
     'Neural Link': 0,
     'Torso': 0,
@@ -19,7 +19,7 @@ const state = {
     wordIdx: 0,  // Idx of the current word in the story.
     runCount: 0, // A count of the current captcha solved during a session. 
     earnings: 0, // The total earned during  session.
-    doneIdx: 4, // Scene Index to use when exiting the game.
+    doneIdx: 2, // Scene Index to use when exiting the game.
   },
 };
 

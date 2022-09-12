@@ -1,5 +1,6 @@
 import { restoreProgress } from './actions/restoreProgress.mjs';
 import { runCaptcha } from './gameCaptcha/index.mjs';
+import { buyWifePart } from './buyWifePart/index.mjs';
 
 
 export const SCENES = [
@@ -25,7 +26,7 @@ export const SCENES = [
 		],
 		choices: [
 			['Restoration progress', restoreProgress],
-			['Buy a Wife Part', -1],
+			['Buy a Wife Part', buyWifePart],
 			['Say something nice', 2],
 		],
 	},
@@ -42,7 +43,7 @@ export const SCENES = [
 		dialogs: [
 			'Bus Stop.',
 			'I only have time for one job a day.',
-			'Gardening, Captcha Entry, or Investing',
+			'Gardening, Captcha Entry, or Investing\n(Only Captcha made it for JS13k)',
 		],
 		items: {
 			'level-bus': -1,	
@@ -69,8 +70,7 @@ export const SCENES = [
 			'Should I spend the day Gardening?',
 		],
 		choices: [
-			['Yes', -1],
-			['No', 4],
+			['Hope for a post JS13k update', 4],
 		],
 	},
 	// 6 - Captcha Entry [Intro] 
@@ -96,15 +96,7 @@ export const SCENES = [
 			'Should I spend the day Investing?',
 		],
 		choices: [
-			['Yes', -1],
-			['No', 4],
-		],
-	},
-	// 8 - Wife Restoration progress.
-	{
-		dialogs: [],	
-		choices: [
-			['Back', 2],
+			['Hope for a post JS13k update', 4],
 		],
 	},
 ];
