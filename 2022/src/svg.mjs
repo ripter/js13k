@@ -1,3 +1,6 @@
+import { showElm } from './svg/showElm.mjs';
+import { hideElm } from './svg/hideElm.mjs';
+
 /**
  * References/Functions to work with the SVG
  */
@@ -7,7 +10,6 @@ export const elmDialog = svg.querySelector('#dialog');
 export const elmDialogText = svg.querySelector('#dialog-text');
 export const elmUIMoneyText = svg.querySelector('#ui-money-text');
 
-export const elmUIChoice = svg.querySelector('#ui-choice');
 
 export const filterCaptchaDisplacement = svg.querySelector('#captcha1 feDisplacementMap');
 export const filterCaptchaTurbulence = svg.querySelector('#captcha1 feTurbulence');
@@ -45,41 +47,3 @@ export function updateUI(money) {
   elmUIMoneyText.innerHTML = ('' + money).padStart(5, 0);
 }
 
-export function updateChoiceUI(isOpen, choices) {
-  if (isOpen) {
-    showElm(elmUIChoice);
-    for (let i=1; i < 5; i++) {
-      const elmChoice = svg.getElementById(`choice-${i}`); 
-      const elmText = svg.getElementById(`choice-${i}-text`); 
-      const text = choices[i-1];
-      
-      if (text) {
-        showElm(elmChoice);
-        elmText.innerHTML = text;
-      } else {
-        hideElm(elmChoice);
-      }
-    }
-  }
-  else {
-    hideElm(elmUIChoice); 
-    for (let i=1; i < 5; i++) {
-      const elmChoice = svg.getElementById(`choice-${i}`); 
-      hideElm(elmChoice);
-    }
-  }
-}
-
-
-
-// filter: url("#captcha1")
-
-// hides the element.
-export function hideElm(elm) {
-  elm.style.visibility = 'hidden';
-}
-
-// shows the element.
-export function showElm(elm) {
-  elm.style.visibility = 'visible';
-}

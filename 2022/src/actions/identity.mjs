@@ -1,5 +1,6 @@
+import { SCENES } from '../stages.mjs';
 
-// Returns the first argument.
+// Returns the Scene object from the constant by index
 export function identity(nextSceneIdx) {
-	return nextSceneIdx;
+	return SCENES[nextSceneIdx];
 }

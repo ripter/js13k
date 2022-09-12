@@ -1,4 +1,5 @@
-import { updateDialog, elmDialog, elmDialogText, updateChoiceUI } from './svg.mjs';
+import { updateDialog } from '../svg.mjs';
+import { updateChoiceUI } from '../svg/updateChoiceUI.mjs';
 
 
 // Moves to the next dialog line or closes the dialog.
@@ -7,7 +8,6 @@ export function dialogClick(state) {
 	const { dialogs } = state;
 	// Use the *next* item, this is in response, so dialogIdx has already rendered.
 	let idx = state.dialogIdx + 1; 
-	// const length = dialogs.length-1;
 	let line = dialogs[idx];
 	let isOpen = !!line; // close when out of lines.
 		
@@ -21,11 +21,12 @@ export function dialogClick(state) {
 			idx = (dialogs.length-1);
 			line = dialogs[idx];
 			state.isChoiceOpen = true;
-			updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices));
+			// SVG Update
+			updateChoiceUI(state.isChoiceOpen, state.choices);
 		}
 	}
 	
-	// Update the SVG
+	// SVG Update
 	updateDialog(isOpen, line);
 	
 	// Update the State for the next line.

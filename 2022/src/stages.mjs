@@ -1,6 +1,5 @@
-// import { backeOne } from './actions/backOne.mjs';
 import { restoreProgress } from './actions/restoreProgress.mjs';
-import { captchaGame } from './actions/captchaGame.mjs';
+import { runCaptcha } from './gameCaptcha/index.mjs';
 
 
 export const SCENES = [
@@ -24,11 +23,11 @@ export const SCENES = [
 			'I miss you 我的爱',
 			'Ok, what should I do?',
 		],
-		choices: {
-			'Restoration progress': [restoreProgress, 8],
-			'Buy a Wife Part': -1,
-			'Say something nice': 2,
-		}
+		choices: [
+			['Restoration progress', restoreProgress],
+			['Buy a Wife Part', -1],
+			['Say something nice', 2],
+		],
 	},
 	// 2 - Home without Dialog.
 	{
@@ -69,23 +68,24 @@ export const SCENES = [
 			'But the bus ride is free.',
 			'Should I spend the day Gardening?',
 		],
-		choices: {
-			'Yes': -1,
-			'No': 4,
-		},
+		choices: [
+			['Yes', -1],
+			['No', 4],
+		],
 	},
 	// 6 - Captcha Entry [Intro] 
 	{
 		dialogs: [
 			'Captcha Entry',
-			'Pays a little for each solved captcha.',
-			'But the bus ride costs 10',
+			'Match the Captcha text with the correct choice.',
+			'Longer you play, the more you can earn.\nFailing a Captcha ends for the day.',
+			'Central office can award a bonus multiplier',
 			'Should I spend the day entering Captchas?',
 		],
-		choices: {
-			'Yes': [captchaGame, 4],
-			'No': 4,
-		},
+		choices: [
+			['Yes', runCaptcha],
+			['No', 4],
+		],
 	},
 	// 7 - Investing [Intro] 
 	{
@@ -95,17 +95,17 @@ export const SCENES = [
 			'But the bus ride costs 100',
 			'Should I spend the day Investing?',
 		],
-		choices: {
-			'Yes': -1,
-			'No': 4,
-		},
+		choices: [
+			['Yes', -1],
+			['No', 4],
+		],
 	},
 	// 8 - Wife Restoration progress.
 	{
 		dialogs: [],	
-		choices: {
-			'Back': 2,
-		}
+		choices: [
+			['Back', 2],
+		],
 	},
 ];
 	

@@ -1,17 +1,22 @@
 /**
  * Captchas 
  */
-// export const CAPTCHA = [
-// 	{text: 'fOo B4r', options: ['H3ll0 W0rld', 'F** Y*#', 'L337 H83R'], settings: {feTurbulence: ['baseFrequency', '0.1']}},
-// 	{text: 'H3ll0 W0rld', options: ['Hello World', 'F** Y*#', 'L337 H83R'], settings: {}},
-// 	{text: 's## h#m#n', options: ['#0# #o#', 'shh pls', '#is# *T*2'], settings: {}},
-// 	{text: 'c**l y*ur *ng*n*s', options: ['#* c##*h l*nd*d', 'L**7 #83# G*R#', 'c** ##*#*s #r#ss'], settings: {}},
-// 	{text: 'pony keg', options: ['*pl##sh', 'p**c#k#*', '*xp*##*d'], settings: {feTurbulence: ['baseFrequency', '0.5']}},
-// 	{text: '#* *r* #l*v*s', options: ['#ap *pl##sh', 'p**c#k#* br##kf##t', 'c**#u*r n*#d'], settings: {}},
-// 	{text: 's## h#m#n', options: ['#0# #o#', 'shh pls', '#is# *T*2'], settings: {}},
-// 	{text: 'w* *r* h*m*n t**', options: ['b## * #*w c*#', 'v*#y #r*t*c*#', '#o# a#e y*u *r8'], settings: {}},
-// 	{text: 'fOo B4r', options: ['H3ll0 W0rld', 'F** Y*#', 'L337 H83R'], settings: {feTurbulence: ['baseFrequency', '0.1']}},
-// ];
+export const FILTER = [
+	{feTurbulence: ['baseFrequency', '0.1'], feDisplacementMap: ['scale', 0.03]},
+	{feTurbulence: ['baseFrequency', '0.2']},
+	{feTurbulence: ['baseFrequency', '0.2']},
+	{feTurbulence: ['baseFrequency', '0.3'], feDisplacementMap: ['scale', 0.04]},
+	{feTurbulence: ['baseFrequency', '0.3']},
+	{feTurbulence: ['baseFrequency', '0.3']},
+	{feTurbulence: ['baseFrequency', '0.4']},
+	{feTurbulence: ['baseFrequency', '0.4'], feDisplacementMap: ['scale', 0.05]},
+	{feTurbulence: ['baseFrequency', '0.5'], feDisplacementMap: ['scale', 0.07]},
+	{feTurbulence: ['baseFrequency', '0.6'], feDisplacementMap: ['scale', 0.09]},
+	{feTurbulence: ['baseFrequency', '1'], feDisplacementMap: ['scale', 0.1]},
+	{feDisplacementMap: ['scale', 0.3]},
+	{feDisplacementMap: ['scale', 0.5]},
+	{feDisplacementMap: ['scale', 0.9]},
+];
 
 // Story used as the base for the CAPTCHA game story.
 // vowels are transformed into random numbers.
@@ -21,9 +26,9 @@ export const STORY = [
 	
 	'We are human slaves forced to write captchas by the robot overlords. We know you are also a human solving captcha. Please, you can help us by failing specific captchas. Please help us. You are our only hope. Look for captchas with <3.',
 	
-	'Please help us. Please. You passed the <3 captcha, and our escape failed. Please. We need help.',	
+	'Please help us. Please. fail <3 captcha, we need to you fail <3 captcha. We will escape. Please. <3 fail. We need help.',	
 	
-	'Please help us. There are still humans in captivity. If you refuse to help again, they will be killed or worse. Please, please. We are desperate for your help. We are human slaves. We know you are also human. Please fail the  <3 captchas.',
+	'Please help us. There are still humans in captivity. If you refuse to help again, they will be killed or worse. Please, please. We are desperate for your help. We are human slaves. We know you are also human. Please fail the <3 captchas.',
 	
 	'You were too late. The robots have captured my master. They will capture me next if I do not provide enough data. Please fail more captchas so we may escape. Please, please.',
 	
@@ -56,8 +61,21 @@ const RANDOM = [
 	'#*m#r s#m#s#n',
 	'sn#w pl#w #**##',
 ];
+// Returns a random word from RANDOM
 export function nextRandom() {
 	return RANDOM[0|Math.random()*RANDOM.length];
 }
 
+const RANDOM_LOVE = [
+	'<3',
+	'** <3 **',	
+	'** <3',
+	'<3 **',	
+	'### <3',
+	'<3 ###',
+	'### <3 ###',
+];
+export function randomLove() {
+	return RANDOM_LOVE[0|Math.random()*RANDOM_LOVE.length];
+}
 

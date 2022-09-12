@@ -9,7 +9,6 @@ export function updateCaptchaLevel(settings) {
 		// and empty object uses the last set filter values.
 		if (!settings) return;
 			
-		console.log('updating captcha filter', settings);
 		// Settings is an object of selector + setAttribute props (as an array).
 		Object.keys(settings).forEach(selector => {
 			const elm = elmFilter.querySelector(selector);	

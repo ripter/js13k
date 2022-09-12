@@ -1,7 +1,8 @@
 import { svg } from './svg.mjs';
 import { SCENES } from './stages.mjs';
-import { dialogClick } from './dialogClick.mjs';
-import { actionClick } from './actionClick.mjs';
+import { dialogClick } from './clickHandlers/dialogClick.mjs';
+import { actionClick } from './clickHandlers/actionClick.mjs';
+import { choiceClick } from './clickHandlers/choiceClick.mjs';
 
 const state = {
   money: 0, 
@@ -11,6 +12,14 @@ const state = {
     'Torso': 0,
     'Arms': 0,
     'Legs': 0,
+  },
+  // Captcha Minigame
+  captcha: {
+    storyIdx: 0, // Idx of the current paragraph in the story
+    wordIdx: 0,  // Idx of the current word in the story.
+    runCount: 0, // A count of the current captcha solved during a session. 
+    earnings: 0, // The total earned during  session.
+    doneIdx: 4, // Scene Index to use when exiting the game.
   },
 };
 
@@ -30,9 +39,7 @@ const GameEventHandler = {
     switch (type) {
       case 'click':
         if (isChoiceOpen && clickID) {
-          const elmText = elmClicked.querySelector(`#${clickID}-text`);
-          const text = elmText.innerHTML;
-          actionClick(state, state.choices[text]);
+          choiceClick(state, parseInt(clickID.substring(7), 10));
         }
         else if (state.isDialogOpen) {
           dialogClick(state);

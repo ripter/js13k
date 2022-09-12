@@ -1,4 +1,5 @@
-import { updateDialog, updateItems, updateUI, updateChoiceUI } from './svg.mjs';
+import { updateDialog, updateItems, updateUI } from './svg.mjs';
+import { updateChoiceUI } from './svg/updateChoiceUI.mjs';
 import { updateCaptchaLevel } from './svg/updateCaptchaLevel.mjs';
 
 // Loads the scene into state.
@@ -23,12 +24,12 @@ export function loadScene(state, scene) {
 	// Choice Options
 	state.isChoiceOpen = scene?.isChoiceOpen ?? false;
 	if ('choices' in scene) {
-		state.choices = {...scene.choices};
+		state.choices = [...scene.choices];
 	}
 	else {
 		delete state.choices;
 	}
-	updateChoiceUI(state.isChoiceOpen, Object.keys(state.choices  ?? []));
+	updateChoiceUI(state.isChoiceOpen, state.choices  ?? []);
 	
 	//
 	// Captcha Filters.
