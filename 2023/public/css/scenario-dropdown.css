@@ -1,0 +1,25 @@
+.scenario-dropdown {
+  border: 1px solid #ccc;
+  width: 250px;
+  position: relative;
+  cursor: pointer;
+}
+
+.scenario-options {
+  /* display: none; */
+  border: 1px solid #ccc;
+  /* position: absolute; */
+  width: 100%;
+  top: 100%;
+  z-index: 1;
+}
+
+.scenario-option {
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.scenario-option:hover {
+  background-color: #f7f7f7;
+}

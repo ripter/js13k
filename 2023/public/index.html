@@ -5,10 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>JS13KGame 2023: Theme "13th Century"!</title>
+  <link href="css/index.css" rel="stylesheet"></link>
   <script type="module" src="../src/index.mjs"></script>
 </head>
 <body>
-  <svg viewBox="0 0 235 100" id="Stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
-  </svg>
+  <div id="elmCard"></div>
+  <div id="elmIntro">
+    <scenario-dropdown id="elmScenarioPicker"></scenario-dropdown>
+  </div>
+
+  <template id="scenario-dropdown-template">
+    <slot name="options">Select Element</slot>
+    <slot name="description">Description of the Scenario</slot>
+  </template>
 </body>
 </html>
