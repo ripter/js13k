@@ -1,0 +1,18 @@
+scenario-picker {
+  border: 1px solid #ccc;
+  width: 250px;
+  position: relative;
+  cursor: pointer;
+}
+
+scenario-picker .option dd {
+  opacity: 0;
+}
+
+scenario-picker .option.expanded dd {
+  opacity: 1;
+}
+
+scenario-picker .option button {
+  margin-top: 5px;
+}
