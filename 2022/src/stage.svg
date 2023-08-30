@@ -94,7 +94,7 @@
       <feDisplacementMap result="displacement-map-0" in="SourceGraphic" in2="turbulence-0" scale="0.05" xChannelSelector="G"/>
     </filter>
   </defs>
-  <g style="visibility: hidden;">
+  <g style="">
     <title>Level Home</title>
     <g class="item" id="level-home" style="">
       <title>lvlHome</title>
@@ -128,7 +128,7 @@
       <title>DoorToBus</title>
     </rect>
   </g>
-  <g style="visibility: hidden;">
+  <g style="">
     <title>Level Bus</title>
     <g class="item" id="level-bus" bx:origin="0 0">
       <title>lvlBus</title>
@@ -189,9 +189,6 @@
       <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7.5px;" x="95.052" y="1.048" transform="matrix(1, 0, 0, 1, 0, 33.930004)">🥚<tspan x="95.052001953125" dy="1em">​</tspan><tspan x="95.052001953125" dy="1em">​</tspan></text>
     </g>
   </g>
-  <rect width="235" height="100" rx="12" ry="12" style="stroke: url(#color-6); fill: url(#color-5); visibility: hidden;">
-    <title>BG</title>
-  </rect>
   <g transform="matrix(1, 0, 0, 1, 29, 70)" id="Player" style="" bx:origin="0 0">
     <title>Player</title>
     <g>

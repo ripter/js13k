@@ -1,0 +1,11 @@
+{
+  "name": "js13k_2023",
+  "version": "0.0.1",
+  "description": "Entry for JS13K 2023",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Richards",
+  "license": "ISC"
+}
