@@ -1,18 +1,72 @@
+/* Variables */
 scenario-picker {
-  border: 1px solid #ccc;
-  width: 250px;
-  position: relative;
-  cursor: pointer;
+    --primary-bg-color: #f9f9f9;
+    --border-color: #e1e1e1;
+    --option-hover-bg-color: #f1f1f1;
+    --text-color: #333;
+    --description-color: #666;
+    --button-bg-color: #007BFF;
+    --button-hover-bg-color: #0056b3;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Base Styles */
+scenario-picker {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 250px;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--primary-bg-color);
+    box-shadow: 0px 2px 5px var(--box-shadow-color);
+    overflow: hidden;
+}
+
+scenario-picker .option {
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px;
+    transition: background-color 0.2s ease;
+}
+
+scenario-picker .option:hover {
+    background-color: var(--option-hover-bg-color);
+}
+
+scenario-picker .option:last-child {
+    border-bottom: none;
+}
+
+scenario-picker .option dt {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Description animation and button styling */
 scenario-picker .option dd {
-  opacity: 0;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s, opacity 0.3s 0.1s;
+    overflow: hidden;
+    color: var(--description-color);
 }
 
 scenario-picker .option.expanded dd {
-  opacity: 1;
+    max-height: 100px; /* Should be larger than you expect the content to be */
+    opacity: 1;
 }
 
 scenario-picker .option button {
-  margin-top: 5px;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--button-bg-color);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 600;
+}
+
+scenario-picker .option button:hover {
+    background-color: var(--button-hover-bg-color);
 }
