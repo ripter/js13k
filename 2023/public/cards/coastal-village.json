@@ -4,7 +4,7 @@
   "matches": [
     {
       "name": "Trade at the Marketplace",
-      "dice": ["Gather"],
+      "dice": [1],
       "description": "Gather Food and Water at the Marketplace.",
       "rewards": [
         {"name": "food", "delta": 1},
@@ -13,7 +13,7 @@
     },
     {
       "name": "Recruitment",
-      "dice": ["Pray", "Pray", "Explore"],
+      "dice": [2, 2, 3],
       "description": "Invoke the divine and explore the village, rallying local supporters to join the Crusader cause.",
       "rewards": [
         {"name": "population", "delta": [1, 3]}
@@ -21,7 +21,7 @@
     },
     {
       "name": "Barter with Fishermen",
-      "dice": ["Gather", "Explore"],
+      "dice": [1, 3],
       "description": "Visit the fishermen along the coast and engage in bartering.",
       "rewards": [
         {"name": "food", "delta": 2}
@@ -29,7 +29,7 @@
     },
     {
       "name": "Aid the Sick",
-      "dice": ["Pray", "Explore"],
+      "dice": [2, 3],
       "description": "Offer solace and care to the ailing villagers, earning their gratitude.",
       "rewards": [
         {"name": "morale", "delta": 1}
@@ -37,7 +37,7 @@
     },
     {
       "name": "Diplomatic Exchange",
-      "dice": ["Gather", "Pray", "Explore"],
+      "dice": [1, 2, 3],
       "description": "Engage in diplomatic conversations with village leaders to secure support.",
       "rewards": [
         {"name": "population", "delta": 1},
