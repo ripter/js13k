@@ -1,7 +1,7 @@
 import { loadJSON } from './loadJson.mjs';
 import { Player } from './Player.mjs';
 
-import './components/scenario-dropdown.mjs';
+import './elements/scenario-dropdown.mjs';
 
 const { elmScenarioPicker } = window;
 

@@ -5,21 +5,18 @@
   cursor: pointer;
 }
 
-.scenario-options {
-  /* display: none; */
-  border: 1px solid #ccc;
-  /* position: absolute; */
-  width: 100%;
-  top: 100%;
-  z-index: 1;
+.scenario-dropdown .option > .description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    opacity: 0;
 }
 
-.scenario-option {
-  padding: 10px;
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
+.scenario-dropdown .option.expanded > .description {
+    max-height: 100px; /* You might need to adjust this based on content size */
+    opacity: 1;
 }
 
-.scenario-option:hover {
-  background-color: #f7f7f7;
+.scenario-dropdown .option button {
+    margin-top: 5px;
 }
