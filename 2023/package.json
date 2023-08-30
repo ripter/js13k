@@ -3,9 +3,15 @@
   "version": "0.0.1",
   "description": "Entry for JS13K 2023",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "author": "Chris Richards",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "jest": "^29.6.4",
+    "vite": "^4.4.9"
+  }
 }
