@@ -1,0 +1,11 @@
+{
+  "name": "Inca",
+  "population": "4",
+  "cannibalism": {
+    "food": 4,
+    "water": 2,
+    "description": "Within the rich tapestry of the 13th century South American realm, where the Inca Empire's splendor bloomed, a shadow crept silently across sacred lands. As echoes of rituals and regalia faded into a discordant backdrop of uncertainty, the people of the Inca found themselves ensnared by the tightening grip of desperation. In the midst of abundance turned scarcity, the once-celebrated unity wavered under the weight of a stark reality. Gathered in somber assembly, their once-golden visages marred by furrowed brows, leaders and shamans grappled with a harrowing choice. And so, amidst the muted sounds of divination, the unthinkable was ordained – a choice that cleaved the fabric of tradition. Each heart-wrenching decision was etched onto fragments of parchment, and with a heavy sigh, the lots were drawn. As fate’s hand swept across their lives, the very essence of their revered connection with Pachamama was tested, a trial that forever shadowed the brilliance of a once-vibrant civilization."
+  },
+  "cards": [
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Sahara",
+  "population": "4",
+  "cannibalism": {
+    "food": 4,
+    "water": 2,
+    "description": "Beneath the scorching sun and across the expansive canvas of the 13th century African expanse, where the Sahara's shifting sands held tales of ancient mysteries, a stark truth cast its shadow. As mirages danced on the horizon and whispers of ancient wisdom lingered in the air, those who navigated the unforgiving desert found themselves at the precipice of desperation. Amidst barrenness and isolation, where water turned to rarity, the nomads of the desert came to a fateful crossroads. Gathered around flickering fires, their faces etched with the weight of a stark decision, they conversed in hushed tones that swirled with sand carried by the wind. And thus, the unthinkable path was contemplated, a choice born from necessity and the haunting awareness of limited sustenance. Each name was inscribed onto fragments of parchment, offerings to the capricious winds of fortune. In that moment, survival stood juxtaposed with the purity of their ancient traditions, a testament to the human spirit's endurance in the face of a land both awe-inspiring and merciless."
+  },
+  "cards": [
+  ]
+}

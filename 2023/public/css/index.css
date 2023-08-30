@@ -4,3 +4,21 @@
 /* Custom Element Styles */
 @import url("./scenario-picker.css");
 
+#elmScenarioPicker, #elmScenarioCard {
+  width: 100%;
+}
+
+#elmScenarioPicker {
+  display: none;
+}
+#elmScenarioPicker.--active {
+  display: flex;
+}
+
+
+#elmScenarioCard {
+  display: none;
+}
+#elmScenarioCard.--active {
+  display: flex;
+}
