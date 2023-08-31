@@ -4,6 +4,7 @@ import { Player } from './Player.mjs';
 import { EVENT_SELECTED } from './elements/scenario-picker.mjs';
 import './elements/scenario-card.mjs';
 import './elements/dice-icon.mjs';
+import './elements/dice-list.mjs';
 
 const CLASS_ACTIVE = '--active';
 

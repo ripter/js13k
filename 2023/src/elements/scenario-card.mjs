@@ -39,9 +39,10 @@ class ScenarioCard extends HTMLElement {
       return `<div class="match" data-idx=${idx}>
         <dt>${match.name}</dt>
         <dd>${match.description}</dd>
-        <div class="dice-list">
-          ${match.dice.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
-        </div>
+        <dice-list 
+          values="${match.dice.map(d => diceValues[d]).join(',')}" 
+          selected="${diceResults.map(d => diceValues[d]).join(',')}"
+        ></dice-list>
       </div>`;
     }).join('');
 
