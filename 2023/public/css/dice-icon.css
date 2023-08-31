@@ -25,8 +25,8 @@ dice-icon {
 
 /* Optional: On hover, make it seem clickable */
 dice-icon:hover {
-  background-color: #f5f5f5;
-  cursor: grab;
+  /* background-color: #f5f5f5; */
+  /* cursor: grab; */
 }
 
 dice-icon.inverted {
@@ -36,5 +36,5 @@ dice-icon.inverted {
   color: #ccc; /* If you have text or icons, make it subtle */
 }
 dice-icon.inverted:hover {
-  cursor: default;
+  /* cursor: default; */
 }

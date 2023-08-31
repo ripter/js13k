@@ -21,19 +21,18 @@ class ScenarioCard extends HTMLElement {
     this.render();
   }
 
-  set userDiceValues(values) {
-    this._userDiceValues = values;
-    this.render();
-  }
-
   render() {
+    // Bail if we have no state.
+    if (!this.playerState) { return; }
     const { 
       name, 
       description,
       matches = [],
     } = this._card;
-    const diceValues = this.playerState?.diceValues ?? [];
-    const diceResults = this.playerState?.rollPopulation() ?? [];
+    const {
+      diceValues = [],
+      currentDice = [],
+    } = this.playerState;
     
     const matchesHTML = matches.map((match, idx) => {
       return `<div class="match" data-idx=${idx}>
@@ -41,8 +40,9 @@ class ScenarioCard extends HTMLElement {
         <dd>${match.description}</dd>
         <dice-list 
           values="${match.dice.map(d => diceValues[d]).join(',')}" 
-          selected="${diceResults.map(d => diceValues[d]).join(',')}"
+          selected="${currentDice.map(d => diceValues[d]).join(',')}"
         ></dice-list>
+        <button type="button">Claim</button>
       </div>`;
     }).join('');
 
@@ -53,7 +53,7 @@ class ScenarioCard extends HTMLElement {
         <p>${description}</p>
         <b>Population Roll:</b>
         <div class="dice-list">
-          ${diceResults.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
+          ${currentDice.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
         </div>
         ${matchesHTML}
       </div>
@@ -61,7 +61,19 @@ class ScenarioCard extends HTMLElement {
   }
 
   handleClick(evt) {
-    console.log('handle click', evt);
+    const { target } = evt;
+    const elmParent = target.closest('.match');
+    const isButton = target.tagName === 'BUTTON';
+    const matchIdx = elmParent.dataset.idx;
+
+    if (isButton) {
+      // TODO: make sure the user can pay for the action.
+      console.log('Submit Action!', matchIdx)
+      // Dispatch the match action.
+      this.playerState.performMatch(matchIdx);
+      // re-render with the updated state
+      this.render();
+    }
   }
 
 }

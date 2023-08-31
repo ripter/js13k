@@ -30,6 +30,7 @@ elmScenarioPicker.addEventListener(EVENT_SELECTED, async (evt) => {
   // Load a random Card to start.
   await playerState.loadRandomCard();
 
+  playerState.rollPopulation();
   elmScenarioCard.playerState = playerState;
   elmScenarioCard.card = playerState.card;
 

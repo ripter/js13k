@@ -34,7 +34,6 @@ class DiceList extends HTMLElement {
       const selectedIdx = selectedValues.findIndex(v => v === value);
       const isSelected = selectedIdx === -1 ? false: true;
       const className = isSelected ? '' : 'inverted';
-
       if (isSelected) {
         selectedValues.splice(selectedIdx, 1);
       }

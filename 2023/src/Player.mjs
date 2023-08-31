@@ -3,17 +3,10 @@ import { rollDice } from './rollDice.mjs';
 
 export class Player {
   constructor() {
-    // 1 Food and 1 Water is consumed every time a population dice is rolled.
-    // Yes, re-rolls consume another +1 of each.
-    // Items & Buildings can allow re-rolls that do not consume Food/Water.
-    // When you run out of Food or Water, a cannibalism event is triggered.
-    // When your population reaches 0, Game Over.
-    // this.food = 8;
-    // this.water = 8;
-    // this.population = 4; // Each person grants 1 dice.
     this.buildings = []; // Buildings are permanent boosts that always take effect.
     this.items = []; // Items are one time boots that can be used by the player.
     this.card = null; // Active Card.
+    this.currentDice = []; // Population turns into rolled dice to be spent on card matches.
   }
 
   /**
@@ -43,10 +36,15 @@ export class Player {
 
     // Load the card's data
     const card = await loadJSON(`cards/${cardOption.src}`);
+    // Hydrage the card
+    card.matches = card.matches.map((match, idx) => ({
+      ...match,
+      claimed: false,
+      key: ''+idx,
+    }));
 
     // Remove the selected card from the deck to ensure it's not picked again
     this.deck.splice(randomIndex, 1);
-
     this.card = card;
     return this.card;
   }
@@ -71,7 +69,33 @@ export class Player {
       }
     }
 
-    return dicePaidFor.length ? dicePaidFor : [];
+    // Reset the current Dice with the rolls that have been paid for.
+    this.currentDice = dicePaidFor.length ? dicePaidFor : [];
   }
 
+  /**
+   * 
+   * @param {number} matchIdx 
+   */
+  performMatch(matchKey) {
+    const matchOption = this.card.matches[matchKey];
+
+    // "Pay" for the match by removing the dice.
+    for (const diceValue of matchOption.dice) {
+      const index = this.currentDice.indexOf(diceValue);
+      this.currentDice.splice(index, 1);
+    }
+
+    // Grant Rewards
+    matchOption.rewards.forEach(award => {
+      const { name } = award;
+      const deltas = Array.isArray(award.delta) ? award.delta : [award.delta];
+      this[name] += deltas[0|Math.random() * deltas.length];
+    });
+
+    // Update the matchOption as claimed by Player.
+    matchOption.claimed = true;
+
+    console.log('Performed match:', matchOption);
+  }
 }
