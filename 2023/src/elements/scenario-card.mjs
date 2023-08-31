@@ -3,8 +3,8 @@ import { rollDice } from '../rollDice.mjs';
 class ScenarioCard extends HTMLElement {
   constructor() {
     super();
+    this.playerState = null;
     this._card = {};
-    this._userDiceValues = [];
   }
 
   connectedCallback() {
@@ -18,7 +18,6 @@ class ScenarioCard extends HTMLElement {
 
   set card(data) {
     this._card = data;
-    this._card.maxDiceValue = this._card.diceValues.length;
     this.render();
   }
 
@@ -31,20 +30,16 @@ class ScenarioCard extends HTMLElement {
     const { 
       name, 
       description,
-      diceValues, 
-      population,
-      maxDiceValue,
       matches = [],
     } = this._card;
-
-    const diceResults = rollDice(population, maxDiceValue);
-    console.log('diceResults', diceResults);
+    const diceValues = this.playerState?.diceValues ?? [];
+    const diceResults = this.playerState?.rollPopulation() ?? [];
     
     const matchesHTML = matches.map((match, idx) => {
       return `<div class="match" data-idx=${idx}>
         <dt>${match.name}</dt>
         <dd>${match.description}</dd>
-        <div class="required-dice">
+        <div class="dice-list">
           ${match.dice.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
         </div>
       </div>`;
@@ -55,8 +50,9 @@ class ScenarioCard extends HTMLElement {
       <div class="scenario-card">
         <h2>${name}</h2>
         <p>${description}</p>
-        <div class="">
-          <b>Population Roll:</b>
+        <b>Population Roll:</b>
+        <div class="dice-list">
+          ${diceResults.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
         </div>
         ${matchesHTML}
       </div>
