@@ -1,12 +1,15 @@
+import { dispatchLoadTribe } from './state/dispatchLoadTribe.mjs';
+
 import { loadJSON } from './loadJson.mjs';
 import { Player } from './Player.mjs';
+
+
 
 import { EVENT_SELECTED } from './elements/scenario-picker.mjs';
 import './elements/scenario-card.mjs';
 import './elements/dice-icon.mjs';
 import './elements/dice-list.mjs';
 
-const CLASS_ACTIVE = '--active';
 
 const { elmScenarioPicker, elmScenarioCard } = window;
 
@@ -16,9 +19,9 @@ const playerState = new Player();
 window.playerState = playerState;
 
 
-// Load the list of Scenarios.
-const scenarioList = await loadJSON('scenarios/index.json');
-elmScenarioPicker.options = scenarioList;
+// Load the list of Tribes.
+const tribeList = await loadJSON('tribes/index.json');
+elmScenarioPicker.options = tribeList;
 
 //
 // On Scenario Picked
@@ -26,15 +29,16 @@ elmScenarioPicker.options = scenarioList;
 elmScenarioPicker.addEventListener(EVENT_SELECTED, async (evt) => {
   const selectedOption = evt.detail;
   // Load the Tribe Data
-  await playerState.loadFreshTribe(`scenarios/${selectedOption.src}`);
+  dispatchLoadTribe(selectedOption.src);
+  // await playerState.loadFreshTribe(`scenarios/${selectedOption.src}`);
   // Load a random Card to start.
-  await playerState.loadRandomCard();
+  // await playerState.loadRandomCard();
 
-  playerState.rollPopulation();
-  elmScenarioCard.playerState = playerState;
-  elmScenarioCard.card = playerState.card;
+  // playerState.rollPopulation();
+  // elmScenarioCard.playerState = playerState;
+  // elmScenarioCard.card = playerState.card;
 
-  elmScenarioPicker.classList.remove(CLASS_ACTIVE);
-  elmScenarioCard.classList.add(CLASS_ACTIVE);
-  console.log('playerState', playerState, '\nevent', evt);
+  // elmScenarioPicker.classList.remove(CLASS_ACTIVE);
+  // elmScenarioCard.classList.add(CLASS_ACTIVE);
+  // console.log('playerState', playerState, '\nevent', evt);
 });
