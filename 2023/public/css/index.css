@@ -5,7 +5,7 @@
 /* Custom Element Styles */
 @import url("./dice-icon.css");
 @import url("./scenario-picker.css");
-@import url("./scenario-card.css");
+@import url("./panel-card.css");
 @import url("./panel-player.css");
 
 
@@ -20,21 +20,3 @@ body > * {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#elmScenarioPicker, #elmScenarioCard {
-  width: 100%;
-}
-
-#elmScenarioPicker {
-  display: none;
-}
-#elmScenarioPicker.--active {
-  display: flex;
-}
-
-
-#elmScenarioCard {
-  display: none;
-}
-#elmScenarioCard.--active {
-  display: flex;
-}

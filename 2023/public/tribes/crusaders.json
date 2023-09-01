@@ -1,14 +1,11 @@
 {
   "name": "Crusaders",
   "diceValues": ["Attack", "Gather", "Pray", "Explore"],
-  "population": 4,
-  "food": 8,
-  "water": 8,
-  "morale": 1,
-  "cannibalism": {
-    "food": 4,
-    "water": 2,
-    "description": "Amid the desolation of the 13th century European world, the Crusaders found themselves ensnared by desperation's icy grasp. With provisions vanished and hope dwindling, an unfathomable choice loomed. Haggard faces encircled a council, a tableau of haunting deliberation. The solution, ghastly but inescapable, took form as names were etched onto shards of parchment. A lottery of somber whispers commenced, each name a reckoning with fate. One by one, destiny's cruel hand chose its sacrifices, their eyes reflecting both resignation and the weight of survival's dark pact. In that moment, humanity teetered on a precipice, torn by the unrelenting tempest of war and the indomitable struggle for existence."
+  "player": {
+    "population": 4,
+    "food": 8,
+    "water": 8,
+    "morale": 1
   },
   "deck": [
     {"name": "Coastal Village", "src": "coastal-village.json"}

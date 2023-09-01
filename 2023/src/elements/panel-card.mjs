@@ -1,27 +1,25 @@
-import { rollDice } from '../rollDice.mjs';
 
-class ScenarioCard extends HTMLElement {
-  constructor() {
-    super();
-    this.playerState = null;
-    this._card = {};
-  }
-
+class PanelCard extends HTMLElement {
   connectedCallback() {
-    this.render();
     this.addEventListener('click', this.handleClick);
   }
-
   disconnectedCallback() {
     this.removeEventListener('click', this.handleClick);
   }
 
-  set card(data) {
-    this._card = data;
-    this.render();
-  }
 
-  render() {
+  render(props) {
+    if (!props) { 
+      return this.innerHTML = "<!-- No State -->";
+    }
+    const { name, description } = props.card;
+
+    return this.innerHTML = `
+      <h2>${name}</h2>
+      <p>${description}</p>
+    `;
+
+    /*
     // Bail if we have no state.
     if (!this.playerState) { return; }
     const { 
@@ -58,6 +56,7 @@ class ScenarioCard extends HTMLElement {
         ${matchesHTML}
       </div>
     `;
+    */
   }
 
   handleClick(evt) {
@@ -78,4 +77,4 @@ class ScenarioCard extends HTMLElement {
 
 }
 
-customElements.define('scenario-card', ScenarioCard);
+customElements.define('panel-card', PanelCard);
