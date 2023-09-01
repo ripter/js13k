@@ -1,0 +1,7 @@
+
+dice-list > * {
+  display: flex;
+  gap: 10px;
+  /* space between dice */
+  margin-top: 10px;
+}

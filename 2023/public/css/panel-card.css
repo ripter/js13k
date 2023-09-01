@@ -37,13 +37,6 @@ panel-card .match dd {
   color: #666;
 }
 
-panel-card .dice-list {
-  display: flex;
-  gap: 10px;
-  /* space between dice */
-  margin-top: 10px;
-}
-
 panel-card .dice-results {
   margin: 20px 0;
 }

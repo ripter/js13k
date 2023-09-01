@@ -43,6 +43,23 @@
         {"name": "population", "delta": 1},
         {"name": "morale", "delta": 1}
       ]
+    },
+    {
+      "name": "Drive Off Bandits",
+      "dice": [0, 0],
+      "description": "Some bandits have been troubling the village. Show strength and drive them away to ensure the safety of the villagers.",
+      "rewards": [
+        {"name": "morale", "delta": 2},
+        {"name": "food", "delta": 1}
+      ]
+    },
+    {
+      "name": "Hunt for Game",
+      "dice": [0, 3],
+      "description": "The nearby forests are rich with game. Organize a hunting party to bring back food for the Crusaders.",
+      "rewards": [
+        {"name": "food", "delta": [2, 3]}
+      ]
     }
   ]
 }

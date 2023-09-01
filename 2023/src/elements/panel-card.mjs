@@ -18,14 +18,16 @@ class PanelCard extends HTMLElement {
     elm.innerHTML = matches.map(match => `<div class="match" data-key=${match.key}>
       <dt>${match.name}</dt>
       <dd>${match.description}</dd>
-      <dice-list 
-        values="${match.dice.map(d => diceValues[d]).join(',')}" 
-        selected="${currentDice.map(d => diceValues[d]).join(',')}"
-      ></dice-list>
-      <button 
-        type="button" 
-        ${canPayCost(match.dice, props.player.dice) ? '' : 'disabled'}
-      >Claim</button>
+      <div class="flex space-between">
+        <dice-list 
+          values="${match.dice.map(d => diceValues[d]).join(',')}" 
+          selected="${currentDice.map(d => diceValues[d]).join(',')}"
+        ></dice-list>
+        <button 
+          type="button" 
+          ${canPayCost(match.dice, props.player.dice) ? '' : 'disabled'}
+        >🧧 Claim</button>
+      </div>
     </div>`).join('');
   }
 

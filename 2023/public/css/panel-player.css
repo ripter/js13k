@@ -1,19 +1,26 @@
-panel-player .player-status {
-
+panel-player .stats-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 panel-player .stat-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #e1e1e1; /* Light gray border to separate rows. Adjust if needed. */
+  padding: 10px 0; /* Padding top and bottom for each row */
 }
 
-panel-player .icon {
+panel-player td:nth-child(1) {
   font-size: 24px;
-  margin-right: 10px;
+  text-align: center; /* Center the icon in its cell */
+  padding: 5px 10px; /* Padding for the icon cell */
 }
 
-panel-player .label {
+panel-player td:nth-child(2) {
   font-weight: bold;
-  margin-right: 5px;
+  color: #333; /* Dark text color for the label. Adjust if needed. */
+  padding: 5px 10px; /* Padding for the label cell */
+}
+
+panel-player td:nth-child(3) {
+  text-align: right; /* Align values to the right. Adjust if preferred differently. */
+  padding: 5px 10px; /* Padding for the value cell */
 }
