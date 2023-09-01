@@ -1,8 +1,11 @@
+import { canPayCost } from '../utils/canPayCost.mjs';
 
 export async function actionClaimMatch(state, key) {
-  const { card } = state;
+  const { card, player } = state;
   const match = card.matches[key];
-  console.log('match', match);
+  const canPay = canPayCost(match.dice, player.dice);
+
+  console.log('match', canPay, match);
 
   return state;
 }

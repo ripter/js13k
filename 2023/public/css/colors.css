@@ -2,6 +2,6 @@
   --button-color: #fff;
   --button-bg-color: #007BFF;
   --button-hover-bg-color: #0056b3;
-
-
+  --button-disabled-bg-color: #ccc;
+  --button-disabled-color: #888;
 }
