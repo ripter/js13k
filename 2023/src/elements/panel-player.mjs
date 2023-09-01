@@ -1,13 +1,5 @@
 
 class PanelPlayer extends HTMLElement {
-  connectedCallback() {
-    // this.addEventListener('click', this.handleClick);
-  }
-
-  disconnectedCallback() {
-    // this.removeEventListener('click', this.handleClick);
-  }
-
   render(props) {
     const { name, diceValues } = props;
     const { 
@@ -16,7 +8,7 @@ class PanelPlayer extends HTMLElement {
       population,
       water,
     } = props.player;
-    console.log('render PanelPlayer', props);
+    // convert dice values into user friendly names.
     const diceList = props.player.dice.map(d => diceValues[d]);
 
     this.innerHTML = `
@@ -38,7 +30,7 @@ class PanelPlayer extends HTMLElement {
       <div class="stat-item">
         <span class="icon">😀</span>
         <span class="label">Morale:</span>
-        <span class="value">${morale}</span>
+        <span class="value">${morale}/100</span>
       </div>
       
       <div class="stat-item">

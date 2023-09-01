@@ -9,5 +9,8 @@
   },
   "deck": [
     {"name": "Coastal Village", "src": "coastal-village.json"}
+  ],
+  "buildings": [
+    {"name": "Cathedreal", "description": "Turns unspent Pray dice into +1 morale."}
   ]
 }
