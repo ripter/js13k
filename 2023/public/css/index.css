@@ -1,10 +1,12 @@
 /* Global Styles */
 @import url("./colors.css");
+@import url("./panels.css");
 
 /* Custom Element Styles */
 @import url("./dice-icon.css");
 @import url("./scenario-picker.css");
 @import url("./scenario-card.css");
+@import url("./panel-player.css");
 
 
 

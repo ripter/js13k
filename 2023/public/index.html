@@ -9,7 +9,22 @@
   <script type="module" src="../src/index.mjs"></script>
 </head>
 <body>
-  <scenario-picker id="elmScenarioPicker" class="--active"></scenario-picker>
-  <scenario-card id="elmScenarioCard"></scenario-card>
+  <div class="panels-hoz">
+    <div class="panel panel-opponents">
+      <h1>Opponents</h1>
+    </div>
+    <div class="panel panel-player --active">
+      <h1>Player</h1>
+      <scenario-picker id="elmScenarioPicker" class="--active"></scenario-picker>
+      <panel-player id="elmPanelPlayer"></panel-player>
+    </div>
+    <div class="panel panel-card">
+      <h1>Season Card</h1>
+      <scenario-card id="elmScenarioCard"></scenario-card>
+    </div>
+    <div class="panel panel-log">
+      <h1>Log</h1>
+    </div>
+  </div>
 </body>
 </html>

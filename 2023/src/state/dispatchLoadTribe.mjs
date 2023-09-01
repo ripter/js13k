@@ -10,6 +10,10 @@ export async function dispatchLoadTribe(tribeURL) {
   });
   console.log('State Updated!', state);
 
+  // Update The Panels.
+  window.elmPanelPlayer.render(state);
+  // TODO: Update the panel-card
+
   // Update the custom elements
   window.elmScenarioPicker.classList.remove(CLASS_ACTIVE);
   window.elmScenarioCard.classList.add(CLASS_ACTIVE);

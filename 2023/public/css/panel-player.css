@@ -1,0 +1,19 @@
+panel-player .player-status {
+
+}
+
+panel-player .stat-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+panel-player .icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+panel-player .label {
+  font-weight: bold;
+  margin-right: 5px;
+}

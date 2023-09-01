@@ -6,6 +6,7 @@ import { Player } from './Player.mjs';
 
 
 import { EVENT_SELECTED } from './elements/scenario-picker.mjs';
+import './elements/panel-player.mjs';
 import './elements/scenario-card.mjs';
 import './elements/dice-icon.mjs';
 import './elements/dice-list.mjs';
@@ -30,15 +31,4 @@ elmScenarioPicker.addEventListener(EVENT_SELECTED, async (evt) => {
   const selectedOption = evt.detail;
   // Load the Tribe Data
   dispatchLoadTribe(selectedOption.src);
-  // await playerState.loadFreshTribe(`scenarios/${selectedOption.src}`);
-  // Load a random Card to start.
-  // await playerState.loadRandomCard();
-
-  // playerState.rollPopulation();
-  // elmScenarioCard.playerState = playerState;
-  // elmScenarioCard.card = playerState.card;
-
-  // elmScenarioPicker.classList.remove(CLASS_ACTIVE);
-  // elmScenarioCard.classList.add(CLASS_ACTIVE);
-  // console.log('playerState', playerState, '\nevent', evt);
 });
