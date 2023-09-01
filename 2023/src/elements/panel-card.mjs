@@ -1,3 +1,4 @@
+import { dispatchClaimMatch } from '../state/dispatchClaimMatch.mjs';
 
 class PanelCard extends HTMLElement {
   connectedCallback() {
@@ -46,12 +47,8 @@ class PanelCard extends HTMLElement {
     const { key } = elmParent.dataset;
 
     if (isButton) {
-      // TODO: Abort if the user can not pay for the match. 
       console.log('Submit Action!', key, this);
-      // Dispatch the match action.
-      // this.playerState.performMatch(matchIdx);
-      // re-render with the updated state
-      // this.render();
+      return dispatchClaimMatch(key);
     }
   }
 
