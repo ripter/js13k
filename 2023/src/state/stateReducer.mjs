@@ -6,9 +6,9 @@ export async function stateReducer(state, action) {
   const { type, value } = action;
   switch(type) {
     case ACTION.LOAD_TRIBE:
-      return actionLoadTribe(state, value);
+      return await actionLoadTribe(state, value);
     case ACTION.CLAIM_MATCH:
-      return actionClaimMatch(state, value);
+      return await actionClaimMatch(state, value);
     default:
       return state;
   }

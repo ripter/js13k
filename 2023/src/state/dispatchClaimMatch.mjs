@@ -7,7 +7,6 @@ export async function dispatchClaimMatch(matchKey) {
     type: ACTION.CLAIM_MATCH,
     value: matchKey,
   });
-  console.log('new State', state);
 
   // Re-render elements with the new state.
   window.elmPanelPlayer.render(state);
