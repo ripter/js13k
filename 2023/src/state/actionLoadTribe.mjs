@@ -1,6 +1,7 @@
-import { loadJSON } from '../loadJson.mjs';
+import { actionCreateOpponents } from './actionCreateOpponents.mjs';
 import { actionLoadCard } from './actionLoadCard.mjs';
 import { actionRollDice } from './actionRollDice.mjs';
+import { loadJSON } from '../loadJson.mjs';
 
 /**
  * Resets the entire game state from a tribe config.
@@ -14,12 +15,17 @@ export async function actionLoadTribe(_, tribeURL) {
   state.player.dice = [];
   state.opponents = [];
 
+  // Create Opponents
+  state = actionCreateOpponents(state, 2);
+
+  // Roll the dice!
+  state = actionRollDice(state, 'player');
+  for (let i = 0; i < state.opponents.length; i++) {
+    state = actionRollDice(state, `opponents[${i}]`);
+}
+
   // Load the first card. 
   state = await actionLoadCard(state);
 
-  // Roll The Player's dice!
-  state = actionRollDice(state, 'player');
-
-  // TODO: Load oppoinents
   return state;
 }
