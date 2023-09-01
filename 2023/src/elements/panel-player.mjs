@@ -38,6 +38,8 @@ class PanelPlayer extends HTMLElement {
         <span class="label">Dice:</span>
         <span class="value"><dice-list values="${diceList}" selected="${diceList}"></dice-list></span>
       </div>
+
+      <button type="button">Finish Season</button>
     </div>
     `;
   }

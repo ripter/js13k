@@ -14,6 +14,7 @@ export async function actionLoadTribe(_, tribeURL) {
   state.numberOfSidesOnDice = state.diceValues.length;
   state.player.dice = [];
   state.opponents = [];
+  state.currentActorPath = 'player';
 
   // Create Opponents
   state = actionCreateOpponents(state, 2);
