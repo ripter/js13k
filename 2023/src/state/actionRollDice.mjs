@@ -1,5 +1,5 @@
 import { get } from '../utils/get.mjs';
-import { rollDice } from '../rollDice.mjs';
+import { rollDice } from '../utils/rollDice.mjs';
 import { set } from '../utils/set.mjs';
 
 /**

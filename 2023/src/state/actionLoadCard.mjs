@@ -1,4 +1,4 @@
-import { loadJSON } from '../loadJson.mjs';
+import { loadJSON } from '../utils/loadJSON.mjs';
 
 export async function actionLoadCard(state) {
   const { deck } = state;

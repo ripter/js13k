@@ -1,7 +1,7 @@
 import { actionCreateOpponents } from './actionCreateOpponents.mjs';
 import { actionLoadCard } from './actionLoadCard.mjs';
 import { actionRollDice } from './actionRollDice.mjs';
-import { loadJSON } from '../loadJson.mjs';
+import { loadJSON } from '../utils/loadJSON.mjs';
 
 /**
  * Resets the entire game state from a tribe config.

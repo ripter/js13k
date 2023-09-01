@@ -1,6 +1,6 @@
 import { dispatchLoadTribe } from './state/dispatchLoadTribe.mjs';
 
-import { loadJSON } from './loadJson.mjs';
+import { loadJSON } from './utils/loadJSON.mjs';
 
 
 import { EVENT_SELECTED } from './elements/scenario-picker.mjs';
