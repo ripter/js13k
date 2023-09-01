@@ -7,6 +7,22 @@ class PanelCard extends HTMLElement {
     this.removeEventListener('click', this.handleClick);
   }
 
+  renderMatchList(props) {
+    const { diceValues } = props;
+    const currentDice = props.player.dice;
+    const { matches } = props.card;
+    const elm = this.querySelector('.match-list');
+
+    elm.innerHTML = matches.map(match => `<div class="match" data-key=${match.key}>
+      <dt>${match.name}</dt>
+      <dd>${match.description}</dd>
+      <dice-list 
+        values="${match.dice.map(d => diceValues[d]).join(',')}" 
+        selected="${currentDice.map(d => diceValues[d]).join(',')}"
+      ></dice-list>
+      <button type="button">Claim</button>
+    </div>`).join('');
+  }
 
   render(props) {
     if (!props) { 
@@ -14,64 +30,28 @@ class PanelCard extends HTMLElement {
     }
     const { name, description } = props.card;
 
-    return this.innerHTML = `
+    this.innerHTML = `
       <h2>${name}</h2>
       <p>${description}</p>
+      <div class="match-list"></div>
     `;
 
-    /*
-    // Bail if we have no state.
-    if (!this.playerState) { return; }
-    const { 
-      name, 
-      description,
-      matches = [],
-    } = this._card;
-    const {
-      diceValues = [],
-      currentDice = [],
-    } = this.playerState;
-    
-    const matchesHTML = matches.map((match, idx) => {
-      return `<div class="match" data-idx=${idx}>
-        <dt>${match.name}</dt>
-        <dd>${match.description}</dd>
-        <dice-list 
-          values="${match.dice.map(d => diceValues[d]).join(',')}" 
-          selected="${currentDice.map(d => diceValues[d]).join(',')}"
-        ></dice-list>
-        <button type="button">Claim</button>
-      </div>`;
-    }).join('');
-
-    // render everything
-    this.innerHTML = `
-      <div class="scenario-card">
-        <h2>${name}</h2>
-        <p>${description}</p>
-        <b>Population Roll:</b>
-        <div class="dice-list">
-          ${currentDice.map(d => `<dice-icon value="${diceValues[d]}"></dice-icon>`).join('')}
-        </div>
-        ${matchesHTML}
-      </div>
-    `;
-    */
+    this.renderMatchList(props);
   }
 
   handleClick(evt) {
     const { target } = evt;
     const elmParent = target.closest('.match');
     const isButton = target.tagName === 'BUTTON';
-    const matchIdx = elmParent.dataset.idx;
+    const { key } = elmParent.dataset;
 
     if (isButton) {
-      // TODO: make sure the user can pay for the action.
-      console.log('Submit Action!', matchIdx)
+      // TODO: Abort if the user can not pay for the match. 
+      console.log('Submit Action!', key, this);
       // Dispatch the match action.
-      this.playerState.performMatch(matchIdx);
+      // this.playerState.performMatch(matchIdx);
       // re-render with the updated state
-      this.render();
+      // this.render();
     }
   }
 
