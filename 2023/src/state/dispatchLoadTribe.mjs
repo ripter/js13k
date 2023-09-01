@@ -1,5 +1,4 @@
 import { ACTION } from './actions.mjs';
-// import { CLASS_ACTIVE } from '../cssClasses.mjs';
 import { dispatch } from './dispatch.mjs';
 
 export async function dispatchLoadTribe(tribeURL) {
