@@ -9,14 +9,15 @@ class PanelPlayer extends HTMLElement {
   }
 
   render(props) {
+    const { name, diceValues } = props;
     const { 
       food,
       morale,
-      name,
       population,
       water,
-    } = props;
+    } = props.player;
     console.log('render PanelPlayer', props);
+    const diceList = props.player.dice.map(d => diceValues[d]);
 
     this.innerHTML = `
     <div class="player-status">
@@ -40,6 +41,11 @@ class PanelPlayer extends HTMLElement {
         <span class="value">${morale}</span>
       </div>
       
+      <div class="stat-item">
+        <span class="icon">🎲</span>
+        <span class="label">Dice:</span>
+        <span class="value"><dice-list values="${diceList}" selected="${diceList}"></dice-list></span>
+      </div>
     </div>
     `;
   }

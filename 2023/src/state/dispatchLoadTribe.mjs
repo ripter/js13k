@@ -11,4 +11,5 @@ export async function dispatchLoadTribe(tribeURL) {
   // Re-render elements with the new state.
   window.elmPanelPlayer.render(state);
   window.elmPanelCard.render(state);
+  window.elmScenarioPicker.style.display = 'none';
 }
