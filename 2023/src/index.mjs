@@ -9,6 +9,7 @@ import './elements/panel-card.mjs';
 import './elements/dice-icon.mjs';
 import './elements/dice-list.mjs';
 import './elements/panel-opponent.mjs';
+import './elements/panel-info.mjs';
 
 
 const { elmScenarioPicker } = window;
