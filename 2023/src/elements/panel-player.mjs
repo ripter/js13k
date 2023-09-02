@@ -1,15 +1,22 @@
 
 class PanelPlayer extends HTMLElement {
   render(props) {
-    const { name, diceValues } = props;
+    const { name, diceValues, currentActorPath } = props;
     const { 
       food,
       morale,
       population,
       water,
     } = props.player;
+    const isMyTurn = currentActorPath === 'player';
     // convert dice values into user friendly names.
     const diceList = props.player.dice.map(d => diceValues[d]);
+
+    if (isMyTurn) {
+      this.classList.remove('hide');
+    } else {
+      this.classList.add('hide');
+    }
 
     this.innerHTML = `
     <div class="player-status">

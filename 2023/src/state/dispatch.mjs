@@ -1,37 +1,38 @@
 import { stateReducer } from './stateReducer.mjs';
-import { initialState } from './initialState.mjs';
+import { render } from '../render.mjs';
 
 /** 
  * Current game state.
  * @type {Object}
  */
-export let currentState = initialState();
+export let currentState = {};
+window.gameState = currentState;
 
 /**
- * Dispatches an action to update the game state.
+ * Dispatches an action to update the game state and subsequently re-renders the UI.
+ * 
+ * This function handles two types of actions:
+ * 1. If the action is a function, it directly mutates the `currentState`.
+ * 2. If the action is an object, it uses the `stateReducer` to derive the next state.
+ * 
  * @function
  * @async
- * @param {Object} action - The action object to dispatch. Typically contains a `type` property.
- * @returns {Promise<Object>} - Returns a promise that resolves to the updated state.
+ * @param {Function|Object} action - The action to be dispatched. Can be either a direct mutative function or an action object for the state reducer.
+ * @global
  */
 export async function dispatch(action) {
-  // Run the State Reducer
-  const nextState = await stateReducer(currentState, action);
-  // if the reference didn't change, then do nothing.
-  if (nextState === currentState) { return currentState; }
-  // Save the new reference.
-  currentState = nextState;
-  window.gameState = currentState;
-  // Return the updated state. 
-  return nextState;
+  if (typeof action === 'function') {
+    // Mutates, smaller than immutable would be for JS13k
+    await action(currentState);
+  } else {
+    // Run the State Reducer
+    const nextState = await stateReducer(currentState, action);
+    // if the reference didn't change, then do nothing.
+    if (nextState === currentState) { return currentState; }
+    // Save the new reference.
+    currentState = nextState;
+    window.gameState = currentState;
+  }
+
+  render(currentState);
 }
-
-// IDEA:
-//  stateReducer might not be needed at all. 
-//  action.type is a string that tells stateReducer which action function to use.
-//  We could cut out the middleman and pass/use the function directly.
-//  example: dispatch(reducer, ...args) 
-//  This file would still be needed because it holds the SINGLETON
-
-// IDEA:
-//  Trigger the re-render here, if all the high level elmeents take state, they can all get an update here.

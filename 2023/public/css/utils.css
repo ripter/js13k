@@ -1,4 +1,8 @@
 
+.hide {
+  display: none;
+}
+
 .flex {
   display: flex;
 }

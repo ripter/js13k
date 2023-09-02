@@ -8,6 +8,7 @@ import './elements/panel-player.mjs';
 import './elements/panel-card.mjs';
 import './elements/dice-icon.mjs';
 import './elements/dice-list.mjs';
+import './elements/panel-opponent.mjs';
 
 
 const { elmScenarioPicker } = window;

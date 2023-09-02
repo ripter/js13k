@@ -1,3 +1,4 @@
+import { actionLoadTribe } from './actionLoadTribe.mjs';
 import { ACTION } from './actions.mjs';
 import { dispatch } from './dispatch.mjs';
 
@@ -8,8 +9,10 @@ export async function dispatchLoadTribe(tribeURL) {
     value: tribeURL,
   });
 
+  // await dispatch(async (state) => {
+  //   await actionLoadTribe(state, tribeURL);
+  // });
+
   // Re-render elements with the new state.
-  window.elmPanelPlayer.render(state);
-  window.elmPanelCard.render(state);
   window.elmScenarioPicker.style.display = 'none';
 }
