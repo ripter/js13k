@@ -15,6 +15,7 @@ class PanelCard extends HTMLElement {
     const { matches } = props.card;
     const elm = this.querySelector('.match-list');
 
+    // TODO: Show if this match has been claimed.
     elm.innerHTML = matches.map(match => `<div class="match" data-key=${match.key}>
       <dt>${match.name}</dt>
       <dd>${match.description}</dd>
@@ -53,7 +54,6 @@ class PanelCard extends HTMLElement {
     const { key } = elmParent.dataset;
 
     if (isButton) {
-      console.log('Submit Action!', key, this);
       return dispatchClaimMatch(key);
     }
   }

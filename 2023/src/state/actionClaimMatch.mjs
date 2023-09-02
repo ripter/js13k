@@ -6,6 +6,7 @@ export function actionClaimMatch(state, matchKey) {
   const matchOption = card.matches[matchKey];
   const actor = get(state, state.currentActorPath);
 
+  // TODO: bail if it can not be claimed anymore.
   // Check if the actor can afford the match
   if (!canPayCost(matchOption.dice, actor.dice)) {
     return state; // Return the unmodified state if they can't afford
@@ -28,6 +29,8 @@ export function actionClaimMatch(state, matchKey) {
 
   // Update the matchOption as claimed
   matchOption.claimed = true;
+
+  // TODO: Log this Event.
 
   return state;
 }
