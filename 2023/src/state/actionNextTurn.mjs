@@ -1,5 +1,3 @@
-// import { actionAITakeTurn } from './actionAITakeTurn.mjs';
-
 
 export async function actionNextTurn(state) {
   // Check if we've reached the end of the opponent's list.
@@ -17,17 +15,5 @@ export async function actionNextTurn(state) {
     }
   }
 
-  /*
-  // If it's an AI's turn.
-  if (state.currentActorPath.includes('opponents')) {
-    // AI decides its move.
-    actionAITakeTurn(state);
-    // Introduce a delay so the human player can see the move.
-    await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay.
-  }
-  */
-
-  // If it's the player's turn, we just return the updated state. The game will
-  // naturally wait for the player's input as it's event-driven.
   return state;
 }
