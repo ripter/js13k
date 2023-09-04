@@ -1,7 +1,6 @@
 import { canPayCost } from '../utils/canPayCost.mjs';
 import { get } from '../utils/get.mjs';
 import { actionNextTurn } from './actionNextTurn.mjs';
-import { actionLogEvent } from './actionLogEvent.mjs';
 
 export async function actionClaimMatch(state, matchKey) {
   const card = state.card;
@@ -30,9 +29,13 @@ export async function actionClaimMatch(state, matchKey) {
   });
 
   // Update the matchOption as claimed
-  matchOption.claimed = true;
+  matchOption.claimed = state.currentActorPath;
 
-  // TODO: Log this Event.
+  state.gameLog.push({
+    season: state.season,
+    actor: state.currentActorPath,
+    description: `${matchOption.description}`,
+  });
 
   await actionNextTurn(state);
 

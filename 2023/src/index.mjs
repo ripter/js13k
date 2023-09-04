@@ -21,5 +21,5 @@ elmScenarioPicker.options = tribeList;
 window.elmScenarioPicker.addEventListener(EVENT_SELECTED, async (evt) => {
   const selectedOption = evt.detail;
   // Load the Tribe Data
-  dispatchLoadTribe(selectedOption.src);
+  dispatchLoadTribe(selectedOption);
 });

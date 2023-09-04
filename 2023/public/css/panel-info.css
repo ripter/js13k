@@ -1,0 +1,18 @@
+panel-info .log-entry {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  max-width: 70%;
+}
+
+panel-info .player {
+  background-color: #4CAF50; /* Green for player messages */
+  color: white;
+  margin-left: auto; /* Align to the right */
+}
+
+panel-info .opponent {
+  background-color: #E0E0E0; /* Light gray for opponent messages */
+  color: #333;
+}
