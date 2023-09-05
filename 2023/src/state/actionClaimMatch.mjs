@@ -33,7 +33,7 @@ export async function actionClaimMatch(state, matchKey) {
 
   state.gameLog.push({
     season: state.season,
-    actor: state.currentActorPath,
+    actorPath: state.currentActorPath,
     description: `${matchOption.description}`,
   });
 

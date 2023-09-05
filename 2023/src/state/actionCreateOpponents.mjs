@@ -6,7 +6,10 @@ export function actionCreateOpponents(state, numberToCreate) {
   const opponents = [];
   for (let i=0; i < numberToCreate; i++) {
     // Deep clone
-    opponents.push(JSON.parse(JSON.stringify(player)));
+    const actor = JSON.parse(JSON.stringify(player));
+    actor.name = 'Opponent'
+    opponents.push(actor);
+
   }
   
   return {

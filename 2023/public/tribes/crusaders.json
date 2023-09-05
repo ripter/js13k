@@ -2,6 +2,7 @@
   "name": "Crusaders",
   "diceValues": ["Attack", "Gather", "Pray", "Explore"],
   "player": {
+    "name": "You",
     "population": 4,
     "food": 8,
     "water": 8,

@@ -17,23 +17,13 @@ export async function actionLoadTribe(_, tribeOption) {
   state.opponents = [];
   state.currentActorPath = 'player';
   state.season = 1;
-  state.gameLog = [{
-    actor: state.currentActorPath,
-    season: 1,
-    description
-  }];
+  state.gameLog = [];
 
   // Create Opponents
-  state = actionCreateOpponents(state, 2);
-
-  // Roll the dice!
-  state = actionRollDice(state, 'player');
-  for (let i = 0; i < state.opponents.length; i++) {
-    state = actionRollDice(state, `opponents[${i}]`);
-}
+  state = actionCreateOpponents(state, 1);
 
   // Load the first card. 
-  state = await actionLoadCard(state);
+  state = await actionLoadCard(state, description);
 
   return state;
 }

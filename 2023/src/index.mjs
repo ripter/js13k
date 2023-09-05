@@ -4,12 +4,12 @@ import { loadJSON } from './utils/loadJSON.mjs';
 
 
 import { EVENT_SELECTED } from './elements/scenario-picker.mjs';
-import './elements/panel-player.mjs';
-import './elements/panel-card.mjs';
 import './elements/dice-icon.mjs';
 import './elements/dice-list.mjs';
-import './elements/panel-opponent.mjs';
+import './elements/panel-card.mjs';
 import './elements/panel-info.mjs';
+import './elements/panel-opponent.mjs';
+import './elements/panel-player.mjs';
 
 
 const { elmScenarioPicker } = window;

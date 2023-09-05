@@ -1,5 +1,6 @@
-import { dispatchClaimMatch } from '../state/dispatchClaimMatch.mjs';
 import { canPayCost } from '../utils/canPayCost.mjs';
+import { dispatchClaimMatch } from '../state/dispatchClaimMatch.mjs';
+import { get } from '../utils/get.mjs';
 
 class PanelCard extends HTMLElement {
   connectedCallback() {
@@ -25,7 +26,9 @@ class PanelCard extends HTMLElement {
           selected="${currentDice.map(d => diceValues[d]).join(',')}"
         ></dice-list>
         ${match.claimedBy !== false
-          ? `<div>Claimed by ${match.claimedBy}</div>`
+          ? `<div>
+              Claimed by ${get(props, match.claimedBy)?.name}
+            </div>`
           : `<button 
                type="button" 
                ${canPayCost(match.dice, props.player.dice) ? '' : 'disabled'}
