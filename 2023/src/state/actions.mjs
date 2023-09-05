@@ -1,5 +1,0 @@
-
-export const ACTION = {
-  LOAD_TRIBE: 'LOAD-TRIBE',
-  CLAIM_MATCH: 'CLAIM-MATCH',
-};

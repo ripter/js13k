@@ -15,5 +15,5 @@ export async function actionNextTurn(state) {
     }
   }
 
-  return state;
+  return state; // Return the mutated state
 }

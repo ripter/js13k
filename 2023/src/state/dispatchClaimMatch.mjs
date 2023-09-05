@@ -3,6 +3,6 @@ import { dispatch } from './dispatch.mjs';
 
 export async function dispatchClaimMatch(matchKey) {
   await dispatch(async (state) => {
-    await actionClaimMatch(state, matchKey)
+    await actionClaimMatch(state, matchKey);
   });
 }

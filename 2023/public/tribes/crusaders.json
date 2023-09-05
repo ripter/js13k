@@ -9,7 +9,10 @@
     "morale": 1
   },
   "deck": [
-    {"name": "Coastal Village", "src": "coastal-village.json"}
+    {"name": "Coastal Village", "src": "coastal-village.json"},
+    {"name": "Ancient Monastery", "src": "ancient-monastery.json"},
+    {"name": "Nomadic Camp", "src": "nomadic-camp.json"},
+    {"name": "Dragon's Lair", "src": "dragons-lair.json", "isBossCard": true}
   ],
   "buildings": [
     {"name": "Cathedreal", "description": "Turns unspent Pray dice into +1 morale."}

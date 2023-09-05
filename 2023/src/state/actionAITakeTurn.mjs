@@ -3,6 +3,9 @@ import { actionNextTurn } from './actionNextTurn.mjs';
 import { canPayCost } from '../utils/canPayCost.mjs';
 import { get } from '../utils/get.mjs';
 
+/**
+ * Mutates State 
+ */
 export async function actionAITakeTurn(state) {
   const actor = get(state, state.currentActorPath);
   // Filter the matches the AI can afford
@@ -18,5 +21,5 @@ export async function actionAITakeTurn(state) {
   // Choose a random match from the affordable ones
   const chosenMatch = affordableMatches[Math.floor(Math.random() * affordableMatches.length)];
   await actionClaimMatch(state, chosenMatch.key);
-  return await actionNextTurn(state);
+  await actionNextTurn(state);
 }

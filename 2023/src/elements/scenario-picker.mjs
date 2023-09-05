@@ -32,7 +32,12 @@ class ScenarioPicker extends HTMLElement {
     return this.options[idx];
   }
 
-  async render() {
+  async render(props) {
+    // Remove when the game has loaded.
+    if (props && props.name) {
+      return this.innerHTML = '';
+    }
+
     const optionsHTML = this._options.map((option, idx) =>
       `<div class="option" data-idx="${idx}">
         <dt>${option.name}</dt>
@@ -52,14 +57,12 @@ class ScenarioPicker extends HTMLElement {
     const { target } = evt;
     const elmOption = target.closest('.option');
     if (!elmOption) return; // Ensure all actions are related to an option.
-
-    const shouldToggleExpand = target.tagName === 'DT';
     const isButton = target.tagName === 'BUTTON';
     const isExpanded = elmOption.classList.contains(CLASS_EXPANDED);
 
     if (isButton) {
       this.dispatchEvent(new CustomEvent(EVENT_SELECTED, { detail: this.selectedOption }));
-    } else if (shouldToggleExpand) {
+    } else {
       this.querySelectorAll('.option.expanded').forEach(elm => elm.classList.remove(CLASS_EXPANDED))
       if (!isExpanded) {
         elmOption.classList.add(CLASS_EXPANDED);

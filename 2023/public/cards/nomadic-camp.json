@@ -1,0 +1,62 @@
+{
+  "name": "Nomadic Camp",
+  "description": "Amidst the sweeping dunes of the vast desert, the Nomadic Camp stands as a temporary haven for travelers. Colorful tents flutter in the wind, and the aroma of spices fills the air as nomads trade stories and sustenance. The camp offers a brief respite from the arid challenges of the desert, a place where cultures converge and stories are exchanged beneath the brilliant desert sky.",
+  "matches": [
+    {
+      "name": "Share Stories",
+      "dice": [1],
+      "description": "Gather around the campfire to share stories and tales with the nomads, boosting the Crusaders' morale.",
+      "rewards": [
+        {"name": "morale", "delta": 1}
+      ]
+    },
+    {
+      "name": "Trade Exotic Goods",
+      "dice": [2, 2],
+      "description": "Engage in bartering with the nomads, trading for exotic goods that can benefit the Crusaders' journey.",
+      "rewards": [
+        {"name": "supplies", "delta": 1}
+      ]
+    },
+    {
+      "name": "Learn Survival Skills",
+      "dice": [1, 3],
+      "description": "Interact with the nomads to learn crucial survival skills in the desert, enhancing the group's resourcefulness.",
+      "rewards": [
+        {"name": "knowledge", "delta": 1}
+      ]
+    },
+    {
+      "name": "Cultural Exchange",
+      "dice": [3, 3],
+      "description": "Engage in a cultural exchange with the nomads, fostering goodwill and forming a bond of friendship.",
+      "rewards": [
+        {"name": "morale", "delta": 2}
+      ]
+    },
+    {
+      "name": "Seek Prophetic Wisdom",
+      "dice": [1, 2, 3],
+      "description": "Consult with the nomadic seer, seeking prophetic wisdom that bolsters the group's determination.",
+      "rewards": [
+        {"name": "morale", "delta": [1, 2]}
+      ]
+    },
+    {
+      "name": "Guard the Camp",
+      "dice": [0, 0],
+      "description": "Danger lurks as desert predators draw near. Stand guard to protect the camp and its inhabitants.",
+      "rewards": [
+        {"name": "morale", "delta": 2}
+      ]
+    },
+    {
+      "name": "Unearth Hidden Relics",
+      "dice": [0, 3],
+      "description": "Search the sands for buried relics, uncovering artifacts that hold historical and practical significance.",
+      "rewards": [
+        {"name": "knowledge", "delta": [1, 2]}
+      ]
+    }
+  ]
+}

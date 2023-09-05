@@ -1,16 +1,18 @@
+import { actionNextTurn } from './actionNextTurn.mjs';
 import { canPayCost } from '../utils/canPayCost.mjs';
 import { get } from '../utils/get.mjs';
-import { actionNextTurn } from './actionNextTurn.mjs';
 
+/**
+ * Mutates state. 
+ */
 export async function actionClaimMatch(state, matchKey) {
-  const card = state.card;
+  const { card, diceValues } = state;
   const matchOption = card.matches[matchKey];
   const actor = get(state, state.currentActorPath);
 
-  // TODO: bail if it can not be claimed anymore.
-  // Check if the actor can afford the match
+  // Bail if the actor can not afford the match.
   if (!canPayCost(matchOption.dice, actor.dice)) {
-    return state; // Return the unmodified state if they can't afford
+    return state;
   }
 
   // "Pay" for the match by removing the dice
@@ -34,10 +36,8 @@ export async function actionClaimMatch(state, matchKey) {
   state.gameLog.push({
     season: state.season,
     actorPath: state.currentActorPath,
-    description: `${matchOption.description}`,
+    description: `${actor.name} spent ${matchOption.dice.map(d => diceValues[d]).join(', ')} resources. ${matchOption.description}`,
   });
 
   await actionNextTurn(state);
-
-  return state;
 }
