@@ -23,21 +23,30 @@ export async function actionClaimMatch(state, matchKey) {
     }
   });
 
+  let rewardDescriptions = [];
+
   // Grant Rewards
   matchOption.rewards.forEach(award => {
     const { name } = award;
     const deltas = Array.isArray(award.delta) ? award.delta : [award.delta];
-    actor[name] += deltas[Math.floor(Math.random() * deltas.length)];
+    const rewardValue = deltas[Math.floor(Math.random() * deltas.length)];
+    actor[name] += rewardValue;
+
+    rewardDescriptions.push(`${rewardValue} ${name}`);
   });
+
+  // Convert reward descriptions to a string
+  const rewardStr = rewardDescriptions.join(', ');
 
   // Update the matchOption as claimed
   matchOption.claimedBy = state.currentActorPath;
 
   state.gameLog.push({
-    season: state.season,
+    season: state.seasonCount,
     actorPath: state.currentActorPath,
-    description: `${actor.name} spent ${matchOption.dice.map(d => diceValues[d]).join(', ')} resources. ${matchOption.description}`,
+    description: `${actor.name} spent ${matchOption.dice.map(d => diceValues[d]).join(', ')} resources to claim "${matchOption.description}" and received "${rewardStr}".`,
   });
 
   await actionNextTurn(state);
 }
+
