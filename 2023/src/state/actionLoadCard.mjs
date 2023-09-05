@@ -12,7 +12,7 @@ export async function actionLoadCard(state) {
   // Hydrage the card
   card.matches = card.matches.map((match, idx) => ({
     ...match,
-    claimed: false,
+    claimedBy: false,
     key: '' + idx,
   }));
 

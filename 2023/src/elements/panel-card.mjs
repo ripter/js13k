@@ -24,10 +24,13 @@ class PanelCard extends HTMLElement {
           values="${match.dice.map(d => diceValues[d]).join(',')}" 
           selected="${currentDice.map(d => diceValues[d]).join(',')}"
         ></dice-list>
-        <button 
-          type="button" 
-          ${canPayCost(match.dice, props.player.dice) ? '' : 'disabled'}
-        >🧧 Claim</button>
+        ${match.claimedBy !== false
+          ? `<div>Claimed by ${match.claimedBy}</div>`
+          : `<button 
+               type="button" 
+               ${canPayCost(match.dice, props.player.dice) ? '' : 'disabled'}
+             >Claim</button>`
+        }
       </div>
     </div>`).join('');
   }
@@ -42,6 +45,7 @@ class PanelCard extends HTMLElement {
       <h2>${name}</h2>
       <p>${description}</p>
       <div class="match-list"></div>
+      <button type="button">Finish Season</button>
     `;
 
     this.renderMatchList(props);

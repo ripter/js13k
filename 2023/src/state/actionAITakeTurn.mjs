@@ -7,7 +7,7 @@ export async function actionAITakeTurn(state) {
   const actor = get(state, state.currentActorPath);
   // Filter the matches the AI can afford
   const affordableMatches = state.card.matches.filter(match =>
-    canPayCost(match.dice, actor.dice)
+    match.claimedBy === false &&  canPayCost(match.dice, actor.dice)
   );
 
   // If there are no matches the AI can afford, just go to the next turn

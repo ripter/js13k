@@ -50,8 +50,6 @@ class PanelPlayer extends HTMLElement {
           </tr>
         </tbody>
       </table>
-
-      <button type="button">Finish Season</button>
     </div>
     `;
   }

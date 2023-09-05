@@ -29,7 +29,7 @@ export async function actionClaimMatch(state, matchKey) {
   });
 
   // Update the matchOption as claimed
-  matchOption.claimed = state.currentActorPath;
+  matchOption.claimedBy = state.currentActorPath;
 
   state.gameLog.push({
     season: state.season,
