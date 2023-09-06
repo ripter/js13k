@@ -7,12 +7,12 @@ class PlayerHand extends HTMLElement {
     //     <card-challenge class="card-in-hand" data-card-idx="${cardKey}"></card-challenge>
     //   `).join('')}
     // </div>`;
-    const html = `${cards.map(cardKey => `<div>
+    const html = `${cards.map(cardKey => `<div class="flex-column">
       <card-challenge class="card-in-hand" data-card-idx="${cardKey}"></card-challenge>
-      <button>Pick</button>
+      <button class="w-5">Pick</button>
     </div>`).join('')}`;
 
-    this.classList.add('component-box');
+    this.classList.add('flex-center','gap-1');
     // Only re-render on change.
     if (this.innerHTML !== html) {
       this.innerHTML = html;
