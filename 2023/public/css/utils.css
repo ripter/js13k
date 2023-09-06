@@ -1,12 +1,26 @@
 
-.hide {
-  display: none;
+.component-box {
+  display: block;
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  margin: 16px auto;
 }
 
-.flex {
+.center-text {
+  text-align: center;
+}
+
+.flex-center {
   display: flex;
+  justify-content: center;
 }
 
-.space-between {
-  justify-content: space-between;
+.flex-gap-8 {
+  gap: 8px;
+}
+
+.mt-0 {
+  margin-top: 0;
 }

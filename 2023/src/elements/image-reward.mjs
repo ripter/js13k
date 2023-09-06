@@ -23,6 +23,7 @@ class ImageReward extends HTMLElement {
     const value = this.getAttribute('value') || 'missingNo';
     const name = this.getAttribute('name') || 'Missing No.';
 
+    console.log(name, value)
     const html = `${TYPE_TO_EMOJI[value]} <b>${name}</b>`;
 
     // Only re-render on change.

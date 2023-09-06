@@ -1,7 +1,17 @@
 :root {
+  --card-bg-color: #fff;
+  --component-width: 20vw;
+
   --button-color: #fff;
   --button-bg-color: #007BFF;
   --button-hover-bg-color: #0056b3;
   --button-disabled-bg-color: #ccc;
   --button-disabled-color: #888;
+
+  --border-color: #e1e1e1;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --h3-color: #333;
+  --h2-color: #333;
+  --general-color: #555;
+  --padding-list: 40px;
 }

@@ -1,0 +1,24 @@
+player-info {
+  background-color: var(--card-bg-color);
+  width: var(--component-width);
+}
+
+player-info h2 {
+  font-weight: 600;
+  color: var(--h2-color);
+}
+
+player-info h3 {
+  font-weight: 500;
+  color: var(--general-color);
+}
+
+player-info .item-list {
+  list-style-type: square;
+  padding-left: var(--padding-list);
+  color: var(--general-color);
+}
+
+player-info .item-list li {
+  margin-bottom: 8px;
+}
