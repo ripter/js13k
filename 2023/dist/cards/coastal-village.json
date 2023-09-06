@@ -1,0 +1,65 @@
+{
+  "name": "Coastal Village",
+  "description": "Nestled along the shimmering embrace of the Mediterranean coast, the Coastal Village offers a refuge amidst the tumultuous Crusader campaign. Wooden piers extend into azure waters, where fishing boats sway in tandem with the gentle waves. Whitewashed stone cottages huddle together, their thatched roofs crowned by plumes of smoke. Weathered faces, etched by both time and toil, greet weary Crusaders with cautious curiosity. The village exudes an air of weary resilience, caught between the crossroads of war and the tranquil cadence of daily life.",
+  "matches": [
+    {
+      "name": "Trade at the Marketplace",
+      "dice": [1],
+      "description": "Gather Food and Water at the Marketplace.",
+      "rewards": [
+        {"name": "food", "delta": 1},
+        {"name": "water", "delta": 1}
+      ]
+    },
+    {
+      "name": "Recruitment",
+      "dice": [2, 2, 3],
+      "description": "Invoke the divine and explore the village, rallying local supporters to join the Crusader cause.",
+      "rewards": [
+        {"name": "population", "delta": [1, 3]}
+      ]
+    },
+    {
+      "name": "Barter with Fishermen",
+      "dice": [1, 3],
+      "description": "Visit the fishermen along the coast and engage in bartering.",
+      "rewards": [
+        {"name": "food", "delta": 2}
+      ]
+    },
+    {
+      "name": "Aid the Sick",
+      "dice": [2, 3],
+      "description": "Offer solace and care to the ailing villagers, earning their gratitude.",
+      "rewards": [
+        {"name": "morale", "delta": 1}
+      ]
+    },
+    {
+      "name": "Diplomatic Exchange",
+      "dice": [1, 2, 3],
+      "description": "Engage in diplomatic conversations with village leaders to secure support.",
+      "rewards": [
+        {"name": "population", "delta": 1},
+        {"name": "morale", "delta": 1}
+      ]
+    },
+    {
+      "name": "Drive Off Bandits",
+      "dice": [0, 0],
+      "description": "Some bandits have been troubling the village. Show strength and drive them away to ensure the safety of the villagers.",
+      "rewards": [
+        {"name": "morale", "delta": 2},
+        {"name": "food", "delta": 1}
+      ]
+    },
+    {
+      "name": "Hunt for Game",
+      "dice": [0, 3],
+      "description": "The nearby forests are rich with game. Organize a hunting party to bring back food for the Crusaders.",
+      "rewards": [
+        {"name": "food", "delta": [2, 3]}
+      ]
+    }
+  ]
+}
