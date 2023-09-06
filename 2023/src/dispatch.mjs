@@ -1,4 +1,4 @@
-import { render } from '../render.mjs';
+import { render } from './render.mjs';
 
 /** 
  * Current game state.
