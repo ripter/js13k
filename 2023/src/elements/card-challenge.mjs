@@ -20,7 +20,7 @@ class ChallengeCard extends HTMLElement {
         <image-pawn type="blue" value="${rating[2]}"></image-pawn>
       </div>
 
-      <h3>Rewards:</h3> 
+      <h3>🕯️ Rewards 🕯️</h3> 
       <div class="rewards">
         ${rewards.map(reward => 
           (`<image-reward value="${reward}" name="${name}"></image-reward>`)

@@ -17,7 +17,7 @@ card-challenge h3 {
   color: #333;
 }
 
-card-challenge .rating {
+card-challenge .challenge {
   display: flex;
   gap: 8px; /* Spacing between the pawns */
   justify-content: center;
