@@ -1,0 +1,32 @@
+
+card-challenge {
+  display: block;
+  border: 1px solid #e1e1e1;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 250px; /* Adjust based on your preference */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 16px auto; /* Centers the card with some margin on top and bottom */
+}
+
+card-challenge h3 {
+  font-weight: 500;
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+card-challenge .rating {
+  display: flex;
+  gap: 8px; /* Spacing between the pawns */
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+card-challenge .rewards {
+  display: flex;
+  gap: 8px; /* Spacing between the rewards */
+  flex-wrap: wrap;
+  justify-content: center;
+}
