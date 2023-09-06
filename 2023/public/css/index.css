@@ -5,17 +5,3 @@
 
 /* Custom Element Styles */
 
-
-
-body > * {
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  background-color: #fafafa;
-  max-width: 600px;
-  margin: 20px auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-
