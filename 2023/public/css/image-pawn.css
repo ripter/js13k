@@ -1,21 +1,10 @@
-/*
-image-pawn >span {
-  font-size: 2em;
-}
-
-image-pawn >b {
-  font-size: 1em;
-}
-*/
-
 
 image-pawn {
-  /* display: inline-block; */
-  /* position: relative; */
   font-size: var(--pawn-size);
   width: 1.5em;
   height: 1.5em;
   display: flex;
+  align-items: center;
 }
 
 image-pawn > :nth-child(1) {
@@ -26,23 +15,6 @@ image-pawn > :nth-child(2) {
 
 }
 
-/* Style the shield */
-/* image-pawn >span {
-  width: 100%;
-  display: block;
-  height: 100%;
-  text-align: center;
-} */
-
-/* Style the badge */
-/* image-pawn>b {
-  top: 1.5em;
-  position: absolute;
-  font-size: 0.5em;
-  display: block;
-  width: 100%;
-  text-align: center;
-} */
 
 image-pawn[type="red"] > b {
   color: var(--color-red);

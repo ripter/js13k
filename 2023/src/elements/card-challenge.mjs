@@ -13,7 +13,6 @@ class ChallengeCard extends HTMLElement {
       ? `<image-reward value="${rewards[0]}" name="${name}"></image-reward>`
       : `${rewards.map(reward => {
         const parts = reward.split(' ');
-        console.log('part', parts);
         return `<image-pawn value="${parts[0]}" type="${parts[1]}"></image-reward>`
       }).join('')}`
 

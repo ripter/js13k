@@ -1,0 +1,18 @@
+
+list-pond {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+list-pond card-challenge {
+  transform: scale(1);
+  transition: transform 0.5s, box-shadow 0.5s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+list-pond card-challenge:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

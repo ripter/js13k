@@ -11,7 +11,7 @@ export const INITAL_STATE = {
     blue: 5,
     items: [],
   }],
-  pool: [],
+  pond: [2, 4, 6, 8, 10, 12],
   deck: [
     { name: 'The Holy Grail', rating: [5, 4, 7], rewards: ['grail'] },
     { name: 'Excalibur\'s Shard', rating: [6, 3, 6], rewards: ['shard'] },
