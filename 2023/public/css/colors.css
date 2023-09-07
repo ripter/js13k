@@ -2,10 +2,12 @@
   --color-red: #FF4136;
   --color-green: #2ECC40;
   --color-blue: #0074D9;
+  --color-disabled: #a0a0a0;
   --pawn-size: 32px;
 
   --card-bg-color: #fff;
   --component-width: 20vw;
+
 
   --button-color: #fff;
   --button-bg-color: #007BFF;

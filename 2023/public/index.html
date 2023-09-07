@@ -10,7 +10,10 @@
 </head>
 <body>
   <list-pond id="elmPond"></list-pond>
-  <player-info id="elmPlayerInfo" class="component-box"></player-info>
+  <div class="player-list">
+    <player-info key-path="player"></player-info>
+    <player-info key-path="opponent"></player-info>
+  </div>
   <dialog id="elmPlayerHand" is="player-hand" cards="2,4,6"></dialog>
   <dialog id="elmChallengeModal" is="modal-challenge"></dialog>
 </body>

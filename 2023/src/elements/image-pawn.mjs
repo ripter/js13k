@@ -6,6 +6,13 @@ const TYPE_TO_EMOJI = {
   castle: '🏰',
   orange: '🍊',
 };
+const TYPE_TO_TOOLTIP = {
+  red: 'Army',
+  green: 'Cavalry',
+  blue: 'Monks',
+  castle: 'Strength',
+  orange: 'Oranges are delicious',
+};
 
 class ImagePawn extends HTMLElement {
   static get observedAttributes() {
@@ -26,9 +33,9 @@ class ImagePawn extends HTMLElement {
 
     
 
-    const html = `
+    const html = `<span title="${TYPE_TO_TOOLTIP[type]}">
       <span>${TYPE_TO_EMOJI[type]}</span> <b>${value}</b> 
-    `;
+    </span>`;
 
     // Only re-render on change.
     if (this.innerHTML !== html) {

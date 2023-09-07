@@ -1,32 +1,77 @@
-player-info {
+.NO player-info {
   background-color: var(--card-bg-color);
-  width: var(--component-width);
+  /* width: var(--component-width); */
+  /* display: flex; */
+  /* flex-direction: column; */
+  border: thin solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1em;
+  box-sizing: border-box;
 }
 
-player-info h2 {
-  font-weight: 600;
-  color: var(--h2-color);
+.NO player-info h2 {
+  display: block;
+  padding-right: 2em;
 }
 
-player-info h3 {
+.NO player-info h3 {
   font-weight: 500;
   color: var(--general-color);
 }
 
-player-info .item-list {
+.NO player-info .item-list {
   list-style-type: square;
   padding-left: var(--padding-list);
   color: var(--general-color);
 }
 
-player-info .item-list li {
+.NO player-info .item-list li {
   margin-bottom: 8px;
 }
 
-player-info .pawn-info {
+.NO player-info .pawn-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
-  padding-left: 25%;
+  width: 25%;
+}
+
+
+
+
+player-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 1 part for labels and 2 parts for content */
+  grid-gap: 16px; /* Space between grid cells */
+  align-items: center; /* Center items vertically */
+}
+
+/* Headers */
+player-info h2,
+player-info h3 {
+  grid-column: 1; /* The first (leftmost) column */
+  justify-self: end; /* Align to the end of the column */
+}
+
+/* Pawn Info */
+player-info .pawn-info {
+  grid-column: 2; /* The second column */
+  display: flex;
+  gap: 16px; /* Space between pawns */
+  justify-content: start; /* Start-aligned */
+}
+
+/* Item List */
+player-info .item-list {
+  grid-column: 2; /* The second column */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 layout */
+  gap: 16px; /* Space between items */
+}
+
+/* Optional adjustments: If you want the item list to start right under the Items header */
+.NO player-info h3 + .item-list {
+  grid-column: 2; 
+  grid-row: 3; /* 3rd row, first being title, second being pawn-info */
 }

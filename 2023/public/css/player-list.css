@@ -1,0 +1,23 @@
+.player-list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9001;
+}
+
+.player-list player-info {
+  background-color: var(--card-bg-color);
+  width: calc(50% - 20px);
+  border-radius: 10px 10px 0 0;
+  transform: translateY(50%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* When hovered, bring the player info up */
+.player-list player-info:hover {
+  transform: translateY(0);
+}

@@ -6,9 +6,17 @@ const TYPE_TO_EMOJI = {
   missingNo: '🈚'
 };
 
+const TYPE_TO_NAME = {
+  grail: 'The Holy Grail',
+  shard: 'Excalibur\'s Shard',
+  stone: 'The Alchemist\'s Stone',
+  manuscript: 'The Saint\'s Manuscript',
+  missingNo: '🈚'
+}
+
 class ImageReward extends HTMLElement {
   static get observedAttributes() {
-    return ['value', 'name'];  // list of attributes to observe for changes
+    return ['type'];  // list of attributes to observe for changes
   }
 
   connectedCallback() {
@@ -20,9 +28,8 @@ class ImageReward extends HTMLElement {
   }
 
   render() {
-    const value = this.getAttribute('value') || 'missingNo';
-    const name = this.getAttribute('name') || 'Missing No.';
-    const html = `${TYPE_TO_EMOJI[value]} <b>${name}</b>`;
+    const type = this.getAttribute('type') ?? 'missingNo';
+    const html = `${TYPE_TO_EMOJI[type]} <b>${TYPE_TO_NAME[type]}</b>`;
 
     // Only re-render on change.
     if (this.innerHTML !== html) {

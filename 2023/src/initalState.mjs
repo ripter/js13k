@@ -5,12 +5,12 @@ export const INITAL_STATE = {
     blue: 5,
     items: [],
   },
-  opponents: [{
+  opponent: {
     red: 5,
     green: 5,
     blue: 5,
     items: [],
-  }],
+  },
   pond: [2, 4, 6, 8, 10, 12],
   deck: [
     { name: 'The Holy Grail', rating: [5, 4, 7], rewards: ['grail'] },

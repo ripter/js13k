@@ -1,23 +1,25 @@
 
 class PlayerInfo extends HTMLElement {
   render(props) {
-    const { red, green, blue, items } = props.player;
-
-    const itemsHTML = items.length ? 
-      items.map(item => `<li>${item}</li>`).join('') : 
-      '<li>No items collected.</li>';
+    const keyPath = this.getAttribute('key-path') ?? 'player';
+    const title = keyPath === 'player' ? 'Your Info' : 'Opponent Info';
+    const { red, green, blue, items } = props[keyPath];
 
     const html = `
-      <h2 class="center-text mt-0">Player Info</h2>
+      <h2 class="flex">${title}</h2>
       <div class="pawn-info">
         <image-pawn type="red" value="${red}"></image-pawn>
         <image-pawn type="green" value="${green}"></image-pawn>
         <image-pawn type="blue" value="${blue}"></image-pawn>
       </div>
-      <h3 class="center-text">Items:</h3>
-      <ul class="item-list">
-        ${itemsHTML}
-      </ul>
+
+      <h2 class="center-text">Items</h2>
+      <div class="item-list">
+        <image-reward type="grail" disabled="${!items.includes('grail')}"></image-reward>
+        <image-reward type="shard" disabled="${!items.includes('shard')}"></image-reward>
+        <image-reward type="stone" disabled="${!items.includes('stone')}"></image-reward>
+        <image-reward type="manuscript" disabled="${!items.includes('manuscript')}"></image-reward>
+      </div>
     `;
 
     // Only re-render on change.
