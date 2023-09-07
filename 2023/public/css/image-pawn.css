@@ -9,34 +9,40 @@ image-pawn >b {
 */
 
 
-/* Global styles for the image-pawn */
 image-pawn {
-  display: inline-block;
-  position: relative; /* This allows absolute positioning within the component */
-  font-size: 32px;    /* Adjust this to change the size of the shield and badge */
+  /* display: inline-block; */
+  /* position: relative; */
+  font-size: var(--pawn-size);
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+}
+
+image-pawn > :nth-child(1) {
+
+}
+
+image-pawn > :nth-child(2) {
+
 }
 
 /* Style the shield */
-image-pawn > span {
+/* image-pawn >span {
+  width: 100%;
   display: block;
+  height: 100%;
   text-align: center;
-  opacity: 0.9;      /* Gives the shield a slightly faded appearance for badge contrast */
-}
+} */
 
 /* Style the badge */
-image-pawn > b {
-  position: absolute;    /* This places the badge relative to the image-pawn */
-  bottom: 5%;            /* Adjust this to move the badge up or down */
-  left: 50%;             /* Centers the badge horizontally */
-  transform: translateX(-50%);  /* Perfectly centers the badge horizontally */
-  
-  background-color: rgba(255, 255, 255, 0.6);  /* A semi-transparent background for legibility */
-  border-radius: 50%;   /* Makes the badge circular */
-  padding: 0.25em 0.5em;  /* Spacing inside the badge; adjust for your aesthetics */
-  font-weight: bold;
-  font-size: 0.75em;    /* Adjust this to change the badge size */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Adds a soft shadow for depth */
-}
+/* image-pawn>b {
+  top: 1.5em;
+  position: absolute;
+  font-size: 0.5em;
+  display: block;
+  width: 100%;
+  text-align: center;
+} */
 
 image-pawn[type="red"] > b {
   color: var(--color-red);

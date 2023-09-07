@@ -22,3 +22,11 @@ player-info .item-list {
 player-info .item-list li {
   margin-bottom: 8px;
 }
+
+player-info .pawn-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  padding-left: 25%;
+}

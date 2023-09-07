@@ -13,3 +13,9 @@ card-challenge .challenge,
 card-challenge .rewards {
   flex-wrap: wrap;
 }
+
+card-challenge .challenge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

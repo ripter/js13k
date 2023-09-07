@@ -19,16 +19,13 @@ class ChallengeCard extends HTMLElement {
 
     const html = `
       <h3 class="center-text mt-0">${title}️</h3>
-      <div class="challenge flex-center flex-gap-8">
-        <span>
-          <b>${rating.reduce((acc, v) => acc + v)}</b>
-          🏰 
-        </span>
-        ＝ 
+      <div class="challenge">
+        <image-pawn type="castle" value="${rating.reduce((acc, v) => acc + v)}"></image-pawn>
+        <span>＝</span> 
         <image-pawn type="red" value="${rating[0]}"></image-pawn>
-        ➕
+        <span>➕</span>
         <image-pawn type="green" value="${rating[1]}"></image-pawn>
-        ➕
+        <span>➕</span>
         <image-pawn type="blue" value="${rating[2]}"></image-pawn>
       </div>
 

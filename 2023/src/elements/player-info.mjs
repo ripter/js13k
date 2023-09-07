@@ -9,7 +9,7 @@ class PlayerInfo extends HTMLElement {
 
     const html = `
       <h2 class="center-text mt-0">Player Info</h2>
-      <div class="pawn-info flex-center">
+      <div class="pawn-info">
         <image-pawn type="red" value="${red}"></image-pawn>
         <image-pawn type="green" value="${green}"></image-pawn>
         <image-pawn type="blue" value="${blue}"></image-pawn>

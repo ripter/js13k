@@ -3,6 +3,7 @@ const TYPE_TO_EMOJI = {
   red: '🛡️',
   green: '🏇',
   blue: '📿',
+  castle: '🏰',
   orange: '🍊',
 };
 
