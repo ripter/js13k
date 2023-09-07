@@ -30,10 +30,9 @@ class ChallengeModal extends HTMLDialogElement {
    * "Upgrades" the pawn icon to have controls. 
    */
   renderPawnControls(elm) {
-    // Use the existing innerHTML of elm as the central content
+    // Save the existing
     const content = elm.outerHTML;
-
-    // Create a new HTML structure with "+" and "-" buttons
+    // Create a wrapper
     const newHTML = `
       <div class="pawn-control">
         <button class="increment">+</button>
@@ -41,10 +40,8 @@ class ChallengeModal extends HTMLDialogElement {
         <button class="decrement">-</button>
       </div>
     `;
-
-    // Wrap elm with the new structure
+    // replace with the wrapped version.
     elm.outerHTML = newHTML;
-    console.log('Pawn', elm)
   }
 
   handleClick(evt) {

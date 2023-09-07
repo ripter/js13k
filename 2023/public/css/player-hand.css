@@ -1,47 +1,65 @@
 [is="player-hand"] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-  border: none;
-  border-radius: 10px;
-  width: 90vw; 
-  padding: 2em;
   background: none;
+  width: 90vw; 
 }
 
 [is="player-hand"]::backdrop {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Stacking the cards and handling hover effects */
-[is="player-hand"] > div {
+
+[is="player-hand"] .card-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  border: none;
+  border-radius: 10px;
+  padding: 2em;
+}
+
+[is="player-hand"] .card-list .card-control {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   margin: 0 -4%;
   transform: scale(0.85);
   transition: transform 0.3s, box-shadow 0.3s;
-  z-index: 1; /* default z-index for all cards */
-}
-
-[is="player-hand"] >:nth-child(1) {
   z-index: 1;
 }
 
-[is="player-hand"] >:nth-child(2) {
+
+[is="player-hand"] .card-list:nth-child(1) {
+  z-index: 1;
+}
+
+[is="player-hand"] .card-list:nth-child(2) {
   z-index: 2;
 }
 
-[is="player-hand"] >:nth-child(3) {
+[is="player-hand"] .card-list:nth-child(3) {
   z-index: 3;
 }
 
-[is="player-hand"] > div:hover {
+[is="player-hand"] .card-list .card-control:hover {
   transform: translateY(-10px) translateZ(10px) scale(1.2);
   z-index: 4;
 }
 
+
 [is="player-hand"] .rules {
-  margin-top: 2em;
-  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  color: #7f8c8d;
+  font-size: 1.1em;
   font-style: italic;
-  color: #7f8c8d; /* Soft gray for the rules to make it distinct yet subtle */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5em;
+  max-width: 400px;
+  padding: 1em;
+  text-align: center;
+  width: 80%;
 }

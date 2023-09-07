@@ -7,16 +7,19 @@ class PlayerHand extends HTMLDialogElement {
     const cards = cardIdxs.map(idx => props.deck[idx]);
     console.log('cards',cards);
 
-    const html = `${cards.map(card => `<div class="flex-column">
-      <card-challenge 
-        name="${card.name}"
-        rating="${card.rating}"
-        rewards="${card.rewards}"
-      ></card-challenge>
-      <button class="w-5">Pick</button>
-    </div>`).join('')}
+    const html = `
+    <div class="card-list">
+      ${cards.map(card => `<div class="card-control">
+          <card-challenge 
+            name="${card.name}"
+            rating="${card.rating}"
+            rewards="${card.rewards}"
+          ></card-challenge>
+          <button class="w-5">Pick</button>
+      </div>`).join('')}
+    </div>
     <p class="rules">
-      Pick a card to replace the one you used.
+      Pick a card to replace the one you conquered.
     </p>
     `;
 
