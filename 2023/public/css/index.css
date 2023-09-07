@@ -5,4 +5,5 @@
 
 /* Custom Element Styles */
 @import url("./card-challenge.css");
-@import url("./player-info.css")
+@import url("./player-info.css");
+@import url("./player-hand.css");

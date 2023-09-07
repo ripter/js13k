@@ -1,0 +1,22 @@
+player-hand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+  transform-style: preserve-3d; /* ensures that the 3D rotate effect is preserved */
+}
+
+player-hand >:nth-child(1) {
+  transform: rotate(-15deg) translateX(-30%); /* increased translateX for closer overlap */
+  transition: transform 0.3s;
+}
+
+player-hand >:nth-child(3) {
+  transform: rotate(15deg) translateX(30%); /* increased translateX for closer overlap */
+  transition: transform 0.3s;
+}
+
+player-hand >:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 2; /* ensures the hovered card appears above the others */
+}
