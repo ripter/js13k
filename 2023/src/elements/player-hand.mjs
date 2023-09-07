@@ -1,9 +1,17 @@
 
 class PlayerHand extends HTMLElement {
   render(props) {
-    const cards = JSON.parse(this.getAttribute('cards') ?? '[]');
-    const html = `${cards.map(cardKey => `<div class="flex-column">
-      <card-challenge class="card-in-hand" data-card-idx="${cardKey}"></card-challenge>
+    const cardIdxs = JSON.parse(this.getAttribute('cards') ?? '[]');
+    // TODO: get cards from props.deck
+    const cards = cardIdxs.map(idx => props.deck[idx]);
+    console.log('cards',cards);
+
+    const html = `${cards.map(card => `<div class="flex-column">
+      <card-challenge 
+        name="${card.name}"
+        rating="${card.rating}"
+        rewards="${card.rewards}"
+      ></card-challenge>
       <button class="w-5">Pick</button>
     </div>`).join('')}`;
 

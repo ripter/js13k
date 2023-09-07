@@ -8,7 +8,9 @@ class ChallengePond extends HTMLElement {
     // Render each card-challenge in a CSS grid
     const html = `${pondCards.map(card => `
       <card-challenge 
-        data-card-idx="${deck.indexOf(card)}"
+        name="${card.name}"
+        rating="${card.rating}"
+        rewards="${card.rewards}"
       ></card-challenge>
     `).join('')}`;
 

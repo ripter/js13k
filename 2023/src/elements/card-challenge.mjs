@@ -2,10 +2,18 @@ import { isRoyalReward } from '../utils/isRoyalReward.mjs';
 
 
 class ChallengeCard extends HTMLElement {
-  render(props) {
-    const { cardIdx } = this.dataset;
-    if (!cardIdx) { return this.innerHTML = '<!-- No Card Index -->'; }
-    const { name, rating, rewards } = props.deck[cardIdx];
+  static get observedAttributes() {
+    return ['name', 'rating', 'reward'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.render();
+  }
+
+  render() {
+    const name = this.getAttribute('name');
+    const rating = this.getAttribute('rating').split(',');
+    const rewards = this.getAttribute('rewards').split(',');
     const isRoyal = isRoyalReward(rewards);
 
     const title = isRoyal ? '⚜️ Royal Challenge ️⚜️' : `⚜️ ${name} ️⚜️`;
@@ -19,7 +27,7 @@ class ChallengeCard extends HTMLElement {
     const html = `
       <h3 class="center-text mt-0">${title}️</h3>
       <div class="challenge">
-        <image-pawn type="castle" value="${rating.reduce((acc, v) => acc + v)}"></image-pawn>
+        <image-pawn type="castle" value="${rating.reduce((acc, v) => acc + parseInt(v, 10), 0)}"></image-pawn>
         <span>＝</span> 
         <image-pawn type="red" value="${rating[0]}"></image-pawn>
         <span>➕</span>

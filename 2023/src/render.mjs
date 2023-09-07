@@ -11,7 +11,7 @@ export function render(state) {
   window.elmChallengeModal.render(state);
 
   // Re-render all the cards.
-  document.querySelectorAll('card-challenge').forEach(elm => elm.render(state));
+  // document.querySelectorAll('card-challenge').forEach(elm => elm.render(state));
 
   // window.elmImagPawn.render(state);
 }

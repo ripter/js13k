@@ -5,8 +5,14 @@ class ChallengeModal extends HTMLDialogElement {
   }
 
   render(props) {
+    const card = props.deck[0|Math.random()*12];
+
     this.innerHTML = `
-      <card-challenge data-card-idx="10"></card-challenge>
+      <card-challenge 
+        name="${card.name}"
+        rating="${card.rating}"
+        rewards="${card.rewards}"
+      ></card-challenge>
       <button id="rollDice">Roll Dice</button>
     `;
 
