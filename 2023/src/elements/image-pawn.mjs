@@ -3,6 +3,7 @@ const TYPE_TO_EMOJI = {
   red: '🛡️',
   green: '🏇',
   blue: '📿',
+  orange: '🍊',
 };
 
 class ImagePawn extends HTMLElement {
@@ -25,7 +26,7 @@ class ImagePawn extends HTMLElement {
     
 
     const html = `
-      ${TYPE_TO_EMOJI[type]} <b>${value}</b> 
+      <span>${TYPE_TO_EMOJI[type]}</span> <b>${value}</b> 
     `;
 
     // Only re-render on change.
