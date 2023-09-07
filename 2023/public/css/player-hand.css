@@ -1,32 +1,47 @@
-player-hand {
+[is="player-hand"] {
   display: flex;
   justify-content: center;
   align-items: center;
   perspective: 1000px;
+  border: none;
+  border-radius: 10px;
+  width: 90vw; 
+  padding: 2em;
+  background: none;
 }
 
-player-hand > div {
-  margin: 0 -4%; /* provides the 'overlap' effect */
+[is="player-hand"]::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Stacking the cards and handling hover effects */
+[is="player-hand"] > div {
+  margin: 0 -4%;
   transform: scale(0.85);
   transition: transform 0.3s, box-shadow 0.3s;
+  z-index: 1; /* default z-index for all cards */
 }
 
-/* Adjusting z-indexes ensures that the hovered card appears on top */
-player-hand >:nth-child(1) {
+[is="player-hand"] >:nth-child(1) {
   z-index: 1;
 }
 
-player-hand >:nth-child(2) {
+[is="player-hand"] >:nth-child(2) {
   z-index: 2;
 }
 
-player-hand >:nth-child(3) {
+[is="player-hand"] >:nth-child(3) {
   z-index: 3;
 }
 
-/* On hover, move card up and slightly forward */
-player-hand >:hover {
+[is="player-hand"] > div:hover {
   transform: translateY(-10px) translateZ(10px) scale(1.2);
-  /* box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); */
-  z-index: 4; /* makes sure the hovered card is on top of all other cards */
+  z-index: 4;
+}
+
+[is="player-hand"] .rules {
+  margin-top: 2em;
+  text-align: center;
+  font-style: italic;
+  color: #7f8c8d; /* Soft gray for the rules to make it distinct yet subtle */
 }

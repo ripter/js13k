@@ -1,7 +1,8 @@
 
-class PlayerHand extends HTMLElement {
+class PlayerHand extends HTMLDialogElement {
   render(props) {
-    const cardIdxs = JSON.parse(this.getAttribute('cards') ?? '[]');
+    // const cardIdxs = JSON.parse(this.getAttribute('cards') ?? '[]');
+    const cardIdxs = this.getAttribute('cards').split(',');
     // TODO: get cards from props.deck
     const cards = cardIdxs.map(idx => props.deck[idx]);
     console.log('cards',cards);
@@ -13,9 +14,12 @@ class PlayerHand extends HTMLElement {
         rewards="${card.rewards}"
       ></card-challenge>
       <button class="w-5">Pick</button>
-    </div>`).join('')}`;
+    </div>`).join('')}
+    <p class="rules">
+      Pick a card to replace the one you used.
+    </p>
+    `;
 
-    this.classList.add('flex-center','gap-1');
     // Only re-render on change.
     if (this.innerHTML !== html) {
       this.innerHTML = html;
@@ -29,4 +33,4 @@ class PlayerHand extends HTMLElement {
   }
 }
 
-customElements.define('player-hand', PlayerHand);
+customElements.define('player-hand', PlayerHand, { extends: 'dialog' });
