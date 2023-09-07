@@ -2,21 +2,31 @@ player-hand {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s;
-  transform-style: preserve-3d; /* ensures that the 3D rotate effect is preserved */
+  perspective: 1000px;
 }
 
+player-hand > div {
+  margin: 0 -4%; /* provides the 'overlap' effect */
+  transform: scale(0.85);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Adjusting z-indexes ensures that the hovered card appears on top */
 player-hand >:nth-child(1) {
-  transform: rotate(-15deg) translateX(-30%); /* increased translateX for closer overlap */
-  transition: transform 0.3s;
+  z-index: 1;
+}
+
+player-hand >:nth-child(2) {
+  z-index: 2;
 }
 
 player-hand >:nth-child(3) {
-  transform: rotate(15deg) translateX(30%); /* increased translateX for closer overlap */
-  transition: transform 0.3s;
+  z-index: 3;
 }
 
+/* On hover, move card up and slightly forward */
 player-hand >:hover {
-  transform: rotate(0deg) scale(1.05);
-  z-index: 2; /* ensures the hovered card appears above the others */
+  transform: translateY(-10px) translateZ(10px) scale(1.2);
+  /* box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); */
+  z-index: 4; /* makes sure the hovered card is on top of all other cards */
 }
