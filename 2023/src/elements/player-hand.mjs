@@ -1,11 +1,8 @@
 
 class PlayerHand extends HTMLDialogElement {
   render(props) {
-    // const cardIdxs = JSON.parse(this.getAttribute('cards') ?? '[]');
     const cardIdxs = this.getAttribute('cards').split(',');
-    // TODO: get cards from props.deck
     const cards = cardIdxs.map(idx => props.deck[idx]);
-    console.log('cards',cards);
 
     const html = `
     <div class="card-list">
