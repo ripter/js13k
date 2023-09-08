@@ -3,8 +3,7 @@ import { INITAL_STATE } from '../initalState.mjs';
 
 export async function dispatchNewGame() {
   await dispatch(async (state) => {
-    // Mutate!
+    // Mutate! Reset the state.
     Object.assign(state, INITAL_STATE);
-    console.log('New Game!', state);
   });
 }

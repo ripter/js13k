@@ -1,4 +1,7 @@
-export const INITAL_STATE = {
+  import { dispatchShowRules } from './dispatch/showRules.mjs';
+
+  export const INITAL_STATE = {
+  activeDialogIdx: 0,
   player: {
     red: 5,
     green: 5,
@@ -11,7 +14,8 @@ export const INITAL_STATE = {
     blue: 5,
     items: [],
   },
-  pond: [2, 4, 6, 8, 10, 12],
+  pond: [],
+  // pond: [2, 4, 6, 8, 10, 12],
   deck: [
     { name: 'The Holy Grail', rating: [5, 4, 7], rewards: ['grail'] },
     { name: 'Excalibur\'s Shard', rating: [6, 3, 6], rewards: ['shard'] },
@@ -32,5 +36,19 @@ export const INITAL_STATE = {
     { name: 'Reconquista Campaign', rating: [5, 3, 2], rewards: ['3 red', '2 green'] },
     { name: 'Magna Carta Negotiation', rating: [3, 5, 2], rewards: ['3 green', '2 blue'] },
     { name: 'Translation of Aristotle', rating: [2, 3, 5], rewards: ['3 blue', '2 green'] },
+  ],
+  dialogs: [
+    { dispatch: () => {},
+      title: '🏰 Welcome to the Quest for the Sacred Four! 🏰',
+      buttons: [
+        ['How to Play', dispatchShowRules],
+        ['Start Game', () => console.log('Start Game')],
+      ],
+      body: `
+        <h3>JS13k 2023 - Theme: 13th Century</h3>
+        <p>The 13th Century: A time when kingdoms rose and fell on the whispers of courtiers and the bravery of knights. In this age of chivalry, legends spoke of the Sacred Four: ancient and mystical items of immense power - the 🏆 Grail, 🗡️ Shard, 💎 Stone, and the revered 📜 Manuscript.</p>
+        <p>In <b>Quest for the Sacred Four</b>, you and your opponent are rival leaders racing against time and each other to be the first to gather these four revered items. Deploy your 🛡️ Army, command your 🏇 Cavalry, and seek guidance from your 📿 Monks to challenge and weaken the 🏰 Strength that guards the treasures. The more you diminish the challenge's strength, the higher your chances of claiming a sacred item. But tread carefully, for the path is treacherous and your opponent is always on the lookout for a chance to outwit you.</p>
+        <a href="https://github.com/ripter/js13k/tree/master/2023"></a>
+      `},
   ],
 }

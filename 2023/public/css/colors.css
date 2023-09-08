@@ -5,6 +5,15 @@
   --color-disabled: #a0a0a0;
   --pawn-size: 32px;
 
+  /* Backgrounds and general shades */
+  --parchment-bg: #faf2e0;
+  --dark-border: #5d5a56;
+  --text-color: #3d3a36;
+
+  /* Emphasis and interactive elements */
+  --emphasis-color: #965a38;
+  --hover-color: #774837;
+
   --card-bg-color: #fff;
   --component-width: 20vw;
 

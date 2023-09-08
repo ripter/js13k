@@ -12,6 +12,7 @@ export function render(state) {
   // Modals
   window.elmPlayerHand.render(state);
   window.elmChallengeModal.render(state);
+  window.elmDialog.render(state);
 
   // Player Stats
   document.querySelectorAll('player-info').forEach(elm => elm.render(state));
