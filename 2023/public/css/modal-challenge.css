@@ -1,3 +1,7 @@
+[is="modal-challenge"] {
+  display: flex;
+  flex-direction: column;
+}
 
 [is="modal-challenge"] .pawn-control button {
   width: 100%;

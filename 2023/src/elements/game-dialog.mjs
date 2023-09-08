@@ -28,9 +28,11 @@ class GameDialog extends HTMLDialogElement {
     }
 
     if (activeDialogIdx === -1) {
+      this.style.display = 'none';
       this.close();
     }
     else {
+      this.style.display = 'flex';
       this.showModal();
     }
 
