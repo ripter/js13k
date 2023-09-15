@@ -17,13 +17,6 @@ class ChallengeCard extends HTMLElement {
     const isRoyal = isRoyalReward(rewards);
 
     const title = isRoyal ? '⚜️ Royal Challenge ️⚜️' : `⚜️ ${name} ️⚜️`;
-    const rewardHTML = rewards.map(reward => {
-      if (isRoyal) {
-        return `<image-reward type="${reward}"></image-reward>`;
-      }
-      const parts = reward.split(' ');
-      return `<image-pawn value="${parts[0]}" type="${parts[1]}"></image-reward>`;
-    });
 
     const html = `
       <h3 class="center-text mt-0">${title}️</h3>
@@ -39,7 +32,7 @@ class ChallengeCard extends HTMLElement {
 
       <h3 class="center-text">🕯️ Rewards 🕯️</h3> 
       <div class="rewards flex-center flex-gap-8">
-        ${rewardHTML}
+        ${rewards.map(reward => `<image-reward type="${reward}"></image-reward>`).join('')}
       </div>
     `;
 

@@ -1,11 +1,17 @@
 # js13k
 
+# FAILED: Not finished in time for JS13k.
+In the middle of this project I had to completely change the game I was building because the first version was not fun. This contributed to me being unable to finish in time for JS13k 2023.
 
 
-While developing this game, I kept adjusting the State Acrchitecture pattern until I stumbled upon a pattern I'm calling Async State Flow. It's the reducer pattern with less boilerplate, perfect for a small jam.
+
+
 
 
 ---
+
+While developing this game, I kept adjusting the State Acrchitecture pattern until I stumbled upon a pattern I'm calling Async State Flow. It's the reducer pattern with less boilerplate, perfect for a small jam.
+
 
 # AsyncStateFlow
 

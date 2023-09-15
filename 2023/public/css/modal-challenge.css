@@ -1,9 +1,93 @@
 [is="modal-challenge"] {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw; 
+  max-width: 550px; 
+  padding: 2em;
+  background-color: var(--parchment-bg);
+  border: 3px solid var(--dark-border);
+  border-radius: 8px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+  font-family: 'Georgia', serif; 
+  color: var(--text-color);
 }
 
-[is="modal-challenge"] .pawn-control button {
+[is="modal-challenge"] h2 {
+  margin-bottom: 0.8em;
+  text-align: center;
+  border-bottom: 1px dotted var(--dark-border);
+  padding-bottom: 0.4em;
+  font-weight: bold;
+}
+
+[is="modal-challenge"] p {
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: justify;
+  margin-bottom: 1em;
+}
+
+[is="modal-challenge"] .pawn-inputs {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  margin: 0;
+  margin-bottom: 1.5em;
+}
+
+[is="modal-challenge"] .pawn-input {
+  flex: 1;
+  text-align: center;
+}
+
+[is="modal-challenge"] .modal-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1em;
+}
+
+[is="modal-challenge"] button {
+  font-size: 1.3em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+[is="modal-challenge"] button:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.05); 
+}
+
+[is="modal-challenge"] .roll-result {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+[is="modal-challenge"] .reward-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5em;
+}
+
+[is="modal-challenge"] image-reward {
+  margin: 0 0.5em;
+  transition: transform 0.5s;
+}
+
+[is="modal-challenge"] image-reward:hover {
+  transform: scale(1.1);
+}
+
+
+[is="modal-challenge"] .pre-roll {
+  display: flex;
+}
+
+[is="modal-challenge"] .post-roll {
+  display: none;
 }

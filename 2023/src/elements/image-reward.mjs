@@ -16,7 +16,7 @@ const TYPE_TO_NAME = {
 
 class ImageReward extends HTMLElement {
   static get observedAttributes() {
-    return ['type'];  // list of attributes to observe for changes
+    return ['type'];  
   }
 
   connectedCallback() {
@@ -28,8 +28,13 @@ class ImageReward extends HTMLElement {
   }
 
   render() {
-    const type = this.getAttribute('type') ?? 'missingNo';
-    const html = `${TYPE_TO_EMOJI[type]} <b>${TYPE_TO_NAME[type]}</b>`;
+    const reward = this.getAttribute('type') ?? 'missingNo';
+    const parts = reward.split(' ');
+    let html = `${TYPE_TO_EMOJI[reward]} <b>${TYPE_TO_NAME[reward]}</b>`;
+
+    if (parts.length === 2) {
+      html = `<image-pawn value="${parts[0]}" type="${parts[1]}"></image-reward>`;
+    }
 
     // Only re-render on change.
     if (this.innerHTML !== html) {
