@@ -16,4 +16,6 @@ export async function dispatch(action) {
   await action(currentState);
   // Re-render the state!
   render(currentState);
+
+  return currentState;
 }

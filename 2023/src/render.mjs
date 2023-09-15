@@ -11,8 +11,14 @@ export function render(state) {
 
   // Modals
   window.elmPlayerHand.render(state);
-  window.elmChallengeModal.render(state);
   window.elmDialog.render(state);
+
+  // Post Jam, I have time to think about how to update these instead of jamming everyhing into render.
+  // In a future update, move this out of render and into a dispatch function. (maybe...)
+  window.elmChallengeModal.state = {
+    card: state.deck[state.challengeIdx],
+    player: state.player,
+  }
 
   // Player Stats
   document.querySelectorAll('player-info').forEach(elm => elm.render(state));

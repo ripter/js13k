@@ -10,6 +10,6 @@ export async function dispatchStartGame() {
     }
 
     state.pond = Array.from(uniqueIndexes);
-    state.activeDialogIdx = -1;
+    state.activeDialogIdx = -1; // -1 closes it.
   });
 }

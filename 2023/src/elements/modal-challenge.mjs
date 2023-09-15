@@ -1,4 +1,5 @@
 import { dispatchChallenge } from '../dispatch/challenge.mjs';
+import { dispatchRollDice } from '../dispatch/rollDice.mjs';
 import { roll2d6 } from '../utils/roll2d6.mjs';
 import { dispatchWinCard } from '../dispatch/winCard.mjs'
 import { dispatchLoseCard } from '../dispatch/loseCard.mjs';
@@ -7,76 +8,51 @@ export const NAME_TO_IDX = { 'red': 0, 'green': 1, 'blue': 2 };
 
 class ChallengeModal extends HTMLDialogElement {
   connectedCallback() {
-    this.addEventListener('click', this.handleClick);
-    this.addEventListener('change', this.handleChange);
-  }
-
-  get adjustedRating() {
-    return this.cardRating.map((val, idx) => this.deltaRating[idx] + val)
-  }
-  get strength() {
-    return this.adjustedRating.reduce((acc, v) => acc + parseInt(v, 10), 0);
-  }
-
-  render(props) {
-    const { challengeIdx } = props;
-    const card = props.deck[challengeIdx];
-
-    if (!card) {
-      return this.renderClosed();
-    }
-    // Save the card original rating so we can use math on updates.
-    this.cardRating = card.rating;
-    this.deltaRating = [0, 0, 0];
-    this.player = props.player;
-
-    const html = `
-      <!-- Display the target value the player needs to beat -->
+    // First Render, hydrate ourselves so we have a full body.
+    this.innerHTML = `
       <h2 class="target-number">
-        <image-pawn type="castle" value="${this.strength}"></image-pawn>
-        ${card.name}
+        <image-pawn class="card-strength" type="castle" value="0"></image-pawn>
+        <span class="card-name">Placeholder</span>
       </h2>
       <div class="pre-roll">
         <p>
-          Roll <b>2d6</b> to match or beat ${this.strength}.
+          Roll <b>2d6</b> to match or beat 
+          <image-pawn class="card-strength" type="none" value="0"></image-pawn>.
         </p>
         <p>
           Spend Resources to reduce the Challenge Strength.
         </p>
       
-        <!-- Display pawn input values to modify odds -->
         <div class="pawn-inputs">
           <div class="pawn-input">
             <label>🛡️ Army:</label>
-            <input data-pawn-type="red" type="number" min="0" max="${card.rating[0]}" value="0" />
+            <input data-pawn-type="red" type="number" min="0" max="0" value="0" />
           </div>
           <div class="pawn-input">
             <label>🏇 Cavalry:</label>
-            <input data-pawn-type="green" type="number" min="0" max="${card.rating[1]}" value="0" />
+            <input data-pawn-type="green" type="number" min="0" max="0" value="0" />
           </div>
           <div class="pawn-input">
             <label>📿 Monks:</label>
-            <input data-pawn-type="blue" type="number" min="0" max="${card.rating[2]}" value="0" />
+            <input data-pawn-type="blue" type="number" min="0" max="0" value="0" />
           </div>
         </div>
-      
-        <!-- Display roll button and back button -->
+
         <div class="modal-controls">
           <button type="cancel">Back</button>
           <button type="roll">Roll Dice</button>
         </div>
       </div>
+
       <div class="post-roll">
-        <!-- Display roll results -->
         <div class="roll-result">
           <p>Your Roll: <span class="roll-result">-</span></p>
         </div>
-      
+
         <div class="result-win">
           <h3>You Win!</h3>
-          ${card.rewards.map(reward => (
-            `<image-reward type="${reward}"></image-reward>`
-          ))}
+          <div class="card-rewards">
+          </div>
         </div>
 
         <div class="result-lose">
@@ -89,23 +65,61 @@ class ChallengeModal extends HTMLDialogElement {
       </div>
     `;
 
-    this.classList.remove('rolled', 'win', 'lose');
-    // Only re-render on change.
-    if (this.innerHTML !== html) {
-      this.innerHTML = html;
-    }
-
-    if (challengeIdx === -1) {
-      this.renderClosed();
-    }
-    else {
-      this.renderOpened();
-    }
+    // Listen to events
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('change', this.handleChange);
   }
 
+  set state({card, player}) {
+    this.card = card;
+    this.player = player;
+    
+    // Hide when we don't have a card.
+    if (!card) {
+      return this.renderClosed();
+    }
+    // Make sure the modal is open.
+    this.renderOpened();
+    this.renderCard();
+  }
+
+  get adjustedRating() {
+    return this.card.rating.map((val, idx) => this.deltaRating[idx] + val)
+  }
+  get strength() {
+    return this.adjustedRating.reduce((acc, v) => acc + parseInt(v, 10), 0);
+  }
+
+
+  /**
+   * Render/Update the Card
+   */
+  renderCard() {
+    const { player } = this;
+    // Update the Strength
+    this.querySelectorAll('.card-strength').forEach(elm => {
+      elm.setAttribute('value', this.strength);
+    });
+
+    // Update the Pawns
+    this.querySelectorAll('[data-pawn-type]').forEach(elm => {
+      const { pawnType } = elm.dataset;
+      const value = this.deltaRating[NAME_TO_IDX[pawnType]];
+      elm.setAttribute('max', player[pawnType]);
+      elm.setAttribute('value', value);
+    });
+  }
+
+
+  /**
+   * Closes the modal and resets the inital state.
+   */
   renderClosed() {
+    // Close it
     this.style.display = 'none';
     this.close();
+    // Reset the state
+    this.deltaRating = [0,0,0];
   }
 
   renderOpened() {
@@ -121,23 +135,10 @@ class ChallengeModal extends HTMLDialogElement {
     switch(buttonType) {
       case 'cancel': 
         // -1 closes us
-        await dispatchChallenge(-1);
-        return;
+        return await dispatchChallenge(-1);
       case 'roll':
         console.log('Roll the Dice!');
-        this.classList.add('rolled');
-        const rollResult = roll2d6();
-        const elmRollResult = this.querySelector('.roll-result');
-        elmRollResult.textContent = rollResult;
-
-        if (rollResult >= this.strength) {
-          this.classList.add('win');
-          // await dispatchWinCard(this.deltaRating);
-        } else {
-          this.classList.add('lose');
-          // await dispatchLoseCard(this.deltaRating);
-        }
-        return;
+        return await dispatchRollDice('player', this.card.rating, this.deltaRating);
       default:
         return;
     }

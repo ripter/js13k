@@ -12,10 +12,22 @@ In the middle of this project I had to completely change the game I was building
 
 While developing this game, I kept adjusting the State Acrchitecture pattern until I stumbled upon a pattern I'm calling Async State Flow. It's the reducer pattern with less boilerplate, perfect for a small jam.
 
-
 # AsyncStateFlow
 
-AsyncStateFlow is a state management architecture designed to simplify the relationship between state transformations and UI dispatches, making asynchronous operations and state updates more intuitive.
+**AsyncStateFlow** is an innovative state management architecture that streamlines state transformations and UI interactions. It is crafted to provide a seamless, intuitive experience, especially when dealing with asynchronous operations and state updates. With AsyncStateFlow, dispatch functions act as the primary "verbs" orchestrating state updates. By leveraging async/await, the architecture ensures a predictable and sequential order of state operations.
+
+In traditional reducer patterns:
+
+1. The frontend triggers a dispatch function with a specific payload.
+2. The reducer identifies the appropriate action based on the dispatched type.
+3. The payload is passed to the designated action function for state transformation.
+4. Once the state is transformed, an update is dispatched to notify the UI to refresh.
+
+However, this conventional method involves several intermediary steps and potentially delays in UI updates.
+
+AsyncStateFlow elegantly simplifies this process. Here, dispatch functions are synonymous with action functions. There's no need to create a separate payload, funnel it through a reducer, relay it to an action function, and then dispatch an additional update for the UI. When the frontend invokes a dispatch in AsyncStateFlow, it leverages async/await to directly receive the updated state. This bypasses the need for separate UI update events and provides a more efficient and responsive experience.
+
+
 
 ## Overview
 
@@ -35,10 +47,10 @@ These are pure functions responsible for transforming the state. They take the c
 import { dispatch } from 'async-state-flow';
 
 export async function someUIEventTrigger(data) {
-  await dispatch(async (state) => {
-    let nextState = await someAsyncOperation(state, data);
-    nextState = await anotherAsyncOperation(nextState);
-    return nextState;
+  await dispatch(async (prevState) => {
+    let state = await someAsyncOperation(prevState, anything_you_need);
+    state = await anotherAsyncOperation(state);
+    return state;
   });
 }
 ```

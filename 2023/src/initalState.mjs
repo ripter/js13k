@@ -4,6 +4,7 @@
   export const INITAL_STATE = {
   activeDialogIdx: 0,
   challengeIdx: -1,
+  rollResult: -1,
   player: {
     red: 5,
     green: 5,
