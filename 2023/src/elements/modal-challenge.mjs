@@ -1,13 +1,10 @@
-import { dispatchChallenge } from '../dispatch/challenge.mjs';
 import { dispatchRollDice } from '../dispatch/rollDice.mjs';
-import { roll2d6 } from '../utils/roll2d6.mjs';
-import { dispatchWinCard } from '../dispatch/winCard.mjs'
-import { dispatchLoseCard } from '../dispatch/loseCard.mjs';
 
-export const NAME_TO_IDX = { 'red': 0, 'green': 1, 'blue': 2 };
 
 class ChallengeModal extends HTMLDialogElement {
   connectedCallback() {
+    // Start closed.
+    this.renderClosed();
     // First Render, hydrate ourselves so we have a full body.
     this.innerHTML = `
       <h2 class="target-number">
@@ -26,15 +23,15 @@ class ChallengeModal extends HTMLDialogElement {
         <div class="pawn-inputs">
           <div class="pawn-input">
             <label>🛡️ Army:</label>
-            <input data-pawn-type="red" type="number" min="0" max="0" value="0" />
+            <number-spinner data-pawn-index="0" min="0" max="0"></number-spinner>
           </div>
           <div class="pawn-input">
             <label>🏇 Cavalry:</label>
-            <input data-pawn-type="green" type="number" min="0" max="0" value="0" />
+            <number-spinner data-pawn-index="1" min="0" max="0"></number-spinner>
           </div>
           <div class="pawn-input">
             <label>📿 Monks:</label>
-            <input data-pawn-type="blue" type="number" min="0" max="0" value="0" />
+            <number-spinner data-pawn-index="2" min="0" max="0"></number-spinner>
           </div>
         </div>
 
@@ -45,7 +42,7 @@ class ChallengeModal extends HTMLDialogElement {
       </div>
 
       <div class="post-roll">
-        <div class="roll-result">
+        <div class="">
           <p>Your Roll: <span class="roll-result">-</span></p>
         </div>
 
@@ -67,47 +64,41 @@ class ChallengeModal extends HTMLDialogElement {
 
     // Listen to events
     this.addEventListener('click', this.handleClick);
-    this.addEventListener('change', this.handleChange);
-  }
-
-  set state({card, player}) {
-    this.card = card;
-    this.player = player;
-    
-    // Hide when we don't have a card.
-    if (!card) {
-      return this.renderClosed();
-    }
-    // Make sure the modal is open.
-    this.renderOpened();
-    this.renderCard();
-  }
-
-  get adjustedRating() {
-    return this.card.rating.map((val, idx) => this.deltaRating[idx] + val)
-  }
-  get strength() {
-    return this.adjustedRating.reduce((acc, v) => acc + parseInt(v, 10), 0);
   }
 
 
-  /**
-   * Render/Update the Card
-   */
-  renderCard() {
-    const { player } = this;
+  showCard(challengeRating, armory) {
+    const strength = challengeRating.reduce((acc, rating) => acc + rating, 0);
+
     // Update the Strength
     this.querySelectorAll('.card-strength').forEach(elm => {
-      elm.setAttribute('value', this.strength);
+      elm.setAttribute('value', strength);
     });
 
     // Update the Pawns
-    this.querySelectorAll('[data-pawn-type]').forEach(elm => {
-      const { pawnType } = elm.dataset;
-      const value = this.deltaRating[NAME_TO_IDX[pawnType]];
-      elm.setAttribute('max', player[pawnType]);
-      elm.setAttribute('value', value);
+    this.querySelectorAll('[data-pawn-index]').forEach(elm => {
+      const { pawnIndex } = elm.dataset;
+      const value = Math.min( 
+        armory[pawnIndex],
+        challengeRating[pawnIndex],
+      );
+      elm.setAttribute('max', value);
     });
+
+    // Open Us
+    this.renderOpened();
+  }
+
+  showWin(diceResult) {
+    console.log('Winner winner chicken dinner', diceResult);
+    this.rollResult = diceResult;
+    this.classList.add('rolled', 'result-win');
+  }
+
+  showLose(diceResult) {
+    console.log('Better luck next time', diceResult);
+    this.rollResult = diceResult;
+    this.classList.add('rolled', 'result-lose');
   }
 
 
@@ -118,11 +109,10 @@ class ChallengeModal extends HTMLDialogElement {
     // Close it
     this.style.display = 'none';
     this.close();
-    // Reset the state
-    this.deltaRating = [0,0,0];
   }
 
   renderOpened() {
+    this.classList.remove('rolled', 'result-win', 'result-lose');
     this.style.display = 'flex';
     this.showModal();
   }
@@ -134,40 +124,28 @@ class ChallengeModal extends HTMLDialogElement {
 
     switch(buttonType) {
       case 'cancel': 
-        // -1 closes us
-        return await dispatchChallenge(-1);
+        return this.renderClosed();
       case 'roll':
-        console.log('Roll the Dice!');
-        return await dispatchRollDice('player', this.card.rating, this.deltaRating);
+        await dispatchRollDice('player', this.armory);
       default:
         return;
     }
   }
 
-  /**
-   * Handles Pawn Delta Input
-   */
-  async handleChange(evt) {
-    const { target } = evt;
-    const { pawnType } = target.dataset;
-    const idx = NAME_TO_IDX[pawnType];
-    // The number of pawns the user wants the spend on this card.
-    const deltaValue = Math.min(
-      parseInt(target.value),  // Player Input.
-      this.cardRating[idx], // Max the card allows to the player to spend.
-      this.player[pawnType], // Max player can spend.
-    );
+  get armory() {
+    return Array.from(document.querySelectorAll('.pawn-input number-spinner')).reduce((acc, elm) => {
+      const { value } = elm;
+      const { pawnIndex } = elm.dataset;
 
-    // Update the delta.
-    this.deltaRating[idx] = -1 * deltaValue;
-    // Update the element, in case we had to limit it.
-    target.value = deltaValue;
-
-    // Update the Challenge element with the new value.
-    const elmChallenge = this.querySelector('.target-number image-pawn');
-    elmChallenge.setAttribute('value', this.strength);
+      acc[pawnIndex] = value;
+      return acc;
+    }, [0, 0, 0]);
   }
 
+  set rollResult(val) {
+    const elm = this.querySelector('.roll-result');
+    elm.textContent = val;
+  }
 }
 
 customElements.define('modal-challenge', ChallengeModal, { extends: 'dialog' });

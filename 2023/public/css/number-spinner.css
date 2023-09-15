@@ -1,0 +1,13 @@
+number-spinner {
+  display: flex;
+  align-items: center;
+}
+
+number-spinner button {
+  padding: 0.5em;
+}
+
+number-spinner input {
+  width: 3em;
+  text-align: center;
+}

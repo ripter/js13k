@@ -7,6 +7,7 @@ import './elements/player-hand.mjs';
 import './elements/list-pond.mjs';
 import './elements/modal-challenge.mjs';
 import './elements/game-dialog.mjs';
+import './elements/number-spinner.mjs';
 
 // Dispatch functions.
 import { dispatchNewGame } from './dispatch/newGame.mjs';

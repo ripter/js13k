@@ -41,6 +41,7 @@
     { name: 'Translation of Aristotle', rating: [2, 3, 5], rewards: ['3 blue', '2 green'] },
   ],
   dialogs: [
+    // Index: 0
     { 
       title: '🏰 Welcome to the Quest for the Sacred Four! 🏰',
       buttons: [
@@ -54,6 +55,7 @@
         <a href="https://github.com/ripter/js13k/tree/master/2023"></a>
       `,
     },
+    // Index: 1
     { 
       title: 'How to Play',
       buttons: [
@@ -65,5 +67,21 @@
         <p>🏆 The first player to collect all four Sacred artifacts emerges victorious in their quest!</p>
       `,
     },
+    // Index: 2
+    {
+      title: 'You Win!',
+      buttons: [
+
+      ],
+      body: `<p>Good Job</p>`,
+    },
+    // Index: 3
+    {
+      title: 'You Lost',
+      buttons: [
+
+      ],
+      body: `<p>Better Luck Next Time</p>`,
+    }
   ],
 }
