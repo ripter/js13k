@@ -1,5 +1,7 @@
 import { dispatchChallenge } from '../dispatch/challenge.mjs';
 import { roll2d6 } from '../utils/roll2d6.mjs';
+import { dispatchWinCard } from '../dispatch/winCard.mjs'
+import { dispatchLoseCard } from '../dispatch/loseCard.mjs';
 
 export const NAME_TO_IDX = { 'red': 0, 'green': 1, 'blue': 2 };
 
@@ -116,7 +118,6 @@ class ChallengeModal extends HTMLDialogElement {
     if (target.nodeName !== 'BUTTON') { return; }
     const buttonType = target.getAttribute('type');
 
-    console.log('buttonType', buttonType);
     switch(buttonType) {
       case 'cancel': 
         // -1 closes us
@@ -131,10 +132,10 @@ class ChallengeModal extends HTMLDialogElement {
 
         if (rollResult >= this.strength) {
           this.classList.add('win');
-          console.log('Winner!', this.classList);
+          // await dispatchWinCard(this.deltaRating);
         } else {
           this.classList.add('lose');
-          console.log('Loser!', this.classList);
+          // await dispatchLoseCard(this.deltaRating);
         }
         return;
       default:
