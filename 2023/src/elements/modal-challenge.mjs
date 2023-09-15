@@ -1,4 +1,7 @@
 import { dispatchChallenge } from '../dispatch/challenge.mjs';
+import { roll2d6 } from '../utils/roll2d6.mjs';
+
+export const NAME_TO_IDX = { 'red': 0, 'green': 1, 'blue': 2 };
 
 class ChallengeModal extends HTMLDialogElement {
   connectedCallback() {
@@ -23,6 +26,7 @@ class ChallengeModal extends HTMLDialogElement {
     // Save the card original rating so we can use math on updates.
     this.cardRating = card.rating;
     this.deltaRating = [0, 0, 0];
+    this.player = props.player;
 
     const html = `
       <!-- Display the target value the player needs to beat -->
@@ -63,18 +67,27 @@ class ChallengeModal extends HTMLDialogElement {
       <div class="post-roll">
         <!-- Display roll results -->
         <div class="roll-result">
-          <p>Your Roll: <span class="roll-number">-</span></p>
+          <p>Your Roll: <span class="roll-result">-</span></p>
         </div>
       
-        <!-- Animate reward on success -->
-        <div class="reward-animation">
+        <div class="result-win">
+          <h3>You Win!</h3>
           ${card.rewards.map(reward => (
             `<image-reward type="${reward}"></image-reward>`
           ))}
         </div>
+
+        <div class="result-lose">
+            <h3>You Lost</h3>
+        </div>
+
+        <div class="modal-controls">
+          <button type="cancel">End Turn</button>
+        </div>
       </div>
     `;
 
+    this.classList.remove('rolled', 'win', 'lose');
     // Only re-render on change.
     if (this.innerHTML !== html) {
       this.innerHTML = html;
@@ -103,22 +116,25 @@ class ChallengeModal extends HTMLDialogElement {
     if (target.nodeName !== 'BUTTON') { return; }
     const buttonType = target.getAttribute('type');
 
+    console.log('buttonType', buttonType);
     switch(buttonType) {
       case 'cancel': 
         // -1 closes us
         await dispatchChallenge(-1);
         return;
       case 'roll':
-        const rollResult = Math.floor(Math.random() * 6 + 1) + Math.floor(Math.random() * 6 + 1); // Roll 2d6
-        const rollSpan = this.querySelector('.roll-number');
-        rollSpan.textContent = rollResult;
+        console.log('Roll the Dice!');
+        this.classList.add('rolled');
+        const rollResult = roll2d6();
+        const elmRollResult = this.querySelector('.roll-result');
+        elmRollResult.textContent = rollResult;
 
         if (rollResult >= this.strength) {
-          // Animate the reward
-          // const rewardDiv = this.querySelector('.reward-animation');
-          // rewardDiv.style.transform = 'scale(1.5)'; // Example animation
+          this.classList.add('win');
+          console.log('Winner!', this.classList);
         } else {
-          // this.renderClosed();
+          this.classList.add('lose');
+          console.log('Loser!', this.classList);
         }
         return;
       default:
@@ -126,14 +142,27 @@ class ChallengeModal extends HTMLDialogElement {
     }
   }
 
+  /**
+   * Handles Pawn Delta Input
+   */
   async handleChange(evt) {
-    const indexMap = { 'red': 0, 'green': 1, 'blue': 2 };
     const { target } = evt;
     const { pawnType } = target.dataset;
-    const idx = indexMap[pawnType];
-    const elmChallenge = this.querySelector('.target-number image-pawn');
+    const idx = NAME_TO_IDX[pawnType];
+    // The number of pawns the user wants the spend on this card.
+    const deltaValue = Math.min(
+      parseInt(target.value),  // Player Input.
+      this.cardRating[idx], // Max the card allows to the player to spend.
+      this.player[pawnType], // Max player can spend.
+    );
 
-    this.deltaRating[idx] = -1 * parseInt(target.value);
+    // Update the delta.
+    this.deltaRating[idx] = -1 * deltaValue;
+    // Update the element, in case we had to limit it.
+    target.value = deltaValue;
+
+    // Update the Challenge element with the new value.
+    const elmChallenge = this.querySelector('.target-number image-pawn');
     elmChallenge.setAttribute('value', this.strength);
   }
 

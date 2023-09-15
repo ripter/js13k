@@ -84,10 +84,21 @@
 }
 
 
-[is="modal-challenge"] .pre-roll {
-  display: flex;
+/*
+ * States
+ */
+
+[is="modal-challenge"].rolled .pre-roll,
+[is="modal-challenge"] .post-roll,
+[is="modal-challenge"] .post-roll .result-win,
+[is="modal-challenge"] .post-roll .result-lose {
+  display: none;
 }
 
-[is="modal-challenge"] .post-roll {
-  display: none;
+[is="modal-challenge"].rolled .post-roll,
+[is="modal-challenge"].rolled.win .post-roll .result-win,
+[is="modal-challenge"].rolled.lose .post-roll .result-lose,
+[is="modal-challenge"] .pre-roll {
+  display: flex;
+  flex-direction: column;
 }
