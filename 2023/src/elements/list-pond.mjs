@@ -20,7 +20,6 @@ class ChallengePond extends HTMLElement {
       ></card-challenge>
     `).join('')}`;
 
-    // this.classList.add('grid-container');
     // Only re-render on change.
     if (this.innerHTML !== html) {
       this.innerHTML = html;

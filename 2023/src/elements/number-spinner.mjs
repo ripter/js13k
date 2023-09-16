@@ -53,14 +53,25 @@ class NumberSpinner extends HTMLElement {
       case 'click':
         if (event.target.classList.contains('increment')) {
           this.value += 1;
+          this.dispatchChange();
         } else if (event.target.classList.contains('decrement')) {
           this.value -= 1;
+          this.dispatchChange();
         }
         break;
       default:
         // ignore.
     }
     
+  }
+
+  dispatchChange() {
+    const event = new Event('change', {
+      'bubbles': true,
+      'cancelable': true,
+      detail: { value: this.value }
+    });
+    this.dispatchEvent(event);
   }
 }
 

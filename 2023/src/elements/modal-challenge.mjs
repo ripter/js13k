@@ -64,22 +64,23 @@ class ChallengeModal extends HTMLDialogElement {
 
     // Listen to events
     this.addEventListener('click', this.handleClick);
+    // Listen to number-spinner value changes.
+    this.querySelectorAll('.pawn-input number-spinner').forEach(elm => {
+      elm.addEventListener('change', this.handleArmoryChange.bind(this));
+    });
   }
 
 
-  showCard(challengeRating, armory) {
-    const strength = challengeRating.reduce((acc, rating) => acc + rating, 0);
-
-    // Update the Strength
-    this.querySelectorAll('.card-strength').forEach(elm => {
-      elm.setAttribute('value', strength);
-    });
+  showCard(challengeRating, playerArmory) {
+    this.challengeRating = challengeRating;
+    // Update/Rerender Challenge Strength.
+    this.strength = challengeRating.reduce((acc, rating) => acc + rating, 0);
 
     // Update the Pawns
     this.querySelectorAll('[data-pawn-index]').forEach(elm => {
       const { pawnIndex } = elm.dataset;
       const value = Math.min( 
-        armory[pawnIndex],
+        playerArmory[pawnIndex],
         challengeRating[pawnIndex],
       );
       elm.setAttribute('max', value);
@@ -117,6 +118,7 @@ class ChallengeModal extends HTMLDialogElement {
     this.showModal();
   }
 
+
   async handleClick(evt) {
     const { target } = evt;
     if (target.nodeName !== 'BUTTON') { return; }
@@ -132,6 +134,13 @@ class ChallengeModal extends HTMLDialogElement {
     }
   }
 
+  /**
+   * Update the strength when the armory values change.
+   */
+  handleArmoryChange() {
+    this.strength = this.challengeRating.reduce((acc, rating, idx) => acc + rating - this.armory[idx], 0);
+  }
+
   get armory() {
     return Array.from(document.querySelectorAll('.pawn-input number-spinner')).reduce((acc, elm) => {
       const { value } = elm;
@@ -145,6 +154,12 @@ class ChallengeModal extends HTMLDialogElement {
   set rollResult(val) {
     const elm = this.querySelector('.roll-result');
     elm.textContent = val;
+  }
+
+  set strength(val) {
+    this.querySelectorAll('.card-strength').forEach(elm => {
+      elm.setAttribute('value', val);
+    });
   }
 }
 
