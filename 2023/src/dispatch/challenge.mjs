@@ -11,17 +11,10 @@ export async function dispatchChallenge(cardIdx) {
 
     // Open the Challenge Modal with the selected card.    
     window.elmChallengeModal.showCard(
+      card.name,
       challengeRating,
       armory,
+      card.rewards,
     );
-
-    // Open the challenge!
-    // state.challengeIdx = cardIdx;
-    // Post Jam, I have time to think about how to update these instead of jamming everyhing into render.
-    // In a future update, move this out of render and into a dispatch function. (maybe...)
-    // window.elmChallengeModal.state = {
-    //   card: state.deck[state.challengeIdx],
-    //   player: state.player,
-    // }
   });
 }

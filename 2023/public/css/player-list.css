@@ -9,7 +9,7 @@
 }
 
 .player-list player-info {
-  background-color: var(--card-bg-color);
+  background-color: var(--parchment-bg);
   width: calc(50% - 20px);
   border-radius: 10px 10px 0 0;
   transform: translateY(50%);

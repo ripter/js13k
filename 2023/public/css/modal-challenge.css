@@ -3,23 +3,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80vw; 
-  max-width: 550px; 
   padding: 2em;
   background-color: var(--parchment-bg);
   border: 3px solid var(--dark-border);
   border-radius: 8px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
-  font-family: 'Georgia', serif; 
   color: var(--text-color);
 }
 
 [is="modal-challenge"] h2 {
-  margin-bottom: 0.8em;
-  text-align: center;
-  border-bottom: 1px dotted var(--dark-border);
-  padding-bottom: 0.4em;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+[is="modal-challenge"] h2 .card-name {
+  padding-left: 1em;
 }
 
 [is="modal-challenge"] p {
@@ -67,12 +64,6 @@
   font-weight: bold;
 }
 
-[is="modal-challenge"] .reward-animation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5em;
-}
 
 [is="modal-challenge"] image-reward {
   margin: 0 0.5em;
@@ -83,6 +74,9 @@
   transform: scale(1.1);
 }
 
+[is="modal-challenge"] .card-rewards {
+  display: flex;
+}
 
 /*
  * States

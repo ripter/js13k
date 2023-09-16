@@ -1,6 +1,6 @@
 
 card-challenge {
-  background-color: var(--card-bg-color);
+  background-color: var(--parchment-bg);
   width: var(--component-width);
 }
 

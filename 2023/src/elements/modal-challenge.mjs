@@ -42,19 +42,13 @@ class ChallengeModal extends HTMLDialogElement {
       </div>
 
       <div class="post-roll">
-        <div class="">
-          <p>Your Roll: <span class="roll-result">-</span></p>
-        </div>
+        <p>
+          Your Roll: <span class="roll-result">-</span>
+        </p>
 
-        <div class="result-win">
-          <h3>You Win!</h3>
-          <div class="card-rewards">
-          </div>
-        </div>
+        <h3>You Won or Lost!</h3>
 
-        <div class="result-lose">
-            <h3>You Lost</h3>
-        </div>
+        <div class="card-rewards"></div>
 
         <div class="modal-controls">
           <button type="cancel">End Turn</button>
@@ -71,8 +65,10 @@ class ChallengeModal extends HTMLDialogElement {
   }
 
 
-  showCard(challengeRating, playerArmory) {
+  showCard(cardName, challengeRating, playerArmory, rewards) {
+    this.cardTitle = cardName;
     this.challengeRating = challengeRating;
+    this.rewards = rewards;
     // Update/Rerender Challenge Strength.
     this.strength = challengeRating.reduce((acc, rating) => acc + rating, 0);
 
@@ -93,11 +89,13 @@ class ChallengeModal extends HTMLDialogElement {
   showWin(diceResult) {
     console.log('Winner winner chicken dinner', diceResult);
     this.rollResult = diceResult;
+    this.resultTitle = 'You Win!'
     this.classList.add('rolled', 'result-win');
   }
 
   showLose(diceResult) {
     console.log('Better luck next time', diceResult);
+    this.resultTitle = 'You Lost!'
     this.rollResult = diceResult;
     this.classList.add('rolled', 'result-lose');
   }
@@ -160,6 +158,26 @@ class ChallengeModal extends HTMLDialogElement {
     this.querySelectorAll('.card-strength').forEach(elm => {
       elm.setAttribute('value', val);
     });
+  }
+
+  set rewards(val) {
+    const elm = this.querySelector('.card-rewards');
+    const html = val.map(reward => `<image-reward type="${reward}"></image-reward>`).join('');
+
+    if (elm.innerHTML !== html) {
+      elm.innerHTML = html;
+    }
+  }
+
+  set resultTitle(val) {
+    const elm = this.querySelector('.post-roll h3');
+    elm.textContent = val;
+  }
+
+  set cardTitle(val) {
+    const elm = this.querySelector('.card-name');
+    console.log(val, elm);
+    elm.textContent = val;
   }
 }
 

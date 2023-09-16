@@ -22,6 +22,7 @@ export async function dispatchRollDice(who, spend) {
 
     // Activate the Win or Lose modal.
     if (rollResult >= challenge) {
+      //TODO: Award rewards.
       window.elmChallengeModal.showWin(rollResult);
     } else {
       window.elmChallengeModal.showLose(rollResult);
