@@ -16,3 +16,18 @@
 
 /* Other */
 @import url("./player-list.css");
+
+
+.intro-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-items li {
+  border: thin solid black;
+  width: 30%;
+  text-align: center;
+  margin: 0.25em;
+}
