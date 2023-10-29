@@ -50,7 +50,7 @@
       ],
       body: `
         <h3>JS13k 2023 - Theme: 13th Century - <a href="https://github.com/ripter/js13k/tree/master/2023">Github</a></h3>
-        <p>The 13th Century: A time when kingdoms rose and fell on the whispers of courtiers and the bravery of knights. In this age of chivalry, legends spoke of the Sacred Four:</p><ul class="intro-items"><li>🏆 Grail,<li> 🗡️ Shard,<li> 💎 Stone,<li>📜 Manuscript.</ul>
+        <p>The 13th Century: A time when kingdoms rose and fell on the whispers of courtiers and the bravery of knights. In this age of chivalry, legends spoke of the Sacred Four:</p><ul class="intro-items"><li><b>🏆</b>Grail<li><b>🗡️</b> Shard<li><b>💎</b> Stone<li><b>📜</b> Manuscript</ul>
         <p>This is a Card game were you race to be the first player to gather the Four Sacred Items. Each turn you pick a Challenge card from the pool. Roll 2d6 to beat the Challenge Rating. Spend your 🛡️ Army, 🏇 Cavalry, and 📿 Monks to reduce the Challenge Rating.</p>
       `,
     },
